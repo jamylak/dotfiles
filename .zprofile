@@ -34,10 +34,6 @@ export MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion)
 export PROJECTS_DIR=/Users/james/bar
 export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-# Set up fzf key bindings and fuzzy completion
-export FZF_DEFAULT_OPS="--extended"
-eval "$(fzf --zsh)"
-
 PATH="/Users/james/bar/glsl-language-server/build:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -74,3 +70,7 @@ mkvirtualenv () {
 }
 
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/homebrew/Cellar/luajit/2.1.1703358377/lib/pkgconfig"
+
+# Set up fzf key bindings and fuzzy completion
+export FZF_DEFAULT_OPS="--extended"
+eval "$(fzf --zsh)"
