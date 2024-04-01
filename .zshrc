@@ -14,7 +14,3 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # Testing some tab completion things
 # autoload -U compinit; compinit
-# source ~/projects/fzf-tab/fzf-tab.plugin.zsh
-
-# source ~/projects/fzf-tab-completion/zsh/fzf-zsh-completion.sh
-# bindkey '^I' fzf_completion

@@ -34,8 +34,9 @@ export MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion)
 export PROJECTS_DIR=/Users/james/bar
 export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Set up fzf key bindings and fuzzy completion
 export FZF_DEFAULT_OPS="--extended"
+eval "$(fzf --zsh)"
 
 PATH="/Users/james/bar/glsl-language-server/build:$PATH"
 
