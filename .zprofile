@@ -1,3 +1,4 @@
+alias c="clear"
 alias qj="exit"
 alias ta="tmux a"
 alias td="tmux detach"
@@ -12,6 +13,7 @@ alias killdocker="osascript -e 'quit app \"Docker\"'"
 alias zb="zig build"
 alias cm="cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1" 
 alias cb="cmake --build build"
+alias rn='./$(find build/ -type f -perm +111 -maxdepth 1 | head -n 1)'
 alias rt="./build/test*"
 alias sb="./scripts/build.sh"
 alias x="exa_with_options --icons --tree -l --git --git-ignore -L 2"
