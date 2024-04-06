@@ -1,4 +1,10 @@
 alias c="clear"
+alias gc="git commit"
+alias gm="git commit -m"
+alias gs="git status"
+alias ga="git add"
+alias gl="git log"
+alias gd="git diff"
 alias qj="exit"
 alias ta="tmux a"
 alias td="tmux detach"
@@ -16,27 +22,22 @@ alias cb="cmake --build build"
 alias rn='./$(find build/ -type f -perm +111 -maxdepth 1 | head -n 1)'
 alias rt="./build/test*"
 alias sb="./scripts/build.sh"
-alias x="exa_with_options --icons --tree -l --git --git-ignore -L 2"
-alias ex="exa_with_options --icons --tree -l --git --git-ignore"
-alias exn="exa_with_options --icons --tree -l --git --git-ignore --no-permissions --no-user"
-alias exx="exa_with_options --icons --tree -l --git"
-alias l="exa_with_options --icons -l --git --git-ignore"
-alias ll="exa_with_options --icons -l --git"
-alias zt="cmd_with_options zig test"
+alias x="exa --icons --tree -l --git --git-ignore -L 2"
+alias ex="exa --icons --tree -l --git --git-ignore"
+alias exn="exa --icons --tree -l --git --git-ignore --no-permissions --no-user"
+alias exx="exa --icons --tree -l --git"
+alias l="exa --icons -l --git --git-ignore"
+alias ll="exa --icons -l --git"
+alias zt="zig test"
 alias ztt="zig test tests.zig"
-
-cmd_with_options() {
-    $@
-}
-exa_with_options() {
-    /usr/local/bin/exa "$@"
-}
 
 export MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion)
 export PROJECTS_DIR=/Users/james/bar
 export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 PATH="/Users/james/bar/glsl-language-server/build:$PATH"
+PATH=$PATH:/Users/james/.local/bin
+
 
 # The next line updates PATH for the Google Cloud SDK.
 # if [ -f '/Users/james/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james/Downloads/google-cloud-sdk/path.zsh.inc'; fi
