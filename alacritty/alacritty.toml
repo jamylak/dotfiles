@@ -1,0 +1,26 @@
+[font.normal]
+family = "MesloLGS NF"
+
+[font]
+size = 14
+
+[window]
+option_as_alt = "Both"
+
+# Map Mac CMD to Ctrl-Space (my tmux prefix)
+[keyboard]
+bindings = [
+	{ key = "}", mods = "Command|Shift",  chars = "\u0000n"},
+	{ key = "{", mods = "Command|Shift",  chars = "\u0000p"},
+	{ key = "T", mods = "Command",  chars = "\u0000c"},
+	{ key = "W", mods = "Command",  chars = "\u0000x"},
+	{ key = "1", mods = "Command",  chars = "\u00000"},
+	{ key = "2", mods = "Command",  chars = "\u00001"},
+	{ key = "3", mods = "Command",  chars = "\u00002"},
+	{ key = "4", mods = "Command",  chars = "\u00003"},
+	{ key = "5", mods = "Command",  chars = "\u00004"},
+	{ key = "6", mods = "Command",  chars = "\u00005"},
+	{ key = "7", mods = "Command",  chars = "\u00006"},
+	{ key = "8", mods = "Command",  chars = "\u00007"},
+	{ key = "9", mods = "Command",  chars = "\u0000e"},
+]
