@@ -1,5 +1,6 @@
 alias c="clear"
 alias ls="ls -G"
+alias gk="git checkout"
 alias gc="git commit"
 alias gm="git commit -m"
 alias gs="git status"
