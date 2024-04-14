@@ -77,6 +77,19 @@ mkvirtualenv () {
   mkvirtualenv $@
 }
 
+# Lazy version of zoxide
+z () {
+  unset -f z zi
+  eval "$(zoxide init zsh)"
+  z $@
+}
+
+zi () {
+  unset -f z zi
+  eval "$(zoxide init zsh)"
+  zi $@
+}
+
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/opt/homebrew/Cellar/luajit/2.1.1703358377/lib/pkgconfig"
 
 # Set up fzf key bindings and fuzzy completion
