@@ -16,6 +16,10 @@ alias ta="tmux a"
 alias td="tmux detach"
 alias vio='NVIM_APPNAME="oldasnvim" nvim'
 alias vi='nvim'
+alias viz='nvim ~/.zprofile -c "normal cd"'
+alias vic='nvim ~/.config -c "normal cd"'
+alias vin='nvim ~/.config/nvim/ -c "normal cd"'
+alias vid='nvim ~/.config/dotfiles/ -c "normal cd"'
 alias vit='nvim -c :term -c :startinsert'
 alias nv='nvim'
 alias lg="lazygit"
