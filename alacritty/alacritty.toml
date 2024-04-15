@@ -10,10 +10,24 @@ option_as_alt = "Both"
 # Map Mac CMD to Ctrl-Space (my tmux prefix)
 [keyboard]
 bindings = [
+	# New Window Split Horizont
+	{ key = "Return", mods = "Command",  chars = "\u0000\\"},
+	# new Window Split Vertical
+	{ key = "Return", mods = "Command|Shift",  chars = "\u0000|"},
 	{ key = "}", mods = "Command|Shift",  chars = "\u0000n"},
 	{ key = "{", mods = "Command|Shift",  chars = "\u0000p"},
+	{ key = ";", mods = "Command",  chars = "\u0000:"},
+	{ key = "]", mods = "Command",  chars = "\u0000o"},
+	{ key = "[", mods = "Command",  chars = "\u0000;"},
+	{ key = "L", mods = "Command",  chars = "\u0000 "},
+	{ key = "L", mods = "Command|Shift",  chars = "\u0000z"},
 	{ key = "T", mods = "Command",  chars = "\u0000c"},
+	# Detach pane into new tab
+	{ key = "T", mods = "Command|Shift",  chars = "\u0000!"},
 	{ key = "W", mods = "Command",  chars = "\u0000x"},
+	{ key = "G", mods = "Command",  chars = "\u0000["},
+	{ key = "J", mods = "Command",  chars = "\u0000["},
+	{ key = "P", mods = "Command",  chars = "\u0000]"},
 	{ key = "1", mods = "Command",  chars = "\u00000"},
 	{ key = "2", mods = "Command",  chars = "\u00001"},
 	{ key = "3", mods = "Command",  chars = "\u00002"},
