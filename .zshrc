@@ -14,7 +14,7 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 export FZF_DEFAULT_OPS="--extended"
 eval "$(fzf --zsh)"
 
-# source "$HOME/.cargo/env"
+source "$HOME/.cargo/env"
 export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
