@@ -67,6 +67,9 @@ set -Ux PROJECTS_DIR /Users/james/bar
 fish_add_path /opt/homebrew/bin
 fish_add_path /usr/local/bin
 fish_add_path /Users/james/.local/bin
+# eg. fd is in here
+fish_add_path $HOME/.cargo/bin
+
 bind \cy 'commandline -f accept-autosuggestion'
 
 # Lazy version of zoxide
@@ -94,4 +97,4 @@ end
 
 fzf --fish | source
 
-starship init fish | source
+# starship init fish | source
