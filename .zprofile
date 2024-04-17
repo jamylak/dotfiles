@@ -1,5 +1,5 @@
 export MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion)
-export PATH="/Users/james/bar/glsl-language-server/build:$PATH"
+export PATH="/Users/$USERNAME/bar/glsl-language-server/build:$PATH"
 # MacPorts Installer
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export MANPATH="/opt/local/share/man:$MANPATH"

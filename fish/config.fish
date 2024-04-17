@@ -62,11 +62,11 @@ alias zt="zig test"
 alias ztt="zig test tests.zig"
 
 set -Ux EDITOR vim
-set -Ux PROJECTS_DIR /Users/james/bar
+set -Ux PROJECTS_DIR /Users/$USER/bar
 
 fish_add_path /opt/homebrew/bin
 fish_add_path /usr/local/bin
-fish_add_path /Users/james/.local/bin
+fish_add_path /Users/$USER/.local/bin
 # eg. fd is in here
 fish_add_path $HOME/.cargo/bin
 
