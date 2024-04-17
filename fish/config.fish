@@ -1,5 +1,17 @@
 set -g fish_key_bindings fish_vi_key_bindings
 
+# https://github.com/fish-shell/fish-shell/issues/3541
+function fish_user_key_bindings
+    # for mode in insert default visual
+    for mode in insert
+        bind -M $mode \cy forward-char
+        bind -M $mode \ck forward-char
+        # https://stackoverflow.com/questions/37114257/how-to-bind-ctrl-enter-in-fish
+        # not working
+        # bind -M $mode \cM forward-char
+    end
+end
+
 # Testing abbreviations
 abbr -a gk git checkout
 abbr -a c clear
@@ -7,6 +19,8 @@ abbr -a gc git commit
 abbr -a ga git add
 abbr -a vi nvim
 abbr -a q exit
+# abbr -a ls ls -G
+abbr -a lg "lazygit"
 
 alias c="clear"
 alias ls="ls -G"
@@ -27,10 +41,8 @@ alias vio='NVIM_APPNAME="oldasnvim" nvim'
 alias viz='nvim ~/.zprofile -c "normal cd"'
 alias vic='nvim ~/.config -c "normal cd"'
 alias vin='nvim ~/.config/nvim/ -c "normal cd"'
-alias vid='nvim ~/.config/dotfiles/ -c "normal cd"'
+alias vid='nvim ~/.config/dotfiles/ -c "normal cdg."'
 alias vit='nvim -c :term -c :startinsert'
-alias nv='nvim'
-alias lg="lazygit"
 alias newproj="scripts/newproj.sh"
 alias nproj="scripts/newproj.sh"
 alias killdocker="osascript -e 'quit app \"Docker\"'"
@@ -48,6 +60,14 @@ alias l="exa --icons -l --git --git-ignore"
 alias ll="exa --icons -l --git"
 alias zt="zig test"
 alias ztt="zig test tests.zig"
+
+set -Ux EDITOR vim
+set -Ux PROJECTS_DIR /Users/james/bar
+
+fish_add_path /opt/homebrew/bin
+fish_add_path /usr/local/bin
+fish_add_path /Users/james/.local/bin
+bind \cy 'commandline -f accept-autosuggestion'
 
 # Lazy version of zoxide
 function z
@@ -73,3 +93,5 @@ function zi
 end
 
 fzf --fish | source
+
+starship init fish | source
