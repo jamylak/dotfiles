@@ -41,10 +41,10 @@ alias ll="exa --icons -l --git"
 alias zt="zig test"
 alias ztt="zig test tests.zig"
 
-export PATH="/Users/james/.local/bin;$PATH"
+export PATH="/Users/james/.local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export EDITOR="nvim"
-export PROJECTS_DIR=/Users/james/bar
+export PROJECTS_DIR="/Users/james/bar"
 
 # Lazy version of zoxide
 z () {
