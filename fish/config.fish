@@ -6,6 +6,7 @@ function fish_user_key_bindings
     for mode in insert
         bind -M $mode \cy forward-char
         bind -M $mode \ck forward-char
+        bind -M $mode \cj forward-char
         # https://stackoverflow.com/questions/37114257/how-to-bind-ctrl-enter-in-fish
         # not working
         # bind -M $mode \cM forward-char
@@ -27,6 +28,7 @@ alias ls="ls -G"
 # alias gk="git checkout"
 # alias gc="git commit"
 # alias ga="git add"
+alias vi="nvim"
 alias gm="git commit -m"
 alias gs="git status"
 alias gl="git log"
