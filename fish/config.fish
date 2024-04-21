@@ -97,6 +97,8 @@ function zi
     zi $argv
 end
 
-fzf --fish | source
+# fzf --fish | source
 
 # starship init fish | source
+
+fzf_configure_bindings --directory=\ct
