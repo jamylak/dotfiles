@@ -13,6 +13,28 @@ function fish_user_key_bindings
     end
 end
 
+function watchandrun
+    # Check if the filename was provided
+    if set -q argv[1]
+        set file_to_watch $argv[1]
+        echo "Watching for changes on $file_to_watch"
+        # Start watching the file and execute it upon changes
+        fswatch -l 0.01 -o $file_to_watch | while read change_count
+            echo "Change detected, running $file_to_watch..."
+            $file_to_watch
+            echo "Waiting for changes..."
+        end
+    else
+        echo "Please specify a file to watch."
+    end
+end
+
+abbr -a war watchandrun
+
+function last_history_item
+    echo $history[1]
+end
+abbr -a r --position anywhere --function last_history_item
 # Testing abbreviations
 abbr -a gk git checkout
 abbr -a c clear
@@ -22,6 +44,9 @@ abbr -a vi nvim
 abbr -a q exit
 # abbr -a ls ls -G
 abbr -a lg "lazygit"
+
+# Set SHELL to FISH
+set -xg SHELL /opt/homebrew/bin/fish
 
 alias c="clear"
 alias ls="ls -G"
@@ -43,7 +68,11 @@ alias vio='NVIM_APPNAME="oldasnvim" nvim'
 alias viz='nvim ~/.zprofile -c "normal cd"'
 alias vic='nvim ~/.config -c "normal cd"'
 alias vin='nvim ~/.config/nvim/ -c "normal cd"'
+alias vip='nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
 alias vid='nvim ~/.config/dotfiles/ -c "normal cdg."'
+alias vif='nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
+alias vik='nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
+alias vib='nvim ~/bar -c "normal cd"'
 alias vit='nvim -c :term -c :startinsert'
 alias newproj="scripts/newproj.sh"
 alias nproj="scripts/newproj.sh"
@@ -55,6 +84,8 @@ alias cb="cmake --build build"
 alias rt="./build/test*"
 alias sb="./scripts/build.sh"
 alias x="exa --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
+alias xj="exa --no-permissions --no-user --icons --tree -l -L 2"
+alias xk="exa --no-permissions --no-user --icons --tree -l -L 1"
 alias ex="exa --icons --tree -l --git --git-ignore"
 alias exn="exa --icons --tree -l --git --git-ignore --no-permissions --no-user"
 alias exx="exa --icons --tree -l --git"
