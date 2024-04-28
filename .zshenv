@@ -16,11 +16,20 @@ alias qj="exit"
 alias ta="tmux a"
 alias td="tmux detach"
 alias vi='nvim'
-alias viz='nvim ~/.zprofile -c "normal cd"'
+alias vig="nvim ."
+alias vii="nvim ."
+alias vio='NVIM_APPNAME="oldasnvim" nvim'
+alias via='nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'
+alias viz='nvim ~/.config/dotfiles/.zshenv -c "normal cd"'
 alias vic='nvim ~/.config -c "normal cd"'
 alias vin='nvim ~/.config/nvim/ -c "normal cd"'
-alias vid='nvim ~/.config/dotfiles/ -c "normal cdg."'
+alias vip='nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
+alias vid='nvim ~/.config/dotfiles/ -c "normal cd"'
+alias vif='nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
+alias vik='nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
+alias vib='nvim ~/bar -c "normal cd"'
 alias vit='nvim -c :term -c :startinsert'
+alias vitm='nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
 alias nv='nvim'
 alias lg="lazygit"
 alias newproj="scripts/newproj.sh"
@@ -58,3 +67,29 @@ zi () {
   eval "$(zoxide init zsh)"
   zi $@
 }
+
+# Function to watch a file and execute a specified command when it changes
+watchandrun() {
+  # Check if at least one argument was provided
+  if [[ $# -lt 2 ]]; then
+    echo "Usage: $0 <command-to-execute> <path-to-watch>"
+    return 1
+  fi
+
+  # Extract the file to watch, which is the last argument
+  local file_to_watch="${@: -1}"
+
+  # Remove the last argument to get the command
+  local command_to_run="${@:1:$(($#-1))}"
+
+  echo "Watching for changes on $file_to_watch"
+  echo "Command to run: $command_to_run"
+
+  # Start watching the file and execute the command upon changes
+  fswatch -l 0.01 -o "$file_to_watch" | while read -r change_count; do
+    echo "Change detected, running command..."
+    eval "$command_to_run"
+    echo "Waiting for changes..."
+  done
+}
+alias war="watchandrun"
