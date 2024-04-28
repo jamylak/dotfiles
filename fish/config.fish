@@ -14,21 +14,26 @@ function fish_user_key_bindings
 end
 
 function watchandrun
-    # Check if the filename was provided
+    # Check if the command was provided
     if set -q argv[1]
-        set file_to_watch $argv[1]
+        # Extract the last argument as the file to watch
+        set file_to_watch (eval echo $argv[-1])
         echo "Watching for changes on $file_to_watch"
-        # Start watching the file and execute it upon changes
+
+        # Convert the command to a string
+        set cmd (string join " " $argv)
+        echo "Command to run: $cmd"
+
+        # Start watching the file and execute the command upon changes
         fswatch -l 0.01 -o $file_to_watch | while read change_count
-            echo "Change detected, running $file_to_watch..."
-            $file_to_watch
+            echo "Change detected, running command..."
+            eval $cmd
             echo "Waiting for changes..."
         end
     else
-        echo "Please specify a file to watch."
+        echo "Please specify a command to run and a file to watch."
     end
 end
-
 abbr -a war watchandrun
 
 function last_history_item
@@ -65,22 +70,33 @@ alias gpl="git pull"
 alias ta="tmux a"
 alias td="tmux detach"
 alias vio='NVIM_APPNAME="oldasnvim" nvim'
-alias viz='nvim ~/.zprofile -c "normal cd"'
+alias vij="nvim ."
+alias vig="nvim ."
+alias via='nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'
+alias viz='nvim ~/.config/dotfiles/.zshenv -c "normal cd"'
 alias vic='nvim ~/.config -c "normal cd"'
 alias vin='nvim ~/.config/nvim/ -c "normal cd"'
 alias vip='nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
-alias vid='nvim ~/.config/dotfiles/ -c "normal cdg."'
+alias vid='nvim ~/.config/dotfiles/ -c "normal cd"'
 alias vif='nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
 alias vik='nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
 alias vib='nvim ~/bar -c "normal cd"'
 alias vit='nvim -c :term -c :startinsert'
+alias vitm='nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
 alias newproj="scripts/newproj.sh"
 alias nproj="scripts/newproj.sh"
 alias killdocker="osascript -e 'quit app \"Docker\"'"
 alias zb="zig build"
 alias cm="cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1" 
 alias cb="cmake --build build"
-# alias rn='./$(find build/ -type f -perm +111 -maxdepth 1 | head -n 1)'
+function rn
+    set executable (find build/ -type f -perm +111 -maxdepth 1 | head -n 1)
+    if test -x $executable
+        eval ./$executable $argv
+    else
+        echo "Executable not found or not runnable"
+    end
+end
 alias rt="./build/test*"
 alias sb="./scripts/build.sh"
 alias x="exa --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
@@ -96,12 +112,13 @@ alias ztt="zig test tests.zig"
 
 set -Ux EDITOR vim
 set -Ux PROJECTS_DIR /Users/$USER/bar
+# set -Ux MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
 
-fish_add_path /opt/homebrew/bin
-fish_add_path /usr/local/bin
-fish_add_path /Users/$USER/.local/bin
 # eg. fd is in here
-fish_add_path $HOME/.cargo/bin
+fish_add_path -mp $HOME/.cargo/bin
+fish_add_path -mp /Users/$USER/.local/bin
+fish_add_path -mp /usr/local/bin
+fish_add_path -mp /opt/homebrew/bin
 
 bind \cy 'commandline -f accept-autosuggestion'
 
