@@ -1,6 +1,9 @@
 [font.normal]
 family = "MesloLGS NF"
 
+[shell]
+program = "/opt/homebrew/bin/fish"
+
 [font]
 size = 14
 
@@ -14,6 +17,9 @@ bindings = [
   { key = "Return", mods = "Command",  chars = "\u0000\\"},
   # new Window Split Vertical
   { key = "Return", mods = "Command|Shift",  chars = "\u0000|"},
+  # For some reason alacritty sends thhrough S-CR as just CR
+  # by default
+  { key = "Return", mods = "Shift", chars = "\u001b[13;2u" },
   { key = "}", mods = "Command|Shift",  chars = "\u0000n"},
   { key = "}", mods = "Command|Shift",  chars = "\u0000n"},
   { key = "{", mods = "Command|Shift",  chars = "\u0000p"},
