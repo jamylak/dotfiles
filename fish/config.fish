@@ -69,7 +69,9 @@ alias gps="git push"
 alias gpl="git pull"
 alias ta="tmux a"
 alias td="tmux detach"
+alias viv='nvim -c "normal \'0"'
 alias vio='NVIM_APPNAME="oldasnvim" nvim'
+alias vii="nvim ."
 alias vij="nvim ."
 alias vig="nvim ."
 alias via='nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'

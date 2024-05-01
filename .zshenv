@@ -16,8 +16,10 @@ alias qj="exit"
 alias ta="tmux a"
 alias td="tmux detach"
 alias vi='nvim'
+alias viv='nvim -c "normal '\''0"'
 alias vig="nvim ."
 alias vii="nvim ."
+alias vij="nvim ."
 alias vio='NVIM_APPNAME="oldasnvim" nvim'
 alias via='nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'
 alias viz='nvim ~/.config/dotfiles/.zshenv -c "normal cd"'
