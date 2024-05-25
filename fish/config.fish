@@ -1,4 +1,37 @@
 set -g fish_key_bindings fish_vi_key_bindings
+function setcursors
+    set -g fish_cursor_insert block
+    set -g fish_cursor_default block
+    set -g fish_cursor_external block
+    set -g fish_cursor_unknown block
+end
+
+# Try get it to always be block
+
+function fish_cursor_block
+    # Set cursor to block shape
+    echo -ne '\e[2 q'
+end
+
+function fish_vi_cursor_handle --on-variable fish_bind_mode
+    fish_cursor_block
+end
+function set_mode_post_execution --on-event fish_postexec
+    fish_cursor_block
+end
+
+function set_mode_pre_execution --on-event fish_preexec
+    fish_cursor_block
+end
+# Set cursor to block on shell startup
+fish_cursor_block
+setcursors
+
+# Reset cursor to block after each command
+function force_cursor_block --on-event fish_prompt
+    fish_cursor_block
+    setcursors
+end
 
 # https://github.com/fish-shell/fish-shell/issues/3541
 function fish_user_key_bindings
@@ -49,9 +82,11 @@ abbr -a vi nvim
 abbr -a q exit
 # abbr -a ls ls -G
 abbr -a lg "lazygit"
+abbr -a vib "cd ~/bar; nvim ."
+abbr -a vij "nvim ."
 
 # Set SHELL to FISH
-set -xg SHELL /opt/homebrew/bin/fish
+set -xg SHELL /opt/homebrew/bin/fish --login
 
 alias c="clear"
 alias ls="ls -G"
@@ -82,7 +117,6 @@ alias vip='nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
 alias vid='nvim ~/.config/dotfiles/ -c "normal cd"'
 alias vif='nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
 alias vik='nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
-alias vib='nvim ~/bar -c "normal cd"'
 alias vit='nvim -c :term -c :startinsert'
 alias vitm='nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
 alias newproj="scripts/newproj.sh"
