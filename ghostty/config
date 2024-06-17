@@ -1,0 +1,20 @@
+theme = Cobalt2
+confirm-close-surface = false
+macos-option-as-alt = true
+font-family = Fira Code Medium
+window-title-font-family = MesloLGS NF
+font-size = 18
+
+background = #000000
+background-opacity = 0.8
+background-blur-radius = 20
+command = /opt/homebrew/bin/fish
+shell-integration-features = no-cursor
+macos-non-native-fullscreen = true
+
+keybind = super+enter=new_split:down
+keybind = super+backslash=new_split:right
+keybind = super+d=scroll_page_down
+keybind = super+u=scroll_page_up
+
+window-decoration = true
