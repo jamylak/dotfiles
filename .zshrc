@@ -22,3 +22,16 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # if [ -f '/Users/james/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 # # The next line enables shell command completion for gcloud.
 # if [ -f '/Users/james/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/james/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^j' autosuggest-accept
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

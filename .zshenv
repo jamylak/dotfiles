@@ -94,4 +94,20 @@ watchandrun() {
     echo "Waiting for changes..."
   done
 }
+
+
+# Lazy version of virtualenv wrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/opt/homebrew/bin/python3
+workon () {
+  unset -f workon mkvirtualenv
+  source /opt/homebrew/bin/virtualenvwrapper.sh
+  workon $@
+}
+mkvirtualenv () {
+  unset -f workon mkvirtualenv
+  source /opt/homebrew/bin/virtualenvwrapper.sh
+  mkvirtualenv $@
+}
+
 alias war="watchandrun"
