@@ -1,37 +1,4 @@
 set -g fish_key_bindings fish_vi_key_bindings
-function setcursors
-    set -g fish_cursor_insert block
-    set -g fish_cursor_default block
-    set -g fish_cursor_external block
-    set -g fish_cursor_unknown block
-end
-
-# Try get it to always be block
-
-function fish_cursor_block
-    # Set cursor to block shape
-    echo -ne '\e[2 q'
-end
-
-function fish_vi_cursor_handle --on-variable fish_bind_mode
-    fish_cursor_block
-end
-function set_mode_post_execution --on-event fish_postexec
-    fish_cursor_block
-end
-
-function set_mode_pre_execution --on-event fish_preexec
-    fish_cursor_block
-end
-# Set cursor to block on shell startup
-fish_cursor_block
-setcursors
-
-# Reset cursor to block after each command
-function force_cursor_block --on-event fish_prompt
-    fish_cursor_block
-    setcursors
-end
 
 # https://github.com/fish-shell/fish-shell/issues/3541
 function fish_user_key_bindings
@@ -72,6 +39,7 @@ abbr -a war watchandrun
 function last_history_item
     echo $history[1]
 end
+
 abbr -a r --position anywhere --function last_history_item
 # Testing abbreviations
 abbr -a gk git checkout
@@ -84,9 +52,11 @@ abbr -a q exit
 abbr -a lg "lazygit"
 abbr -a vib "cd ~/bar; nvim ."
 abbr -a vij "nvim ."
+abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
+abbr -a viv 'nvim -c "normal \'0"'
 
 # Set SHELL to FISH
-set -xg SHELL /opt/homebrew/bin/fish --login
+set -xg SHELL /opt/homebrew/bin/fish
 
 alias c="clear"
 alias ls="ls -G"
@@ -104,11 +74,9 @@ alias gps="git push"
 alias gpl="git pull"
 alias ta="tmux a"
 alias td="tmux detach"
-alias viv='nvim -c "normal \'0"'
 alias vio='NVIM_APPNAME="oldasnvim" nvim'
 alias vii="nvim ."
 alias vij="nvim ."
-alias vig="nvim ."
 alias via='nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'
 alias viz='nvim ~/.config/dotfiles/.zshenv -c "normal cd"'
 alias vic='nvim ~/.config -c "normal cd"'
@@ -155,6 +123,10 @@ fish_add_path -mp $HOME/.cargo/bin
 fish_add_path -mp /Users/$USER/.local/bin
 fish_add_path -mp /usr/local/bin
 fish_add_path -mp /opt/homebrew/bin
+
+# Running vulkan things doesn't work without this
+set -g XDG_DATA_DIRS /usr/local/share
+# set -g XDG_DATA_DIRS /usr/local/share:/usr/share:/Users/james/.nix-profile/share:/nix/var/nix/profiles/default/share
 
 bind \cy 'commandline -f accept-autosuggestion'
 
