@@ -18,3 +18,13 @@ keybind = super+d=scroll_page_down
 keybind = super+u=scroll_page_up
 
 window-decoration = true
+
+keybind = super+ctrl+down=resize_split:down,30
+keybind = super+ctrl+left=resize_split:left,30
+keybind = super+ctrl+up=resize_split:up,30
+keybind = super+ctrl+right=resize_split:right,30
+keybind = super+ctrl+j=resize_split:down,30
+keybind = super+ctrl+h=resize_split:left,30
+keybind = super+ctrl+k=resize_split:up,30
+keybind = super+ctrl+l=resize_split:right,30
+keybind = super+ctrl+enter=toggle_split_zoom
