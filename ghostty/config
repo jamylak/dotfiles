@@ -28,3 +28,9 @@ keybind = super+ctrl+h=resize_split:left,30
 keybind = super+ctrl+k=resize_split:up,30
 keybind = super+ctrl+l=resize_split:right,30
 keybind = super+ctrl+enter=toggle_split_zoom
+keybind = super+shift+j=write_screen_file:paste
+
+# custom-shader = /Users/james/Desktop/shaders/glitch.glsl
+# custom-shader = /Users/james/proj/ghostty/src/renderer/shaders/test_shadertoy_crt.glsl
+# custom-shader = /Users/james/Desktop/shaders/crt.glsl
+custom-shader = shaders/bloom.glsl
