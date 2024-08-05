@@ -40,6 +40,7 @@ function last_history_item
     echo $history[1]
 end
 
+abbr -a tm tmux
 abbr -a r --position anywhere --function last_history_item
 # Testing abbreviations
 abbr -a gk git checkout
