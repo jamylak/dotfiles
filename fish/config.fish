@@ -115,7 +115,7 @@ alias ll="exa --icons -l --git"
 alias zt="zig test"
 alias ztt="zig test tests.zig"
 
-set -Ux EDITOR vim
+set -Ux EDITOR nvim
 set -Ux PROJECTS_DIR /Users/$USER/bar
 # set -Ux MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
 
