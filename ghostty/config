@@ -23,10 +23,10 @@ keybind = super+ctrl+down=resize_split:down,30
 keybind = super+ctrl+left=resize_split:left,30
 keybind = super+ctrl+up=resize_split:up,30
 keybind = super+ctrl+right=resize_split:right,30
-keybind = super+ctrl+j=resize_split:down,30
-keybind = super+ctrl+h=resize_split:left,30
-keybind = super+ctrl+k=resize_split:up,30
-keybind = super+ctrl+l=resize_split:right,30
+keybind = super+ctrl+j=resize_split:down,60
+keybind = super+ctrl+h=resize_split:left,60
+keybind = super+ctrl+k=resize_split:up,60
+keybind = super+ctrl+l=resize_split:right,60
 keybind = super+ctrl+enter=toggle_split_zoom
 keybind = super+shift+j=write_screen_file:paste
 
