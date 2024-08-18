@@ -1,3 +1,9 @@
+export HOMEBREW_DIR="/opt/homebrew"
+export PATH="/Users/$USERNAME/.local/bin:$PATH"
+export PATH="$HOMEBREW_DIR/bin:$PATH"
+export EDITOR="nvim"
+export PROJECTS_DIR="/Users/$USERNAME/bar"
+
 alias c="clear"
 alias ls="ls -G"
 alias gk="git checkout"
@@ -52,11 +58,6 @@ alias ll="exa --icons -l --git"
 alias zt="zig test"
 alias ztt="zig test tests.zig"
 
-export PATH="/Users/$USERNAME/.local/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
-export EDITOR="nvim"
-export PROJECTS_DIR="/Users/$USERNAME/bar"
-
 # Lazy version of zoxide
 z () {
   unset -f z zi
@@ -98,15 +99,15 @@ watchandrun() {
 
 # Lazy version of virtualenv wrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/opt/homebrew/bin/python3
+export VIRTUALENVWRAPPER_PYTHON=$HOMEBREW_DIR/bin/python3
 workon () {
   unset -f workon mkvirtualenv
-  source /opt/homebrew/bin/virtualenvwrapper.sh
+  source $HOMEBREW_DIR/bin/virtualenvwrapper.sh
   workon $@
 }
 mkvirtualenv () {
   unset -f workon mkvirtualenv
-  source /opt/homebrew/bin/virtualenvwrapper.sh
+  source $HOMEBREW_DIR/bin/virtualenvwrapper.sh
   mkvirtualenv $@
 }
 
