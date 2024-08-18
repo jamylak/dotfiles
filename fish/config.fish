@@ -1,5 +1,11 @@
-set -g fish_key_bindings fish_vi_key_bindings
+set -xg SHELL /opt/homebrew/bin/fish
+# eg. fd is in here
+fish_add_path -mp $HOME/.cargo/bin
+fish_add_path -mp /Users/$USER/.local/bin
+fish_add_path -mp /usr/local/bin
+fish_add_path -mp /opt/homebrew/bin
 
+set -g fish_key_bindings fish_vi_key_bindings
 # https://github.com/fish-shell/fish-shell/issues/3541
 function fish_user_key_bindings
     # for mode in insert default visual
@@ -59,8 +65,6 @@ abbr -a vij "nvim ."
 abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
 abbr -a viv 'nvim -c "normal \'0"'
 
-# Set SHELL to FISH
-set -xg SHELL /opt/homebrew/bin/fish
 
 alias c="clear"
 alias ls="ls -G"
@@ -121,12 +125,6 @@ set -Ux EDITOR nvim
 set -Ux PROJECTS_DIR /Users/$USER/bar
 # set -Ux MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
 
-# eg. fd is in here
-fish_add_path -mp $HOME/.cargo/bin
-fish_add_path -mp /Users/$USER/.local/bin
-fish_add_path -mp /usr/local/bin
-fish_add_path -mp /opt/homebrew/bin
-
 # Running vulkan things doesn't work without this
 set -g XDG_DATA_DIRS /usr/local/share
 # set -g XDG_DATA_DIRS /usr/local/share:/usr/share:/Users/james/.nix-profile/share:/nix/var/nix/profiles/default/share
@@ -158,6 +156,10 @@ end
 
 # fzf --fish | source
 
-# starship init fish | source
+starship init fish | source
 
 fzf_configure_bindings --directory=\ct
+
+# Noting tide configuration but don't need to run this in this file
+# fisher install IlanCosman/tide@v6
+# tide configure --auto --style=Rainbow --prompt_colors='16 colors' --show_time='24-hour format' --rainbow_prompt_separators=Vertical --powerline_prompt_heads=Sharp --powerline_prompt_tails=Flat --powerline_prompt_style='Two lines, character' --prompt_connection=Dotted --powerline_right_prompt_frame=No --prompt_spacing=Sparse --icons='Many icons' --transient=No
