@@ -41,13 +41,16 @@ function last_history_item
 end
 
 abbr -a tm tmux
+abbr -a t tmux
 abbr -a r --position anywhere --function last_history_item
 # Testing abbreviations
 abbr -a gk git checkout
 abbr -a c clear
 abbr -a gc git commit
 abbr -a ga git add
+abbr -a gp git pull
 abbr -a vi nvim
+abbr -a v nvim
 abbr -a q exit
 # abbr -a ls ls -G
 abbr -a lg "lazygit"
@@ -69,7 +72,6 @@ alias gm="git commit -m"
 alias gs="git status"
 alias gl="git log"
 alias gd="git diff"
-alias gp="git pull"
 alias gu="git push"
 alias gps="git push"
 alias gpl="git pull"
