@@ -1,3 +1,4 @@
+command = /opt/homebrew/bin/fish
 theme = Cobalt2
 confirm-close-surface = false
 macos-option-as-alt = true
@@ -8,7 +9,6 @@ font-size = 18
 background = #000000
 background-opacity = 0.8
 background-blur-radius = 20
-command = /opt/homebrew/bin/fish
 shell-integration-features = no-cursor
 macos-non-native-fullscreen = true
 
