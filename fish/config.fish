@@ -55,6 +55,7 @@ abbr -a c clear
 abbr -a gc git commit
 abbr -a ga git add
 abbr -a gp git pull
+abbr -a gs git status
 abbr -a vi nvim
 abbr -a v nvim
 abbr -a q exit
@@ -73,7 +74,6 @@ alias ls="ls -G"
 # alias ga="git add"
 alias vi="nvim"
 alias gm="git commit -m"
-alias gs="git status"
 alias gl="git log"
 alias gd="git diff"
 alias gu="git push"
