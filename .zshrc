@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+HOMEBREW_DIR="/opt/homebrew"
+
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -15,8 +17,8 @@ export FZF_DEFAULT_OPS="--extended"
 eval "$(fzf --zsh)"
 
 source "$HOME/.cargo/env"
-export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
-eval "$(/opt/homebrew/bin/brew shellenv)"
+export PKG_CONFIG_PATH="$HOMEBREW_DIR/lib/pkgconfig:$PKG_CONFIG_PATH"
+eval "$($HOMEBREW_DIR/bin/brew shellenv)"
 
 # The next line updates PATH for the Google Cloud SDK.
 # if [ -f '/Users/james/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james/Downloads/google-cloud-sdk/path.zsh.inc'; fi
@@ -34,4 +36,4 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$HOMEBREW_DIR/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
