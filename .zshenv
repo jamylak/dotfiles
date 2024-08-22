@@ -116,4 +116,4 @@ mkvirtualenv () {
   mkvirtualenv $@
 }
 
-source .zshenv.local
+source ~/.zshenv.local
