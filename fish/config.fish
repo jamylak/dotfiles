@@ -104,7 +104,11 @@ abbr -a tm tmux
 abbr -a t tmux
 abbr -a ta "tmux a"
 abbr -a td "tmux detach"
+abbr -a h 'nvim -c :term -c :startinsert'
 abbr -a zid "z dotfiles"
+abbr -a zib "z bar"
+abbr -a zit "z /tmp"
+abbr -a zin "z ~/.config/nvim"
 
 # Git
 abbr -a gk git checkout
@@ -153,8 +157,8 @@ abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
 abbr -a cb "cmake --build build"
 
 # Exa
-abbr -a x "exa --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
-abbr -a xj "exa --no-permissions --no-user --icons --tree -l -L 2"
+abbr -a x "exa --no-permissions --no-user --icons --tree -l -L 2"
+abbr -a xj "exa --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
 abbr -a xk "exa --no-permissions --no-user --icons --tree -l -L 1"
 abbr -a ex "exa --icons --tree -l --git --git-ignore"
 abbr -a exn "exa --icons --tree -l --git --git-ignore --no-permissions --no-user"
