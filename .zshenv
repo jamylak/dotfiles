@@ -1,4 +1,8 @@
-export HOMEBREW_DIR="/opt/homebrew"
+if [ -d "/opt/homebrew" ]; then
+    export HOMEBREW_DIR="/opt/homebrew"
+else
+    export HOMEBREW_DIR="/usr/local"  # fallback to another directory if needed
+fi
 export PATH="/Users/$USERNAME/.local/bin:$PATH"
 export PATH="$HOMEBREW_DIR/bin:$PATH"
 export EDITOR="nvim"
