@@ -61,6 +61,7 @@ alias l="exa --icons -l --git --git-ignore"
 alias ll="exa --icons -l --git"
 alias zt="zig test"
 alias ztt="zig test tests.zig"
+alias war="watchandrun"
 
 # Lazy version of zoxide
 z () {
@@ -115,4 +116,4 @@ mkvirtualenv () {
   mkvirtualenv $@
 }
 
-alias war="watchandrun"
+source .zshenv.local
