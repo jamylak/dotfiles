@@ -1,11 +1,24 @@
 set -xg SHELL /opt/homebrew/bin/fish
+
+set -Ux EDITOR nvim
+set -Ux PROJECTS_DIR /Users/$USER/bar
+# set -Ux MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
+# Running vulkan things doesn't work without this
+set -g XDG_DATA_DIRS /usr/local/share
+# set -g XDG_DATA_DIRS /usr/local/share:/usr/share:/Users/james/.nix-profile/share:/nix/var/nix/profiles/default/share
+
+
+set -g fish_key_bindings fish_vi_key_bindings
+
+# Autocomplete binding
+bind \cy 'commandline -f accept-autosuggestion'
+
 # eg. fd is in here
 fish_add_path -mp $HOME/.cargo/bin
 fish_add_path -mp /Users/$USER/.local/bin
 fish_add_path -mp /usr/local/bin
 fish_add_path -mp /opt/homebrew/bin
 
-set -g fish_key_bindings fish_vi_key_bindings
 # https://github.com/fish-shell/fish-shell/issues/3541
 function fish_user_key_bindings
     # for mode in insert default visual
@@ -40,66 +53,11 @@ function watchandrun
         echo "Please specify a command to run and a file to watch."
     end
 end
-abbr -a war watchandrun
 
 function last_history_item
     echo $history[1]
 end
 
-abbr -a tm tmux
-abbr -a t tmux
-abbr -a r --position anywhere --function last_history_item
-# Testing abbreviations
-abbr -a gk git checkout
-abbr -a c clear
-abbr -a gc git commit
-abbr -a ga git add
-abbr -a gp git pull
-abbr -a gs git status
-abbr -a vi nvim
-abbr -a v nvim
-abbr -a q exit
-# abbr -a ls ls -G
-abbr -a lg "lazygit"
-abbr -a vib "cd ~/bar; nvim ."
-abbr -a vij "nvim ."
-abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
-abbr -a viv 'nvim -c "normal \'0"'
-
-
-alias c="clear"
-alias ls="ls -G"
-# alias gk="git checkout"
-# alias gc="git commit"
-# alias ga="git add"
-alias vi="nvim"
-alias gm="git commit -m"
-alias gl="git log"
-alias gd="git diff"
-alias gu="git push"
-alias gps="git push"
-alias gpl="git pull"
-alias ta="tmux a"
-alias td="tmux detach"
-alias vio='NVIM_APPNAME="oldasnvim" nvim'
-alias vii="nvim ."
-alias vij="nvim ."
-alias via='nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'
-alias viz='nvim ~/.config/dotfiles/.zshenv -c "normal cd"'
-alias vic='nvim ~/.config -c "normal cd"'
-alias vin='nvim ~/.config/nvim/ -c "normal cd"'
-alias vip='nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
-alias vid='nvim ~/.config/dotfiles/ -c "normal cd"'
-alias vif='nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
-alias vik='nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
-alias vit='nvim -c :term -c :startinsert'
-alias vitm='nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
-alias newproj="scripts/newproj.sh"
-alias nproj="scripts/newproj.sh"
-alias killdocker="osascript -e 'quit app \"Docker\"'"
-alias zb="zig build"
-alias cm="cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1" 
-alias cb="cmake --build build"
 function rn
     set executable (find build/ -type f -perm +111 -maxdepth 1 | head -n 1)
     if test -x $executable
@@ -108,28 +66,6 @@ function rn
         echo "Executable not found or not runnable"
     end
 end
-alias rt="./build/test*"
-alias sb="./scripts/build.sh"
-alias x="exa --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
-alias xj="exa --no-permissions --no-user --icons --tree -l -L 2"
-alias xk="exa --no-permissions --no-user --icons --tree -l -L 1"
-alias ex="exa --icons --tree -l --git --git-ignore"
-alias exn="exa --icons --tree -l --git --git-ignore --no-permissions --no-user"
-alias exx="exa --icons --tree -l --git"
-alias l="exa --icons -l --git --git-ignore"
-alias ll="exa --icons -l --git"
-alias zt="zig test"
-alias ztt="zig test tests.zig"
-
-set -Ux EDITOR nvim
-set -Ux PROJECTS_DIR /Users/$USER/bar
-# set -Ux MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
-
-# Running vulkan things doesn't work without this
-set -g XDG_DATA_DIRS /usr/local/share
-# set -g XDG_DATA_DIRS /usr/local/share:/usr/share:/Users/james/.nix-profile/share:/nix/var/nix/profiles/default/share
-
-bind \cy 'commandline -f accept-autosuggestion'
 
 # Lazy version of zoxide
 function z
@@ -153,6 +89,79 @@ function zi
     # Forward arguments using argv
     zi $argv
 end
+
+abbr -a war watchandrun
+abbr -a p python3
+abbr -a c clear
+abbr -a r --position anywhere --function last_history_item
+abbr -a q exit
+abbr -a lg "lazygit"
+abbr -a tm tmux
+abbr -a t tmux
+abbr -a ta "tmux a"
+abbr -a td "tmux detach"
+
+# Git
+abbr -a gk git checkout
+abbr -a gm "git commit -m"
+abbr -a gl "git log"
+abbr -a gpl "git pull"
+abbr -a gc git commit
+abbr -a ga git add
+abbr -a gp git pull
+abbr -a gs git status
+abbr -a gd git diff
+abbr -a gu git push
+abbr -a gps git push
+
+# Vim
+abbr -a vi nvim
+abbr -a v nvim .
+abbr -a vib "cd ~/bar; nvim ."
+abbr -a vij "nvim ."
+abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
+abbr -a viv 'nvim -c "normal \'0"'
+abbr -a c "clear"
+abbr -a vio 'NVIM_APPNAME="oldasnvim" nvim'
+abbr -a vi "nvim"
+abbr -a vii "nvim ."
+abbr -a vij "nvim ."
+abbr -a via 'nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'
+abbr -a viz 'nvim ~/.config/dotfiles/.zshenv -c "normal cd"'
+abbr -a vic 'nvim ~/.config -c "normal cd"'
+abbr -a vin 'nvim ~/.config/nvim/ -c "normal cd"'
+abbr -a vip 'nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
+abbr -a vid 'nvim ~/.config/dotfiles/ -c "normal cd"'
+abbr -a vif 'nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
+abbr -a vik 'nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
+abbr -a vit 'nvim -c :term -c :startinsert'
+abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
+
+# Misc
+abbr -a newproj "scripts/newproj.sh"
+abbr -a nproj "scripts/newproj.sh"
+abbr -a killdocker "osascript -e 'quit app \"Docker\"'"
+abbr -a rt "./build/test*"
+abbr -a sb "./scripts/build.sh"
+
+# C++
+abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1" 
+abbr -a cb "cmake --build build"
+
+# Exa
+abbr -a x "exa --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
+abbr -a xj "exa --no-permissions --no-user --icons --tree -l -L 2"
+abbr -a xk "exa --no-permissions --no-user --icons --tree -l -L 1"
+abbr -a ex "exa --icons --tree -l --git --git-ignore"
+abbr -a exn "exa --icons --tree -l --git --git-ignore --no-permissions --no-user"
+abbr -a exx "exa --icons --tree -l --git"
+abbr -a l "exa --icons -l --git --git-ignore"
+abbr -a ll "exa --icons -l --git"
+
+# Zig
+abbr -a zb "zig build"
+abbr -a zt "zig test"
+abbr -a ztt "zig test tests.zig"
 
 # fzf --fish | source
 
