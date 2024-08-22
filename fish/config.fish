@@ -121,7 +121,6 @@ abbr -a vib "cd ~/bar; nvim ."
 abbr -a vij "nvim ."
 abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
 abbr -a viv 'nvim -c "normal \'0"'
-abbr -a c "clear"
 abbr -a vio 'NVIM_APPNAME="oldasnvim" nvim'
 abbr -a vi "nvim"
 abbr -a vii "nvim ."
