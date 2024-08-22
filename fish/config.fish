@@ -1,4 +1,8 @@
-set -xg SHELL /opt/homebrew/bin/fish
+if test -d /opt/homebrew/bin
+    set -xg SHELL /opt/homebrew/bin/fish
+else
+    set -xg SHELL /usr/local/bin/fish
+end
 
 set -Ux EDITOR nvim
 set -Ux PROJECTS_DIR /Users/$USER/bar
