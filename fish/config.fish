@@ -109,6 +109,7 @@ abbr -a zid "z dotfiles"
 abbr -a zib "z bar"
 abbr -a zit "z /tmp"
 abbr -a zin "z ~/.config/nvim"
+abbr -a br "brew"
 
 # Git
 abbr -a gk git checkout
