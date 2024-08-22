@@ -104,6 +104,7 @@ abbr -a tm tmux
 abbr -a t tmux
 abbr -a ta "tmux a"
 abbr -a td "tmux detach"
+abbr -a zid "z dotfiles"
 
 # Git
 abbr -a gk git checkout
