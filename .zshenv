@@ -8,29 +8,45 @@ export PATH="$HOMEBREW_DIR/bin:$PATH"
 export EDITOR="nvim"
 export PROJECTS_DIR="/Users/$USERNAME/bar"
 
-alias c="clear"
-alias ls="ls -G"
-alias gk="git checkout"
-alias gc="git commit"
-alias gm="git commit -m"
-alias gs="git status"
-alias ga="git add"
-alias gl="git log"
-alias gd="git diff"
-alias gp="git pull"
-alias gu="git push"
-alias gps="git push"
-alias gpl="git pull"
-alias q="exit"
-alias qj="exit"
+alias war=watchandrun
+alias p=python3
+alias c=clear
+alias q=exit
+alias lg="lazygit"
+alias tm=tmux
+alias t=tmux
 alias ta="tmux a"
 alias td="tmux detach"
-alias vi='nvim'
+alias h='nvim -c :term -c :startinsert'
+alias zid="z dotfiles"
+alias zib="z bar"
+alias zit="z /tmp"
+alias zin="z ~/.config/nvim"
+alias br="brew"
+
+# Git
+alias gk=git checkout
+alias gm="git commit -m"
+alias gl="git log"
+alias gpl="git pull"
+alias gc=git commit
+alias ga=git add
+alias gp=git pull
+alias gs=git status
+alias gd=git diff
+alias gu=git push
+alias gps=git push
+
+# Vim
+alias vi="nvim"
+alias v="nvim ."
+alias vib="cd ~/bar; nvim ."
+alias vij="nvim ."
+alias vig='nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
 alias viv='nvim -c "normal '\''0"'
-alias vig="nvim ."
+alias vi="nvim"
 alias vii="nvim ."
 alias vij="nvim ."
-alias vio='NVIM_APPNAME="oldasnvim" nvim'
 alias via='nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'
 alias viz='nvim ~/.config/dotfiles/.zshenv -c "normal cd"'
 alias vic='nvim ~/.config -c "normal cd"'
@@ -38,30 +54,36 @@ alias vin='nvim ~/.config/nvim/ -c "normal cd"'
 alias vip='nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
 alias vid='nvim ~/.config/dotfiles/ -c "normal cd"'
 alias vif='nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
+alias vifl='nvim ~/.config/dotfiles/fish/config.local.fish -c "normal cd"'
 alias vik='nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
-alias vib='nvim ~/bar -c "normal cd"'
 alias vit='nvim -c :term -c :startinsert'
 alias vitm='nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
-alias nv='nvim'
-alias lg="lazygit"
+
+# Misc
 alias newproj="scripts/newproj.sh"
 alias nproj="scripts/newproj.sh"
 alias killdocker="osascript -e 'quit app \"Docker\"'"
-alias zb="zig build"
-alias cm="cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1" 
-alias cb="cmake --build build"
-alias rn='./$(find build/ -type f -perm +111 -maxdepth 1 | head -n 1)'
 alias rt="./build/test*"
 alias sb="./scripts/build.sh"
-alias x="exa --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
+
+# C++
+alias cm="cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1" 
+alias cb="cmake --build build"
+
+# Exa
+alias x="exa --no-permissions --no-user --icons --tree -l -L 2"
+alias xj="exa --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
+alias xk="exa --no-permissions --no-user --icons --tree -l -L 1"
 alias ex="exa --icons --tree -l --git --git-ignore"
 alias exn="exa --icons --tree -l --git --git-ignore --no-permissions --no-user"
 alias exx="exa --icons --tree -l --git"
 alias l="exa --icons -l --git --git-ignore"
 alias ll="exa --icons -l --git"
+
+# Zig
+alias zb="zig build"
 alias zt="zig test"
 alias ztt="zig test tests.zig"
-alias war="watchandrun"
 
 # Lazy version of zoxide
 z () {
