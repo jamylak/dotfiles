@@ -110,14 +110,16 @@ abbr -a zib "z bar"
 abbr -a zit "z /tmp"
 abbr -a zin "z ~/.config/nvim"
 abbr -a br "brew"
+abbr -a bi "brew install"
 
 # Git
 abbr -a gk git checkout
-abbr -a gm "git commit -m"
+abbr -a gm  --set-cursor=! "git commit -m \"!\""
 abbr -a gl "git log"
 abbr -a gpl "git pull"
 abbr -a gc git commit
 abbr -a ga git add
+abbr -a gaa git add -A
 abbr -a gp git pull
 abbr -a gs git status
 abbr -a gd git diff
@@ -126,6 +128,7 @@ abbr -a gps git push
 
 # Vim
 abbr -a vi nvim
+abbr -a e nvim
 abbr -a v nvim .
 abbr -a vib "cd ~/bar; nvim ."
 abbr -a vij "nvim ."
@@ -143,6 +146,7 @@ abbr -a vip 'nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
 abbr -a vid 'nvim ~/.config/dotfiles/ -c "normal cd"'
 abbr -a vif 'nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
 abbr -a vifl 'nvim ~/.config/dotfiles/fish/config.local.fish -c "normal cd"'
+abbr -a vizl 'nvim ~/.config/dotfiles/.zshenv.local -c "normal cd"'
 abbr -a vik 'nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
 abbr -a vit 'nvim -c :term -c :startinsert'
 abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
@@ -158,15 +162,15 @@ abbr -a sb "./scripts/build.sh"
 abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1" 
 abbr -a cb "cmake --build build"
 
-# Exa
-abbr -a x "exa --no-permissions --no-user --icons --tree -l -L 2"
-abbr -a xj "exa --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
-abbr -a xk "exa --no-permissions --no-user --icons --tree -l -L 1"
-abbr -a ex "exa --icons --tree -l --git --git-ignore"
-abbr -a exn "exa --icons --tree -l --git --git-ignore --no-permissions --no-user"
-abbr -a exx "exa --icons --tree -l --git"
-abbr -a l "exa --icons -l --git --git-ignore"
-abbr -a ll "exa --icons -l --git"
+# eza
+abbr -a x "eza --no-permissions --no-user --icons --tree -l -L 2"
+abbr -a xj "eza --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
+abbr -a xk "eza --no-permissions --no-user --icons --tree -l -L 1"
+abbr -a ex "eza --icons --tree -l --git --git-ignore"
+abbr -a exn "eza --icons --tree -l --git --git-ignore --no-permissions --no-user"
+abbr -a exx "eza --icons --tree -l --git"
+abbr -a l "eza --icons -l --git --git-ignore"
+abbr -a ll "eza --icons -l --git"
 
 # Zig
 abbr -a zb "zig build"
