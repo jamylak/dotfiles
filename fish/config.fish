@@ -113,6 +113,8 @@ abbr -a br "brew"
 abbr -a bi "brew install"
 
 # Git
+abbr -a g "git"
+abbr -a gi "git init"
 abbr -a gk git checkout
 abbr -a gm  --set-cursor=! "git commit -m \"!\""
 abbr -a gl "git log"
@@ -146,6 +148,7 @@ abbr -a vip 'nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
 abbr -a vid 'nvim ~/.config/dotfiles/ -c "normal cd"'
 abbr -a vif 'nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
 abbr -a vifl 'nvim ~/.config/dotfiles/fish/config.local.fish -c "normal cd"'
+abbr -a fl 'nvim ~/.config/dotfiles/fish/config.local.fish -c "normal cd"'
 abbr -a vizl 'nvim ~/.config/dotfiles/.zshenv.local -c "normal cd"'
 abbr -a vik 'nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
 abbr -a vit 'nvim -c :term -c :startinsert'
@@ -163,13 +166,13 @@ abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
 abbr -a cb "cmake --build build"
 
 # eza
-abbr -a x "eza --no-permissions --no-user --icons --tree -l -L 2"
+abbr -a l "eza --no-permissions --no-user --icons --tree -l -L 2"
+abbr -a x "eza --icons -l --git --git-ignore"
 abbr -a xj "eza --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
 abbr -a xk "eza --no-permissions --no-user --icons --tree -l -L 1"
 abbr -a ex "eza --icons --tree -l --git --git-ignore"
 abbr -a exn "eza --icons --tree -l --git --git-ignore --no-permissions --no-user"
 abbr -a exx "eza --icons --tree -l --git"
-abbr -a l "eza --icons -l --git --git-ignore"
 abbr -a ll "eza --icons -l --git"
 
 # Zig
