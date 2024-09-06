@@ -25,17 +25,17 @@ alias zin="z ~/.config/nvim"
 alias br="brew"
 
 # Git
-alias gk=git checkout
+alias gk="git checkout"
 alias gm="git commit -m"
 alias gl="git log"
 alias gpl="git pull"
-alias gc=git commit
-alias ga=git add
-alias gp=git pull
-alias gs=git status
-alias gd=git diff
-alias gu=git push
-alias gps=git push
+alias gc="git commit"
+alias ga="git add"
+alias gp="git pull"
+alias gs="git status"
+alias gd="git diff"
+alias gu="git push"
+alias gps="git push"
 
 # Vim
 alias vi="nvim"
