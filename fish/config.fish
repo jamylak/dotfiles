@@ -127,6 +127,7 @@ abbr -a gs git status
 abbr -a gd git diff
 abbr -a gu git push
 abbr -a gps git push
+abbr -a gcl git clone
 
 # Vim
 abbr -a vi nvim
