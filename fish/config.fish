@@ -118,6 +118,8 @@ abbr -a g "git"
 abbr -a gi "git init"
 abbr -a gk git checkout
 abbr -a gm  --set-cursor=! "git commit -m \"!\""
+# gh extension install gennaro-tedesco/gh-s
+abbr -a ghc  --set-cursor=! "git clone (gh s \"!\")"
 abbr -a gl "git log"
 abbr -a gpl "git pull"
 abbr -a gc git commit
