@@ -107,6 +107,7 @@ abbr -a td "tmux detach"
 abbr -a h 'nvim -c :term -c :startinsert'
 abbr -a zid "z dotfiles"
 abbr -a zib "z bar"
+abbr -a zip "z proj"
 abbr -a zit "z /tmp"
 abbr -a zin "z ~/.config/nvim"
 abbr -a br "brew"
