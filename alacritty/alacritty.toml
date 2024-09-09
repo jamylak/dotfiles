@@ -34,7 +34,8 @@ bindings = [
   # Detach pane into new tab
   { key = "T", mods = "Command|Shift",  chars = "\u0000!"},
   { key = "W", mods = "Command",  chars = "\u0000x"},
-  # { key = "G", mods = "Command",  chars = "\u0000["},
+  # For this to work on mac you need to go to Keyboard Shortcuts
+  # for Applications and override 'Hide alacritty' -> F12
   { key = "H", mods = "Command",  chars = "\u0000P"},
   { key = "G", mods = "Command",  chars = "\u0000P"},
   { key = "J", mods = "Command",  chars = "\u0000["},
