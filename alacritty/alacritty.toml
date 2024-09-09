@@ -34,7 +34,9 @@ bindings = [
   # Detach pane into new tab
   { key = "T", mods = "Command|Shift",  chars = "\u0000!"},
   { key = "W", mods = "Command",  chars = "\u0000x"},
-  { key = "G", mods = "Command",  chars = "\u0000["},
+  # { key = "G", mods = "Command",  chars = "\u0000["},
+  { key = "H", mods = "Command",  chars = "\u0000P"},
+  { key = "G", mods = "Command",  chars = "\u0000P"},
   { key = "J", mods = "Command",  chars = "\u0000["},
   { key = "P", mods = "Command",  chars = "\u0000]"},
   { key = "1", mods = "Command",  chars = "\u00000"},
