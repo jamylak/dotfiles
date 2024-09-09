@@ -39,6 +39,7 @@ bindings = [
   { key = "G", mods = "Command",  chars = "\u0000P"},
   { key = "J", mods = "Command",  chars = "\u0000["},
   { key = "P", mods = "Command",  chars = "\u0000]"},
+  { key = "Z", mods = "Command",  chars = "\u0000z"},
   { key = "1", mods = "Command",  chars = "\u00000"},
   { key = "2", mods = "Command",  chars = "\u00001"},
   { key = "3", mods = "Command",  chars = "\u00002"},
