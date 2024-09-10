@@ -17,6 +17,9 @@ set -g fish_key_bindings fish_vi_key_bindings
 # Autocomplete binding
 bind \cy 'commandline -f accept-autosuggestion'
 
+bind -M normal \ce edit_command_buffer
+bind -M insert \ce edit_command_buffer
+
 # eg. fd is in here
 fish_add_path -mp $HOME/.cargo/bin
 fish_add_path -mp /Users/$USER/.local/bin
