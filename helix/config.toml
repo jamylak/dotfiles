@@ -26,6 +26,7 @@ g.o = "goto_file_start"
 0 = "goto_line_start"
 # Yank to clipboard
 Y = "yank_main_selection_to_clipboard"
+" " = {q = ":q"}
 
 [keys.insert]
 "A-x" = "normal_mode"
