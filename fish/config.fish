@@ -160,6 +160,7 @@ abbr -a fl 'nvim ~/.config/dotfiles/fish/config.local.fish -c "normal cd"'
 abbr -a vizl 'nvim ~/.config/dotfiles/.zshenv.local -c "normal cd"'
 abbr -a vik 'nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
 abbr -a vit 'nvim -c :term -c :startinsert'
+abbr -a vit 'nvim /tmp -c "normal cd"'
 abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
 
 # Misc
