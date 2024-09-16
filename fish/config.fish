@@ -106,8 +106,8 @@ abbr -a tm tmux
 abbr -a t tmux
 abbr -a ta "tmux a"
 abbr -a td "tmux detach"
-abbr -a zid "cd ~/dotfiles"
-abbr -a zd "cd ~/dotfiles"
+abbr -a zid "cd ~/.config/dotfiles"
+abbr -a zd "cd ~/.config/dotfiles"
 abbr -a zib "cd ~/bar"
 abbr -a zip "cd ~/proj"
 abbr -a zit "cd /tmp"
