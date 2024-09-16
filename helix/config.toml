@@ -10,13 +10,21 @@ theme = "ayu_evolve"
 # w = "move_line_up" # Maps the 'w' key move_line_up
 # "C-S-esc" = "extend_line" # Maps Ctrl-Shift-Escape to extend_line
 # g = { a = "code_action" } # Maps `ga` to show possible code actions
+
+# Paste big selection
 "C-p" = ["extend_to_line_bounds", "yank", "paste_after", "add_newline_above"]
+# Move lines up and down
+"C-j" = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+"C-k" = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+# Duplicate line
 q.p = ["extend_to_line_bounds", "yank", "paste_after"]
+# Quick shortcuts for line end and begin
 q.k = "goto_line_end"
 q.j = "extend_to_line_end"
 q.h = "extend_to_line_start"
 g.o = "goto_file_start"
 0 = "goto_line_start"
+# Yank to clipboard
 Y = "yank_main_selection_to_clipboard"
 
 [keys.insert]
