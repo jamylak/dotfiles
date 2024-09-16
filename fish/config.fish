@@ -102,27 +102,27 @@ abbr -a p python3
 abbr -a c clear
 abbr -a r --position anywhere --function last_history_item
 abbr -a q exit
-abbr -a lg "lazygit"
 abbr -a tm tmux
 abbr -a t tmux
 abbr -a ta "tmux a"
 abbr -a td "tmux detach"
-abbr -a h 'nvim -c :term -c :startinsert'
-abbr -a zid "z dotfiles"
+abbr -a zid "cd ~/dotfiles"
+abbr -a zd "cd ~/dotfiles"
 abbr -a zib "cd ~/bar"
 abbr -a zip "cd ~/proj"
 abbr -a zit "cd /tmp"
 abbr -a zin "z ~/.config/nvim"
-abbr -a br "brew"
+abbr -a zn "z ~/.config/nvim"
+abbr -a br brew
 abbr -a bi "brew install"
 
 # Git
-abbr -a g "git"
+abbr -a g git
 abbr -a gi "git init"
 abbr -a gk git checkout
-abbr -a gm  --set-cursor=! "git commit -m \"!\""
+abbr -a gm --set-cursor=! "git commit -m \"!\""
 # gh extension install gennaro-tedesco/gh-s
-abbr -a ghc  --set-cursor=! "git clone (gh s \"!\")"
+abbr -a ghc --set-cursor=! "git clone (gh s \"!\")"
 abbr -a gl "git log"
 abbr -a gpl "git pull"
 abbr -a gc git commit
@@ -135,6 +135,11 @@ abbr -a gu git push
 abbr -a gps git push
 abbr -a gcl git clone
 
+# Lazygit
+abbr -a lg lazygit
+abbr -a lgd "cd ~/.config/dotfiles; lazygit"
+abbr -a lgn "cd ~/.config/nvim/; lazygit"
+
 # Vim
 abbr -a vi nvim
 abbr -a e nvim
@@ -145,13 +150,14 @@ abbr -a vij "nvim ."
 abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
 abbr -a viv 'nvim -c "normal \'0"'
 abbr -a vio 'NVIM_APPNAME="oldasnvim" nvim'
-abbr -a vi "nvim"
+abbr -a vi nvim
 abbr -a vii "nvim ."
 abbr -a vij "nvim ."
 abbr -a via 'nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'
 abbr -a viz 'nvim ~/.config/dotfiles/.zshenv -c "normal cd"'
 abbr -a vic 'nvim ~/.config -c "normal cd"'
 abbr -a vin 'nvim ~/.config/nvim/ -c "normal cd"'
+abbr -a vih 'cd ~/.config/helix/; nvim config.toml'
 abbr -a vip 'nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
 abbr -a vid 'nvim ~/.config/dotfiles/ -c "normal cd"'
 abbr -a vif 'nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
@@ -162,6 +168,15 @@ abbr -a vik 'nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
 abbr -a vit 'nvim /tmp -c "normal cd"'
 abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
 
+# Helix
+abbr -a h 'hx .'
+abbr -a hf 'cd ~/.config/dotfiles; hx fish/config.fish'
+abbr -a hh 'cd ~/.config/dotfiles; hx helix/config.toml'
+abbr -a hb 'cd ~/bar; hx .'
+abbr -a hfl 'cd ~/.config/dotfiles; hx fish/config.local.fish'
+abbr -a hd 'cd ~/.config/dotfiles; hx .'
+abbr -a hitm 'cd ~/.config/dotfiles; hx .tmux.conf'
+
 # Misc
 abbr -a newproj "scripts/newproj.sh"
 abbr -a nproj "scripts/newproj.sh"
@@ -170,7 +185,7 @@ abbr -a rt "./build/test*"
 abbr -a sb "./scripts/build.sh"
 
 # C++
-abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1" 
+abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
 abbr -a cb "cmake --build build"
 
 # eza
