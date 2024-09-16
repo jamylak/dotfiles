@@ -5,7 +5,7 @@ family = "MesloLGS NF"
 program = "/opt/homebrew/bin/fish"
 
 [font]
-size = 14
+size = 16
 
 [window]
 option_as_alt = "Both"
