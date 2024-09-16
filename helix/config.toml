@@ -11,7 +11,17 @@ theme = "ayu_evolve"
 # "C-S-esc" = "extend_line" # Maps Ctrl-Shift-Escape to extend_line
 # g = { a = "code_action" } # Maps `ga` to show possible code actions
 "C-p" = ["extend_to_line_bounds", "yank", "paste_after", "add_newline_above"]
+q.p = ["extend_to_line_bounds", "yank", "paste_after"]
+q.k = "goto_line_end"
+g.o = "goto_file_start"
+0 = "goto_line_start"
+Y = "yank_main_selection_to_clipboard"
 
 [keys.insert]
-"A-x" = "normal_mode"     # Maps Alt-X to enter normal mode
-j = { k = "normal_mode", i = "normal_mode"} # Maps `jk` to exit insert mode
+"A-x" = "normal_mode"
+j = { k = "normal_mode", i = "normal_mode"}
+
+[keys.select]
+q = "extend_to_line_end"
+0 = "extend_to_line_start"
+Y = "yank_main_selection_to_primary_clipboard"
