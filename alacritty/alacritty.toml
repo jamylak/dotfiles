@@ -39,8 +39,8 @@ bindings = [
   { key = "W", mods = "Command",  chars = "\u0000x"},
   # For this to work on mac you need to go to Keyboard Shortcuts
   # for Applications and override 'Hide alacritty' -> F12
+  { key = "G", mods = "Command",  chars = "\u0000Q"},
   { key = "H", mods = "Command",  chars = "\u0000P"},
-  { key = "G", mods = "Command",  chars = "\u0000P"},
   { key = "J", mods = "Command",  chars = "\u0000["},
   { key = "P", mods = "Command",  chars = "\u0000]"},
   { key = "Z", mods = "Command",  chars = "\u0000z"},

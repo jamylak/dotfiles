@@ -170,12 +170,13 @@ abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
 
 # Helix
 abbr -a h 'hx .'
+abbr -a ha 'cd ~/.config/dotfiles; hx alacritty/alacritty.toml'
 abbr -a hf 'cd ~/.config/dotfiles; hx fish/config.fish'
 abbr -a hh 'cd ~/.config/dotfiles; hx helix/config.toml'
 abbr -a hb 'cd ~/bar; hx .'
 abbr -a hfl 'cd ~/.config/dotfiles; hx fish/config.local.fish'
 abbr -a hd 'cd ~/.config/dotfiles; hx .'
-abbr -a hitm 'cd ~/.config/dotfiles; hx .tmux.conf'
+abbr -a htm 'cd ~/.config/dotfiles; hx .tmux.conf'
 
 # Misc
 abbr -a newproj "scripts/newproj.sh"
