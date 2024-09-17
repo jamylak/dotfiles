@@ -1,0 +1,19 @@
+[[language]]
+name = "glsl"
+scope = "source.glsl"
+file-types = ["glsl", "vert", "tesc", "tese", "geom", "frag", "comp" ]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+indent = { tab-width = 4, unit = "    " }
+injection-regex = "glsl"
+# language-servers = ["glsl-lsp", "glsl-analyzer"]
+language-servers = ["glsl-lsp"]
+
+[language-server.glsl-lsp]
+command = "glslls"
+args = ["--stdin"]
+# args = ["--stdin", "-v", "-l", "/tmp/glslls.log"]
+
+[language-server.glsl-analyzer]
+command = "glsl_analyzer"
+args = ["--stdio"]
