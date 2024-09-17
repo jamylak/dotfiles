@@ -110,6 +110,7 @@ abbr -a zid "cd ~/.config/dotfiles"
 abbr -a zd "cd ~/.config/dotfiles"
 abbr -a zib "cd ~/bar"
 abbr -a zip "cd ~/proj"
+abbr -a zp "cd ~/proj"
 abbr -a zit "cd /tmp"
 abbr -a zin "z ~/.config/nvim"
 abbr -a zn "z ~/.config/nvim"
@@ -122,7 +123,8 @@ abbr -a gi "git init"
 abbr -a gk git checkout
 abbr -a gm --set-cursor=! "git commit -m \"!\""
 # gh extension install gennaro-tedesco/gh-s
-abbr -a ghc --set-cursor=! "git clone (gh s \"!\")"
+abbr -a ghc --set-cursor=! "git clone (gh s \"!\") && cd (ls -t | head -n 1)"
+#abbr -a ghc --set-cursor=! "git clone (gh s !) && cd (ls -t | head -n 1)"
 abbr -a gl "git log"
 abbr -a gpl "git pull"
 abbr -a gc git commit
@@ -146,6 +148,9 @@ abbr -a e nvim
 abbr -a v nvim .
 abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
 abbr -a vib "cd ~/bar; nvim ."
+abbr -a o "cd /Users/james/bar/testfoo; nvim foo.frag -c ':M' -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"f<CR>\", true, true, true), \"m\", true)'"
+
+abbr -a vb "cd ~/bar; cd (fzf --walker=dir) && nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"si<CR>\", true, true, true), \"m\", true)'"
 abbr -a vij "nvim ."
 abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
 abbr -a viv 'nvim -c "normal \'0"'
@@ -159,6 +164,7 @@ abbr -a vic 'nvim ~/.config -c "normal cd"'
 abbr -a vin 'nvim ~/.config/nvim/ -c "normal cd"'
 abbr -a vih 'cd ~/.config/helix/; nvim config.toml'
 abbr -a vip 'nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
+abbr -a vp "cd ~/proj; cd (fzf --walker=dir) && nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"si<CR>\", true, true, true), \"m\", true)'"
 abbr -a vid 'nvim ~/.config/dotfiles/ -c "normal cd"'
 abbr -a vif 'nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
 abbr -a vifl 'nvim ~/.config/dotfiles/fish/config.local.fish -c "normal cd"'
@@ -174,7 +180,8 @@ abbr -a hr 'hx .'
 abbr -a ha 'cd ~/.config/dotfiles; hx alacritty/alacritty.toml'
 abbr -a hf 'cd ~/.config/dotfiles; hx fish/config.fish'
 abbr -a hh 'cd ~/.config/dotfiles; hx helix/config.toml'
-abbr -a hb 'cd ~/bar; hx .'
+abbr -a hb 'cd ~/bar; cd (fzf --walker=dir) && hx .'
+abbr -a he 'cd ~/bar; cd (fzf --walker=dir) && hx .'
 abbr -a hfl 'cd ~/.config/dotfiles; hx fish/config.local.fish'
 abbr -a hd 'cd ~/.config/dotfiles; hx .'
 abbr -a htm 'cd ~/.config/dotfiles; hx .tmux.conf'
