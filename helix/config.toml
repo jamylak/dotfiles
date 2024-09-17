@@ -1,7 +1,11 @@
 # https://docs.helix-editor.com/keymap.html
 # https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
-
 theme = "ayu_evolve"
+
+[editor]
+bufferline = "multiple"
+shell = ["zsh", "-c"]
+# whitespace.render = "all"
 
 [keys.normal]
 # C-s = ":w" # Maps Ctrl-s to the typable command :w which is an alias for :write (save file)
@@ -19,6 +23,7 @@ theme = "ayu_evolve"
 # Duplicate line
 q.p = ["extend_to_line_bounds", "yank", "paste_after"]
 # Quick shortcuts for line end and begin
+q.d = ["extend_to_line_bounds", "delete_selection"]
 q.k = "goto_line_end"
 q.j = "extend_to_line_end"
 q.h = "extend_to_line_start"
