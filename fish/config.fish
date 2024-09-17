@@ -169,7 +169,8 @@ abbr -a vit 'nvim /tmp -c "normal cd"'
 abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
 
 # Helix
-abbr -a h 'hx .'
+abbr -a h hx
+abbr -a hr 'hx .'
 abbr -a ha 'cd ~/.config/dotfiles; hx alacritty/alacritty.toml'
 abbr -a hf 'cd ~/.config/dotfiles; hx fish/config.fish'
 abbr -a hh 'cd ~/.config/dotfiles; hx helix/config.toml'
