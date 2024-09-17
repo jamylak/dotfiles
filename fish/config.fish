@@ -178,6 +178,7 @@ abbr -a hfl 'cd ~/.config/dotfiles; hx fish/config.local.fish'
 abbr -a hd 'cd ~/.config/dotfiles; hx .'
 abbr -a htm 'cd ~/.config/dotfiles; hx .tmux.conf'
 abbr -a hn 'cd ~/.config/nvim/; hx .'
+abbr -a hk 'cd ~/.config/dotfiles; hx kitty/kitty.conf'
 
 # Misc
 abbr -a newproj "scripts/newproj.sh"
