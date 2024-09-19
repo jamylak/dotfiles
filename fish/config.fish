@@ -44,17 +44,17 @@ function watchandrun
     if set -q argv[1]
         # Extract the last argument as the file to watch
         set file_to_watch (eval echo $argv[-1])
-        echo "Watching for changes on $file_to_watch"
+        echo "[[ Watching for changes on $file_to_watch ]]"
 
         # Convert the command to a string
         set cmd (string join " " $argv)
-        echo "Command to run: $cmd"
+        echo "[[ Command to run: $cmd ]]"
 
         # Start watching the file and execute the command upon changes
         fswatch -l 0.01 -o $file_to_watch | while read change_count
-            echo "Change detected, running command..."
+            # echo "[[ Change detected, running command... ]]"
             eval $cmd
-            echo "Waiting for changes..."
+            echo "[[ ...waiting for changes... ]]"
         end
     else
         echo "Please specify a command to run and a file to watch."
