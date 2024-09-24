@@ -146,7 +146,7 @@ abbr -a lgn "cd ~/.config/nvim/; lazygit"
 abbr -a vi nvim
 abbr -a e nvim
 abbr -a v nvim .
-abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
+#abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
 abbr -a vib "cd ~/bar; nvim ."
 abbr -a o "cd /Users/james/bar/testfoo; nvim foo.frag -c ':M' -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"f<CR>\", true, true, true), \"m\", true)'"
 
@@ -154,7 +154,9 @@ abbr -a vb "cd ~/bar; cd (fzf --walker=dir) && nvim . -c ':lua vim.api.nvim_feed
 abbr -a vij "nvim ."
 abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
 abbr -a viv 'nvim -c "normal \'0"'
-abbr -a vio 'NVIM_APPNAME="oldasnvim" nvim'
+abbr -a vn 'NVIM_APPNAME=nvim2 nvim'
+abbr -a vj 'NVIM_APPNAME=nvim2 nvim'
+abbr -a vnn 'NVIM_APPNAME=nvim2 nvim ~/.config/nvim2/init.lua'
 abbr -a vi nvim
 abbr -a vii "nvim ."
 abbr -a vij "nvim ."
@@ -179,6 +181,7 @@ abbr -a h hx
 abbr -a hr 'hx .'
 abbr -a ha 'cd ~/.config/dotfiles; hx alacritty/alacritty.toml'
 abbr -a hf 'cd ~/.config/dotfiles; hx fish/config.fish'
+abbr -a hg 'cd ~/.config/dotfiles; hx ghostty/config'
 abbr -a hh 'cd ~/.config/dotfiles; hx helix/config.toml'
 abbr -a hb 'cd ~/bar; cd (fzf --walker=dir) && hx .'
 abbr -a hp 'cd ~/proj; cd (fzf --walker=dir) && hx .'
