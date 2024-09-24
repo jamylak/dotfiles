@@ -20,6 +20,16 @@ shell = ["zsh", "-c"]
 # Move lines up and down
 "C-j" = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 "C-k" = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+"C-f" = "goto_next_function"
+"C-b" = "goto_prev_function"
+"C-r" = "redo"
+'\' = "hsplit"
+'|' = "vsplit"
+# g.j.i = ["jump_view_left", "jump_view_up"]
+# g.j.o = ["jump_view_right", "jump_view_down"]
+g.j = ["jump_view_left", "jump_view_up"]
+g.k = ["jump_view_right", "jump_view_down"]
+
 # Duplicate line
 q.p = ["extend_to_line_bounds", "yank", "paste_after"]
 # Quick shortcuts for line end and begin
