@@ -36,4 +36,4 @@ keybind = super+alt+shift+j=write_screen_file:open
 # custom-shader = /Users/james/Desktop/shaders/glitch.glsl
 # custom-shader = /Users/james/proj/ghostty/src/renderer/shaders/test_shadertoy_crt.glsl
 # custom-shader = /Users/james/Desktop/shaders/crt.glsl
-custom-shader = shaders/bloom.glsl
+# custom-shader = shaders/bloom.glsl
