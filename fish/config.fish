@@ -136,6 +136,8 @@ abbr -a gd git diff
 abbr -a gu git push
 abbr -a gps git push
 abbr -a gcl git clone
+abbr -a gpsu "git push --set-upstream origin (git branch --show-current)"
+abbr -a gsu "git push --set-upstream origin (git branch --show-current)"
 
 # Lazygit
 abbr -a lg lazygit
