@@ -100,7 +100,14 @@ function zi
 end
 
 abbr -a war watchandrun
+abbr -a ef exec fish
+abbr -a hm --position anywhere ~/
+abbr -a fj --position anywhere ~/
+abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -t | head -n 1)"
+abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -t | head -n 1)"
 abbr -a p python3
+abbr -a --position anywhere tmp /tmp/
+abbr -a --position anywhere bar ~/bar/
 abbr -a c clear
 abbr -a r --position anywhere --function last_history_item
 abbr -a q exit
@@ -177,6 +184,7 @@ abbr -a vifl 'nvim ~/.config/dotfiles/fish/config.local.fish -c "normal cd"'
 abbr -a fl 'nvim ~/.config/dotfiles/fish/config.local.fish -c "normal cd"'
 abbr -a vizl 'nvim ~/.config/dotfiles/.zshenv.local -c "normal cd"'
 abbr -a vik 'nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
+abbr -a vk 'cd ~/.config/dotfiles && nvim kitty/kitty.conf'
 abbr -a vit 'nvim /tmp -c "normal cd"'
 abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
 
@@ -219,6 +227,7 @@ abbr -a ll "eza --icons -l --git"
 
 # Zig
 abbr -a zb "zig build"
+abbr -a zbt "zig build test"
 abbr -a zt "zig test"
 abbr -a ztt "zig test tests.zig"
 abbr -a zr "./zig-out/bin/*"
