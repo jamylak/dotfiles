@@ -16,6 +16,8 @@ set -g fish_key_bindings fish_vi_key_bindings
 
 # Autocomplete binding
 bind \cy 'commandline -f accept-autosuggestion'
+bind -M normal \ck expand-abbr
+bind -M insert \ck expand-abbr
 
 bind -M normal \ce edit_command_buffer
 bind -M insert \ce edit_command_buffer
@@ -31,7 +33,7 @@ function fish_user_key_bindings
     # for mode in insert default visual
     for mode in insert
         bind -M $mode \cy forward-char
-        bind -M $mode \ck forward-char
+        #bind -M $mode \ck forward-char
         bind -M $mode \cj forward-char
         # https://stackoverflow.com/questions/37114257/how-to-bind-ctrl-enter-in-fish
         # not working
