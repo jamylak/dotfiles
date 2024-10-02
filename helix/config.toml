@@ -1,6 +1,11 @@
 # https://docs.helix-editor.com/keymap.html
 # https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
-theme = "ayu_evolve"
+# theme = "ayu_evolve"
+
+# Transparent bgs
+# theme = "dark_high_contrast"
+theme = "modus_vivendi_deuteranopia"
+# theme = "vim_dark_high_contrast"
 
 [editor]
 bufferline = "multiple"
