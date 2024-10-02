@@ -7,7 +7,7 @@ window-title-font-family = MesloLGS NF
 font-size = 18
 
 background = #000000
-background-opacity = 0.5
+background-opacity = 0.8
 # background-blur-radius = 20
 background-blur-radius = 5
 shell-integration-features = no-cursor
