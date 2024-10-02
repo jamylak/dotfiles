@@ -103,8 +103,8 @@ abbr -a war watchandrun
 abbr -a ef exec fish
 abbr -a hm --position anywhere ~/
 abbr -a fj --position anywhere ~/
-abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -t | head -n 1)"
-abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -t | head -n 1)"
+abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a p python3
 abbr -a --position anywhere tmp /tmp/
 abbr -a --position anywhere bar ~/bar/
