@@ -141,6 +141,8 @@ abbr -a ga git add
 abbr -a gaa git add -A
 abbr -a gp git pull
 abbr -a gs git status
+abbr -a gst git stash
+abbr -a gstp git stash pop
 abbr -a gd git diff
 abbr -a gu git push
 abbr -a gps git push
