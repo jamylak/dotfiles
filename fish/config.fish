@@ -217,13 +217,13 @@ abbr -a cb "cmake --build build"
 
 # eza
 abbr -a l "eza --no-permissions --no-user --icons --tree -l -L 2"
-abbr -a x "eza --icons -l --git --git-ignore"
+abbr -a x "eza --icons -l"
 abbr -a xj "eza --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
 abbr -a xk "eza --no-permissions --no-user --icons --tree -l -L 1"
-abbr -a ex "eza --icons --tree -l --git --git-ignore"
+abbr -a ex "eza --icons --tree -l"
 abbr -a exn "eza --icons --tree -l --git --git-ignore --no-permissions --no-user"
-abbr -a exx "eza --icons --tree -l --git"
-abbr -a ll "eza --icons -l --git"
+abbr -a exx "eza --icons --tree -l --git --git-ignore"
+abbr -a ll "eza --icons -l"
 
 # Zig
 abbr -a zb "zig build"
