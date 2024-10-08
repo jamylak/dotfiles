@@ -45,7 +45,8 @@ q.p = ["extend_to_line_bounds", "yank", "paste_after"]
 q.d = ["extend_to_line_bounds", "delete_selection"]
 q.k = "goto_line_end"
 q.j = "extend_to_line_end"
-q.h = "extend_to_line_start"
+# q.h = "extend_to_line_start"
+q.h = "select_all"
 g.o = "goto_file_start"
 0 = "goto_line_start"
 # Yank to clipboard
