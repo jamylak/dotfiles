@@ -152,6 +152,7 @@ abbr -a gsu "git push --set-upstream origin (git branch --show-current)"
 
 # Lazygit
 abbr -a lg lazygit
+abbr -a gn "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\" gn<CR>\", true, true, true), \"m\", true)'"
 abbr -a lgd "cd ~/.config/dotfiles; lazygit"
 abbr -a lgn "cd ~/.config/nvim/; lazygit"
 
