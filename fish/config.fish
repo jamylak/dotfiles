@@ -210,6 +210,7 @@ abbr -a hd 'cd ~/.config/dotfiles; hx .'
 abbr -a htm 'cd ~/.config/dotfiles; hx .tmux.conf'
 abbr -a hn 'cd ~/.config/nvim/; hx .'
 abbr -a hk 'cd ~/.config/dotfiles; hx kitty/kitty.conf'
+abbr -a ht 'cd /tmp; hx .'
 
 # Misc
 abbr -a newproj "scripts/newproj.sh"
