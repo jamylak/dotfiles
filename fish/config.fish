@@ -105,6 +105,9 @@ abbr -a hm --position anywhere ~/
 abbr -a fj --position anywhere ~/
 abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mkd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mkc --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mk --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a p python3
 abbr -a --position anywhere tmp /tmp/
 abbr -a --position anywhere bar ~/bar/
