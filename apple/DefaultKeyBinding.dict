@@ -1,0 +1,18 @@
+# https://support.apple.com/en-au/102650
+# https://www.reddit.com/r/MacOS/comments/xz4c8l/i_had_no_idea_macos_had_emacsish_keybindings_in/
+# https://stackoverflow.com/questions/20146972/is-there-a-way-t%E2%88%AB%E2%88%AB%C6%92%C6%92%E2%88%91%E2%88%82%E2%88%82ake-alt-f-and-alt-b-jump-word-forward-and-backward-instead-of
+# https://developer.apple.com/documentation/appkit/nsstandardkeybindingresponding?language=objc
+# https://gist.github.com/trusktr/1e5e516df4e8032cbc3d
+# https://apple.stackexchange.com/questions/459695/why-does-movewordbackward-auto-repeat-but-movewordforward-does-not
+# Create file ~/Library/KeyBindings/DefaultKeyBinding.dict
+# setMark not working as expected
+# TODO: alt-w is Copy, todo: cut
+{
+    "~d" = "deleteWordForward:";
+    "^w" = "deleteWordBackward:";
+    "^ " = "setMark:";
+    "~f" = "moveWordForward:";
+    "~b" = "moveWordBackward:";
+    "~B" = "moveWordBackwardAndModifySelection:";
+    "~F" = "moveWordForwardAndModifySelection:";
+}
