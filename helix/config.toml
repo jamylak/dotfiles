@@ -54,7 +54,9 @@ Y = "yank_main_selection_to_clipboard"
 " " = { q = ":q", Q = ":q!"}
 
 [keys.insert]
-"A-x" = "normal_mode"
+"A-b" = ["normal_mode", "move_prev_word_start"]
+# TODO: Figure best way for this one
+"A-w" = ["normal_mode", "move_next_word_start", "ensure_selections_forward"]
 j = { k = "normal_mode", i = "normal_mode"}
 
 [keys.select]
