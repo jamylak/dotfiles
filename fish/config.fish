@@ -161,7 +161,6 @@ abbr -a lgn "cd ~/.config/nvim/; lazygit"
 
 # Vim
 abbr -a vi nvim
-abbr -a e nvim
 abbr -a v nvim .
 #abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
 abbr -a vib "cd ~/bar; nvim ."
@@ -211,6 +210,10 @@ abbr -a htm 'cd ~/.config/dotfiles; hx .tmux.conf'
 abbr -a hn 'cd ~/.config/nvim/; hx .'
 abbr -a hk 'cd ~/.config/dotfiles; hx kitty/kitty.conf'
 abbr -a ht 'cd /tmp; hx .'
+
+# Emacs
+abbr -a em emacs
+abbr -a e emacs
 
 # Misc
 abbr -a newproj "scripts/newproj.sh"
