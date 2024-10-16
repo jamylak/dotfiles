@@ -100,6 +100,7 @@ function zi
 end
 
 abbr -a war watchandrun
+abbr -a w --set-cursor=! "cd ~/.virtualenvs/!; source bin/activate.fish; cd (cat .project)"
 abbr -a ef exec fish
 abbr -a hm --position anywhere ~/
 abbr -a fj --position anywhere ~/
