@@ -43,12 +43,14 @@ g.k = ["jump_view_right", "jump_view_down"]
 q.p = ["extend_to_line_bounds", "yank", "paste_after"]
 # Quick shortcuts for line end and begin
 q.d = ["extend_to_line_bounds", "delete_selection"]
-q.k = "goto_line_end"
-q.j = "extend_to_line_end"
+q.j = "goto_line_end"
+q.k = "extend_to_line_end"
+"C-e" = "extend_to_line_end"
+"C-a" = "extend_to_line_start"
 # q.h = "extend_to_line_start"
 q.h = "select_all"
 g.o = "goto_file_start"
-0 = "goto_line_start"
+0 = "extend_to_line_start"
 # Yank to clipboard
 Y = "yank_main_selection_to_clipboard"
 " " = { q = ":q", Q = ":q!"}
@@ -73,8 +75,8 @@ j = { k = "normal_mode", i = "normal_mode"}
 "A->" = "goto_file_end"
 # TODO: Select all line is useful?
 # or for normal mode?
-"C-a" = "goto_line_start"
-"C-e" = "goto_line_end_newline"
+"C-a" = "extend_to_line_start"
+"C-e" = "extend_to_line_end_newline"
 "A-left" = "goto_line_start"
 # "pageup" = "page_up"
 # "pagedown" = "page_down"
@@ -84,4 +86,4 @@ j = { k = "normal_mode", i = "normal_mode"}
 [keys.select]
 q = "extend_to_line_end"
 0 = "extend_to_line_start"
-Y = "yank_main_selection_to_primary_clipboard"
+Y = "yank_main_selection_to_clipboard"
