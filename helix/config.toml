@@ -53,7 +53,7 @@ g.o = "goto_file_start"
 0 = "extend_to_line_start"
 # Yank to clipboard
 Y = "yank_main_selection_to_clipboard"
-" " = { q = ":q", Q = ":q!"}
+" " = { q = ":q", Q = ":q!", "ret" = "last_picker"}
 
 [keys.insert]
 j = { k = "normal_mode", i = "normal_mode"}
