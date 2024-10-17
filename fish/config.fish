@@ -23,10 +23,10 @@ bind -M normal \ce edit_command_buffer
 bind -M insert \ce edit_command_buffer
 
 # eg. fd is in here
-fish_add_path -mp $HOME/.cargo/bin
-fish_add_path -mp /Users/$USER/.local/bin
-fish_add_path -mp /usr/local/bin
 fish_add_path -mp /opt/homebrew/bin
+fish_add_path -mp /usr/local/bin
+fish_add_path -mp /Users/$USER/.local/bin
+fish_add_path -mp $HOME/.cargo/bin
 
 # https://github.com/fish-shell/fish-shell/issues/3541
 function fish_user_key_bindings
