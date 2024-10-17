@@ -11,8 +11,8 @@ theme = "modus_vivendi_deuteranopia"
 bufferline = "multiple"
 shell = ["zsh", "-c"]
 # whitespace.render = "all"
-
 [editor.file-picker]
+
 hidden = false
 git-ignore = true
 
@@ -54,10 +54,32 @@ Y = "yank_main_selection_to_clipboard"
 " " = { q = ":q", Q = ":q!"}
 
 [keys.insert]
-"A-b" = ["normal_mode", "move_prev_word_start"]
-# TODO: Figure best way for this one
-"A-w" = ["normal_mode", "move_next_word_start", "ensure_selections_forward"]
 j = { k = "normal_mode", i = "normal_mode"}
+# https://github.com/helix-editor/helix/pull/3671/files
+# https://github.com/helix-editor/helix/pull/3827/files
+# "up" = "move_line_up"
+# "down" = "move_line_down"
+# "left" = "move_char_left"
+# "right" = "move_char_right"
+"C-p" = "move_line_up"
+"C-n" = "move_line_down"
+"C-b" = "move_char_left"
+"C-f" = "move_char_right"
+"A-b" = "move_prev_word_end"
+"C-left" = "move_prev_word_end"
+"A-f" = "move_next_word_start"
+"C-right" = "move_next_word_start"
+"A-<" = "goto_file_start"
+"A->" = "goto_file_end"
+# TODO: Select all line is useful?
+# or for normal mode?
+"C-a" = "goto_line_start"
+"C-e" = "goto_line_end_newline"
+"A-left" = "goto_line_start"
+# "pageup" = "page_up"
+# "pagedown" = "page_down"
+# "home" = "goto_line_start"
+# "end" = "goto_line_end_newline"
 
 [keys.select]
 q = "extend_to_line_end"
