@@ -134,6 +134,8 @@ abbr -a bi "brew install"
 
 # Git
 abbr -a g git
+abbr -a N nvim -c ":Neogit"
+abbr -a ng nvim -c ":Neogit"
 abbr -a gi "git init"
 abbr -a gk git checkout
 abbr -a gm --set-cursor=! "git commit -m \"!\""
@@ -158,6 +160,7 @@ abbr -a gsu "git push --set-upstream origin (git branch --show-current)"
 
 # Lazygit
 abbr -a lg lazygit
+abbr -a G lazygit
 abbr -a gn "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\" gn<CR>\", true, true, true), \"m\", true)'"
 abbr -a lgd "cd ~/.config/dotfiles; lazygit"
 abbr -a lgn "cd ~/.config/nvim/; lazygit"
