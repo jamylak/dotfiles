@@ -123,7 +123,6 @@ abbr -a --position anywhere pr ~/proj/
 abbr -a c clear
 abbr -a r --position anywhere --function last_history_item
 abbr -a q exit
-abbr -a tm tmux
 abbr -a t tmux
 abbr -a ta "tmux a"
 abbr -a td "tmux detach"
