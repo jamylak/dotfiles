@@ -14,8 +14,8 @@ shell = ["zsh", "-c"]
 # idle-timeout = 0
 # completion-timeout = 5
 # whitespace.render = "all"
-[editor.file-picker]
 
+[editor.file-picker]
 hidden = false
 git-ignore = true
 
@@ -28,7 +28,7 @@ git-ignore = true
 # g = { a = "code_action" } # Maps `ga` to show possible code actions
 
 # Paste big selection
-"C-p" = ["extend_to_line_bounds", "yank", "paste_after", "add_newline_above"]
+"C-p" = ["extend_to_line_bounds", "yank", "paste_after"]
 # Move lines up and down
 "C-j" = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 "C-k" = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
