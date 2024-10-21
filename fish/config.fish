@@ -115,7 +115,11 @@ abbr -a mkc --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mk --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a p python3
 abbr -a --position anywhere tmp /tmp/
+abbr -a --position anywhere tm /tmp/
 abbr -a --position anywhere bar ~/bar/
+abbr -a --position anywhere b ~/bar/
+abbr -a --position anywhere proj ~/proj/
+abbr -a --position anywhere pr ~/proj/
 abbr -a c clear
 abbr -a r --position anywhere --function last_history_item
 abbr -a q exit
