@@ -2,7 +2,6 @@
 # https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
 # https://github.com/helix-editor/helix/issues/11206#issuecomment-2236849181
 # theme = "ayu_evolve"
-
 # Transparent bgs
 # theme = "dark_high_contrast"
 theme = "modus_vivendi_deuteranopia"
@@ -11,8 +10,6 @@ theme = "modus_vivendi_deuteranopia"
 [editor]
 bufferline = "multiple"
 shell = ["zsh", "-c"]
-# idle-timeout = 0
-# completion-timeout = 5
 # whitespace.render = "all"
 
 [editor.file-picker]
@@ -20,14 +17,8 @@ hidden = false
 git-ignore = true
 
 [keys.normal]
-# C-s = ":w" # Maps Ctrl-s to the typable command :w which is an alias for :write (save file)
-# C-o = ":open ~/.config/helix/config.toml" # Maps Ctrl-o to opening of the helix config file
-# a = "move_char_left" # Maps the 'a' key to the move_char_left command
-# w = "move_line_up" # Maps the 'w' key move_line_up
-# "C-S-esc" = "extend_line" # Maps Ctrl-Shift-Escape to extend_line
 # g = { a = "code_action" } # Maps `ga` to show possible code actions
-
-# Paste big selection
+# Duplicate
 "C-p" = ["extend_to_line_bounds", "yank", "paste_after"]
 # Move lines up and down
 "C-j" = ["extend_to_line_bounds", "delete_selection", "paste_after"]
@@ -37,11 +28,8 @@ git-ignore = true
 "C-r" = "redo"
 '\' = "hsplit"
 '|' = "vsplit"
-# g.j.i = ["jump_view_left", "jump_view_up"]
-# g.j.o = ["jump_view_right", "jump_view_down"]
 g.j = ["jump_view_left", "jump_view_up"]
 g.k = ["jump_view_right", "jump_view_down"]
-
 # Duplicate line
 q.p = ["extend_to_line_bounds", "yank", "paste_after"]
 # Quick shortcuts for line end and begin
