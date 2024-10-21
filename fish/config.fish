@@ -102,6 +102,7 @@ end
 
 abbr -a war watchandrun
 abbr -a w --set-cursor=! "cd ~/.virtualenvs/!; source bin/activate.fish; test -f .project && cd (cat .project)"
+abbr -a workon --set-cursor=! "cd ~/.virtualenvs/!; source bin/activate.fish; test -f .project && cd (cat .project)"
 abbr -a svep --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
 abbr -a setvirtualenvproject --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
 abbr -a ef exec fish
