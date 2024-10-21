@@ -17,6 +17,9 @@ eval "$(fzf --zsh)"
 source "$HOME/.cargo/env"
 export PKG_CONFIG_PATH="$HOMEBREW_DIR/lib/pkgconfig:$PKG_CONFIG_PATH"
 eval "$($HOMEBREW_DIR/bin/brew shellenv)"
+# export PATH="$HOMEBREW_DIR/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/Users/$USERNAME/.local/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 # if [ -f '/Users/james/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/james/Downloads/google-cloud-sdk/path.zsh.inc'; fi
