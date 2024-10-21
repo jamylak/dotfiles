@@ -4,6 +4,7 @@
 # https://developer.apple.com/documentation/appkit/nsstandardkeybindingresponding?language=objc
 # https://gist.github.com/trusktr/1e5e516df4e8032cbc3d
 # https://apple.stackexchange.com/questions/459695/why-does-movewordbackward-auto-repeat-but-movewordforward-does-not
+# https://github.com/fkchang/emacs-keybindings-in-osx/blob/master/DefaultKeybinding.dict
 # Create file ~/Library/KeyBindings/DefaultKeyBinding.dict
 # setMark not working as expected
 # TODO: alt-w is Copy, todo: cut
@@ -15,4 +16,12 @@
     "~b" = "moveWordBackward:";
     "~B" = "moveWordBackwardAndModifySelection:";
     "~F" = "moveWordForwardAndModifySelection:";
+    // "~v" = "scrollPageUp:";
+    "~v" = "pageUp:";
+    "~V" = "pageUpAndModifySelection:";
+    "~<" = "moveToBeginningOfDocument:";
+    "~>" = "moveToEndOfDocument:";
+    "~w" = "copy:";
+    // "~<" = "scrollToBeginningOfDocument:";
+    // "~>" = "scrollToEndOfDocument:";
 }
