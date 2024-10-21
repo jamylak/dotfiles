@@ -59,13 +59,10 @@ Y = "yank_main_selection_to_clipboard"
 " " = { q = ":q", Q = ":q!", "ret" = "last_picker", " " = "global_search"}
 
 [keys.insert]
+"C-c" = "normal_mode"
 j = { k = "normal_mode", i = "normal_mode"}
 # https://github.com/helix-editor/helix/pull/3671/files
 # https://github.com/helix-editor/helix/pull/3827/files
-# "up" = "move_line_up"
-# "down" = "move_line_down"
-# "left" = "move_char_left"
-# "right" = "move_char_right"
 "C-p" = "move_line_up"
 "C-n" = "move_line_down"
 "C-b" = "move_char_left"
@@ -76,11 +73,12 @@ j = { k = "normal_mode", i = "normal_mode"}
 "C-right" = "move_next_word_start"
 "A-<" = "goto_file_start"
 "A->" = "goto_file_end"
-# TODO: Select all line is useful?
-# or for normal mode?
 "C-a" = "extend_to_line_start"
 "C-e" = "extend_to_line_end_newline"
 "A-left" = "goto_line_start"
+"C-v" = "page_down"
+"A-v" = "page_up"
+"C-/" = "undo"
 # "pageup" = "page_up"
 # "pagedown" = "page_down"
 # "home" = "goto_line_start"
