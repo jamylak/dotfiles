@@ -208,6 +208,7 @@ abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
 abbr -a h hx
 abbr -a hr 'hx .'
 abbr -a hz 'cd ~/.config/dotfiles; hx .zshenv'
+abbr -a hzl 'cd ~/.config/dotfiles; hx .zshenv.local'
 abbr -a ha 'cd ~/.config/dotfiles; hx alacritty/alacritty.toml'
 abbr -a hf 'cd ~/.config/dotfiles; hx fish/config.fish'
 abbr -a hg 'cd ~/.config/dotfiles; hx ghostty/config'
