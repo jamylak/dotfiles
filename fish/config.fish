@@ -4,7 +4,6 @@ else
     set -xg SHELL /usr/local/bin/fish
 end
 
-set -Ux EDITOR nvim
 set -Ux EDITOR hx
 set -Ux PROJECTS_DIR /Users/$USER/bar
 # set -Ux MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
