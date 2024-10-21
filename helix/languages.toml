@@ -17,3 +17,16 @@ args = ["--stdin"]
 [language-server.glsl-analyzer]
 command = "glsl_analyzer"
 args = ["--stdio"]
+
+# https://github.com/helix-editor/helix/issues/5479#issuecomment-1669522115
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+config = {} # buggy behaviour, you need a pyproject.toml and pyrightconfig.json
+
+[[language]]
+name = "python"
+formatter = { command = "ruff", args = ["--quiet", "-"] }
+auto-format = true
+roots = ["pyproject.toml"]
+language-servers = [ "pyright" ]
