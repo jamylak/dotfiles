@@ -50,13 +50,32 @@ q.j = "goto_line_end"
 q.k = "extend_to_line_end"
 "C-e" = "extend_to_line_end"
 "C-a" = "extend_to_line_start"
-# q.h = "extend_to_line_start"
 q.h = "select_all"
 g.o = "goto_file_start"
 0 = "extend_to_line_start"
 # Yank to clipboard
 Y = "yank_main_selection_to_clipboard"
-" " = { q = ":q", Q = ":q!", "ret" = "last_picker", " " = "global_search"}
+" " = { q = ":q", Q = ":q!", "ret" = "last_picker", " " = "global_search", "y" = "yank_abs_filename_to_clipboard"}
+"A-{" = "goto_prev_paragraph"
+"A-}" = "goto_next_paragraph"
+# ci) or ciq or cinq type stuff
+# https://github.com/helix-editor/helix/pull/4709
+# https://www.reddit.com/r/HelixEditor/comments/1furs59/mi_from_anywhere_on_the_line/
+m.b = "@lf)hmi)"
+m.B = "@lf)hma)"
+m.")" = "@lf)hmi)"
+m."(" = "@lf)hmi)"
+m."'" = "@lf'lmi'"
+m."`" = "@lf`lmi`"
+m."\"" = "@lf\"lmi\""
+# Hacky: Regex search for either type of quote
+# Then visual search find next of same quote
+# which makes new cursor so join selections
+# then move selection back 1 char
+# then leave visual mode
+m.q = "@l/\"|'<ret>lv/<C-r>/<ret><A-minus>hv"
+m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
+# TODO: ma version
 
 [keys.insert]
 "C-c" = "normal_mode"
@@ -79,10 +98,12 @@ j = { k = "normal_mode", i = "normal_mode"}
 "C-v" = "page_down"
 "A-v" = "page_up"
 "C-/" = "undo"
-# "pageup" = "page_up"
-# "pagedown" = "page_down"
-# "home" = "goto_line_start"
-# "end" = "goto_line_end_newline"
+"A-a" = "goto_prev_paragraph"
+"A-e" = "goto_next_paragraph"
+"A-{" = "goto_prev_paragraph"
+"A-}" = "goto_next_paragraph"
+"A-w" = "yank"
+"C-y" = ["collapse_selection", "paste_before"]
 
 [keys.select]
 q = "extend_to_line_end"
