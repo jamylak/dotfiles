@@ -18,6 +18,7 @@ git-ignore = true
 
 [keys.normal]
 # g = { a = "code_action" } # Maps `ga` to show possible code actions
+X = ["extend_line_up", "extend_to_line_bounds"]
 # Duplicate
 "C-p" = ["extend_to_line_bounds", "yank", "paste_after"]
 # Move lines up and down
@@ -37,7 +38,7 @@ q.d = ["extend_to_line_bounds", "delete_selection"]
 q.j = "goto_line_end"
 q.k = "extend_to_line_end"
 "C-e" = "extend_to_line_end"
-"C-a" = "extend_to_line_start"
+# "C-a" = "extend_to_line_start"
 q.h = "select_all"
 g.o = "goto_file_start"
 0 = "extend_to_line_start"
