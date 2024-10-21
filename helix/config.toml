@@ -86,6 +86,7 @@ j = { k = "normal_mode", i = "normal_mode"}
 "C-v" = "page_down"
 "A-v" = "page_up"
 "C-/" = "undo"
+"C-?" = "redo"
 "A-a" = "goto_prev_paragraph"
 "A-e" = "goto_next_paragraph"
 "A-{" = "goto_prev_paragraph"
