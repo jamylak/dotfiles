@@ -22,6 +22,6 @@
     "~<" = "moveToBeginningOfDocument:";
     "~>" = "moveToEndOfDocument:";
     "~w" = "copy:";
-    // "~<" = "scrollToBeginningOfDocument:";
-    // "~>" = "scrollToEndOfDocument:";
+    "~{" = "moveToBeginningOfParagraph:";
+    "~}" = "moveToEndOfParagraph:";
 }
