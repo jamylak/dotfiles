@@ -12,6 +12,7 @@ theme = "modus_vivendi_deuteranopia"
 bufferline = "multiple"
 shell = ["zsh", "-c"]
 # whitespace.render = "all"
+# cursor-shape.insert = "bar"
 
 [editor.file-picker]
 hidden = false
