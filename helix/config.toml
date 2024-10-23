@@ -6,6 +6,7 @@
 # theme = "dark_high_contrast"
 theme = "modus_vivendi_deuteranopia"
 # theme = "vim_dark_high_contrast"
+# theme = "dracula_at_night"
 
 [editor]
 bufferline = "multiple"
