@@ -1,0 +1,10 @@
+[manager]
+show_hidden = true
+linemode = "mtime"
+
+[opener]
+edit = [
+	{ run = 'hx "$@"', block = true, for = "unix" },
+	{ run = 'nvim "$@"', block = true, for = "unix" },
+	{ run = 'emacs "$@"', block = true, for = "unix" },
+]

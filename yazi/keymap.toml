@@ -17,3 +17,9 @@ desc = "Cd to /tmp"
 on   = [ "g", "p" ]
 run  = "cd ~/proj"
 desc = "Cd to ~/proj"
+
+# NOTE: This remaps symlink
+[[manager.prepend_keymap]]
+on  = "-"
+run = 'cd ..'
+# TODO: could make _ go the opposite way
