@@ -54,7 +54,7 @@ g.o = "goto_file_start"
 0 = "extend_to_line_start"
 # Yank to clipboard
 Y = "yank_main_selection_to_clipboard"
-" " = { q = ":q", Q = ":q!", "ret" = "last_picker", " " = "global_search", "y" = "yank_abs_filename_to_clipboard", N = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'nvim (pbpaste)'"]}
+" " = { q = ":q", Q = ":q!", "ret" = "last_picker", " " = "global_search", "y" = "yank_abs_filename_to_clipboard", N = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'nvim (pbpaste)'"],  "." = "file_picker_in_current_buffer_directory"}
 "A-{" = "goto_prev_paragraph"
 "A-}" = "goto_next_paragraph"
 # ci) or ciq or cinq type stuff
