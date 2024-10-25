@@ -18,6 +18,12 @@ shell = ["zsh", "-c"]
 hidden = false
 git-ignore = true
 
+# TODO:
+# :set file-picker.hidden false
+# :set file-picker.hidden true
+# etc
+# to run eg. mapping to search hidden files
+
 [keys.normal]
 # g = { a = "code_action" } # Maps `ga` to show possible code actions
 X = ["extend_line_up", "extend_to_line_bounds"]
