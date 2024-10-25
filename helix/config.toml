@@ -75,7 +75,7 @@ m."\"" = "@lf\"lmi\""
 m.q = "@l/\"|'<ret>lv/<C-r>/<ret><A-minus>hv"
 m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
 # TODO: Test with spaces in filename
-"minus" = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'y (pbpaste)'"]
+"minus" = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=overlay fish -c 'y (pbpaste)'"]
 
 [keys.insert]
 "C-c" = "normal_mode"
