@@ -23,3 +23,42 @@ desc = "Cd to ~/proj"
 on  = "-"
 run = 'cd ..'
 # TODO: could make _ go the opposite way
+
+[[manager.prepend_keymap]]
+on  = "<C-->"
+run = 'cd ..'
+
+[[manager.prepend_keymap]]
+on   = "<C-Enter>"
+run  = "enter"
+desc = "Enter"
+
+[[manager.prepend_keymap]]
+on   = "<C-l>"
+run  = "enter"
+desc = "Enter"
+
+[[manager.prepend_keymap]]
+on   = "<Backspace>"
+run  = "leave"
+desc = "Leave"
+
+[[manager.prepend_keymap]]
+on   = "<C-h>"
+run  = "leave"
+desc = "Leave"
+
+[[manager.prepend_keymap]]
+on   = "<C-Backspace>"
+run  = "leave"
+desc = "Leave"
+
+[[manager.prepend_keymap]]
+on   = "<C-j>"
+run  = "arrow 1"
+desc = "Down"
+
+[[manager.prepend_keymap]]
+on   = "<C-k>"
+run  = "arrow -1"
+desc = "Up"
