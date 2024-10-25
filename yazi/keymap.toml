@@ -4,6 +4,11 @@ run  = "cd ~/bar"
 desc = "Cd to ~/bar"
 
 [[manager.prepend_keymap]]
+on   = [ "g", "s" ]
+run  = "cd ~/scripts"
+desc = "Cd to ~/scripts"
+
+[[manager.prepend_keymap]]
 on   = [ "g", "d" ]
 run  = "cd ~/.config/dotfiles"
 desc = "Cd to ~/.config/dotfiles"
