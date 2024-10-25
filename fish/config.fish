@@ -5,6 +5,7 @@ else
 end
 
 set -Ux EDITOR hx
+# set -Ux HELIX_RUNTIME /Users/james/proj/helix/runtime
 set -Ux PROJECTS_DIR /Users/$USER/bar
 # set -Ux MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
 # Running vulkan things doesn't work without this
@@ -99,6 +100,30 @@ function zi
     zi $argv
 end
 
+function neogitlog
+    # Hacky feedkeys way, so use a delay to wait for it to load
+    set -l delay 1000
+    if test -n "$argv[1]"
+        set delay "$argv[1]"
+    end
+    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\" gnll\", true, true, true), \"m\", true); vim.defer_fn(function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"ggjdd\", true, true, true), \"m\", true) end, $delay)"
+end
+
+function dashboard
+    set -l dir (pwd)
+    if test -n "$argv[1]"
+        set dir "$argv[1]"
+    end
+    kitty @ launch --type=tab --cwd $dir fish -c yazi
+    kitty @ launch --type=tab --cwd $dir fish -c neogitlog
+    kitty @ launch --type=tab --cwd $dir fish -c 'hx .'
+    kitty @ launch --type=tab --cwd $dir fish -c lazygit
+    exit
+end
+
+abbr -a db dashboard
+abbr -a ng neogitlog 300
+abbr -a ngl neogitlog 300
 abbr -a war watchandrun
 abbr -a w --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
 abbr -a workon --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
@@ -258,12 +283,12 @@ abbr -a zbr "zig build && ./zig-out/bin/*"
 # Yazi
 # https://yazi-rs.github.io/docs/quick-start/
 function y
-	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-	yazi $argv --cwd-file="$tmp"
-	if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-		builtin cd -- "$cwd"
-	end
-	rm -f -- "$tmp"
+    set tmp (mktemp -t "yazi-cwd.XXXXXX")
+    yazi $argv --cwd-file="$tmp"
+    if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+        builtin cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
 end
 
 # fzf --fish | source
