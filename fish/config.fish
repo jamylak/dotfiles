@@ -109,6 +109,10 @@ function neogitlog
     nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\" gnll\", true, true, true), \"m\", true); vim.defer_fn(function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"ggjdd\", true, true, true), \"m\", true) end, $delay)"
 end
 
+function neogitdiff
+    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\" gndd\", true, true, true), \"m\", true);"
+end
+
 function dashboard
     set -l dir (pwd)
     if test -n "$argv[1]"
@@ -124,6 +128,10 @@ end
 abbr -a db dashboard
 abbr -a ng neogitlog 300
 abbr -a ngl neogitlog 300
+abbr -a nl neogitlog 300
+abbr -a ngd neogitdiff
+abbr -a nd neogitdiff
+abbr -a d neogitdiff
 abbr -a war watchandrun
 abbr -a w --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
 abbr -a workon --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
