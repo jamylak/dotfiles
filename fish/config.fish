@@ -135,6 +135,7 @@ abbr -a ngd neogitdiff
 abbr -a nd neogitdiff
 abbr -a d neogitdiff
 # Other
+abbr -a cdls "cd (ls -t | head -n 1)"
 abbr -a war watchandrun
 abbr -a w --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
 abbr -a workon --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
