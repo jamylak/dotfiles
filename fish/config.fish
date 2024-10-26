@@ -244,7 +244,7 @@ abbr -a vit 'nvim /tmp -c "normal cd"'
 abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
 
 # Helix
-abbr -a h hx
+abbr -a h hx .
 abbr -a hr 'hx .'
 abbr -a hz 'cd ~/.config/dotfiles; hx .zshenv'
 abbr -a hzl 'cd ~/.config/dotfiles; hx .zshenv.local'
