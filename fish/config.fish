@@ -198,7 +198,7 @@ abbr -a gstp git stash pop
 abbr -a gd git diff
 abbr -a gu git push
 abbr -a gps git push
-abbr -a gcl git clone
+abbr -a gcl --set-cursor=! "git clone ! && cd (ls -t | head -n 1)"
 abbr -a gpsu "git push --set-upstream origin (git branch --show-current)"
 abbr -a gsu "git push --set-upstream origin (git branch --show-current)"
 
