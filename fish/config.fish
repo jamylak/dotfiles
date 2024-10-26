@@ -125,13 +125,16 @@ function dashboard
     exit
 end
 
+# Dashboard
 abbr -a db dashboard
+# Neogit
 abbr -a ng neogitlog 300
 abbr -a ngl neogitlog 300
 abbr -a nl neogitlog 300
 abbr -a ngd neogitdiff
 abbr -a nd neogitdiff
 abbr -a d neogitdiff
+# Other
 abbr -a war watchandrun
 abbr -a w --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
 abbr -a workon --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
