@@ -75,7 +75,8 @@ prepend_exts = [
 		{ name = "glsl", text = "👾" },
 		{ name = "hlsl", text = "󰍲", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
 		{ name = "metal", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
-		{ name = "tfvars", text = "" },
+		{ name = "tfvars", text = "󱁢" },
+		{ name = "hcl", text = "󱁢" },
 ]
 prepend_conds = [
 	# Special files
