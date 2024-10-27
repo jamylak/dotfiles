@@ -89,6 +89,7 @@ prepend_conds = [
 	# { if = "dummy",  text = "" },
 
 	# Fallback
+	{ if = "hidden & dir", text = "👻" },
 	{ if = "dir", text = "🗂️" },
 	# { if = "exec", text = "" },
 	# { if = "!dir", text = "󰈔" },
