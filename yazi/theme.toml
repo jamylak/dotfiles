@@ -50,6 +50,13 @@ prepend_dirs  = [
 	{ name = "Pictures", text = "📸" },
 	{ name = "Public", text = "📢" },
 	{ name = "Videos", text = "📹" },
+	{ name = "home", text = "🏠" },
+	{ name = "private", text = "🔏" },
+	{ name = "tmp", text = "⏳" },
+	{ name = "Applications", text = "🚀" },
+	{ name = "Volumes", text = "📀" },
+	{ name = "docs", text = "📖" },
+	{ name = "doc", text = "📖" },
 ]
 prepend_globs = [
 		{ name = "**/*.app/", text = "󰘳 ", fg_dark = "#eca517", fg_light = "#76520c" },
@@ -62,6 +69,7 @@ prepend_files = [
 		# { name = "Makefile", text = "🚜", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
 		{ name = "Makefile", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
 		{ name = "go.mod", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+		{ name = ".tmux.conf", text = "" },
 ]
 prepend_exts = [
 		{ name = "txt", text = "📝" },
