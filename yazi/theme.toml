@@ -3,7 +3,7 @@
 # use = "rose-pine"
 # https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/theme.toml
 [icon]
-dirs  = [
+prepend_dirs  = [
 	{ name = ".config", text = " " , fg_dark = "#eca517", fg_light = "#76520c"},
 	{ name = ".git", text = " " , fg_dark = "#eca517", fg_light = "#76520c" },
 	{ name = ".github", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
@@ -29,6 +29,16 @@ dirs  = [
 	{ name = "docker", text = " " },
 	{ name = ".docker", text = " ", fg_dark = "#eca517", fg_light = "#76520c" },
 	{ name = ".cmake", text = " ", fg_dark = "#eca517", fg_light = "#76520c" },
+	{ name = "CMakeFiles", text = " ", fg_dark = "#eca517", fg_light = "#76520c" },
+	{ name = "tests", text = "🧪" },
+	{ name = "src", text = "🔬" },
+	{ name = "scripts", text = "📜" },
+	# { name = "api", text = "🛜" },
+	# { name = "schemas", text = "⨠" },
+	# { name = "models", text = "🌏" },
+	{ name = "web", text = "🕸️" },
+	{ name = ".cache", text = "󰃨 ", fg_dark = "#eca517", fg_light = "#76520c" },
+	{ name = "build", text = "🚧", fg_dark = "#eca517", fg_light = "#76520c" },
 	{ name = "yazi", text = "🧰" },
 	{ name = "Desktop", text = "🖥 " },
 	{ name = "Development", text = "👨‍💻" },
@@ -41,18 +51,32 @@ dirs  = [
 	{ name = "Public", text = "📢" },
 	{ name = "Videos", text = "📹" },
 ]
-globs = [
+prepend_globs = [
 		{ name = "**/*.app/", text = "󰘳 ", fg_dark = "#eca517", fg_light = "#76520c" },
 ]
-files = [
+prepend_files = [
 		{ name = ".clang-format", text = "", fg_dark = "#eca517", fg_light = "#76520c" },
 		{ name = ".gitignore", text = "󰊢", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
 		{ name = ".DS_Store", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
 		{ name = "LICENSE", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
-		# { name = "Makefile", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
-		{ name = "Makefile", text = "🚜", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+		# { name = "Makefile", text = "🚜", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+		{ name = "Makefile", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+		{ name = "go.mod", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
 ]
-conds = [
+prepend_exts = [
+		{ name = "txt", text = "📝" },
+		{ name = "log", text = "🪵" },
+		{ name = "vert", text = "👾" },
+		{ name = "frag", text = "👾" },
+		{ name = "spv", text = "👾" },
+		{ name = "geom", text = "👾" },
+		{ name = "tesc", text = "👾" },
+		{ name = "tese", text = "👾" },
+		{ name = "glsl", text = "👾" },
+		{ name = "hlsl", text = "󰍲", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+		{ name = "metal", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+]
+prepend_conds = [
 	# Special files
 	# { if = "orphan", text = "" },
 	# { if = "link"  , text = "" },
