@@ -4,7 +4,7 @@ confirm-close-surface = false
 macos-option-as-alt = true
 font-family = Fira Code Medium
 window-title-font-family = MesloLGS NF
-font-size = 18
+font-size = 20
 
 background = #000000
 background-opacity = 0.8
