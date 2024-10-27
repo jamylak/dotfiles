@@ -1,3 +1,71 @@
 # ya pack -a jamylak/rose-pine
 # [flavor]
 # use = "rose-pine"
+# https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/theme.toml
+[icon]
+dirs  = [
+	{ name = ".config", text = " " , fg_dark = "#eca517", fg_light = "#76520c"},
+	{ name = ".git", text = " " , fg_dark = "#eca517", fg_light = "#76520c" },
+	{ name = ".github", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
+	{ name = "gh", text = " ", fg_dark = "#eca517", fg_light = "#76520c" },
+	{ name = "bar", text = "🚧" },
+	{ name = "proj", text = "🛠️" },
+	{ name = "ghostty", text = "👻" },
+	{ name = "fish", text = "🐠" },
+	{ name = "apple", text = "💻" },
+	{ name = "applescripts", text = "💻" },
+	{ name = "kitty", text = "😺" },
+	{ name = "helix", text = "🧬" },
+	{ name = ".helix", text = "🧬" },
+	{ name = "nvim", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
+	{ name = "nvim2", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
+	{ name = ".nvim", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
+	{ name = "vim", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
+	{ name = ".vimrc", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
+	{ name = ".viminfo", text = " " },
+	{ name = ".viminfo.old", text = " " },
+	{ name = ".cargo", text = " ", fg_dark = "#eca517", fg_light = "#76520c" },
+	{ name = "gcloud", text = "󱇶 ", fg_dark = "#eca517", fg_light = "#76520c" },
+	{ name = "docker", text = " " },
+	{ name = ".docker", text = " ", fg_dark = "#eca517", fg_light = "#76520c" },
+	{ name = ".cmake", text = " ", fg_dark = "#eca517", fg_light = "#76520c" },
+	{ name = "yazi", text = "🧰" },
+	{ name = "Desktop", text = "🖥 " },
+	{ name = "Development", text = "👨‍💻" },
+	{ name = "Documents", text = "📜" },
+	{ name = "Downloads", text = "☁️" },
+	{ name = "Library", text = "📚" },
+	{ name = "Movies", text = "🎥" },
+	{ name = "Music", text = "🎵" },
+	{ name = "Pictures", text = "📸" },
+	{ name = "Public", text = "📢" },
+	{ name = "Videos", text = "📹" },
+]
+globs = [
+		{ name = "**/*.app/", text = "󰘳 ", fg_dark = "#eca517", fg_light = "#76520c" },
+]
+files = [
+		{ name = ".clang-format", text = "", fg_dark = "#eca517", fg_light = "#76520c" },
+		{ name = ".gitignore", text = "󰊢", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+		{ name = ".DS_Store", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+		{ name = "LICENSE", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+		# { name = "Makefile", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+		{ name = "Makefile", text = "🚜", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
+]
+conds = [
+	# Special files
+	# { if = "orphan", text = "" },
+	# { if = "link"  , text = "" },
+	# { if = "block" , text = "" },
+	# { if = "char"  , text = "" },
+	# { if = "fifo"  , text = "" },
+	# { if = "sock"  , text = "" },
+	# { if = "sticky", text = "" },
+	# { if = "dummy",  text = "" },
+
+	# Fallback
+	{ if = "dir", text = "🗂️" },
+	# { if = "exec", text = "" },
+	# { if = "!dir", text = "󰈔" },
+]
+
