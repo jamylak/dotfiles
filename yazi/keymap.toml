@@ -9,6 +9,11 @@ run  = "shell 'kitty @ launch --location=hsplit fish -c \"y $1\"' --confirm"
 desc = "Horizontal Split"
 
 [[manager.prepend_keymap]]
+on   = "T"
+run  = "shell 'kitty @ launch --type=tab fish -c \"y $1\"' --confirm"
+desc = "New Tab"
+
+[[manager.prepend_keymap]]
 on   = [ "g", "b" ]
 run  = "cd ~/bar"
 desc = "Cd to ~/bar"
