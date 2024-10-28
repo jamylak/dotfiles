@@ -1,2 +1,4 @@
 fish/config.local.fish
 .zshenv.local
+fish/config.local.post.fish
+fish/config.local.pre.fish
