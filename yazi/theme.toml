@@ -90,6 +90,7 @@ prepend_exts = [
 		{ name = "hlsl", text = "󰍲", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
 		{ name = "metal", text = "", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
 		{ name = "tfvars", text = "󱁢" },
+		{ name = "tfstate", text = "󱁢" },
 		{ name = "hcl", text = "󱁢" },
 ]
 prepend_conds = [
