@@ -47,6 +47,7 @@ q.j = "goto_line_end"
 q.k = "extend_to_line_end"
 "C-e" = "extend_to_line_end"
 "C-a" = "extend_to_line_start"
+# TODO: Select mode versions
 "C-A" = "increment"
 "C-X" = "decrement"
 q.h = "select_all"
@@ -75,6 +76,7 @@ m."\"" = "@lf\"lmi\""
 m.q = "@l/\"|'<ret>lv/<C-r>/<ret><A-minus>hv"
 m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
 # TODO: Test with spaces in filename
+# TODO: Better way than pbcopy and paste
 "minus" = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=overlay fish -c 'y (pbpaste)'"]
 
 [keys.insert]
