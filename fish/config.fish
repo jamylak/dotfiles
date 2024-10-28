@@ -13,6 +13,9 @@ set -Ux PROJECTS_DIR /Users/$USER/bar
 set -g XDG_DATA_DIRS /usr/local/share
 # set -g XDG_DATA_DIRS /usr/local/share:/usr/share:/Users/james/.nix-profile/share:/nix/var/nix/profiles/default/share
 
+# TODO: Lazygit config
+# promptToReturnFromSubprocess: false
+# https://github.com/jesseduffield/lazygit/issues/1915
 
 set -g fish_key_bindings fish_vi_key_bindings
 
