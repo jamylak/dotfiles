@@ -175,6 +175,8 @@ abbr -a zin "z ~/.config/nvim"
 abbr -a zn "z ~/.config/nvim"
 abbr -a br brew
 abbr -a bi "brew install"
+abbr -a bin "brew info"
+abbr -a bu "brew upgrade"
 
 # Git
 abbr -a g git
