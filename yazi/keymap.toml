@@ -16,7 +16,19 @@ desc = "New Tab"
 [[manager.prepend_keymap]]
 on   = ["g", "g"]
 run  = "shell 'kitty @ launch --type=tab fish -c \"cd (git_repo_dir $1); lazygit\"' --confirm"
-desc = "New Tab"
+desc = "Lazygit in New Tab"
+
+[[manager.prepend_keymap]]
+on   = "'"
+run  = "shell 'lazygit' --block --confirm"
+desc = "Lazygit"
+
+# Since i don't have much use for running non blocking shell from yazi
+# If I do i can remap
+[[manager.prepend_keymap]]
+on   = ";"
+run  = "shell 'fish' --block --confirm"
+desc = "Fish Shell"
 
 [[manager.prepend_keymap]]
 on   = [ "g", "b" ]
