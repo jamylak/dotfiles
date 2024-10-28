@@ -27,6 +27,7 @@ prepend_dirs  = [
 	{ name = ".emacs.d.backup", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
 	{ name = ".viminfo", text = " " },
 	{ name = ".viminfo.old", text = " " },
+	{ name = ".terraform", text = "󱁢 " },
 	{ name = ".tmux", text = " " },
 	{ name = ".cargo", text = " ", fg_dark = "#eca517", fg_light = "#76520c" },
 	{ name = "gcloud", text = "󱇶 ", fg_dark = "#eca517", fg_light = "#76520c" },
