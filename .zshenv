@@ -140,3 +140,4 @@ mkvirtualenv () {
 }
 
 source ~/.zshenv.local
+. "$HOME/.cargo/env"
