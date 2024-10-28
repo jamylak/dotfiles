@@ -30,6 +30,19 @@ fish_add_path -mp /usr/local/bin
 fish_add_path -mp /Users/$USER/.local/bin
 fish_add_path -mp $HOME/.cargo/bin
 
+function git_repo_dir -a path
+    set dir (realpath $path)
+    while test $dir != /
+        if test -d "$dir/.git"
+            echo $dir
+            return 0
+        end
+        set dir (dirname $dir)
+    end
+    echo "Not in a Git repository" >&2
+    return 1
+end
+
 # https://github.com/fish-shell/fish-shell/issues/3541
 function fish_user_key_bindings
     # for mode in insert default visual
