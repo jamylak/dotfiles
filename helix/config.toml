@@ -35,8 +35,6 @@ X = ["extend_line_up", "extend_to_line_bounds"]
 "C-f" = "goto_next_function"
 "C-b" = "goto_prev_function"
 "C-r" = "redo"
-'\' = "hsplit"
-'|' = "vsplit"
 g.j = ["jump_view_left", "jump_view_up"]
 g.k = ["jump_view_right", "jump_view_down"]
 # Duplicate line
@@ -55,7 +53,6 @@ g.o = "goto_file_start"
 0 = "extend_to_line_start"
 # Yank to clipboard
 Y = "yank_main_selection_to_clipboard"
-" " = { q = ":q", Q = ":q!", "ret" = "last_picker", " " = "global_search", "Y" = "yank_abs_filename_to_clipboard", N = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'nvim (pbpaste)'"],  Z = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'yazi (pbpaste)'"], "\\" = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --location=hsplit fish -c 'yazi (pbpaste)'"], "|" = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --location=vsplit fish -c 'yazi (pbpaste)'"], "." = "file_picker_in_current_buffer_directory"}
 "A-{" = "goto_prev_paragraph"
 "A-}" = "goto_next_paragraph"
 # ci) or ciq or cinq type stuff
@@ -78,6 +75,22 @@ m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
 # TODO: Test with spaces in filename
 # TODO: Better way than pbcopy and paste
 "minus" = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=overlay fish -c 'y (pbpaste)'"]
+'\' = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --location=hsplit fish -c 'yazi (pbpaste)'"]
+'|' = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --location=vsplit fish -c 'yazi (pbpaste)'"]
+
+# Space mode
+[keys.normal." "]
+q = ":q"
+Q = ":q!"
+"ret" = "last_picker"
+" " = "global_search"
+"Y" = "yank_abs_filename_to_clipboard"
+N = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'nvim (pbpaste)'"]
+Z = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'yazi (pbpaste)'"]
+I = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'yazi (pbpaste)'"]
+"\\" = "hsplit"
+"|" = "vsplit"
+"." = "file_picker_in_current_buffer_directory"
 
 [keys.insert]
 "C-c" = "normal_mode"
