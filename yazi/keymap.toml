@@ -20,12 +20,12 @@ desc = "Lazygit in New Tab"
 
 [[manager.prepend_keymap]]
 on   = "'"
-run  = "shell 'lazygit' --block --confirm"
+run  = "shell 'fish -c \"cd (git_repo_dir $1); lazygit\"' --block --confirm"
 desc = "Lazygit"
 
 [[manager.prepend_keymap]]
 on   = "\""
-run  = "shell 'lazygit' --block --confirm"
+run  = "shell 'fish -c \"cd (git_repo_dir $1); lazygit\"' --block --confirm"
 desc = "Lazygit"
 
 # Since i don't have much use for running non blocking shell from yazi
