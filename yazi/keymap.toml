@@ -23,6 +23,11 @@ on   = "'"
 run  = "shell 'lazygit' --block --confirm"
 desc = "Lazygit"
 
+[[manager.prepend_keymap]]
+on   = "\""
+run  = "shell 'lazygit' --block --confirm"
+desc = "Lazygit"
+
 # Since i don't have much use for running non blocking shell from yazi
 # If I do i can remap
 [[manager.prepend_keymap]]
