@@ -5,7 +5,7 @@ family = "MesloLGS NF"
 program = "/opt/homebrew/bin/tmux"
 
 [font]
-size = 16
+size = 18
 
 [window]
 option_as_alt = "Both"
