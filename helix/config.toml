@@ -10,7 +10,7 @@ theme = "modus_vivendi_deuteranopia"
 
 [editor]
 bufferline = "multiple"
-shell = ["zsh", "-c"]
+shell = ["fish", "-c"]
 # whitespace.render = "all"
 # cursor-shape.insert = "bar"
 
