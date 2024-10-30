@@ -2,7 +2,7 @@
 family = "MesloLGS NF"
 
 [shell]
-program = "/opt/homebrew/bin/fish"
+program = "/opt/homebrew/bin/tmux"
 
 [font]
 size = 16
