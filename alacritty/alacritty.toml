@@ -25,6 +25,8 @@ bindings = [
   { key = "{", mods = "Command|Shift",  chars = "\u0000p"},
   { key = "|", mods = "Command|Shift",  chars = "\u0000|"},
   { key = "\\", mods = "Command",  chars = "\u0000\\"},
+  { key = "I", mods = "Command",  chars = "\u0000x"},
+  { key = "O", mods = "Command",  chars = "\u0000O"},
   { key = ";", mods = "Command",  chars = "\u0000:"},
   { key = "r", mods = "Command",  chars = "\u0000\u0012"},
   { key = "]", mods = "Command",  chars = "\u0000o"},
@@ -36,7 +38,7 @@ bindings = [
   { key = "T", mods = "Command",  chars = "\u0000c"},
   # Detach pane into new tab
   { key = "T", mods = "Command|Shift",  chars = "\u0000!"},
-  { key = "W", mods = "Command",  chars = "\u0000x"},
+  { key = "W", mods = "Command",  chars = "\u0000&"},
   # For this to work on mac you need to go to Keyboard Shortcuts
   # for Applications and override 'Hide alacritty' -> F12
   { key = "G", mods = "Command",  chars = "\u0000Q"},
