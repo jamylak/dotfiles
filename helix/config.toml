@@ -12,7 +12,7 @@ theme = "modus_vivendi_deuteranopia"
 bufferline = "multiple"
 shell = ["fish", "-c"]
 # whitespace.render = "all"
-# cursor-shape.insert = "bar"
+cursor-shape.insert = "bar"
 
 [editor.file-picker]
 hidden = false
