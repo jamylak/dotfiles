@@ -33,6 +33,16 @@ fish_add_path -mp /usr/local/bin
 fish_add_path -mp /Users/$USER/.local/bin
 fish_add_path -mp $HOME/.cargo/bin
 
+function launch_tab
+    if set -q TMUX
+        set cmd (string join ' ' $argv)
+        tmux new-window "$cmd"
+    else
+        # kitty @ launch --type=tab --cwd $dir fish -c yazi
+        kitty @ launch --type=tab $argv
+    end
+end
+
 function git_repo_dir -a path
     set dir (realpath $path)
     while test $dir != /
