@@ -42,6 +42,7 @@ q.p = ["extend_to_line_bounds", "yank", "paste_after"]
 # Quick shortcuts for line end and begin
 q.d = ["extend_to_line_bounds", "delete_selection"]
 q.j = "goto_line_end"
+q.q = ":q!"
 q.k = "extend_to_line_end"
 "C-e" = "extend_to_line_end"
 "C-a" = "extend_to_line_start"
