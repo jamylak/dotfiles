@@ -17,6 +17,7 @@
     "~B" = "moveWordBackwardAndModifySelection:";
     "~F" = "moveWordForwardAndModifySelection:";
     // "~v" = "scrollPageUp:";
+    // "~u" = "deleteToBeginningOfLine:";
     "~v" = "pageUp:";
     "~V" = "pageUpAndModifySelection:";
     "~<" = "moveToBeginningOfDocument:";
@@ -24,4 +25,7 @@
     "~w" = "copy:";
     "~{" = "moveToBeginningOfParagraph:";
     "~}" = "moveToEndOfParagraph:";
+    "^j" = "insertNewlineIgnoringFieldEditor:";
+    "~a" = "selectParagraph:"; //cocoa paragraph ≈ unix line
+    "~A" = "selectWord:";
 }
