@@ -24,6 +24,11 @@ run  = "shell 'kitty @ launch --type=tab fish -c \"cd (git_repo_dir $1); lazygit
 desc = "Lazygit in New Tab"
 
 [[manager.prepend_keymap]]
+on   = ["<c-g>"]
+run  = "shell 'kitty @ launch --type=tab fish -c \"cd (git_repo_dir $1); lazygit\"' --confirm"
+desc = "Lazygit in New Tab"
+
+[[manager.prepend_keymap]]
 on   = "'"
 run  = "shell 'fish -c \"cd (git_repo_dir $1); lazygit\"' --block --confirm"
 desc = "Lazygit"
