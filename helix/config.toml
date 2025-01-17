@@ -92,6 +92,7 @@ I = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'y
 "\\" = "hsplit"
 "|" = "vsplit"
 "." = "file_picker_in_current_buffer_directory"
+"n" = ":w"
 
 [keys.insert]
 "C-c" = "normal_mode"
