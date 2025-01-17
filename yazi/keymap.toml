@@ -101,6 +101,11 @@ run  = "enter"
 desc = "Enter"
 
 [[manager.prepend_keymap]]
+on   = "<C-m>"
+run  = "open"
+desc = "open"
+
+[[manager.prepend_keymap]]
 on   = "<C-l>"
 run  = "enter"
 desc = "Enter"
