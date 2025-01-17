@@ -3,9 +3,9 @@
 # https://stackoverflow.com/questions/20146972/is-there-a-way-t%E2%88%AB%E2%88%AB%C6%92%C6%92%E2%88%91%E2%88%82%E2%88%82ake-alt-f-and-alt-b-jump-word-forward-and-backward-instead-of
 # https://developer.apple.com/documentation/appkit/nsstandardkeybindingresponding?language=objc
 # https://gist.github.com/trusktr/1e5e516df4e8032cbc3d
-# https://apple.stackexchange.com/questions/459695/why-does-movewordbackward-auto-repeat-but-movewordforward-does-not
 # https://github.com/fkchang/emacs-keybindings-in-osx/blob/master/DefaultKeybinding.dict
 # Create file ~/Library/KeyBindings/DefaultKeyBinding.dict
+# https://apple.stackexchange.com/questions/459695/why-does-movewordbackward-auto-repeat-but-movewordforward-does-not
 # setMark not working as expected
 # TODO: alt-w is Copy, todo: cut
 {
@@ -26,6 +26,7 @@
     "~{" = "moveToBeginningOfParagraph:";
     "~}" = "moveToEndOfParagraph:";
     "^j" = "insertNewlineIgnoringFieldEditor:";
+    "^m" = "insertNewline:";
     "~a" = "selectParagraph:"; //cocoa paragraph ≈ unix line
     "~A" = "selectWord:";
 }
