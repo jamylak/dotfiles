@@ -92,7 +92,10 @@ I = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'y
 "\\" = "hsplit"
 "|" = "vsplit"
 "." = "file_picker_in_current_buffer_directory"
-"n" = ":w"
+"w" = ":w"
+# TODO: Kitty send command 'r' to other window
+# through use of sh kitty sending it
+"n" = ":sh kitty @ send-text -m id:$(kitty @ ls | jq -r '.[].tabs[].windows[] | select(.is_focused == false) | .id' | head -n 1) 'r\\x0d'"
 
 [keys.insert]
 "C-c" = "normal_mode"
