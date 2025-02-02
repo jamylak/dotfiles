@@ -8,6 +8,7 @@
 # https://apple.stackexchange.com/questions/459695/why-does-movewordbackward-auto-repeat-but-movewordforward-does-not
 # setMark not working as expected
 # TODO: alt-w is Copy, todo: cut
+# https://github.com/ttscoff/KeyBindings/blob/master/DefaultKeyBinding.dict
 {
     "~d" = "deleteWordForward:";
     "^w" = "deleteWordBackward:";
@@ -27,6 +28,10 @@
     "~}" = "moveToEndOfParagraph:";
     "^j" = "insertNewlineIgnoringFieldEditor:";
     "^m" = "insertNewline:";
-    "~a" = "selectParagraph:"; //cocoa paragraph ≈ unix line
-    "~A" = "selectWord:";
+    "~h" = "selectParagraph:"; //cocoa paragraph ≈ unix line
+    "~a" = "moveToBeginningOfParagraph:";
+    "~e" = "moveToEndOfParagraph:";
+    # not working
+    "~$2" = "selectWord:";
+    "~H" = "selectParagraph:";
 }
