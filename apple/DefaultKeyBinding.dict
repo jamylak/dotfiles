@@ -12,7 +12,10 @@
 {
     "~d" = "deleteWordForward:";
     "^w" = "deleteWordBackward:";
-    "^ " = "setMark:";
+    # doesn't work
+    # "^ " = "setMark:";
+    "^ " = "selectParagraph:";
+    "^/" = "undo:";
     "~w" = "copy:";
     "^y" = "paste:";
     "~f" = "moveWordForward:";
@@ -22,6 +25,8 @@
     // "~v" = "scrollPageUp:";
     // "~u" = "deleteToBeginningOfLine:";
     "~v" = "pageUp:";
+    "^v" = "pageDown:";
+    "^V" = "pageDownAndModifySelection:";
     "~V" = "pageUpAndModifySelection:";
     "~<" = "moveToBeginningOfDocument:";
     "~>" = "moveToEndOfDocument:";
@@ -29,11 +34,13 @@
     "~}" = "moveToEndOfParagraph:";
     "^j" = "insertNewlineIgnoringFieldEditor:";
     "^m" = "insertNewline:";
-    "~h" = "selectParagraph:"; //cocoa paragraph ≈ unix line
+    "~h" = "moveParagraphForwardAndModifySelection:";
+    "~H" = "selectParagraph:";
     "~a" = "moveToBeginningOfParagraph:";
     "~e" = "moveToEndOfParagraph:";
-    # above doesnt seem to work
-    "~e" = "moveToEndOfLine:";
+    # above doesnt seem to work and anything with E for some reason
+    "~A" = "moveToBeginningOfParagraphAndModifySelection:";
+    "~E" = "moveToEndOfParagraphAndModifySelection:";
     "~\\@" = (moveWordRightAndModifySelection:);
     "~H" = "selectParagraph:";
 }
