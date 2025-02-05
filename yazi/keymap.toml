@@ -134,3 +134,13 @@ desc = "Down"
 on   = "<C-k>"
 run  = "arrow -1"
 desc = "Up"
+
+[[manager.prepend_keymap]]
+on   = "<C-n>"
+run  = "shell 'kitty @ launch --type=tab fish -c \"cd (git_repo_dir $1); neogitlog 400\"' --confirm"
+desc = "Open Neogit Log in new tab"
+
+[[manager.prepend_keymap]]
+on   = "<A-n>"
+run  = "shell 'kitty @ launch --type=tab fish -c \"cd (git_repo_dir $1); neogitdiff\"' --confirm"
+desc = "Open Neogit Diff in new tab"
