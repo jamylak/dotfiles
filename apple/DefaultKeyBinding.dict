@@ -31,7 +31,8 @@
     "~h" = "selectParagraph:"; //cocoa paragraph ≈ unix line
     "~a" = "moveToBeginningOfParagraph:";
     "~e" = "moveToEndOfParagraph:";
-    # not working
-    "~$2" = "selectWord:";
+    # above doesnt seem to work
+    "~e" = "moveToEndOfLine:";
+    "~\\@" = (moveWordRightAndModifySelection:);
     "~H" = "selectParagraph:";
 }
