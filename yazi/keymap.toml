@@ -127,8 +127,8 @@ desc = "Leave"
 
 [[manager.prepend_keymap]]
 on   = "<C-j>"
-run  = "arrow 1"
-desc = "Down"
+run  = "shell 'nvim $1' --block --confirm"
+desc = "Open with nvim"
 
 [[manager.prepend_keymap]]
 on   = "<C-k>"
