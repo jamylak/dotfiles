@@ -13,6 +13,8 @@
     "~d" = "deleteWordForward:";
     "^w" = "deleteWordBackward:";
     "^ " = "setMark:";
+    "~w" = "copy:";
+    "^y" = "paste:";
     "~f" = "moveWordForward:";
     "~b" = "moveWordBackward:";
     "~B" = "moveWordBackwardAndModifySelection:";
@@ -23,7 +25,6 @@
     "~V" = "pageUpAndModifySelection:";
     "~<" = "moveToBeginningOfDocument:";
     "~>" = "moveToEndOfDocument:";
-    "~w" = "copy:";
     "~{" = "moveToBeginningOfParagraph:";
     "~}" = "moveToEndOfParagraph:";
     "^j" = "insertNewlineIgnoringFieldEditor:";
