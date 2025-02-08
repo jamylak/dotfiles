@@ -146,6 +146,15 @@ function neogitlog
     nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\" gnll\", true, true, true), \"m\", true); vim.defer_fn(function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"ggjdd\", true, true, true), \"m\", true) end, $delay)"
 end
 
+function neogitdiffmain
+    # Hacky feedkeys way, so use a delay to wait for it to load
+    set -l delay 400
+    if test -n "$argv[1]"
+        set delay "$argv[1]"
+    end
+    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\" gndr\", true, true, true), \"m\", true); vim.defer_fn(function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<c-n><c-n><enter>\", true, true, true), \"m\", true) end, $delay)"
+end
+
 function neogitdiff
     nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\" gndd\", true, true, true), \"m\", true);"
 end
