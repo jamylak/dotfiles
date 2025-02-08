@@ -273,6 +273,7 @@ abbr -a q exit
 abbr -a t tmux
 abbr -a ta "tmux a"
 abbr -a td "tmux detach"
+abbr -a k zi
 abbr -a zid "cd ~/.config/dotfiles"
 abbr -a zd "cd ~/.config/dotfiles"
 abbr -a zib "cd ~/bar"
