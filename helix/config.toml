@@ -75,10 +75,9 @@ m.q = "@l/\"|'<ret>lv/<C-r>/<ret><A-minus>hv"
 m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
 # TODO: Test with spaces in filename
 # TODO: Better way than pbcopy and paste
-"minus" = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=overlay fish -c 'y (pbpaste)'"]
-'\' = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --location=hsplit fish -c 'yazi (pbpaste)'"]
-'|' = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --location=vsplit fish -c 'yazi (pbpaste)'"]
-# 'C-g' = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'lazygit (pbpaste)'"]
+"minus" = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_launch_overlay (pbpaste)'"]
+'\' = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_hsplit (pbpaste)'"]
+'|' = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_vsplit (pbpaste)'"]
 
 # Space mode
 [keys.normal." "]
@@ -87,16 +86,14 @@ Q = ":q!"
 "ret" = "last_picker"
 " " = "global_search"
 "Y" = "yank_abs_filename_to_clipboard"
-N = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'nvim (pbpaste)'"]
-Z = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'yazi (pbpaste)'"]
-I = ["yank_abs_filename_to_clipboard", ":sh kitty @ launch --type=tab fish -c 'yazi (pbpaste)'"]
+N = ["yank_abs_filename_to_clipboard", ":sh fish -c 'launch_new_tab \"nvim (pbpaste)\"'"]
+I = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_new_tab (pbpaste)'"]
 "\\" = "hsplit"
 "|" = "vsplit"
 "." = "file_picker_in_current_buffer_directory"
 "w" = ":w"
-# TODO: Kitty send command 'r' to other window
-# through use of sh kitty sending it
-"n" = [":w", ":sh kitty @ send-text -m id:$(kitty @ ls | jq -r '.[].tabs[].windows[] | select(.is_focused == false) | .id' | head -n 1) 'r\\x0d'"]
+# TODO: Make compatible with ghostty
+"n" = [":w", ":sh fish -c sendRepeatToOtherPane"]
 
 [keys.insert]
 "C-c" = "normal_mode"
