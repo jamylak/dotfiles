@@ -42,14 +42,77 @@ function launch_new_tab -a cmd
     end
 end
 
-function lazygit_new_tab -a path
+function launch_overlay -a cmd
     if test $TERM = xterm-kitty
-        kitty @ launch --type=tab fish -c "cd (git_repo_dir $path); lazygit"
+        kitty @ launch --type=overlay fish -c "$cmd"
     else
-        # For ghostty (or others?)
-        skhd -k "cmd - t" -t "cd (git_repo_dir $path); lazygit; exit" && skhd -k return
+        # For ghostty
+        skhd -k "cmd - return" && skhd -t "$cmd; exit" && skhd -k return -k "cmd + shift - return"
     end
 end
+
+function launch_vsplit -a cmd
+    if test $TERM = xterm-kitty
+        kitty @ launch --location=vsplit fish -c "$cmd"
+    else
+        # For ghostty - Replicate Cmd - \
+        skhd -k "cmd - 0x2A" && skhd -t "$cmd; exit" && skhd -k return
+    end
+end
+
+function launch_hsplit -a cmd
+    if test $TERM = xterm-kitty
+        kitty @ launch --location=hsplit fish -c "$cmd"
+    else
+        # For ghostty - Replicate Cmd - Enter
+        skhd -k "cmd - 0x24" && skhd -t "$cmd; exit" && skhd -k return
+    end
+end
+
+function sendRepeatToOtherPane
+    if test $TERM = xterm-kitty
+        kitty @ send-text -m id:$(kitty @ ls | jq -r '.[].tabs[].windows[] | select(.is_focused == false) | .id' | head -n 1) 'r\\x0d'
+    else
+        # For ghostty - Replicate Cmd - ] to swith to the other pane
+        # then send 'r' and enter
+        # then Cmd - [ to swith back
+        # skhd -k "cmd - ]" && skhd -t "$cmd; exit" && skhd -k return
+        skhd -k "cmd - 0x1E" && skhd -t r -k return -k "cmd - 0x21"
+    end
+end
+
+function lazygit_new_tab -a path
+    launch_new_tab "cd (git_repo_dir $path); lazygit"
+end
+
+function yazi_new_tab -a path
+    launch_new_tab "y $path"
+end
+
+function yazi_launch_overlay -a path
+    launch_overlay "y $path"
+end
+
+function yazi_vsplit -a path
+    launch_vsplit "y $path"
+end
+
+function yazi_hsplit -a path
+    launch_hsplit "y $path"
+end
+
+function neogitlog_new_tab -a path
+    launch_new_tab "cd (git_repo_dir $path); neogitlog 400"
+end
+
+function neogitdiffmain_new_tab -a path
+    launch_new_tab "cd (git_repo_dir $path); neogitdiffmain"
+end
+
+function neogitdiff_new_tab -a path
+    launch_new_tab "cd (git_repo_dir $path); neogitdiff"
+end
+
 
 function git_repo_dir -a path
     set dir (realpath $path)
