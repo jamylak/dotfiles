@@ -53,6 +53,8 @@ end
 
 function git_repo_dir -a path
     set dir (realpath $path)
+    # Test git rev-parse --show-toplevel
+    # instead of while
     while test $dir != /
         if test -d "$dir/.git"
             echo $dir
