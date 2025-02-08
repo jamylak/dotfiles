@@ -422,10 +422,6 @@ function y
 end
 
 starship init fish | source
-#oh-my-posh init fish --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/kushal.omp.json' | source
-#oh-my-posh init fish --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/montys.omp.json' | source
-#oh-my-posh init fish --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/1_shell.omp.json' | source
-
 fzf_configure_bindings --directory=\ct
 
 # Noting tide configuration but don't need to run this in this file
