@@ -33,13 +33,21 @@ fish_add_path -mp /usr/local/bin
 fish_add_path -mp /Users/$USER/.local/bin
 fish_add_path -mp $HOME/.cargo/bin
 
-function launch_tab
-    if set -q TMUX
-        set cmd (string join ' ' $argv)
-        tmux new-window "$cmd"
+function launch_new_tab -a cmd
+    if test $TERM = xterm-kitty
+        kitty @ launch --type=tab fish -c "$cmd"
     else
-        # kitty @ launch --type=tab --cwd $dir fish -c yazi
-        kitty @ launch --type=tab $argv
+        # For ghostty (or others?)
+        skhd -k "cmd - t" -t "$cmd; exit" && skhd -k return
+    end
+end
+
+function lazygit_new_tab -a path
+    if test $TERM = xterm-kitty
+        kitty @ launch --type=tab fish -c "cd (git_repo_dir $path); lazygit"
+    else
+        # For ghostty (or others?)
+        skhd -k "cmd - t" -t "cd (git_repo_dir $path); lazygit; exit" && skhd -k return
     end
 end
 
