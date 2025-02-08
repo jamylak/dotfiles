@@ -421,8 +421,6 @@ function y
     rm -f -- "$tmp"
 end
 
-# fzf --fish | source
-
 starship init fish | source
 #oh-my-posh init fish --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/kushal.omp.json' | source
 #oh-my-posh init fish --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/montys.omp.json' | source
