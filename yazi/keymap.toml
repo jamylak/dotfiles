@@ -1,31 +1,31 @@
 [[manager.prepend_keymap]]
 on   = "|"
-run  = "shell 'kitty @ launch --location=vsplit fish -c \"y $1\"' --confirm"
+run  = "shell 'fish -c \"yazi_vsplit $1\"' --confirm"
 desc = "Vertical Split"
 
 [[manager.prepend_keymap]]
 on   = "\\"
-run  = "shell 'kitty @ launch --location=hsplit fish -c \"y $1\"' --confirm"
+run  = "shell 'fish -c \"yazi_hsplit $1\"' --confirm"
 desc = "Horizontal Split"
 
 [[manager.prepend_keymap]]
 on   = "T"
-run  = "shell 'kitty @ launch --type=tab fish -c \"y $1\"' --confirm"
+run  = "shell 'fish -c \"yazi_new_tab $1\"' --confirm"
 desc = "New Tab"
 
 [[manager.prepend_keymap]]
 on   = "I"
-run  = "shell 'kitty @ launch --type=tab fish -c \"y $1\"' --confirm"
+run  = "shell 'fish -c \"yazi_new_tab $1\"' --confirm"
 desc = "New Tab"
 
 [[manager.prepend_keymap]]
 on   = ["g", "g"]
-run  = "shell 'kitty @ launch --type=tab fish -c \"cd (git_repo_dir $1); lazygit\"' --confirm"
+run  = "shell 'fish -c \"lazygit_new_tab $1\"' --block --confirm"
 desc = "Lazygit in New Tab"
 
 [[manager.prepend_keymap]]
 on   = ["<c-g>"]
-run  = "shell 'kitty @ launch --type=tab fish -c \"cd (git_repo_dir $1); lazygit\"' --confirm"
+run  = "shell 'fish -c \"lazygit_new_tab $1\"' --block --confirm"
 desc = "Lazygit in New Tab"
 
 [[manager.prepend_keymap]]
@@ -127,7 +127,7 @@ desc = "Leave"
 
 [[manager.prepend_keymap]]
 on   = "<C-j>"
-run  = "shell 'nvim $1' --block --confirm"
+run  = "shell 'nvim $@' --block --confirm"
 desc = "Open with nvim"
 
 [[manager.prepend_keymap]]
@@ -137,10 +137,15 @@ desc = "Up"
 
 [[manager.prepend_keymap]]
 on   = "<C-n>"
-run  = "shell 'kitty @ launch --type=tab fish -c \"cd (git_repo_dir $1); neogitlog 400\"' --confirm"
+run  = "shell 'fish -c \"neogitlog_new_tab $1\"' --confirm"
 desc = "Open Neogit Log in new tab"
 
 [[manager.prepend_keymap]]
 on   = "<A-n>"
-run  = "shell 'kitty @ launch --type=tab fish -c \"cd (git_repo_dir $1); neogitdiff\"' --confirm"
-desc = "Open Neogit Diff in new tab"
+run  = "shell 'fish -c \"neogitdiffmain_new_tab $1\"' --confirm"
+desc = "Open Neogit Log in new tab"
+
+[[manager.prepend_keymap]]
+on   = "<A-d>"
+run  = "shell 'fish -c \"neogitdiff_new_tab $1\"' --confirm"
+desc = "Open Neogit Diff Main in new tab"
