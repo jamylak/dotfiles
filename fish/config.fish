@@ -227,10 +227,10 @@ function dashboard
     if test -n "$argv[1]"
         set dir "$argv[1]"
     end
-    kitty @ launch --type=tab --cwd $dir fish -c yazi
-    kitty @ launch --type=tab --cwd $dir fish -c neogitlog
-    kitty @ launch --type=tab --cwd $dir fish -c 'hx .'
-    kitty @ launch --type=tab --cwd $dir fish -c lazygit
+    launch_new_tab "cd $dir && fish -c yazi"
+    launch_new_tab "cd $dir && fish -c neogitlog"
+    launch_new_tab "cd $dir && fish -c 'hx .'"
+    launch_new_tab "cd $dir && fish -c lazygit"
     exit
 end
 
