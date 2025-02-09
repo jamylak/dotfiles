@@ -20,6 +20,7 @@ keybind = super+u=scroll_page_up
 
 window-decoration = true
 
+# keybind = super+i=text:\x00\x03
 keybind = super+ctrl+down=resize_split:down,30
 keybind = super+ctrl+left=resize_split:left,30
 keybind = super+ctrl+up=resize_split:up,30
