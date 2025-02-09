@@ -13,6 +13,7 @@ background-blur-radius = 5
 shell-integration-features = no-cursor
 macos-non-native-fullscreen = true
 
+keybind = super+p=toggle_quick_terminal
 keybind = super+enter=new_split:down
 keybind = super+backslash=new_split:right
 keybind = super+d=scroll_page_down
