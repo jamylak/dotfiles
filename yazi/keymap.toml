@@ -127,12 +127,12 @@ desc = "Leave"
 
 [[manager.prepend_keymap]]
 on   = "<C-j>"
-run  = "shell 'nvim $@' --block --confirm"
+run  = "shell 'fish -c \"cd (git_repo_dir $1); nvim $@\"' --block --confirm"
 desc = "Open with nvim"
 
 [[manager.prepend_keymap]]
 on   = "<C-k>"
-run  = "arrow -1"
+run  = "plugin zoxide"
 desc = "Up"
 
 [[manager.prepend_keymap]]
