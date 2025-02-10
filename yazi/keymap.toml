@@ -117,8 +117,8 @@ desc = "Leave"
 
 [[manager.prepend_keymap]]
 on   = "<C-h>"
-run  = "leave"
-desc = "Leave"
+run  = "plugin zoxide"
+desc = "zoxide"
 
 [[manager.prepend_keymap]]
 on   = "<C-Backspace>"
@@ -133,7 +133,7 @@ desc = "Open with nvim"
 [[manager.prepend_keymap]]
 on   = "<C-k>"
 run  = "plugin zoxide"
-desc = "Up"
+desc = "Zoxide"
 
 [[manager.prepend_keymap]]
 on   = "<C-n>"
