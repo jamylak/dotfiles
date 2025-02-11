@@ -1,0 +1,33 @@
+{
+  "description": "Map Del to Ctrl+Left and End to Ctrl+Right",
+  "manipulators": [
+    {
+      "from": {
+        "key_code": "delete_forward"
+      },
+      "to": [
+        {
+          "key_code": "left_arrow",
+          "modifiers": [
+            "left_control"
+          ]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "end"
+      },
+      "to": [
+        {
+          "key_code": "right_arrow",
+          "modifiers": [
+            "left_control"
+          ]
+        }
+      ],
+      "type": "basic"
+    }
+  ]
+}
