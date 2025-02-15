@@ -5,11 +5,11 @@ macos-option-as-alt = true
 font-family = Fira Code Medium
 window-title-font-family = MesloLGS NF
 font-size = 20
+# working-directory = inherit
 
 background = #000000
-background-opacity = 0.8
-# background-blur-radius = 20
-background-blur-radius = 5
+background-opacity = 0.75
+background-blur-radius = 35
 shell-integration-features = no-cursor
 macos-non-native-fullscreen = true
 
