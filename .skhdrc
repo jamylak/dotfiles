@@ -143,3 +143,10 @@
 
 # toggle sticky(+float), picture-in-picture
 # alt - p : yabai -m window --toggle sticky --toggle pip
+
+cmd - g [
+	"ghostty" : skhd -t "hx " && skhd -k "cmd + shift - j" && skhd -k return
+]
+cmd - h [
+	"ghostty" : skhd -t "hx " && skhd -k "cmd + shift - j" && skhd -k return
+]
