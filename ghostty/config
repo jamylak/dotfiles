@@ -5,10 +5,14 @@ macos-option-as-alt = true
 font-family = Fira Code Medium
 window-title-font-family = MesloLGS NF
 font-size = 20
-# working-directory = inherit
+#  * `blueprint`, `chalkboard`, `microchip`, `glass`, `holographic`,
+#    `paper`, `retro`, `xray` - Official variants of the Ghostty icon
+# macos-icon = holographic
+# macos-icon = retro
+macos-icon = xray
 
 background = #000000
-background-opacity = 0.75
+background-opacity = 0.55
 background-blur-radius = 35
 shell-integration-features = no-cursor
 macos-non-native-fullscreen = true
@@ -36,7 +40,8 @@ keybind = super+shift+h=text:nvim +9999 /
 keybind = super+shift+j=write_screen_file:paste
 keybind = super+alt+shift+j=write_screen_file:open
 
-# custom-shader = /Users/james/Desktop/shaders/glitch.glsl
-# custom-shader = /Users/james/proj/ghostty/src/renderer/shaders/test_shadertoy_crt.glsl
-# custom-shader = /Users/james/Desktop/shaders/crt.glsl
-# custom-shader = shaders/bloom.glsl
+# custom-shader = ~/proj/ghostty-shaders/galaxy.glsl
+# custom-shader = ~/proj/ghostty-shaders/glow-rgbsplit-twitchy.glsl
+# custom-shader = ~/proj/ghostty-shaders/tft.glsl
+# custom-shader = ~/proj/ghostty-shaders/gears-and-belts.glsl
+# custom-shader = ~/proj/ghostty-shaders/underwater.glsl
