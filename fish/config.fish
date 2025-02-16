@@ -86,6 +86,10 @@ function lazygit_new_tab -a path
     launch_new_tab "cd (git_repo_dir $path); lazygit"
 end
 
+function hx_new_tab -a path
+    launch_new_tab "hx $path"
+end
+
 function yazi_new_tab -a path
     launch_new_tab "y $path"
 end
