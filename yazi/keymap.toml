@@ -46,6 +46,21 @@ run  = "shell 'fish' --block --confirm"
 desc = "Fish Shell"
 
 [[manager.prepend_keymap]]
+on   = "<c-x>"
+run  = "shell 'fish' --block --confirm"
+desc = "Fish Shell"
+
+[[manager.prepend_keymap]]
+on   = "<c-s>"
+run  = "find --smart"
+desc = "Find next file"
+
+[[manager.prepend_keymap]]
+on   = "<c-.>"
+run  = "escape --search"
+desc = "Cancel the ongoing search"
+
+[[manager.prepend_keymap]]
 on   = [ "g", "b" ]
 run  = "cd ~/bar"
 desc = "Cd to ~/bar"
@@ -129,6 +144,11 @@ desc = "Leave"
 on   = "<C-j>"
 run  = "shell 'fish -c \"cd (git_repo_dir $1); nvim $@\"' --block --confirm"
 desc = "Open with nvim"
+
+[[manager.prepend_keymap]]
+on   = "<C-e>"
+run  = "shell 'fish -c \"cd (git_repo_dir $1); emacsclient -c $@\"' --block --confirm"
+desc = "Open with emacs"
 
 [[manager.prepend_keymap]]
 on   = "<C-k>"
