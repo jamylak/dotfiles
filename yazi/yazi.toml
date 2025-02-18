@@ -6,5 +6,5 @@ linemode = "mtime"
 edit = [
 	{ run = 'hx "$@"', block = true, for = "unix" },
 	{ run = 'nvim "$@"', block = true, for = "unix" },
-	{ run = 'emacs "$@"', block = true, for = "unix" },
+	{ run = 'emacsclient -c -a "emacs -nw" "$@"', block = true, for = "unix" },
 ]
