@@ -33,6 +33,8 @@ fish_add_path -mp /opt/homebrew/bin
 fish_add_path -mp /usr/local/bin
 fish_add_path -mp /Users/$USER/.local/bin
 fish_add_path -mp $HOME/.cargo/bin
+fish_add_path -mp $HOME/.emacs.d/bin
+fish_add_path -mp $HOME/.config/emacs/bin
 
 function launch_new_tab -a cmd
     if test $TERM = xterm-kitty
@@ -383,8 +385,8 @@ abbr -a hk 'cd ~/.config/dotfiles; hx kitty/kitty.conf'
 abbr -a ht 'cd /tmp; hx .'
 
 # Emacs
-abbr -a em emacs
-abbr -a e emacs
+abbr -a em emacsclient -c
+abbr -a e emacsclient -c
 
 # Misc
 abbr -a newproj "scripts/newproj.sh"
