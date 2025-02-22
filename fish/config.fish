@@ -25,7 +25,13 @@ bind -M insert \ef forward-word
 bind -M insert \eb backward-word
 bind -M normal \ck expand-abbr
 bind -M insert \ck expand-abbr
-bind -M insert \cs zi
+bind -M insert \cs "zi && commandline --function repaint"
+bind -M insert \ei "zi && commandline --function repaint"
+bind -M insert \ej "y && commandline --function repaint"
+bind -M insert \ek 'nvim -c ":Telescope oldfiles" '
+bind -M insert \eh "hx ."
+bind -M insert \eg "echo n | lazygit && commandline --function repaint"
+bind -M insert \ev "nvim ."
 
 bind -M normal \ce edit_command_buffer
 bind -M insert \ce edit_command_buffer
