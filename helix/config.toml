@@ -13,6 +13,7 @@ bufferline = "multiple"
 shell = ["fish", "-c"]
 # whitespace.render = "all"
 cursor-shape.insert = "bar"
+soft-wrap.enable = true
 
 [editor.file-picker]
 hidden = false
