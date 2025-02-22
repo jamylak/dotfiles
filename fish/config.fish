@@ -21,6 +21,8 @@ set -g fish_key_bindings fish_vi_key_bindings
 
 # Autocomplete binding
 bind \cy 'commandline -f accept-autosuggestion'
+bind -M insert \ef forward-word
+bind -M insert \eb backward-word
 bind -M normal \ck expand-abbr
 bind -M insert \ck expand-abbr
 bind -M insert \cs zi
