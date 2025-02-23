@@ -124,7 +124,16 @@ function launchGithubUrl -a url
 end
 
 function launchRepo -a repo path
-    cd (tv git-repos -i $repo)
+    # Try quick cd but if can't find it
+    # do a search, in future could
+    # offer option to clone
+    if test -d "$HOME/bar/$repo"
+        cd "$HOME/bar/$repo"
+    else if test -d "$HOME/proj/$repo"
+        cd "$HOME/proj/$repo"
+    else
+        cd (tv git-repos -i $repo)
+    end
     echo "launchRepo $repo $path"
     if test -n "$path"
         # path helix format
