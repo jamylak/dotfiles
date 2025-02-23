@@ -31,10 +31,12 @@ bind -M insert \ej "y && commandline --function repaint"
 bind -M insert \ek 'nvim -c ":Telescope oldfiles" '
 bind -M insert \eh "hx ."
 bind -M insert \eg "echo n | lazygit && commandline --function repaint"
+bind -M insert \en 'nvim -c ":Telescope find_files" '
 bind -M insert \ev "nvim ."
+bind -M insert \cg "cd (tv git-repos) && commandline --function repaint"
 
-bind -M normal \ce edit_command_buffer
-bind -M insert \ce edit_command_buffer
+#bind -M normal \ce edit_command_buffer
+#bind -M insert \ce edit_command_buffer
 
 # eg. fd is in here
 fish_add_path -mp /opt/homebrew/bin
@@ -50,6 +52,37 @@ function launch_new_tab -a cmd
     else
         # For ghostty (or others?)
         skhd -k "cmd - t" -t "$cmd; exit" && skhd -k return
+    end
+end
+
+function hx_tv -a path
+    # Text search a path
+    # then open result in hx (if we got one)
+    set res (tv text (dirname "$path"))
+    if test -n "$res"
+        hx $res
+    end
+end
+
+
+function yazi_tv_text -a path
+    # Text search a path
+    # then open result in hx (if we got one)
+    set res (tv text (dirname "$path"))
+    # Strip off everything after final : at the end
+    # including the #
+    set res (echo $res | sed 's/:[^:]*$//')
+    if test -n "$res"
+        yazi $res
+    end
+end
+
+function yazi_tv_git -a path
+    # Text search a path
+    # then open result in hx (if we got one)
+    set res (tv git-repos (dirname "$path"))
+    if test -n "$res"
+        yazi $res
     end
 end
 
@@ -128,6 +161,10 @@ function neogitdiff_new_tab -a path
     launch_new_tab "cd (git_repo_dir $path); neogitdiff"
 end
 
+function nvim_find_files
+    nvim -c ":Telescope find_files"
+end
+
 
 function git_repo_dir -a path
     set dir (realpath $path)
@@ -148,9 +185,11 @@ end
 function fish_user_key_bindings
     # for mode in insert default visual
     for mode in insert
-        bind -M $mode \cy forward-char
-        #bind -M $mode \ck forward-char
+        bind -M $mode \cb backward-char
+        bind -M $mode \ca beginning-of-line
+        bind -M $mode \ce end-of-line
         bind -M $mode \cj forward-char
+        bind -M $mode \cf forward-char
         # https://stackoverflow.com/questions/37114257/how-to-bind-ctrl-enter-in-fish
         # not working
         # bind -M $mode \cM forward-char
@@ -339,6 +378,7 @@ abbr -a lgn "cd ~/.config/nvim/; lazygit"
 # Vim
 abbr -a vi nvim
 abbr -a v nvim .
+abbr -a v nvim_find_files
 #abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
 abbr -a vib "cd ~/bar; nvim ."
 abbr -a o "cd /Users/james/bar/testfoo; nvim foo.frag -c ':M' -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"f<CR>\", true, true, true), \"m\", true)'"
