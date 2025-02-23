@@ -117,7 +117,9 @@ function launchGithubUrl -a url
     echo launch github url $url
     set repo (string split / $url -f5)
     echo repo $repo
-    set path (string split / $url -f8 -m7)
+    if not string match -q '*pull*' $url
+        set path (string split / $url -f8 -m7)
+    end
     launchRepo $repo $path
 end
 
