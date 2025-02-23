@@ -51,6 +51,22 @@ run  = "shell 'fish' --block --confirm"
 desc = "Fish Shell"
 
 [[manager.prepend_keymap]]
+on   = "<a-s>"
+run  = "shell 'fish -c \"hx_tv $1\"' --block --confirm"
+desc = "HX TV Text"
+
+# TODO: Fix hack yazi in yazi later
+[[manager.prepend_keymap]]
+on   = "<a-t>"
+run  = "shell 'fish -c \"yazi_tv_text $1\"' --block --confirm"
+desc = "Yazi TV Text"
+
+[[manager.prepend_keymap]]
+on   = "<a-k>"
+run  = "shell 'fish -c \"yazi_tv_git $1\"' --block --confirm"
+desc = "Yazi TV Git"
+
+[[manager.prepend_keymap]]
 on   = "<c-s>"
 run  = "find --smart"
 desc = "Find next file"
