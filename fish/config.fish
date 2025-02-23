@@ -113,6 +113,33 @@ function launch_hsplit -a cmd
     end
 end
 
+function launchGithubUrl -a url
+    echo launch github url $url
+    set repo (string split / $url -f5)
+    echo repo $repo
+    set path (string split / $url -f8 -m7)
+    launchRepo $repo $path
+end
+
+function launchRepo -a repo path
+    cd (tv git-repos -i $repo)
+    echo "launchRepo $repo $path"
+    if test -n "$path"
+        # path helix format
+        # set path (string replace -a '#L' ':' $path)
+        set linenum (string split "#L" $path -r -m1 -f2)
+        set path (string split "#L" $path -r -m1 -f1)
+        echo new path $path
+        nvim +$linenum $path
+    else
+        nvim_find_files
+    end
+end
+
+function launchKitty -a url
+    kitty fish -c "launchGithubUrl $url"
+end
+
 function sendRepeatToOtherPane
     if test $TERM = xterm-kitty
         kitty @ send-text -m id:$(kitty @ ls | jq -r '.[].tabs[].windows[] | select(.is_focused == false) | .id' | head -n 1) 'r\\x0d'
