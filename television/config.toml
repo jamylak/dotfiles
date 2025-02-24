@@ -78,11 +78,11 @@ quit = ["esc", "ctrl-c", "alt-w"]
 # Scrolling through entries
 select_next_entry = ["down", "ctrl-n", "ctrl-j"]
 select_prev_entry = ["up", "ctrl-p", "ctrl-k"]
-select_next_page = "ctrl-f"
-select_prev_page = "ctrl-b"
+select_next_page = "ctrl-d"
+select_prev_page = "ctrl-u"
 # Scrolling the preview pane
-scroll_preview_half_page_down = "ctrl-d"
-scroll_preview_half_page_up = "ctrl-u"
+scroll_preview_half_page_down = "ctrl-f"
+scroll_preview_half_page_up = "ctrl-b"
 # Add entry to selection and move to the next entry
 toggle_selection_down = "tab"
 # Add entry to selection and move to the previous entry
