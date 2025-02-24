@@ -538,3 +538,6 @@ end
 starship init fish | source
 fzf_configure_bindings --directory=\ct
 source ~/.config/fish/config.local.post.fish
+tv init fish | source
+bind -M insert \et tv_smart_autocomplete
+bind -M insert \er tv_shell_history
