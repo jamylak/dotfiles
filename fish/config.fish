@@ -391,6 +391,7 @@ abbr -a bu "brew upgrade"
 # Git
 abbr -a g git
 abbr -a gf git fetch
+abbr -a gfk "git fetch && git_checkout_origin"
 abbr -a gko git_checkout_origin
 abbr -a N nvim -c ":Neogit"
 abbr -a ng nvim -c ":Neogit"
