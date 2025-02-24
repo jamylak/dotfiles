@@ -326,6 +326,14 @@ function dashboard
     exit
 end
 
+function git_checkout_origin
+    # Move an origin branch locally
+    set branch (tv git-branch)
+    git checkout $branch
+    git switch --track $branch
+end
+
+
 # Dashboard
 abbr -a db dashboard
 # Neogit
@@ -382,6 +390,8 @@ abbr -a bu "brew upgrade"
 
 # Git
 abbr -a g git
+abbr -a gf git fetch
+abbr -a gko git_checkout_origin
 abbr -a N nvim -c ":Neogit"
 abbr -a ng nvim -c ":Neogit"
 abbr -a gi "git init"
