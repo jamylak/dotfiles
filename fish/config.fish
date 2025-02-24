@@ -388,10 +388,17 @@ abbr -a bi "brew install"
 abbr -a bin "brew info"
 abbr -a bu "brew upgrade"
 
+function git_fetch_main
+    git fetch
+    git branch -f main origin/main 2>/dev/null
+    git branch -f master origin/master 2>/dev/null
+end
+
 # Git
 abbr -a g git
 abbr -a gf git fetch
-abbr -a gfk "git fetch && git_checkout_origin"
+abbr -a gfk "git_fetch_main; git_checkout_origin"
+abbr -a gfo "git_fetch_main; git_checkout_origin"
 abbr -a gko git_checkout_origin
 abbr -a gkt "git checkout (tv git-branch)"
 abbr -a gt "git checkout (tv git-branch)"
