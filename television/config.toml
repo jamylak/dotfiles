@@ -1,18 +1,3 @@
-# CONFIGURATION FILE LOCATION ON YOUR SYSTEM:
-# -------------------------------------------
-# Defaults:
-# ---------
-#  Linux:   `$HOME/.config/television/config.toml`
-#  macOS:   `$HOME/.config/television/config.toml`
-#  Windows: `%APPDATA%\television\config.toml`
-#
-# XDG dirs:
-# ---------
-# You may use XDG_CONFIG_HOME if set on your system.
-# In that case, television will expect the configuration file to be in:
-# `$XDG_CONFIG_HOME/television/config.toml`
-#
-
 # General settings
 # ----------------------------------------------------------------------------
 frame_rate = 60 # DEPRECATED: this option is no longer used
