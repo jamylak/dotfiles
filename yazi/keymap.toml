@@ -147,11 +147,6 @@ run  = "leave"
 desc = "Leave"
 
 [[manager.prepend_keymap]]
-on   = "<C-h>"
-run  = "plugin zoxide"
-desc = "zoxide"
-
-[[manager.prepend_keymap]]
 on   = "<C-Backspace>"
 run  = "leave"
 desc = "Leave"
@@ -170,6 +165,16 @@ desc = "Open with nvim"
 on   = "<C-e>"
 run  = "shell 'fish -c \"cd (git_repo_dir $1); emacsclient -c $@\"' --block --confirm"
 desc = "Open with emacs"
+
+[[manager.prepend_keymap]]
+on   = "<C-h>"
+run  = "plugin zoxide"
+desc = "zoxide"
+
+[[manager.prepend_keymap]]
+on   = "<A-i>"
+run  = "plugin zoxide"
+desc = "zoxide"
 
 [[manager.prepend_keymap]]
 on   = "<C-k>"
