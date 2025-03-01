@@ -80,6 +80,7 @@ m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
 "minus" = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_launch_overlay (pbpaste)'"]
 '\' = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_hsplit (pbpaste)'"]
 '|' = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_vsplit (pbpaste)'"]
+'A-h' = "@mip"
 
 # Space mode
 [keys.normal." "]
