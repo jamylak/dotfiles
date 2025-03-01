@@ -122,6 +122,13 @@ function launchGithubUrl -a url branch
     if not string match -q '*pull*' $url; and not string match -q '*job*' $url
         set path (string split / $url -f8 -m7)
     end
+
+    if not test -d "$HOME/bar/$repo"; and not test -d "$HOME/proj/$repo"
+        # offer to clone
+        set base_repo (string split / $url -f1-5 | string join "/")
+        git clone "$base_repo.git" "$HOME/proj/$repo"
+    end
+
     launchRepo $repo "$path" "$branch"
 end
 
