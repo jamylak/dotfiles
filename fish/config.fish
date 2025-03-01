@@ -34,7 +34,7 @@ bind -M insert \eh "hx ."
 bind -M insert \cg "echo n | lazygit && commandline --function repaint"
 bind -M insert \en 'nvim -c ":Telescope find_files" '
 bind -M insert \ev "nvim ."
-bind -M insert \eg "cd (tv git-repos) && commandline --function repaint"
+bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
 
 #bind -M normal \ce edit_command_buffer
 #bind -M insert \ce edit_command_buffer
@@ -83,6 +83,7 @@ function yazi_tv_git -a path
     # then open result in hx (if we got one)
     set res (tv git-repos (dirname "$path"))
     if test -n "$res"
+        z $res
         yazi $res
     end
 end
