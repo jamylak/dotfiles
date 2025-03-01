@@ -4,8 +4,10 @@ gui:
       # - yellow
       # - bold
 promptToReturnFromSubprocess: false
+
+
 customCommands:
   - key: "I"
-    command: "p=$(git -C $(dirname {{.SelectedFile.Name}}) rev-parse --show-toplevel)/{{.SelectedFile.Name}} && fish -C \"set p $p\" -c \"launch_new_tab 'yazi $p'\""
+    command: "p=$(git -C $(dirname {{ if .SelectedFile }}{{.SelectedFile.Name}}{{ else }}{{ .SelectedPath }}{{end}}) rev-parse --show-toplevel)/{{ if .SelectedFile }}{{ .SelectedFile.Name }}{{ end }} && fish -C \"set p $p\" -c \"launch_new_tab 'yazi $p'\""
     context: "global"
     description: "Yazi"
