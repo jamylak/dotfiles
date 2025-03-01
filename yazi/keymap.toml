@@ -62,7 +62,7 @@ run  = "shell 'fish -c \"yazi_tv_text $1\"' --block --confirm"
 desc = "Yazi TV Text"
 
 [[manager.prepend_keymap]]
-on   = "<a-k>"
+on   = "<a-g>"
 run  = "shell 'fish -c \"yazi_tv_git $1\"' --block --confirm"
 desc = "Yazi TV Git"
 
@@ -178,6 +178,11 @@ desc = "zoxide"
 
 [[manager.prepend_keymap]]
 on   = "<C-k>"
+run  = "plugin zoxide"
+desc = "Zoxide"
+
+[[manager.prepend_keymap]]
+on   = "<A-k>"
 run  = "plugin zoxide"
 desc = "Zoxide"
 
