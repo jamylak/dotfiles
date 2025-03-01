@@ -31,10 +31,10 @@ bind -M insert \ei "zi && commandline --function repaint"
 bind -M insert \ej "y && commandline --function repaint"
 bind -M insert \ek 'nvim -c ":Telescope oldfiles" '
 bind -M insert \eh "hx ."
-bind -M insert \eg "echo n | lazygit && commandline --function repaint"
+bind -M insert \cg "echo n | lazygit && commandline --function repaint"
 bind -M insert \en 'nvim -c ":Telescope find_files" '
 bind -M insert \ev "nvim ."
-bind -M insert \cg "cd (tv git-repos) && commandline --function repaint"
+bind -M insert \eg "cd (tv git-repos) && commandline --function repaint"
 
 #bind -M normal \ce edit_command_buffer
 #bind -M insert \ce edit_command_buffer
