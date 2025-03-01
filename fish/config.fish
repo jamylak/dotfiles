@@ -115,17 +115,34 @@ function launch_hsplit -a cmd
     end
 end
 
-function launchGithubUrl -a url
+function launchGithubUrl -a url branch
     echo launch github url $url
     set repo (string split / $url -f5)
     echo repo $repo
     if not string match -q '*pull*' $url; and not string match -q '*job*' $url
         set path (string split / $url -f8 -m7)
     end
-    launchRepo $repo $path
+    launchRepo $repo "$path" "$branch"
 end
 
-function launchRepo -a repo path
+function gitStashUpdateRepo -a branch
+    # Update a repo to the latest thing
+    git stash
+    git fetch --all
+
+    # Update main and master
+    if git show-ref --verify --quiet refs/heads/main
+        git update-ref refs/heads/main refs/remotes/origin/main
+    end
+
+    if git show-ref --verify --quiet refs/heads/master
+        git update-ref refs/heads/master refs/remotes/origin/master
+    end
+
+    git checkout $branch
+end
+
+function launchRepo -a repo path branch
     # Try quick cd but if can't find it
     # do a search, in future could
     # offer option to clone
@@ -135,6 +152,12 @@ function launchRepo -a repo path
         cd "$HOME/proj/$repo"
     else
         cd (tv git-repos -i $repo)
+    end
+    if test -n "$branch"
+        # if branch is given, then we can update in background
+        # and probably the file should be there otherwise just
+        # wait and search for it
+        fish -c "gitStashUpdateRepo $branch" >/dev/null 2>&1 &
     end
     echo "launchRepo $repo $path"
     if test -n "$path"
@@ -149,8 +172,8 @@ function launchRepo -a repo path
     end
 end
 
-function launchKitty -a url
-    kitty fish -c "launchGithubUrl $url"
+function launchKittyGithubUrl -a url branch
+    kitty fish -c "launchGithubUrl $url $branch"
 end
 
 function sendRepeatToOtherPane
