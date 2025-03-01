@@ -11,7 +11,7 @@ set -Ux PROJECTS_DIR /Users/$USER/bar
 # set -Ux MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
 # Running vulkan things doesn't work without this
 set -g XDG_DATA_DIRS /usr/local/share
-# set -g XDG_DATA_DIRS /usr/local/share:/usr/share:/Users/james/.nix-profile/share:/nix/var/nix/profiles/default/share
+set -Ux LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
 
 # TODO: Lazygit config
 # promptToReturnFromSubprocess: false
