@@ -51,7 +51,7 @@ function launch_new_tab -a cmd
         kitty @ launch --type=tab fish -c "$cmd"
     else
         # For ghostty (or others?)
-        skhd -k "cmd - t" -t "$cmd; exit" && skhd -k return
+        skhd -k "cmd - t" && skhd -t "$cmd; exit" && skhd -k return
     end
 end
 
