@@ -116,9 +116,9 @@ function launch_hsplit -a cmd
 end
 
 function launchGithubUrl -a url branch
-    echo launch github url $url
+    echo launching github url: $url
     set repo (string split / $url -f5)
-    echo repo $repo
+    echo repo: $repo
     if not string match -q '*pull*' $url; and not string match -q '*job*' $url
         set path (string split / $url -f8 -m7)
     end
@@ -147,29 +147,38 @@ function launchRepo -a repo path branch
     # do a search, in future could
     # offer option to clone
     if test -d "$HOME/bar/$repo"
-        cd "$HOME/bar/$repo"
+        set p "$HOME/bar/$repo"
     else if test -d "$HOME/proj/$repo"
-        cd "$HOME/proj/$repo"
+        set p "$HOME/proj/$repo"
     else
-        cd (tv git-repos -i $repo)
+        set p (tv git-repos -i $repo)
     end
-    if test -n "$branch"
-        # if branch is given, then we can update in background
-        # and probably the file should be there otherwise just
-        # wait and search for it
-        fish -c "gitStashUpdateRepo $branch" >/dev/null 2>&1 &
-    end
-    echo "launchRepo $repo $path"
+    cd $p
+
+    yazi_new_tab $p
+
+    echo "launch repo: $repo $path..."
     if test -n "$path"
         # path helix format
         # set path (string replace -a '#L' ':' $path)
         set linenum (string split "#L" $path -r -m1 -f2)
         set path (string split "#L" $path -r -m1 -f1)
         echo new path $path
-        nvim +$linenum $path
+        launch_new_tab "cd $p && nvim +$linenum $path" &
     else
-        nvim_find_files
+        launch_new_tab "cd $p && nvim_find_files" &
     end
+
+
+    if test -n "$branch"
+        # if branch is given, then we can update in background
+        # and probably the file should be there otherwise just
+        # wait and search for it
+        gitStashUpdateRepo $branch
+        read -P "Press Enter to continue..."
+    end
+
+
 end
 
 function launchKittyGithubUrl -a url branch
