@@ -150,3 +150,10 @@ cmd - g [
 cmd - h [
 	"ghostty" : skhd -t "hx " && skhd -k "cmd + shift - j" && skhd -k return
 ]
+alt - j [
+	"finder" : ~/.config/dotfiles/scripts/runghostty.sh
+	"google chrome" : ~/.config/dotfiles/scripts/runghostty.sh
+]
+alt - k [
+	"finder" : ~/.config/dotfiles/scripts/runchrome.sh
+]
