@@ -130,7 +130,8 @@ function launchGithubUrl -a url branch
     else if test -d "$HOME/proj/$repo"
         set p "$HOME/proj/$repo"
     else
-        git clone "$base_repo.git" "$HOME/proj/$repo"
+        set p "$HOME/proj/$repo"
+        git clone "$base_repo.git" $p
     end
     cd $p
 
