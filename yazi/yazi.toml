@@ -8,3 +8,11 @@ edit = [
 	{ run = 'nvim "$@"', block = true, for = "unix" },
 	{ run = 'emacsclient -c -a "emacs -nw" "$@"', block = true, for = "unix" },
 ]
+
+[open]
+prepend_rules = [
+	{ name = "*.md", use = "edit" },
+]
+append_rules = [
+	{ name = "*", use = "edit" },
+]
