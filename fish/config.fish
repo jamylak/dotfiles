@@ -26,8 +26,8 @@ bind -M insert \ef forward-word
 bind -M insert \eb backward-word
 bind -M normal \ck expand-abbr
 bind -M insert \ck expand-abbr
-bind -M insert \cs "zi && commandline --function repaint"
-bind -M insert \ei "zi && commandline --function repaint"
+bind -M insert \cs "zi; commandline --function repaint"
+bind -M insert \ei "zi; commandline --function repaint"
 bind -M insert \ej "y && commandline --function repaint"
 bind -M insert \ek 'nvim -c ":Telescope oldfiles" '
 bind -M insert \eh "hx ."
@@ -117,79 +117,102 @@ end
 
 function launchGithubUrl -a url branch
     echo launching github url: $url
+    set remote origin
     set repo (string split / $url -f5)
+    set base_repo (string split / $url -f1-5 | string join "/")
     echo repo: $repo
     if not string match -q '*pull*' $url; and not string match -q '*job*' $url
         set path (string split / $url -f8 -m7)
     end
 
-    if not test -d "$HOME/bar/$repo"; and not test -d "$HOME/proj/$repo"
-        # offer to clone
-        set base_repo (string split / $url -f1-5 | string join "/")
-        git clone "$base_repo.git" "$HOME/proj/$repo"
-    end
-
-    launchRepo $repo "$path" "$branch"
-end
-
-function gitStashUpdateRepo -a branch
-    # Update a repo to the latest thing
-    git stash
-    git fetch --all
-
-    # Update main and master
-    if git show-ref --verify --quiet refs/heads/main
-        git update-ref refs/heads/main refs/remotes/origin/main
-    end
-
-    if git show-ref --verify --quiet refs/heads/master
-        git update-ref refs/heads/master refs/remotes/origin/master
-    end
-
-    git checkout $branch
-end
-
-function launchRepo -a repo path branch
-    # Try quick cd but if can't find it
-    # do a search, in future could
-    # offer option to clone
     if test -d "$HOME/bar/$repo"
         set p "$HOME/bar/$repo"
     else if test -d "$HOME/proj/$repo"
         set p "$HOME/proj/$repo"
     else
-        set p (tv git-repos -i $repo)
+        git clone "$base_repo.git" "$HOME/proj/$repo"
     end
     cd $p
+
+    # check if it's a fork branch eg. pluiedev:push-foo
+    if string match -q '*:*' $branch
+        set forkBranch $branch
+        # we need to achieve something like this
+        # git remote add upstream https://github.com/ghostty-org/ghostty.git
+        # git fetch upstream pull/6004/head:pluiedev-push-nxwlqouoqluy
+        # git checkout pluiedev-push-nxwlqouoqluy
+
+        # we are looking at something like
+        # https://github.com/ghostty-org/ghostty/pull/6004/commits
+        # so it's a PR based off fork
+        # assume the upstream is same as URL
+        git remote add upstream "$base_repo.git"
+        # make the pull/6004/head:pluiedev-push-nxwlqouoqluy part
+        set ref_prefix (string split / $url -f6-7 | string join "/")
+        # forkBranch is like pluiedev:push-nxwlqouoqluy
+        # so replace the :
+        set ref_suffix (string replace ':' '-' $forkBranch)
+        set ref $ref_prefix/head:$ref_suffix
+        git fetch upstream $ref
+
+        set remote upstream
+        set branch $ref_suffix
+    end
 
     yazi_new_tab $p
 
     echo "launch repo: $repo $path..."
+
     if test -n "$path"
         # path helix format
         # set path (string replace -a '#L' ':' $path)
         set linenum (string split "#L" $path -r -m1 -f2)
         set path (string split "#L" $path -r -m1 -f1)
+
+        # Don't make it go to end of file if no line num
+        set linenumnvim ""
+        if test -n "$linenum"
+            set linenumnvim "+$linenum"
+        end
+
         echo new path $path
-        launch_new_tab "cd $p && nvim +$linenum $path" &
+        launch_new_tab "cd $p && nvim $linenumnvim $path" &
     else
         launch_new_tab "cd $p && nvim_find_files" &
     end
-
 
     if test -n "$branch"
         # if branch is given, then we can update in background
         # and probably the file should be there otherwise just
         # wait and search for it
-        gitStashUpdateRepo $branch
+        # Update in BG cause this is slow
+        echo "stash + untracked..."
+        git stash -u
+        # Try checkout the branch in case we already have it
+        git checkout $branch
+        # Get it if we don't have it
+        gitUpdateMainMaster $remote
+        git checkout $branch
         read -P "Press Enter to continue..."
     end
+end
 
+function gitUpdateMainMaster -a remote
+    echo "Update main / master to $remote"
+    git fetch --all
 
+    # Update main and master
+    if git show-ref --verify --quiet refs/heads/main
+        git update-ref refs/heads/main refs/remotes/$remote/main
+    end
+
+    if git show-ref --verify --quiet refs/heads/master
+        git update-ref refs/heads/master refs/remotes/$remote/master
+    end
 end
 
 function launchKittyGithubUrl -a url branch
-    kitty fish -c "launchGithubUrl $url $branch"
+    kitty fish -c "launchGithubUrl $url \"$branch\""
 end
 
 function sendRepeatToOtherPane
@@ -447,6 +470,7 @@ abbr -a gkb "git checkout (tv git-branch)"
 abbr -a N nvim -c ":Neogit"
 abbr -a ng nvim -c ":Neogit"
 abbr -a gi "git init"
+abbr -a gb "git branch"
 abbr -a gk git checkout
 abbr -a gm --set-cursor=! "git commit -m \"!\""
 # gh extension install gennaro-tedesco/gh-s
