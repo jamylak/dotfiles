@@ -81,6 +81,7 @@ m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
 '\' = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_hsplit (pbpaste)'"]
 '|' = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_vsplit (pbpaste)'"]
 'A-h' = "@mip"
+"C-g" = ["yank_abs_filename_to_clipboard", ":sh fish -c 'lazygit_new_tab (pbpaste)'"]
 
 # Space mode
 [keys.normal." "]
