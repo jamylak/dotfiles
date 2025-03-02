@@ -183,8 +183,8 @@ desc = "zoxide"
 
 [[manager.prepend_keymap]]
 on   = "<C-k>"
-run  = "plugin zoxide"
-desc = "Zoxide"
+run  = "shell 'fish' --block --confirm"
+desc = "Fish Shell"
 
 [[manager.prepend_keymap]]
 on   = "<A-k>"
