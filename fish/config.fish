@@ -213,7 +213,7 @@ function gitUpdateMainMaster -a remote
 end
 
 function launchKittyGithubUrl -a url branch
-    kitty fish -c "launchGithubUrl $url \"$branch\""
+    kitty fish -c "launchGithubUrl $url \"$branch\"" &
 end
 
 function sendRepeatToOtherPane
