@@ -144,8 +144,13 @@
 # toggle sticky(+float), picture-in-picture
 # alt - p : yabai -m window --toggle sticky --toggle pip
 
+# has some hacks eg.
+# alt-q kills line
+# xx which is helix to last line
+# then ghostty keymaps to get scrollback buffer
+# quick hacks until better support is added
 cmd - g [
-	"ghostty" : skhd -t "xx " && skhd -k "cmd + shift - j" && skhd -k return
+	"ghostty" : skhd -k "alt - q" && skhd -t "xx " && skhd -k "cmd + shift - j" && skhd -k return
 ]
 cmd - h [
 	"ghostty" : skhd -t "xx " && skhd -k "cmd + shift - j" && skhd -k return
