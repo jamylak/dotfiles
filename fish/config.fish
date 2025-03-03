@@ -35,6 +35,7 @@ bind -M insert \cg "echo n | lazygit && commandline --function repaint"
 bind -M insert \en 'nvim -c ":Telescope find_files" '
 bind -M insert \ev "nvim ."
 bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
+bind -M insert \eq "commandline --function kill-whole-line"
 
 #bind -M normal \ce edit_command_buffer
 #bind -M insert \ce edit_command_buffer
