@@ -567,6 +567,7 @@ abbr -a nproj "scripts/newproj.sh"
 abbr -a killdocker "osascript -e 'quit app \"Docker\"'"
 abbr -a rt "./build/test*"
 abbr -a sb "./scripts/build.sh"
+abbr -a xx hx +999999
 
 # C++
 abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
