@@ -145,10 +145,10 @@
 # alt - p : yabai -m window --toggle sticky --toggle pip
 
 cmd - g [
-	"ghostty" : skhd -t "hx " && skhd -k "cmd + shift - j" && skhd -k return
+	"ghostty" : skhd -t "xx " && skhd -k "cmd + shift - j" && skhd -k return
 ]
 cmd - h [
-	"ghostty" : skhd -t "hx " && skhd -k "cmd + shift - j" && skhd -k return
+	"ghostty" : skhd -t "xx " && skhd -k "cmd + shift - j" && skhd -k return
 ]
 alt - j [
 	"finder" : ~/.config/dotfiles/scripts/runghostty.sh
