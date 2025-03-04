@@ -53,7 +53,9 @@ fish_add_path -mp $HOME/.emacs.d/bin
 fish_add_path -mp $HOME/.config/emacs/bin
 
 function launch_new_tab -a cmd
-    if test $TERM = xterm-kitty
+    if test -n "$TMUX"
+        tmux new-window "fish -c \"$cmd\""
+    else if test $TERM = xterm-kitty
         kitty @ launch --type=tab fish -c "$cmd"
     else
         # For ghostty (or others?)
@@ -94,7 +96,11 @@ function yazi_tv_git -a path
 end
 
 function launch_overlay -a cmd
-    if test $TERM = xterm-kitty
+    if test -n "$TMUX"
+        tmux split-window -v -c "#{pane_current_path}" "fish -c \"$cmd\"" \; resize-pane -Z
+        #tmux new-window "fish -c \"$cmd\""
+        #tmux popup -E "fish -c \"$cmd\""
+    else if test $TERM = xterm-kitty
         kitty @ launch --type=overlay fish -c "$cmd"
     else
         # For ghostty
@@ -103,7 +109,9 @@ function launch_overlay -a cmd
 end
 
 function launch_vsplit -a cmd
-    if test $TERM = xterm-kitty
+    if test -n "$TMUX"
+        tmux split-window -v "fish -c \"$cmd\""
+    else if test $TERM = xterm-kitty
         kitty @ launch --location=vsplit fish -c "$cmd"
     else
         # For ghostty - Replicate Cmd - \
@@ -112,7 +120,9 @@ function launch_vsplit -a cmd
 end
 
 function launch_hsplit -a cmd
-    if test $TERM = xterm-kitty
+    if test -n "$TMUX"
+        tmux split-window -h "fish -c \"$cmd\""
+    else if test $TERM = xterm-kitty
         kitty @ launch --location=hsplit fish -c "$cmd"
     else
         # For ghostty - Replicate Cmd - Enter
