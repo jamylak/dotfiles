@@ -463,6 +463,7 @@ abbr -a tk tmux new-session -s
 abbr -a fk tmux new-session -s
 
 function tmux_attach -a name
+    set name (string escape --style=var $name)
     tmux new-session -s $name 2>/dev/null
     tmux attach-session -t $name
 end
@@ -544,6 +545,9 @@ function nvim_new_session -a name
 end
 
 function nvim_join_session -a name
+    # So fish abbr can work eg. filepaths will
+    # be scaped
+    set name (string escape --style=var $name)
     # Create the session if it doesn't exist
     nvim_new_session $name
     while not test -e /tmp/nvim$name.sock
