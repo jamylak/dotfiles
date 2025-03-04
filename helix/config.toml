@@ -2,9 +2,8 @@
 # https://github.com/helix-editor/helix/blob/master/helix-term/src/commands.rs
 # https://github.com/helix-editor/helix/issues/11206#issuecomment-2236849181
 # theme = "ayu_evolve"
-# Transparent bgs
 # theme = "dark_high_contrast"
-theme = "modus_vivendi_deuteranopia"
+theme = "modus_vivendi_deuteranopia_custom"
 # theme = "vim_dark_high_contrast"
 # theme = "dracula_at_night"
 
