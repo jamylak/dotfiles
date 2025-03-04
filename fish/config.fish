@@ -543,8 +543,9 @@ function nvim_join_session -a name
 end
 
 abbr -a ns nvim_new_session
-abbr -a nj --set-cursor=! nvim --server /tmp/nvim!.sock --remote-ui
+# abbr -a nj --set-cursor=! nvim --server /tmp/nvim!.sock --remote-ui
 abbr -a ne nvim_join_session
+abbr -a nj nvim_join_session
 #abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
 abbr -a vib "cd ~/bar; nvim ."
 abbr -a o "cd /Users/james/bar/testfoo; nvim foo.frag -c ':M' -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"f<CR>\", true, true, true), \"m\", true)'"
