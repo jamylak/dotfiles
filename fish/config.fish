@@ -437,7 +437,6 @@ abbr -a ef exec fish
 abbr -a hm --position anywhere ~/
 abbr -a dotfiles --position anywhere ~/.config/dotfiles
 abbr -a dot --position anywhere ~/.config/dotfiles
-# abbr -a fj --position anywhere ~/
 abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
@@ -458,12 +457,18 @@ abbr -a q exit
 abbr -a t tmux
 abbr -a ta "tmux a"
 abbr -a td "tmux detach"
-abbr -a tc --set-cursor=! tmux new-session -s !
-abbr -a ts --set-cursor=! tmux new-session -s !
-abbr -a tk --set-cursor=! tmux new-session -s !
-abbr -a fk --set-cursor=! tmux new-session -s !
-abbr -a tj --set-cursor=! tmux attach-session -t !
-abbr -a fj --set-cursor=! tmux attach-session -t !
+abbr -a tc tmux new-session -s
+abbr -a ts tmux new-session -s
+abbr -a tk tmux new-session -s
+abbr -a fk tmux new-session -s
+
+function tmux_attach -a name
+    tmux new-session -s $name 2>/dev/null
+    tmux attach-session -t $name
+end
+
+abbr -a tj tmux_attach
+abbr -a fk tmux_attach
 
 # Directories
 abbr -a k zi
@@ -539,13 +544,20 @@ function nvim_new_session -a name
 end
 
 function nvim_join_session -a name
+    # Create the session if it doesn't exist
+    nvim_new_session $name
+    while not test -e /tmp/nvim$name.sock
+        continue
+    end
+    # Join it
     nvim --server /tmp/nvim$name.sock --remote-ui
 end
 
 abbr -a ns nvim_new_session
-# abbr -a nj --set-cursor=! nvim --server /tmp/nvim!.sock --remote-ui
+abbr -a njj --set-cursor=! nvim --server /tmp/nvim!.sock --remote-ui
 abbr -a ne nvim_join_session
 abbr -a nj nvim_join_session
+abbr -a fj nvim_join_session
 #abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
 abbr -a vib "cd ~/bar; nvim ."
 abbr -a o "cd /Users/james/bar/testfoo; nvim foo.frag -c ':M' -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"f<CR>\", true, true, true), \"m\", true)'"
