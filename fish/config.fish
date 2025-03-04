@@ -10,7 +10,8 @@ set -Ux EDITOR hx
 set -Ux PROJECTS_DIR /Users/$USER/bar
 # set -Ux MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
 # Running vulkan things doesn't work without this
-set -Ux XDG_DATA_DIRS /usr/local/share
+set -g XDG_DATA_DIRS /usr/local/share
+# set -Ux XDG_DATA_DIRS /usr/local/share
 # https://github.com/nushell/nushell/issues/10100
 # set -Ux XDG_CONFIG_HOME $HOME/.config
 # set -Ux XDG_STATE_HOME $HOME/.local/state
