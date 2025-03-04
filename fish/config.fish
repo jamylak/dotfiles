@@ -255,7 +255,7 @@ end
 function yazi_new_tab -a path
     # attempted fix for it not loading fish
     # full config in time
-    launch_new_tab "fish -c y $path"
+    launch_new_tab "y $path"
 end
 
 function yazi_launch_overlay -a path
