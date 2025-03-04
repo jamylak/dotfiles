@@ -548,12 +548,20 @@ function nvim_join_session -a name
     # So fish abbr can work eg. filepaths will
     # be scaped
     set name (string escape --style=var $name)
+
+    # First try just connect
+    # this will make most cases faster
+    if test -e /tmp/nvim$name.sock
+        nvim --server /tmp/nvim$name.sock --remote-ui
+        return
+    end
+
     # Create the session if it doesn't exist
     nvim_new_session $name
     while not test -e /tmp/nvim$name.sock
         continue
     end
-    # Join it
+
     nvim --server /tmp/nvim$name.sock --remote-ui
 end
 
