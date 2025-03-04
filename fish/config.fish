@@ -436,7 +436,7 @@ abbr -a ef exec fish
 abbr -a hm --position anywhere ~/
 abbr -a dotfiles --position anywhere ~/.config/dotfiles
 abbr -a dot --position anywhere ~/.config/dotfiles
-abbr -a fj --position anywhere ~/
+# abbr -a fj --position anywhere ~/
 abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
@@ -452,9 +452,19 @@ abbr -a --position anywhere pr ~/proj/
 abbr -a c clear
 abbr -a r --position anywhere --function last_history_item
 abbr -a q exit
+
+# Tmux
 abbr -a t tmux
 abbr -a ta "tmux a"
 abbr -a td "tmux detach"
+abbr -a tc --set-cursor=! tmux new-session -s !
+abbr -a ts --set-cursor=! tmux new-session -s !
+abbr -a tk --set-cursor=! tmux new-session -s !
+abbr -a fk --set-cursor=! tmux new-session -s !
+abbr -a tj --set-cursor=! tmux attach-session -t !
+abbr -a fj --set-cursor=! tmux attach-session -t !
+
+# Directories
 abbr -a k zi
 abbr -a zid "cd ~/.config/dotfiles"
 abbr -a zd "cd ~/.config/dotfiles"
@@ -521,6 +531,19 @@ abbr -a lgn "cd ~/.config/nvim/; lazygit"
 abbr -a vi nvim
 abbr -a v nvim .
 abbr -a v nvim_find_files
+
+function nvim_new_session -a name
+    tmux new-session -d -s nvim 2>/dev/null
+    tmux new-window -t nvim "nvim --headless --listen /tmp/nvim$name.sock"
+end
+
+function nvim_join_session -a name
+    nvim --server /tmp/nvim$name.sock --remote-ui
+end
+
+abbr -a ns nvim_new_session
+abbr -a nj --set-cursor=! nvim --server /tmp/nvim!.sock --remote-ui
+abbr -a ne nvim_join_session
 #abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
 abbr -a vib "cd ~/bar; nvim ."
 abbr -a o "cd /Users/james/bar/testfoo; nvim foo.frag -c ':M' -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"f<CR>\", true, true, true), \"m\", true)'"
