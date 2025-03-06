@@ -553,7 +553,10 @@ abbr -a v nvim_find_files
 
 function nvim_new_session -a name
     tmux new-session -d -s nvim 2>/dev/null
-    tmux new-window -t nvim "nvim --headless --listen /tmp/nvim$name.sock"
+    # unset tmux variable or else when eg. launch_new_tab is called
+    # from a joined nvim session, it thinks we are in tmux,
+    # even though tmux just runs this server only...
+    tmux new-window -t nvim "set -e TMUX && nvim --headless --listen /tmp/nvim$name.sock"
 end
 
 function nvim_join_session -a name
