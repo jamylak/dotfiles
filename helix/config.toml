@@ -75,12 +75,11 @@ m."\"" = "@lf\"lmi\""
 m.q = "@l/\"|'<ret>lv/<C-r>/<ret><A-minus>hv"
 m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
 # TODO: Test with spaces in filename
-# TODO: Better way than pbcopy and paste
-"minus" = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_launch_overlay (pbpaste)'"]
-'\' = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_hsplit (pbpaste)'"]
-'|' = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_vsplit (pbpaste)'"]
+"minus" = [":sh fish -c 'yazi_launch_overlay (realpath %{buffer_name})'"]
+'\' = [":sh fish -c 'yazi_hsplit (realpath %{buffer_name})'"]
+'|' = [":sh fish -c 'yazi_vsplit (realpath %{buffer_name})'"]
 'A-h' = "@mip"
-"C-g" = ["yank_abs_filename_to_clipboard", ":sh fish -c 'lazygit_new_tab (pbpaste)'"]
+"C-g" = [":sh fish -c 'lazygit_new_tab (realpath %{buffer_name})'"]
 
 # Space mode
 [keys.normal." "]
@@ -88,9 +87,9 @@ q = ":q"
 Q = ":q!"
 "ret" = "last_picker"
 " " = "global_search"
-"Y" = "yank_abs_filename_to_clipboard"
-N = ["yank_abs_filename_to_clipboard", ":sh fish -c 'launch_new_tab \"nvim (pbpaste) -c \":CD\"\"'"]
-I = ["yank_abs_filename_to_clipboard", ":sh fish -c 'yazi_new_tab (pbpaste)'"]
+"Y" = ":sh echo (realpath %{buffer_name}) | pbcopy"
+N = [":sh fish -c 'nvim_new_tab (realpath %{buffer_name}) %{cursor_line}'"]
+I = [":sh fish -c 'yazi_new_tab (realpath %{buffer_name})'"]
 "\\" = "hsplit"
 "|" = "vsplit"
 "." = "file_picker_in_current_buffer_directory"
