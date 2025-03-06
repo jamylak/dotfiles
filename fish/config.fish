@@ -640,6 +640,7 @@ abbr -a em emacsclient -c
 abbr -a e emacsclient -c
 
 # Misc
+abbr -a rp realpath
 abbr -a newproj "scripts/newproj.sh"
 abbr -a nproj "scripts/newproj.sh"
 abbr -a killdocker "osascript -e 'quit app \"Docker\"'"
