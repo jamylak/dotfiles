@@ -160,6 +160,8 @@ symbol = " "
 symbol = " "
 
 [gcloud]
+symbol = "☁️ "
 # format = 'on [$symbol$account(@$domain)(\($region\))]($style) '
-format = 'on [$symbol(@$domain)(\($region\))]($style) '
+# format = 'on [$symbol(@$domain)(\($region\))]($style) '
+format = 'on [$symbol$account(\($region\))]($style) '
 region_aliases = { 'australia-southeast1' = 'au-se1' }
