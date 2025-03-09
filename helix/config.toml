@@ -26,6 +26,7 @@ git-ignore = true
 
 [keys.normal]
 A-y = [ ':sh rm -f /tmp/yazi-path', ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-path', ":open %sh{cat /tmp/yazi-path}", ":redraw" ]
+minus = [ ':sh rm -f /tmp/yazi-path', ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-path', ":open %sh{cat /tmp/yazi-path}", ":redraw" ]
 # g = { a = "code_action" } # Maps `ga` to show possible code actions
 X = ["extend_line_up", "extend_to_line_bounds"]
 # Duplicate
@@ -75,8 +76,6 @@ m."\"" = "@lf\"lmi\""
 # then leave visual mode
 m.q = "@l/\"|'<ret>lv/<C-r>/<ret><A-minus>hv"
 m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
-# TODO: Test with spaces in filename
-"minus" = [":sh fish -c 'yazi_launch_overlay (realpath %{buffer_name})'"]
 '\' = [":sh fish -c 'yazi_hsplit (realpath %{buffer_name})'"]
 '|' = [":sh fish -c 'yazi_vsplit (realpath %{buffer_name})'"]
 'A-h' = "@mip"
