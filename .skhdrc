@@ -144,6 +144,13 @@
 # toggle sticky(+float), picture-in-picture
 # alt - p : yabai -m window --toggle sticky --toggle pip
 
+# Shortcuts to move forward and back desktops
+# only run these if amethyst is on
+# otherwise we may wan to turn off amethyst
+# and use app which redefines this stuff
+alt + ctrl - n : pgrep Amethyst && skhd -k "ctrl - right"
+alt + ctrl - p : pgrep Amethyst && skhd -k "ctrl - left"
+
 # has some hacks eg.
 # alt-q kills line
 # xx which is helix to last line
