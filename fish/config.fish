@@ -5,18 +5,25 @@ else
     set -xg SHELL /usr/local/bin/fish
 end
 
-set -Ux EDITOR hx
-# set -Ux HELIX_RUNTIME /Users/james/proj/helix/runtime
-set -Ux PROJECTS_DIR /Users/$USER/bar
-# set -Ux MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
+# Fix incorrerct yazi emoji rendering on
+# nvim terminal. Also fix tmux issue when returning
+# to a session, on return the layout gets messed up
+if set -q NVIM; or set -q TMUX
+    set -gx YAZI_CONFIG_HOME $HOME/.config/dotfiles/yazi_alt
+end
+
+set -gx EDITOR hx
+# set -gx HELIX_RUNTIME /Users/james/proj/helix/runtime
+set -gx PROJECTS_DIR /Users/$USER/bar
+# set -gx MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
 # Running vulkan things doesn't work without this
-set -g XDG_DATA_DIRS /usr/local/share
-# set -Ux XDG_DATA_DIRS /usr/local/share
+set -gx XDG_DATA_DIRS /usr/local/share
+# set -gx XDG_DATA_DIRS /usr/local/share
 # https://github.com/nushell/nushell/issues/10100
-# set -Ux XDG_CONFIG_HOME $HOME/.config
-# set -Ux XDG_STATE_HOME $HOME/.local/state
-# set -Ux XDG_DATA_HOME $HOME/.local/share
-set -Ux LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
+# set -gx XDG_CONFIG_HOME $HOME/.config
+# set -gx XDG_STATE_HOME $HOME/.local/state
+# set -gx XDG_DATA_HOME $HOME/.local/share
+set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
 
 # TODO: Lazygit config
 # promptToReturnFromSubprocess: false
