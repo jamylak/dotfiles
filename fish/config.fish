@@ -48,6 +48,10 @@ bind -M insert \en 'nvim -c ":Telescope find_files" '
 bind -M insert \ev "nvim ."
 bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
 bind -M insert \eq "commandline --function kill-whole-line"
+bind -M insert \ep nvim_last_session
+bind -M insert \cp tmux_last_session
+bind -M insert \eo "nvim_join_session main"
+bind -M insert \co "tmux_attach main"
 
 #bind -M normal \ce edit_command_buffer
 #bind -M insert \ce edit_command_buffer
