@@ -151,6 +151,9 @@
 alt + ctrl - n : pgrep Amethyst && skhd -k "ctrl - right"
 alt + ctrl - p : pgrep Amethyst && skhd -k "ctrl - left"
 
+# toggle amethyst alt ctrl . (dot)
+alt + ctrl - 0x2F : fish -c toggle_amethyst
+
 # has some hacks eg.
 # alt-q kills line
 # xx which is helix to last line
