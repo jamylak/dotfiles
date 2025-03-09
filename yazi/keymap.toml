@@ -166,6 +166,18 @@ on   = "<C-e>"
 run  = "shell 'fish -c \"cd (git_repo_dir $1); emacsclient -c $@\"' --block --confirm"
 desc = "Open with emacs"
 
+# TODO: Display sent message toast
+[[manager.prepend_keymap]]
+on   = "<A-E>"
+run  = "shell 'fish -c \"nvim_main_send_files $@\"' --confirm"
+desc = "Send to nvim remote main"
+
+# TODO: Support multiple files
+[[manager.prepend_keymap]]
+on   = "<A-e>"
+run  = "shell 'fish -c \"nvim_main_send_files $1 &; nvim_join_session main\"' --block --confirm"
+desc = "Send to nvim remote main && join sesion"
+
 [[manager.prepend_keymap]]
 on   = "<C-h>"
 run  = "plugin zoxide"
