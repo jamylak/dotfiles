@@ -25,7 +25,7 @@ desc = "Print path"
 
 [[manager.prepend_keymap]]
 on   = ["g", "g"]
-run  = "shell 'fish -c \"lazygit_new_tab $1\"' --block --confirm"
+run  = "shell 'fish -c \"lazygit_new_tab $1\"' --confirm"
 desc = "Lazygit in New Tab"
 
 [[manager.prepend_keymap]]
