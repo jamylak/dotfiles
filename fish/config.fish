@@ -670,6 +670,14 @@ abbr -a hn 'cd ~/.config/nvim/; hx .'
 abbr -a hk 'cd ~/.config/dotfiles; hx kitty/kitty.conf'
 abbr -a ht 'cd /tmp; hx .'
 
+function toggle_amethyst
+    if pgrep Amethyst >/dev/null
+        killall Amethyst
+    else
+        open -a Amethyst
+    end
+end
+
 # Emacs
 abbr -a em emacsclient -c
 abbr -a e emacsclient -c
