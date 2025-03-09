@@ -20,7 +20,7 @@ desc = "New Tab"
 
 [[manager.prepend_keymap]]
 on   = "<a-p>"
-run  = "shell 'fish -c \"echo && echo -n (realpath $1) && sleep 10\"' --block --confirm"
+run  = "shell 'fish -c \"echo && echo -n (realpath $1) && nvim_of && sleep 10\"' --block --confirm"
 desc = "Print path"
 
 [[manager.prepend_keymap]]
