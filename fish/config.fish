@@ -420,6 +420,27 @@ function neogitdiff
     nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\" gndd\", true, true, true), \"m\", true);"
 end
 
+function nvim_of
+    # From within neovim, escape terminal, then open a file
+    # and CD into that dir
+    # skhd doesn't seem to work in kitty right now?
+    skhd -k "ctrl - 0x2A" && skhd -k "ctrl - n" && skhd -t gf && skhd -t " v" && skhd -t " j"
+end
+
+function nvim_last_session
+    set last_command (history | grep '^nvim_join_session' | head -n 1)
+    eval $last_command
+end
+
+function nvim_main_send_files
+    nvim --server /tmp/nvimmain.sock --remote-send ":args $argv <CR>"
+end
+
+function tmux_last_session
+    set last_command (history | grep '^tmux_attach' | head -n 1)
+    eval $last_command
+end
+
 function dashboard
     set -l dir (pwd)
     if test -n "$argv[1]"
