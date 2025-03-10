@@ -290,6 +290,8 @@ function yazi_vsplit -a path
 end
 
 function yazi_hsplit -a path
+    # TODO: doesn't work for file eg. notes(1).csv
+    # should escape to notes\(1\).csv
     launch_hsplit "y $path"
 end
 
