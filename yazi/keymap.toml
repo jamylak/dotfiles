@@ -152,6 +152,11 @@ run  = "shell 'fish -c \"cd (git_repo_dir $1); nvim $@\"' --block --confirm"
 desc = "Open with nvim"
 
 [[manager.prepend_keymap]]
+on   = "<C-f>"
+run  = "plugin fzf"
+desc = "fzf"
+
+[[manager.prepend_keymap]]
 on   = "<A-j>"
 run  = "shell 'fish -c \"cd (git_repo_dir $1); nvim_find_files\"' --block --confirm"
 desc = "Open project with nvim"
