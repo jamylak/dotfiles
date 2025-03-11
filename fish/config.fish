@@ -20,7 +20,7 @@ set -gx PROJECTS_DIR /Users/$USER/bar
 set -gx XDG_DATA_DIRS /usr/local/share
 # set -gx XDG_DATA_DIRS /usr/local/share
 # https://github.com/nushell/nushell/issues/10100
-# set -gx XDG_CONFIG_HOME $HOME/.config
+set -gx XDG_CONFIG_HOME $HOME/.config
 # set -gx XDG_STATE_HOME $HOME/.local/state
 # set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
