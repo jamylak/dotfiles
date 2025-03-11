@@ -24,11 +24,6 @@ run  = "shell 'fish -c \"echo && echo -n (realpath $1) && nvim_of && sleep 10\"'
 desc = "Print path"
 
 [[manager.prepend_keymap]]
-on   = ["g", "g"]
-run  = "shell 'fish -c \"lazygit_new_tab $1\"' --confirm"
-desc = "Lazygit in New Tab"
-
-[[manager.prepend_keymap]]
 on   = ["<c-g>"]
 run  = "shell 'fish -c \"lazygit_new_tab $1\"' --confirm"
 desc = "Lazygit in New Tab"
