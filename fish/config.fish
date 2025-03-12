@@ -48,8 +48,9 @@ bind -M insert \en 'nvim -c ":Telescope find_files" '
 bind -M insert \ev "nvim ."
 bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
 bind -M insert \eq "commandline --function kill-whole-line"
-bind -M insert \ep nvim_last_session
-bind -M insert \cp tmux_last_session
+bind -M insert \ep nvim_join_fzf
+bind -M insert \cp tmux_fzf
+bind -M insert \em tmux_session_fzf
 bind -M insert \eo "nvim_join_session main"
 bind -M insert \co "tmux_attach main"
 
@@ -508,9 +509,13 @@ abbr -a ts tmux new-session -s
 abbr -a tk tmux new-session -s
 abbr -a fk tmux new-session -s
 
-function tmux_attach -a name
+function tmux_attach -a name dir
     set name (string escape --style=var $name)
-    tmux new-session -s $name 2>/dev/null
+    if test -n "$dir"
+        tmux new-session -s $name -c $dir "hx ." 2>/dev/null
+    else
+        tmux new-session -s $name 2>/dev/null
+    end
     tmux attach-session -t $name
 end
 
@@ -593,7 +598,7 @@ function nvim_new_session -a name
     tmux new-window -t nvim "set -e TMUX && nvim --headless --listen /tmp/nvim$name.sock"
 end
 
-function nvim_join_session -a name
+function nvim_join_session -a name dir
     # So fish abbr can work eg. filepaths will
     # be scaped
     set name (string escape --style=var $name)
@@ -609,6 +614,10 @@ function nvim_join_session -a name
     nvim_new_session $name
     while not test -e /tmp/nvim$name.sock
         continue
+    end
+    if test -n "$dir"
+        nvim --server /tmp/nvim$name.sock --remote-send ":cd $dir <CR>"
+        nvim --server /tmp/nvim$name.sock --remote-send ":Telescope find_files <CR>"
     end
 
     nvim --server /tmp/nvim$name.sock --remote-ui
@@ -732,3 +741,17 @@ source ~/.config/fish/config.local.post.fish
 tv init fish | source
 bind -M insert \et tv_smart_autocomplete
 bind -M insert \er tv_shell_history
+
+function nvim_join_fzf
+    set dir (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
+    nvim_join_session "$dir" "$dir"
+end
+
+function tmux_fzf
+    set dir (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
+    tmux_attach "$dir" "$dir"
+end
+
+function tmux_session_fzf
+    tmux attach-session -t (tmux list-sessions | fzf | cut -d ':' -f 1)
+end
