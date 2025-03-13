@@ -744,12 +744,16 @@ bind -M insert \er tv_shell_history
 
 function nvim_join_fzf
     set dir (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
-    nvim_join_session "$dir" "$dir"
+    if test -n "$dir"
+        nvim_join_session "$dir" "$dir"
+    end
 end
 
 function tmux_fzf
     set dir (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
-    tmux_attach "$dir" "$dir"
+    if test -n "$dir"
+        tmux_attach "$dir" "$dir"
+    end
 end
 
 function tmux_session_fzf
