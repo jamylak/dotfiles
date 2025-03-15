@@ -8,8 +8,8 @@ font-size = 18
 #  * `blueprint`, `chalkboard`, `microchip`, `glass`, `holographic`,
 #    `paper`, `retro`, `xray` - Official variants of the Ghostty icon
 # macos-icon = holographic
-# macos-icon = retro
-macos-icon = xray
+# macos-icon = xray
+macos-icon = blueprint
 
 background = #000000
 background-opacity = 0.60
