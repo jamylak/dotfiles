@@ -144,6 +144,21 @@
 # toggle sticky(+float), picture-in-picture
 # alt - p : yabai -m window --toggle sticky --toggle pip
 
+# TODO:fix chrome overriding this
+# alt + ctrl - j : skhd -k "alt + ctrl - b"
+
+# test remaps
+alt + shift - j : skhd -k "ctrl + alt - p"
+alt + shift - k : skhd -k "ctrl + alt - n"
+# alt + shift - k : skhd -k "ctrl + alt - k"
+# alt + shift - h : skhd -k "ctrl + alt - h"
+# alt + shift - l : skhd -k "ctrl + alt - l"
+# alt + shift - f : skhd -k "ctrl + alt - f"
+# alt + shift - b : skhd -k "ctrl + alt - b"
+# alt + shift - space : skhd -k "ctrl + alt - space"
+# # ; character
+# alt + shift - 0x29 : skhd -k "ctrl + alt - 0x29"
+
 # Shortcuts to move forward and back desktops
 # only run these if amethyst is on
 # otherwise we may wan to turn off amethyst
@@ -168,9 +183,21 @@ cmd - g [
 cmd - h [
 	"ghostty" : skhd -t "xx " && skhd -k "cmd + shift - j" && skhd -k return
 ]
+ctrl - n [
+	"google chrome" : skhd -k "down"
+]
+ctrl - p [
+	"google chrome" : skhd -k "up"
+]
 alt - j [
 	"finder" : ~/.config/dotfiles/scripts/runghostty.sh
 	"google chrome" : ~/.config/dotfiles/scripts/runghostty.sh
+]
+# ctrl - /
+ctrl - 0x2C [
+	"Σημειώσεις" : skhd -k "cmd - z"
+	"Notes" : skhd -k "cmd - z"
+	"google chrome" : skhd -k "cmd - z"
 ]
 alt - k [
 	"finder" : ~/.config/dotfiles/scripts/runchrome.sh
