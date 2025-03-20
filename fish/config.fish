@@ -743,7 +743,15 @@ bind -M insert \et tv_smart_autocomplete
 bind -M insert \er tv_shell_history
 
 function nvim_join_fzf
-    set dir (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
+    set result (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --print-query)
+    set query $result[1]
+    set dir $result[2]
+
+    if test -n "$query"; and not test -n "$dir"
+        # new folder to create in bar, doesn't already exist
+        set dir $HOME/bar/$query
+        mkdir -p $dir
+    end
     if test -n "$dir"
         nvim_join_session "$dir" "$dir"
     end
