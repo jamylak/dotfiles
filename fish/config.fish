@@ -748,9 +748,16 @@ function nvim_join_fzf
     set dir $result[2]
 
     if test -n "$query"; and not test -n "$dir"
-        # new folder to create in bar, doesn't already exist
         set dir $HOME/bar/$query
-        mkdir -p $dir
+        if string match -q '*.*' $query
+            # new file to create in bar, ensure directories exist
+            mkdir -p (dirname $dir)
+            touch $dir
+            set dir (dirname $dir)
+        else
+            # new folder to create in bar, doesn't already exist
+            mkdir -p $dir
+        end
     end
     if test -n "$dir"
         nvim_join_session "$dir" "$dir"
