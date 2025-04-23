@@ -9,6 +9,11 @@ run  = "shell 'fish -c \"yazi_hsplit $1\"' --confirm"
 desc = "Horizontal Split"
 
 [[manager.prepend_keymap]]
+on   = "<c-o>"
+run  = "plugin fzf_proj"
+desc = "fzf projects"
+
+[[manager.prepend_keymap]]
 on   = "T"
 run  = "shell 'fish -c \"yazi_new_tab $1\"' --confirm"
 desc = "New Tab"

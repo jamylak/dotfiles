@@ -49,10 +49,10 @@ bind -M insert \ev "nvim ."
 bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
 bind -M insert \eq "commandline --function kill-whole-line"
 bind -M insert \ep nvim_join_fzf
+bind -M insert \eo nvim_join_fzf
 bind -M insert \cp tmux_fzf
 bind -M insert \em tmux_session_fzf
-bind -M insert \eo "nvim_join_session main"
-bind -M insert \co "tmux_attach main"
+bind -M insert \co "cd_fzf; commandline --function repaint"
 
 #bind -M normal \ce edit_command_buffer
 #bind -M insert \ce edit_command_buffer
@@ -741,6 +741,11 @@ source ~/.config/fish/config.local.post.fish
 tv init fish | source
 bind -M insert \et tv_smart_autocomplete
 bind -M insert \er tv_shell_history
+
+function cd_fzf
+    set result (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
+    cd $result
+end
 
 function nvim_join_fzf
     set result (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --print-query)
