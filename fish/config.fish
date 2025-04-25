@@ -777,5 +777,8 @@ function tmux_fzf
 end
 
 function tmux_session_fzf
-    tmux attach-session -t (tmux list-sessions | fzf | cut -d ':' -f 1)
+    set session (tmux list-sessions | fzf | cut -d ':' -f 1)
+    if test -n "$session"
+        tmux attach-session -t $session
+    end
 end
