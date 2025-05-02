@@ -6,6 +6,7 @@
         {
           "bundle_identifiers": [
             "^com\\.google\\.Chrome$",
+            "^com\\.brave\\.Browser$",
             "^com\\.apple\\.Safari$"
           ],
           "type": "frontmost_application_if"
