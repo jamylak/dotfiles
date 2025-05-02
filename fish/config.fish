@@ -44,8 +44,9 @@ bind -M insert \ej "y && commandline --function repaint"
 bind -M insert \ek 'nvim -c ":Telescope oldfiles" '
 bind -M insert \eh "hx ."
 bind -M insert \cg "echo n | lazygit && commandline --function repaint"
-bind -M insert \en 'nvim -c ":Telescope find_files" '
+bind -M insert \en 'nvim -c ":F" '
 bind -M insert \ev "nvim ."
+# bind -M insert \ev "nvim"
 bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
 bind -M insert \eq "commandline --function kill-whole-line"
 bind -M insert \ep nvim_join_fzf
@@ -745,6 +746,12 @@ bind -M insert \er tv_shell_history
 function cd_fzf
     set result (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
     cd $result
+end
+
+
+function dirs_fzf
+    echo (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
+    return 0
 end
 
 function nvim_join_fzf
