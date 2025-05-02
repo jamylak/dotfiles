@@ -185,19 +185,22 @@ cmd - h [
 ]
 ctrl - n [
 	"google chrome" : skhd -k "down"
+	"brave browser" : skhd -k "down"
 ]
 ctrl - p [
-	"google chrome" : skhd -k "up"
+	"brave browser" : skhd -k "up"
 ]
 alt - j [
 	"finder" : ~/.config/dotfiles/scripts/runghostty.sh
 	"google chrome" : ~/.config/dotfiles/scripts/runghostty.sh
+	"brave browser" : ~/.config/dotfiles/scripts/runghostty.sh
 ]
 # ctrl - /
 ctrl - 0x2C [
 	"Σημειώσεις" : skhd -k "cmd - z"
 	"Notes" : skhd -k "cmd - z"
 	"google chrome" : skhd -k "cmd - z"
+	"brave browser" : skhd -k "cmd - z"
 ]
 alt - k [
 	"finder" : ~/.config/dotfiles/scripts/runchrome.sh
