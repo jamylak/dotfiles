@@ -4,6 +4,7 @@
 # xattr -cr /path/to/YourApp.app
 # codesign --deep --force --sign "MySelfSignedIdentity" /path/to/YourApp.app
 # then manually add as trusted
+# <key>LSUIElement</key><true/> in info.plist to stop bouncing in dock
 on is_running(appName)
 	tell application "System Events" to (name of processes) contains appName
 end is_running
