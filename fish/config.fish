@@ -87,7 +87,6 @@ function hx_tv -a path
     end
 end
 
-
 function yazi_tv_text -a path
     # Text search a path
     # then open result in hx (if we got one)
@@ -314,7 +313,6 @@ function nvim_find_files
     nvim -c ":Telescope find_files"
 end
 
-
 function git_repo_dir -a path
     set dir (realpath $path)
     # Test git rev-parse --show-toplevel
@@ -464,7 +462,6 @@ function git_checkout_origin
     git checkout $branch
     git switch --track $branch
 end
-
 
 # Dashboard
 abbr -a db dashboard
@@ -744,13 +741,12 @@ fzf_configure_bindings --directory=\ct
 source ~/.config/fish/config.local.post.fish
 
 function cd_fzf
-    set result (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
+    set result (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
     cd $result
 end
 
-
 function dirs_fzf
-    echo (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
+    echo (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
     return 0
 end
 
