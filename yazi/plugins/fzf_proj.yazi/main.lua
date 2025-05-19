@@ -1,6 +1,10 @@
-local state = ya.sync(function() return cx.active.current.cwd end)
+local state = ya.sync(function()
+	return cx.active.current.cwd
+end)
 
-local function fail(s, ...) ya.notify { title = "Fzf", content = string.format(s, ...), timeout = 5, level = "error" } end
+local function fail(s, ...)
+	ya.notify({ title = "Fzf", content = string.format(s, ...), timeout = 5, level = "error" })
+end
 
 local function entry()
 	local _permit = ya.hide()
@@ -8,7 +12,13 @@ local function entry()
 
 	local child, err =
 		-- Command("fzf"):cwd(cwd):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.INHERIT):spawn()
-		Command("sh"):args({"-c", "ls -d ~/bar/*/ ~/proj/*/ ~/.config/dotfiles/ ~/.config/nvim/ | fzf"}):cwd(cwd):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.INHERIT):spawn()
+		Command("sh")
+			:args({ "-c", "ls -d ~/bar/*/ ~/proj/*/ ~/.config/dotfiles/ ~/.config/nvim/ | fzf --bind ctrl-j:accept" })
+			:cwd(cwd)
+			:stdin(Command.INHERIT)
+			:stdout(Command.PIPED)
+			:stderr(Command.INHERIT)
+			:spawn()
 
 	if not child then
 		return fail("Failed to start `fzf`, error: " .. err)
