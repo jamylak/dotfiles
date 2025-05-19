@@ -563,7 +563,9 @@ abbr -a gk git checkout
 abbr -a gm --set-cursor=! "git commit -m \"!\""
 # gh extension install gennaro-tedesco/gh-s
 abbr -a ghc --set-cursor=! "git clone (gh s \"!\") && cd (ls -t | head -n 1)"
-#abbr -a ghc --set-cursor=! "git clone (gh s !) && cd (ls -t | head -n 1)"
+abbr -a cloneproj --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
+abbr -a clonetoproj --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
+abbr -a ghp --set-cursor=! "cd ~/bar && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
 abbr -a gl "git log"
 abbr -a gpl "git pull"
 abbr -a gc git commit
