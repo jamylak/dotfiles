@@ -14,7 +14,7 @@ macos-icon = blueprint
 background = #000000
 background-opacity = 0.60
 background-blur-radius = 35
-shell-integration-features = no-cursor
+# shell-integration-features = no-cursor
 macos-non-native-fullscreen = true
 
 keybind = super+p=toggle_quick_terminal
