@@ -31,6 +31,10 @@ set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
 
 set -g fish_key_bindings fish_vi_key_bindings
 
+function nvim_new_project
+    nvim -c ":F"
+end
+
 # Autocomplete binding
 bind \cy 'commandline -f accept-autosuggestion'
 # bind -M insert \cy fish_clipboard_paste
@@ -40,14 +44,16 @@ bind -M normal \ck expand-abbr
 bind -M insert \ck expand-abbr
 bind -M insert \cs "zi; commandline --function repaint"
 bind -M insert \ei "zi; commandline --function repaint"
-bind -M insert \ej "y && commandline --function repaint"
-bind -M insert \ek 'nvim -c ":Telescope oldfiles" '
+# Doing commandline -r because if you bind things directly
+# it messes up nvim cursor
+bind -M insert \ej 'commandline -r "y" ; commandline -f execute'
+bind -M insert \ek 'commandline -r "nvim -c \":Telescope oldfiles\"" ; commandline -f execute'
 bind -M insert \eh "hx ."
 bind -M insert \cg "echo n | lazygit && commandline --function repaint"
 bind -M insert \eg "echo n | lazygit && commandline --function repaint"
 # bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
-bind -M insert \en 'nvim -c ":F" '
-bind -M insert \ev "nvim ."
+bind -M insert \en 'commandline -r "nvim_new_project"; commandline -f execute'
+bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
 # bind -M insert \ev "nvim"
 bind -M insert \eq "commandline --function kill-whole-line"
 bind -M insert \ep nvim_join_fzf
