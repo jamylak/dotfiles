@@ -56,10 +56,10 @@ bind -M insert \en 'commandline -r "nvim_new_project"; commandline -f execute'
 bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
 # bind -M insert \ev "nvim"
 bind -M insert \eq "commandline --function kill-whole-line"
-bind -M insert \ep nvim_join_fzf
-bind -M insert \eo nvim_join_fzf
-bind -M insert \cp tmux_fzf
-bind -M insert \em tmux_session_fzf
+bind -M insert \ep 'commandline -r "nvim_join_fzf"; commandline -f execute'
+bind -M insert \eo 'commandline -r "nvim_join_fzf"; commandline -f execute'
+bind -M insert \cp 'commandline -r "tmux_fzf"; commandline -f execute'
+bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
 bind -M insert \co "cd_fzf; commandline --function repaint"
 
 #bind -M normal \ce edit_command_buffer
