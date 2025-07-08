@@ -1,229 +1,229 @@
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "|"
 run  = "shell 'fish -c \"yazi_vsplit $1\"' --confirm"
 desc = "Vertical Split"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<S-k>"
 run  = "shell 'fish -c \"yazi_vsplit $1\"' --confirm"
 desc = "Vertical Split"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "\\"
 run  = "shell 'fish -c \"yazi_hsplit $1\"' --confirm"
 desc = "Horizontal Split"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<S-j>"
 run  = "shell 'fish -c \"yazi_hsplit $1\"' --confirm"
 desc = "Horizontal Split"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<c-o>"
 run  = "plugin fzf_proj"
 desc = "fzf projects"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "T"
 run  = "shell 'fish -c \"yazi_new_tab $1\"' --confirm"
 desc = "New Tab"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "I"
 run  = "shell 'fish -c \"yazi_new_tab $1\"' --confirm"
 desc = "New Tab"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<a-p>"
 run  = "shell 'fish -c \"echo && echo -n (realpath $1) && nvim_of && sleep 10\"' --block --confirm"
 desc = "Print path"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = ["<c-g>"]
 run  = "shell 'fish -c \"lazygit_new_tab $1\"' --confirm"
 desc = "Lazygit in New Tab"
 
 # Since i don't have much use for running non blocking shell from yazi
 # If I do i can remap
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = ";"
 run  = "shell 'fish' --block --confirm"
 desc = "Fish Shell"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<c-x>"
 run  = "shell 'fish' --block --confirm"
 desc = "Fish Shell"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<a-s>"
 run  = "shell 'fish -c \"hx_tv $1\"' --block --confirm"
 desc = "HX TV Text"
 
 # TODO: Fix hack yazi in yazi later
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<a-t>"
 run  = "shell 'fish -c \"yazi_tv_text $1\"' --block --confirm"
 desc = "Yazi TV Text"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<a-g>"
 run  = "shell 'fish -c \"yazi_tv_git $1\"' --block --confirm"
 desc = "Yazi TV Git"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<c-s>"
 run  = "find --smart"
 desc = "Find next file"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<c-.>"
 run  = "escape --search"
 desc = "Cancel the ongoing search"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "b" ]
 run  = "cd ~/bar"
 desc = "Cd to ~/bar"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "y" ]
 run  = "cd ~/.config/dotfiles/yazi"
 desc = "Cd to Yazi config"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "s" ]
 run  = "cd ~/scripts"
 desc = "Cd to ~/scripts"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "A" ]
 run  = "cd /Applications"
 desc = "Cd to /Applications"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "T" ]
 run  = "cd ~/.Trash/"
 desc = "Cd to Trash"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "d" ]
 run  = "cd ~/.config/dotfiles"
 desc = "Cd to ~/.config/dotfiles"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "t" ]
 run  = "cd /tmp"
 desc = "Cd to /tmp"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = [ "g", "p" ]
 run  = "cd ~/proj"
 desc = "Cd to ~/proj"
 
 # NOTE: This remaps symlink
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = "-"
 run = 'cd ..'
 # TODO: could make _ go the opposite way
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = "<C-->"
 run = 'cd ..'
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-Enter>"
 run  = "enter"
 desc = "Enter"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-m>"
 run  = "open"
 desc = "open"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-l>"
 run  = "enter"
 desc = "Enter"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<Backspace>"
 run  = "leave"
 desc = "Leave"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-Backspace>"
 run  = "leave"
 desc = "Leave"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-j>"
 run  = "shell 'fish -c \"cd (git_repo_dir $1); nvim $@\"' --block --confirm"
 desc = "Open with nvim"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-f>"
 run  = "plugin fzf"
 desc = "fzf"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<A-j>"
 run  = "shell 'fish -c \"cd (git_repo_dir $1); nvim_find_files\"' --block --confirm"
 desc = "Open project with nvim"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<A-h>"
 run  = "shell 'fish -c \"cd (git_repo_dir $1); hx .\"' --block --confirm"
 desc = "Open project with helix"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-e>"
 run  = "shell 'fish -c \"cd (git_repo_dir $1); emacsclient -c $@\"' --block --confirm"
 desc = "Open with emacs"
 
 # TODO: Display sent message toast
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<A-E>"
 run  = "shell 'fish -c \"nvim_main_send_files $@\"' --confirm"
 desc = "Send to nvim remote main"
 
 # TODO: Support multiple files
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<A-e>"
 run  = "shell 'fish -c \"nvim_main_send_files $1 &; nvim_join_session main\"' --block --confirm"
 desc = "Send to nvim remote main && join sesion"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-h>"
 run  = "plugin zoxide"
 desc = "zoxide"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<A-i>"
 run  = "plugin zoxide"
 desc = "zoxide"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-k>"
 run  = "shell 'fish' --block --confirm"
 desc = "Fish Shell"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<A-k>"
 run  = "plugin zoxide"
 desc = "Zoxide"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<C-n>"
 run  = "shell 'fish -c \"neogitlog_new_tab $1\"' --confirm"
 desc = "Open Neogit Log in new tab"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<A-n>"
 run  = "shell 'fish -c \"neogitdiffmain_new_tab $1\"' --confirm"
 desc = "Open Neogit Log in new tab"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "<A-d>"
 run  = "shell 'fish -c \"neogitdiff_new_tab $1\"' --confirm"
 desc = "Open Neogit Diff Main in new tab"
