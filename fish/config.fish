@@ -747,17 +747,12 @@ fzf_configure_bindings --directory=\ct
 source ~/.config/fish/config.local.post.fish
 
 function cd_fzf
-    set result (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
+    set result (ls -d /tmp ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
     cd $result
 end
 
-function dirs_fzf
-    echo (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
-    return 0
-end
-
 function nvim_join_fzf
-    set result (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --print-query)
+    set result (ls -d /tmp ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --print-query)
     set query $result[1]
     set dir $result[2]
 
