@@ -171,8 +171,8 @@ function launchGithubUrl -a url branch
     cd $p
 
     # check if it's a fork branch eg. pluiedev:push-foo
-    if string match -q '*:*' $branch
-        set forkBranch $branch
+    if string match -q '*:*' "$branch"
+        set forkBranch "$branch"
         # we need to achieve something like this
         # git remote add upstream https://github.com/ghostty-org/ghostty.git
         # git fetch upstream pull/6004/head:pluiedev-push-nxwlqouoqluy
@@ -187,12 +187,12 @@ function launchGithubUrl -a url branch
         set ref_prefix (string split / $url -f6-7 | string join "/")
         # forkBranch is like pluiedev:push-nxwlqouoqluy
         # so replace the :
-        set ref_suffix (string replace ':' '-' $forkBranch)
+        set ref_suffix (string replace ':' '-' "$forkBranch")
         set ref $ref_prefix/head:$ref_suffix
         git fetch upstream $ref
 
         set remote upstream
-        set branch $ref_suffix
+        set branch "$ref_suffix"
     end
 
     yazi_new_tab $p
@@ -225,10 +225,10 @@ function launchGithubUrl -a url branch
         echo "stash + untracked..."
         git stash -u
         # Try checkout the branch in case we already have it
-        git checkout $branch
+        git checkout "$branch"
         # Get it if we don't have it
         gitUpdateMainMaster $remote
-        git checkout $branch
+        git checkout "$branch"
         read -P "Press Enter to continue..."
     end
 end
