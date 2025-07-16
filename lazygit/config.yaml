@@ -7,7 +7,7 @@ promptToReturnFromSubprocess: false
 notARepository: skip
 customCommands:
   - key: "I"
-    command: "p={{ .SelectedWorktree.Path }}/{{ if .SelectedFile }}{{ .SelectedFile.Name }}{{ end }} && fish -C \"set p $p\" -c \"yazi_new_tab '$p'\""
+    command: "set p {{ .SelectedWorktree.Path }}/{{ if .SelectedFile }}{{ .SelectedFile.Name }}{{ end }} && fish -C \"set p $p\" -c \"yazi_new_tab '$p'\""
     context: "global"
     description: "Yazi"
   - key: "J"
