@@ -47,7 +47,8 @@ bind -M insert \ei "zi; commandline --function repaint"
 # Doing commandline -r because if you bind things directly
 # it messes up nvim cursor
 bind -M insert \ej 'commandline -r "y" ; commandline -f execute'
-bind -M insert \ek 'commandline -r "nvim -c \":Telescope oldfiles\"" ; commandline -f execute'
+bind -M insert \ek 'commandline -r "nvim_find_files" ; commandline -f execute'
+bind -M insert \eo 'commandline -r "nvim -c \":Telescope oldfiles\"" ; commandline -f execute'
 bind -M insert \eh "hx ."
 bind -M insert \cg "echo n | lazygit && commandline --function repaint"
 bind -M insert \eg "echo n | lazygit && commandline --function repaint"
@@ -57,7 +58,6 @@ bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
 # bind -M insert \ev "nvim"
 bind -M insert \eq "commandline --function kill-whole-line"
 bind -M insert \ep 'commandline -r "nvim_join_fzf"; commandline -f execute'
-bind -M insert \eo 'commandline -r "nvim_join_fzf"; commandline -f execute'
 bind -M insert \cp 'commandline -r "tmux_fzf"; commandline -f execute'
 bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
 bind -M insert \co "cd_fzf; commandline --function repaint"
@@ -747,7 +747,7 @@ fzf_configure_bindings --directory=\ct
 source ~/.config/fish/config.local.post.fish
 
 function cd_fzf
-    set result (ls -d /tmp ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
+    set result (ls -d /Applications /tmp ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
     cd $result
 end
 
