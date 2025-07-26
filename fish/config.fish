@@ -747,7 +747,7 @@ fzf_configure_bindings --directory=\ct
 source ~/.config/fish/config.local.post.fish
 
 function cd_fzf
-    set result (ls -d /Applications /tmp ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
+    set result (ls -d /Applications /tmp (eval echo ~) ~/.Trash ~/.config ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
     cd $result
 end
 
