@@ -86,7 +86,7 @@ m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
 q = ":q"
 Q = ":q!"
 v = [
-  ":cd %sh{git -C $(dirname \"%{buffer_name}\") rev-parse --show-toplevel}",
+  ":cd %sh{git -C  (dirname (echo %{buffer_name}))  rev-parse --show-toplevel}",
   ":redraw"
 ]
 "ret" = "last_picker"
