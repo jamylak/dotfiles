@@ -89,6 +89,7 @@ end
 
 # eg. fd is in here
 fish_add_path -mp /opt/homebrew/bin
+fish_add_path -mp /opt/homebrew/opt/llvm/bin
 fish_add_path -mp /usr/local/bin
 fish_add_path -mp /Users/$USER/.local/bin
 fish_add_path -mp $HOME/.cargo/bin
