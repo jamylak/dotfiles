@@ -65,14 +65,30 @@ bind -M insert \co "cd_fzf; commandline --function repaint"
 bind -M insert \co __smart_cd_or_insert_path
 
 function __smart_cd_or_insert_path
+    # 1. If I press eg. \co
+    # cd to that dir
+    # 2. If i type eg. hx \co
+    # then it is hx (fzf dir result)/
+    # 3. If i type eg. hx /my/dir/\co
+    # then it is hx /my/dir/(fzf dir result)
+    set cmd (commandline)
+    set cursor (commandline --cursor)
+
+    if test -n "$cmd"
+        set prev_char (string sub -l 1 -s (string length -- $cmd) -- $cmd)
+    else
+        set prev_char ""
+    end
+
+    if test "$prev_char" = /
+        _fzf_search_directory
+        return
+    end
+
     set result (ls -d /Applications /tmp (eval echo ~) ~/.Trash ~/.config ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
     if test -z "$result"
         return
     end
-
-    set cmd (commandline)
-    set cursor (commandline --cursor)
-    # set prev_char (string sub -l 1 -s (math $cursor - 1) -- "$cmd")
 
     # Check if cursor is at the start or only whitespace before
     if string match -rq '^\s*$' (string sub -l $cursor -- "$cmd")
@@ -81,6 +97,8 @@ function __smart_cd_or_insert_path
         commandline --function repaint
     else
         commandline -i -- "$result/"
+        # TODO: Test if this is better otherwise remove
+        _fzf_search_directory
     end
 end
 
@@ -618,6 +636,7 @@ abbr -a lgn "cd ~/.config/nvim/; lazygit"
 # Vim
 abbr -a vi nvim
 abbr -a v nvim
+abbr -a n nvim
 
 function nvim_new_session -a name
     tmux new-session -d -s nvim 2>/dev/null
