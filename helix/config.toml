@@ -85,6 +85,10 @@ m.Q = "@l/\"|'<ret>v/<C-r>/<ret><A-minus>v"
 [keys.normal." "]
 q = ":q"
 Q = ":q!"
+v = [
+  ":cd %sh{git -C $(dirname \"%{buffer_name}\") rev-parse --show-toplevel}",
+  ":redraw"
+]
 "ret" = "last_picker"
 " " = "global_search"
 "Y" = ":sh echo (realpath %{buffer_name}) | pbcopy"
