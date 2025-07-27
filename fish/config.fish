@@ -617,8 +617,7 @@ abbr -a lgn "cd ~/.config/nvim/; lazygit"
 
 # Vim
 abbr -a vi nvim
-abbr -a v nvim .
-abbr -a v nvim_find_files
+abbr -a v nvim
 
 function nvim_new_session -a name
     tmux new-session -d -s nvim 2>/dev/null
