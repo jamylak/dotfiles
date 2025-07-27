@@ -62,6 +62,28 @@ bind -M insert \cp 'commandline -r "tmux_fzf"; commandline -f execute'
 bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
 bind -M insert \co "cd_fzf; commandline --function repaint"
 
+bind -M insert \co __smart_cd_or_insert_path
+
+function __smart_cd_or_insert_path
+    set result (ls -d /Applications /tmp (eval echo ~) ~/.Trash ~/.config ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
+    if test -z "$result"
+        return
+    end
+
+    set cmd (commandline)
+    set cursor (commandline --cursor)
+    # set prev_char (string sub -l 1 -s (math $cursor - 1) -- "$cmd")
+
+    # Check if cursor is at the start or only whitespace before
+    if string match -rq '^\s*$' (string sub -l $cursor -- "$cmd")
+        cd $result
+        commandline -r ''
+        commandline --function repaint
+    else
+        commandline -i -- "$result/"
+    end
+end
+
 #bind -M normal \ce edit_command_buffer
 #bind -M insert \ce edit_command_buffer
 
