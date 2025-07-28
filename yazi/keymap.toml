@@ -172,6 +172,11 @@ run  = "shell 'fish -c \"cd (git_repo_dir $1); nvim_find_files\"' --block --conf
 desc = "Open project with nvim"
 
 [[mgr.prepend_keymap]]
+on   = "<A-k>"
+run  = "shell 'fish -c \"cd (git_repo_dir $1); nvim_find_files\"' --block --confirm"
+desc = "Open project with nvim"
+
+[[mgr.prepend_keymap]]
 on   = "<A-h>"
 run  = "shell 'fish -c \"cd (git_repo_dir $1); hx .\"' --block --confirm"
 desc = "Open project with helix"
@@ -207,11 +212,6 @@ desc = "zoxide"
 on   = "<C-k>"
 run  = "shell 'fish' --block --confirm"
 desc = "Fish Shell"
-
-[[mgr.prepend_keymap]]
-on   = "<A-k>"
-run  = "plugin zoxide"
-desc = "Zoxide"
 
 [[mgr.prepend_keymap]]
 on   = "<C-n>"
