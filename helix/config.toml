@@ -25,6 +25,7 @@ git-ignore = true
 # to run eg. mapping to search hidden files
 
 [keys.normal]
+A-space = "command_mode"
 A-y = [ ':sh rm -f /tmp/yazi-path', ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-path', ":open %sh{cat /tmp/yazi-path}", ":redraw" ]
 minus = [ ':sh rm -f /tmp/yazi-path', ':insert-output yazi %{buffer_name} --chooser-file=/tmp/yazi-path', ":open %sh{cat /tmp/yazi-path}", ":redraw" ]
 # g = { a = "code_action" } # Maps `ga` to show possible code actions
