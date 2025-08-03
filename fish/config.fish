@@ -12,6 +12,7 @@ if set -q NVIM; or set -q TMUX
     set -gx YAZI_CONFIG_HOME $HOME/.config/dotfiles/yazi_alt
 end
 
+set fish_cursor_insert line
 set -gx EDITOR hx
 # set -gx HELIX_RUNTIME /Users/james/proj/helix/runtime
 set -gx PROJECTS_DIR /Users/$USER/bar
