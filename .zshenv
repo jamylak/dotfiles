@@ -38,6 +38,12 @@ alias gd="git diff"
 alias gu="git push"
 alias gps="git push"
 
+# Gcloud
+alias gal="gcloud auth login"
+alias gad="gcloud auth application-default login"
+alias gaadl="gcloud auth application-default login"
+alias gadl="gcloud auth application-default login"
+
 # Vim
 alias vi="nvim"
 alias v="nvim ."
