@@ -628,6 +628,12 @@ abbr -a gcl --set-cursor=! "git clone ! && cd (ls -t | head -n 1)"
 abbr -a gpsu "git push --set-upstream origin (git branch --show-current)"
 abbr -a gsu "git push --set-upstream origin (git branch --show-current)"
 
+# gcloud
+abbr -a gal gcloud auth login
+abbr -a gad gcloud auth application-default login
+abbr -a gaadl gcloud auth application-default login
+abbr -a gadl gcloud auth application-default login
+
 # Lazygit
 abbr -a lg lazygit
 abbr -a G lazygit
