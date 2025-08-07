@@ -791,10 +791,6 @@ function y
     rm -f -- "$tmp"
 end
 
-starship init fish | source
-fzf_configure_bindings --directory=\ct
-source ~/.config/fish/config.local.post.fish
-
 function nvim_join_fzf
     set result (ls -d /tmp ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --print-query)
     set query $result[1]
@@ -830,3 +826,7 @@ function tmux_session_fzf
         tmux attach-session -t $session
     end
 end
+
+starship init fish | source
+fzf_configure_bindings --directory=\ct
+source ~/.config/fish/config.local.post.fish
