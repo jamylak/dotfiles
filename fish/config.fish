@@ -518,6 +518,9 @@ abbr -a nl neogitlog 300
 abbr -a ngd neogitdiff
 abbr -a nd neogitdiff
 abbr -a d neogitdiff
+# C++
+# TODO: debug build
+# TODO: lldb
 # Other
 abbr -a hex hexdump -C
 abbr -a cdls "cd (ls -t | head -n 1)"
