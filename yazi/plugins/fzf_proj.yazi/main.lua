@@ -13,7 +13,7 @@ local function entry()
 	local child, err =
 		-- Command("fzf"):cwd(cwd):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.INHERIT):spawn()
 		Command("sh")
-			:arg({ "-c", "ls -d /Applications/ /tmp/ $HOME/ $HOME/.local/share/ ~/.Trash/ ~/.config/ ~/bar/ ~/bar/*/ ~/proj/ ~/proj/*/ ~/.config/dotfiles/ ~/.config/nvim/ | fzf --bind ctrl-j:accept" })
+			:arg({ "-c", "ls -d /Applications/ /tmp/ $HOME/ $HOME/.local/share/ $HOME/.local/share/nvim/lazy/ ~/.Trash/ ~/.config/ ~/bar/ ~/bar/*/ ~/proj/ ~/proj/*/ ~/.config/dotfiles/ ~/.config/nvim/ | fzf --bind ctrl-j:accept" })
 			:cwd(cwd)
 			:stdin(Command.INHERIT)
 			:stdout(Command.PIPED)
