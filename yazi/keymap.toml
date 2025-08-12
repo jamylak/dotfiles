@@ -227,3 +227,8 @@ desc = "Open Neogit Log in new tab"
 on   = "<A-d>"
 run  = "shell 'fish -c \"neogitdiff_new_tab $1\"' --confirm"
 desc = "Open Neogit Diff Main in new tab"
+
+[[mgr.prepend_keymap]]
+on   = [ "c", "m" ]
+run  = "plugin chmod"
+desc = "Chmod on selected files"
