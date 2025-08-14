@@ -32,8 +32,14 @@ set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
 
 set -g fish_key_bindings fish_vi_key_bindings
 
-function nvim_new_project
-    nvim -c ":F"
+function nvim_nproj -a projname
+    if test -n "$projname"
+        mkdir ~/bar/$projname
+        cd ~/bar/$projname
+        nvim_find_files
+    else
+        nvim -c ":F"
+    end
 end
 
 # Autocomplete binding
@@ -54,7 +60,7 @@ bind -M insert \eh "hx ."
 bind -M insert \cg "echo n | lazygit && commandline --function repaint"
 bind -M insert \eg "echo n | lazygit && commandline --function repaint"
 # bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
-bind -M insert \en 'commandline -r "nvim_new_project"; commandline -f execute'
+bind -M insert \en 'commandline -r "nvim_nproj"; commandline -f execute'
 bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
 # bind -M insert \ev "nvim"
 bind -M insert \eq "commandline --function kill-whole-line"
@@ -648,6 +654,7 @@ abbr -a lgn "cd ~/.config/nvim/; lazygit"
 abbr -a vi nvim
 abbr -a v nvim
 abbr -a n nvim
+abbr -a nn nvim_nproj
 
 function nvim_new_session -a name
     tmux new-session -d -s nvim 2>/dev/null
