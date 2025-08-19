@@ -552,7 +552,7 @@ abbr -a --position anywhere bar ~/bar/
 abbr -a --position anywhere b ~/bar/
 abbr -a --position anywhere proj ~/proj/
 abbr -a --position anywhere pr ~/proj/
-abbr -a c clear
+abbr -a c 'nvim -c ":CopilotChatOpen" -c ":only" -c "startinsert"'
 abbr -a r --position anywhere --function last_history_item
 abbr -a q exit
 
