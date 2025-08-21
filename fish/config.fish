@@ -852,5 +852,6 @@ function tmux_session_fzf
 end
 
 starship init fish | source
+set -gx FZF_DEFAULT_OPTS "--layout=reverse --info=inline --height=80% --bind=ctrl-j:accept"
 fzf_configure_bindings --directory=\ct
 source ~/.config/fish/config.local.post.fish
