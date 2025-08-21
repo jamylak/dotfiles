@@ -67,7 +67,7 @@ bind -M insert \eq "commandline --function kill-whole-line"
 bind -M insert \ep 'commandline -r "nvim_join_fzf"; commandline -f execute'
 # bind -M insert \cp 'commandline -r "tmux_fzf"; commandline -f execute'
 bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
-bind -M insert \co __smart_cd_or_insert_path
+bind -M insert \co "__smart_cd_or_insert_path; commandline --function repaint"
 
 function __smart_cd_or_insert_path
     # 1. If I press eg. \co
