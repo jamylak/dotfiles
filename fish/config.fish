@@ -391,7 +391,7 @@ function fish_user_key_bindings
         bind -M $mode \cb backward-char
         bind -M $mode \ca beginning-of-line
         bind -M $mode \ce end-of-line
-        bind -M $mode \cj forward-char
+        bind -M $mode \cj execute
         bind -M $mode \cf forward-char
         bind -M $mode \cp history-search-backward
         bind -M $mode \cn history-search-forward
