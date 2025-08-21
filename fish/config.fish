@@ -387,10 +387,20 @@ end
 # https://github.com/fish-shell/fish-shell/issues/3541
 function forward-or-execute
     set before (commandline -C) # cursor position
-    commandline -f forward-char
-    set after (commandline -C)
-    if test $before -eq $after
+    set cmd (commandline)
+    if test -z "$cmd"
+        # empty commandline
+        # commandline -r nvim_nproj
+        commandline -r nvim
         commandline -f execute
+    else
+        # either go forward char if there is a suggestion
+        # else execute the line
+        commandline -f forward-char
+        set after (commandline -C)
+        if test $before -eq $after
+            commandline -f execute
+        end
     end
 end
 
