@@ -396,22 +396,17 @@ end
 
 function fish_user_key_bindings
     # for mode in insert default visual
-    for mode in insert
-        bind -M $mode \cb backward-char
-        bind -M $mode \ca beginning-of-line
-        bind -M $mode \ce end-of-line
-        bind -M $mode \cj forward-char
-        bind -M $mode \cf forward-char
-        bind -M $mode \cp history-search-backward
-        bind -M $mode \cn history-search-forward
+    bind -M insert \cb backward-char
+    bind -M insert \ca beginning-of-line
+    bind -M insert \ce end-of-line
+    bind -M insert \cj forward-char
+    bind -M insert \cf forward-char
+    bind -M insert \cp history-search-backward
+    bind -M insert \cn history-search-forward
+    bind -M insert ctrl-space _fzf_search_history
+    bind -M insert alt-space _fzf_search_history
+    bind -M insert \cj forward-or-execute
 
-        bind -M $mode ctrl-space _fzf_search_history
-        bind -M $mode alt-space _fzf_search_history
-
-        # https://stackoverflow.com/questions/37114257/how-to-bind-ctrl-enter-in-fish
-        # not working
-        # bind -M $mode \cM forward-char
-    end
 end
 
 function watchandrun
