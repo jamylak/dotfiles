@@ -385,13 +385,22 @@ end
 # bind --preset -M insert ctrl-space 'test -n "$(commandline)" && commandline -i " "'
 
 # https://github.com/fish-shell/fish-shell/issues/3541
+function forward-or-execute
+    set before (commandline -C) # cursor position
+    commandline -f forward-char
+    set after (commandline -C)
+    if test $before -eq $after
+        commandline -f execute
+    end
+end
+
 function fish_user_key_bindings
     # for mode in insert default visual
     for mode in insert
         bind -M $mode \cb backward-char
         bind -M $mode \ca beginning-of-line
         bind -M $mode \ce end-of-line
-        bind -M $mode \cj execute
+        bind -M $mode \cj forward-char
         bind -M $mode \cf forward-char
         bind -M $mode \cp history-search-backward
         bind -M $mode \cn history-search-forward
