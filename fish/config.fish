@@ -383,7 +383,6 @@ end
 # Note: Could do something like this to allow mix of
 # commands, eg. when not empty
 # bind --preset -M insert ctrl-space 'test -n "$(commandline)" && commandline -i " "'
-# maybe could be the case for \cp and \cn
 
 # https://github.com/fish-shell/fish-shell/issues/3541
 function fish_user_key_bindings
@@ -396,6 +395,10 @@ function fish_user_key_bindings
         bind -M $mode \cf forward-char
         bind -M $mode \cp history-search-backward
         bind -M $mode \cn history-search-forward
+
+        bind -M $mode ctrl-space _fzf_search_history
+        bind -M $mode alt-space _fzf_search_history
+
         # https://stackoverflow.com/questions/37114257/how-to-bind-ctrl-enter-in-fish
         # not working
         # bind -M $mode \cM forward-char
