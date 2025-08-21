@@ -65,7 +65,7 @@ bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
 # bind -M insert \ev "nvim"
 bind -M insert \eq "commandline --function kill-whole-line"
 bind -M insert \ep 'commandline -r "nvim_join_fzf"; commandline -f execute'
-bind -M insert \cp 'commandline -r "tmux_fzf"; commandline -f execute'
+# bind -M insert \cp 'commandline -r "tmux_fzf"; commandline -f execute'
 bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
 bind -M insert \co __smart_cd_or_insert_path
 
@@ -380,6 +380,11 @@ function git_repo_dir -a path
     return 1
 end
 
+# Note: Could do something like this to allow mix of
+# commands, eg. when not empty
+# bind --preset -M insert ctrl-space 'test -n "$(commandline)" && commandline -i " "'
+# maybe could be the case for \cp and \cn
+
 # https://github.com/fish-shell/fish-shell/issues/3541
 function fish_user_key_bindings
     # for mode in insert default visual
@@ -389,6 +394,8 @@ function fish_user_key_bindings
         bind -M $mode \ce end-of-line
         bind -M $mode \cj forward-char
         bind -M $mode \cf forward-char
+        bind -M $mode \cp history-search-backward
+        bind -M $mode \cn history-search-forward
         # https://stackoverflow.com/questions/37114257/how-to-bind-ctrl-enter-in-fish
         # not working
         # bind -M $mode \cM forward-char
