@@ -659,6 +659,12 @@ abbr -a gcl --set-cursor=! "git clone ! && cd (ls -t | head -n 1)"
 abbr -a gpsu "git push --set-upstream origin (git branch --show-current)"
 abbr -a gsu "git push --set-upstream origin (git branch --show-current)"
 
+# Neovide
+abbr -a neovide 'open -a neovide --args'
+abbr -a nv 'open -a neovide --args'
+# alias neovide 'open -a Neovide --args'
+# abbr -a nv neovide
+
 # gcloud
 abbr -a gal gcloud auth login
 abbr -a gad gcloud auth application-default login
