@@ -47,6 +47,7 @@ bind \cy 'commandline -f accept-autosuggestion'
 # bind -M insert \cy fish_clipboard_paste
 bind -M insert \ef forward-word
 bind -M insert \eb backward-word
+# todo: make a useful default for empty terminal \ck
 bind -M normal \ck expand-abbr
 bind -M insert \ck expand-abbr
 bind -M insert \cs "zi; commandline --function repaint"

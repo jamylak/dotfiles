@@ -23,6 +23,7 @@ git-ignore = true
 # :set file-picker.hidden true
 # etc
 # to run eg. mapping to search hidden files
+# TODO: Useful binding for <c-space>
 
 [keys.normal]
 A-space = "command_mode"
