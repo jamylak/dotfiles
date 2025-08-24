@@ -26,15 +26,16 @@ keybind = super+u=scroll_page_up
 window-decoration = true
 
 # keybind = super+i=text:\x00\x03
-keybind = super+alt+down=resize_split:down,30
-keybind = super+alt+left=resize_split:left,30
-keybind = super+alt+up=resize_split:up,30
-keybind = super+alt+right=resize_split:right,30
-keybind = super+alt+j=resize_split:down,60
-keybind = super+alt+h=resize_split:left,60
-keybind = super+alt+k=resize_split:up,60
-keybind = super+alt+l=resize_split:right,60
+keybind = super+ctrl+down=resize_split:down,30
+keybind = super+ctrl+left=resize_split:left,30
+keybind = super+ctrl+up=resize_split:up,30
+keybind = super+ctrl+right=resize_split:right,30
+keybind = super+ctrl+j=resize_split:down,60
+keybind = super+ctrl+h=resize_split:left,60
+keybind = super+ctrl+k=resize_split:up,60
+keybind = super+ctrl+l=resize_split:right,60
 keybind = super+ctrl+enter=toggle_split_zoom
+
 # nvm this
 keybind = super+shift+h=text:nvim +9999 /
 keybind = super+shift+j=write_screen_file:paste
