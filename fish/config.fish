@@ -5,6 +5,8 @@ else
     set -xg SHELL /usr/local/bin/fish
 end
 
+# TODO: Empty <c-c> does copilot chat?
+
 # Fix incorrerct yazi emoji rendering on
 # nvim terminal. Also fix tmux issue when returning
 # to a session, on return the layout gets messed up
@@ -49,7 +51,17 @@ bind -M insert \ef forward-word
 bind -M insert \eb backward-word
 # todo: make a useful default for empty terminal \ck
 bind -M normal \ck expand-abbr
-bind -M insert \ck expand-abbr
+
+function smart-expand-abbr
+    if test (commandline) != ""
+        commandline -f expand-abbr
+    else
+        commandline -r vt
+        commandline -f execute
+    end
+end
+
+bind -M insert \ck smart-expand-abbr
 bind -M insert \cs "zi; commandline --function repaint"
 bind -M insert \ei "zi; commandline --function repaint"
 # Doing commandline -r because if you bind things directly
@@ -392,7 +404,7 @@ function forward-or-execute
     if test -z "$cmd"
         # empty commandline
         # commandline -r nvim_nproj
-        commandline -r nvim
+        commandline -r 'nvim -c ":FFFFind"'
         commandline -f execute
     else
         # either go forward char if there is a suggestion
