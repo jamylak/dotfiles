@@ -417,6 +417,27 @@ function forward-or-execute
     end
 end
 
+function delete_or_lazygit
+    set cmd (commandline)
+    if test -z "$cmd"
+        # empty commandline
+        echo n | lazygit && commandline --function repaint
+    else
+        commandline -f backward-delete-char
+    end
+end
+
+function space_or_fzf
+    set cmd (commandline)
+    if test -z "$cmd"
+        # empty commandline
+        __smart_cd_or_insert_path
+        commandline --function repaint
+    else
+        commandline -i " "
+    end
+end
+
 function fish_user_key_bindings
     # for mode in insert default visual
     bind -M insert \cb backward-char
