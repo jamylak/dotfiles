@@ -410,8 +410,9 @@ end
 function forward-or-execute
     set before (commandline -C) # cursor position
     set cmd (commandline)
-    if test -z "$cmd"
-        # empty commandline
+    # empty commandline
+    # but dont open nvim in nvim
+    if test -z "$cmd"; and not set -q NVIM
         # commandline -r nvim_nproj
         commandline -r 'nvim -c ":FFFFind"'
         commandline -f execute
@@ -476,7 +477,9 @@ function fish_user_key_bindings
     bind -M insert \cj forward-or-execute
     bind -M insert \ch delete_or_lazygit
     bind -M insert space space_or_fzf
-    bind -M insert enter fish_enter_or_fzf
+    if not set -q NVIM
+        bind -M insert enter fish_enter_or_fzf
+    end
 end
 
 function fish_enter_or_fzf
