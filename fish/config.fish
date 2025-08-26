@@ -476,6 +476,17 @@ function fish_user_key_bindings
     bind -M insert \cj forward-or-execute
     bind -M insert \ch delete_or_lazygit
     bind -M insert space space_or_fzf
+    bind -M insert enter fish_enter_or_fzf
+end
+
+function fish_enter_or_fzf
+    set cmd (commandline)
+    # If empty then run nvim FFFFind
+    if test -z "$cmd"
+        commandline -r 'nvim -c ":FFFFind"'
+    end
+    # Otherwise normal enter
+    commandline -f execute
 end
 
 function watchandrun
