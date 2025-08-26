@@ -449,6 +449,8 @@ function fish_user_key_bindings
     bind -M insert ctrl-space _fzf_search_history
     bind -M insert alt-space _fzf_search_history
     bind -M insert \cj forward-or-execute
+    bind -M insert \ch delete_or_lazygit
+    bind -M insert space space_or_fzf
 end
 
 function watchandrun
