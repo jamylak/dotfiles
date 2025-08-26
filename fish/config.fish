@@ -443,7 +443,23 @@ function space_or_fzf
         __smart_cd_or_insert_path
         commandline --function repaint
     else
-        commandline -i " "
+        # is there nothing to the right? then add a space
+        # this basically replicates normal fish abbr
+        # but now i can enter space at empty prompt
+        # to do something different
+        set cursor_before (commandline --cursor)
+        commandline --function expand-abbr
+        set line (commandline)
+        set cursor_after (commandline --cursor)
+
+        set cursor (commandline --cursor)
+        set right (string sub --start=(math $cursor + 1) -- $line)
+
+        # If nothing to the right OR cursor didn't move, insert space
+        # handles the case eg. hx<cursor>foo and you want to insert a space
+        if test -z "$right" -o "$cursor_before" = "$cursor_after"
+            commandline -i " "
+        end
     end
 end
 
