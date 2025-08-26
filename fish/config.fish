@@ -49,15 +49,24 @@ bind \cy 'commandline -f accept-autosuggestion'
 # bind -M insert \cy fish_clipboard_paste
 bind -M insert \ef forward-word
 bind -M insert \eb backward-word
-# todo: make a useful default for empty terminal \ck
-bind -M normal \ck expand-abbr
 
 function smart-expand-abbr
-    if test (commandline) != ""
-        commandline -f expand-abbr
-    else
+    # 1. If empty then start neovim terminal
+    # 2. Try expand something if it can
+    # 3. If there's no expansion it means we just
+    # wanted normal \ck which is to kill the line
+    set cmd (commandline)
+    if test -z "$cmd"
+        # empty commandline
         commandline -r vt
         commandline -f execute
+    else
+        set before (commandline)
+        commandline -f expand-abbr
+        set after (commandline)
+        if test "$before" = "$after"
+            commandline -f kill-line
+        end
     end
 end
 
