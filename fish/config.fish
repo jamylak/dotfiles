@@ -103,7 +103,7 @@ function __smart_cd_or_insert_path
         return
     end
 
-    set result (ls -d /Applications /tmp (eval echo ~) ~/.local/share/ ~/.local/share/nvim/lazy/ ~/.Trash ~/.config ~/bar/ ~/bar/* ~/proj/ ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
+    set result (ls -d /Applications /tmp (eval echo ~) ~/.local/share/ ~/.local/share/nvim/lazy/ ~/.Trash ~/.config ~/bar/ ~/Desktop/ ~/bar/* ~/proj/ ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --bind 'ctrl-j:accept')
     if test -z "$result"
         return
     end
