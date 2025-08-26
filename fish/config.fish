@@ -573,6 +573,8 @@ function git_checkout_origin
     git switch --track $branch
 end
 
+abbr -a bt btop
+
 # Dashboard
 abbr -a db dashboard
 # Neogit
