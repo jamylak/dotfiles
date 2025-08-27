@@ -639,9 +639,9 @@ abbr -a ef exec fish
 abbr -a hm --position anywhere ~/
 abbr -a dotfiles --position anywhere ~/.config/dotfiles
 abbr -a dot --position anywhere ~/.config/dotfiles
+abbr -a m --set-cursor=! "cd ~/bar; mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
-abbr -a m --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkc --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mk --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
