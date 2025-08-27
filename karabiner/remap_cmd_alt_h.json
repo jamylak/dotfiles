@@ -1,11 +1,14 @@
 {
-  "description": "Printscreen to CMD+SHIFT+3",
+  "description": "cmd alt h to CMD+SHIFT+3",
   "manipulators": [
     {
       "from": {
-        "key_code": "print_screen",
+        "key_code": "h",
         "modifiers": {
-          "mandatory": [],
+          "mandatory": [
+            "left_command",
+            "left_alt"
+          ],
           "optional": [
             "any"
           ]
@@ -16,7 +19,8 @@
           "key_code": "3",
           "modifiers": [
             "left_command",
-            "shift"
+            "shift",
+            "left_control"
           ]
         }
       ],
