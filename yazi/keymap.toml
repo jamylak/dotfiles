@@ -24,6 +24,11 @@ run  = "plugin fzf_proj"
 desc = "fzf projects"
 
 [[mgr.prepend_keymap]]
+on   = "<c-space>"
+run  = "plugin fzf_proj"
+desc = "fzf projects"
+
+[[mgr.prepend_keymap]]
 on   = "T"
 run  = "shell 'fish -c \"yazi_new_tab $1\"' --confirm"
 desc = "New Tab"
