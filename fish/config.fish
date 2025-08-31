@@ -620,11 +620,14 @@ abbr -a db dashboard
 # Neogit
 abbr -a ng neogitlog 300
 abbr -a ngl neogitlog 300
+abbr -a dl neogitlog 300
 abbr -a nl neogitlog 300
 abbr -a ngd neogitdiff
 abbr -a nd neogitdiff
 abbr -a d neogitdiff
 abbr -a ngdm neogitdiffmain
+abbr -a ngm neogitdiffmain
+abbr -a dm neogitdiffmain
 # C++
 # TODO: debug build
 # TODO: lldb
