@@ -468,6 +468,7 @@ end
 function fish_user_key_bindings
     # for mode in insert default visual
     bind -M insert \cb backward-char
+    bind -M insert alt-a beginning-of-line
     bind -M insert \ca beginning-of-line
     bind -M insert \ce end-of-line
     bind -M insert \cf forward-char
