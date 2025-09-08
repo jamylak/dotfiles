@@ -12,8 +12,8 @@ font-size = 18
 macos-icon = blueprint
 
 background = #000000
-background-opacity = 0.60
-background-blur-radius = 35
+background-opacity = 0.20
+background-blur-radius = 65
 # shell-integration-features = no-cursor
 macos-non-native-fullscreen = true
 
@@ -40,6 +40,9 @@ keybind = super+f=goto_split:next
 keybind = super+b=goto_split:previous
 keybind = super+l=new_split:right
 keybind = super+;=new_split:right
+
+keybind = super+h=write_screen_file:copy
+keybind = super+g=write_screen_file:paste
 
 # nvm this
 keybind = super+shift+h=text:nvim +9999 /
