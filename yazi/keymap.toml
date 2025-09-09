@@ -23,6 +23,11 @@ on   = "<c-o>"
 run  = "plugin fzf_proj"
 desc = "fzf projects"
 
+# ya pkg install
+[[mgr.prepend_keymap]]
+on = "<C-y>"
+run = ["plugin system-clipboard"]
+
 [[mgr.prepend_keymap]]
 on   = "<c-space>"
 run  = "plugin fzf_proj"

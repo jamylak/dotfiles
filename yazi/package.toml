@@ -3,5 +3,10 @@ use = "yazi-rs/plugins:chmod"
 rev = "e95c7b3"
 hash = "1adc12c2b2b025411ab61eb8f0879574"
 
+[[plugin.deps]]
+use = "orhnk/system-clipboard"
+rev = "4f6942d"
+hash = "8e81a147e8ddfd992b10dd957d51a199"
+
 [flavor]
 deps = []

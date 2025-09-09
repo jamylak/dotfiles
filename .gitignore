@@ -3,3 +3,4 @@ fish/config.local.fish
 fish/config.local.post.fish
 fish/config.local.pre.fish
 yazi/plugins/chmod.yazi
+yazi/plugins/system-clipboard.yazi
