@@ -46,7 +46,6 @@ end
 
 # Autocomplete binding
 bind \cy 'commandline -f accept-autosuggestion'
-# bind -M insert \cy fish_clipboard_paste
 bind -M insert \ef forward-word
 bind -M insert \eb backward-word
 
@@ -88,9 +87,10 @@ bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
 bind -M insert \eq "commandline --function kill-whole-line"
 bind -M insert \ep 'commandline -r "nvim_join_fzf"; commandline -f execute'
 # bind -M insert \cp 'commandline -r "tmux_fzf"; commandline -f execute'
-bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
+# bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
 bind -M insert \co "__smart_cd_or_insert_path; commandline --function repaint"
 bind --mode insert \cy 'commandline --insert (pbpaste)'
+bind -M insert \em fish_clipboard_paste
 
 function __smart_cd_or_insert_path
     # 1. If I press eg. \co
