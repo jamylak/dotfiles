@@ -213,5 +213,7 @@ alt - m [
     "Σημειώσεις" : skhd -k "cmd - v"
 ]
 alt - k [
-	"finder" : ~/.config/dotfiles/scripts/runchrome.sh
+    "brave browser" : skhd -k "alt + ctrl - f"
+    "Σημειώσεις" : skhd -k "alt + ctrl - f"
+	"finder" : ~/.config/dotfiles/scripts/runbrave.sh
 ]
