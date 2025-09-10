@@ -1,0 +1,23 @@
+{
+  "description": "Middle click = Cmd+V in Notes only",
+  "manipulators": [
+    {
+      "from": { "pointing_button": "button3" },
+      "to": [
+        {
+          "key_code": "v",
+          "modifiers": ["left_command"]
+        }
+      ],
+      "type": "basic",
+      "conditions": [
+        {
+          "type": "frontmost_application_if",
+          "bundle_identifiers": [
+            "^com\\.apple\\.Notes$"
+          ]
+        }
+      ]
+    }
+  ]
+}
