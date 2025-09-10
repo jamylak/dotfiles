@@ -204,6 +204,14 @@ ctrl - 0x2C [
 	"google chrome" : skhd -k "cmd - z"
 	"brave browser" : skhd -k "cmd - z"
 ]
+alt - n [
+    "brave browser" : skhd -k "alt + ctrl - f"
+    "Σημειώσεις" : skhd -k "alt + ctrl - f"
+]
+alt - m [
+    "brave browser" : skhd -k "cmd - v"
+    "Σημειώσεις" : skhd -k "cmd - v"
+]
 alt - k [
 	"finder" : ~/.config/dotfiles/scripts/runchrome.sh
 ]
