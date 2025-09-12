@@ -615,6 +615,7 @@ function git_checkout_origin
 end
 
 abbr -a bt btop
+abbr -a a awrit
 
 # Dashboard
 abbr -a db dashboard
