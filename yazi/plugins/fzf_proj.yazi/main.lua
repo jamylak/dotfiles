@@ -11,14 +11,15 @@ local function entry()
 	local cwd = tostring(state())
 
 	local child, err =
-		-- Command("fzf"):cwd(cwd):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.INHERIT):spawn()
+	-- Command("fzf"):cwd(cwd):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.INHERIT):spawn()
 		Command("sh")
-			:arg({ "-c", "ls -dt /Applications/ /tmp/ $HOME/ $HOME/.local/share/ $HOME/.local/share/nvim/lazy/ ~/.Trash/ ~/.config/ ~/Desktop/ ~/bar/ ~/bar/*/ ~/proj/ ~/proj/*/ ~/.config/dotfiles/ ~/.config/nvim/ | fzf --bind ctrl-j:accept" })
-			:cwd(cwd)
-			:stdin(Command.INHERIT)
-			:stdout(Command.PIPED)
-			:stderr(Command.INHERIT)
-			:spawn()
+		:arg({ "-c",
+			"ls -dt /Applications/ /tmp/ $HOME/ $HOME/.local/share/ $HOME/.local/share/nvim/lazy/ ~/.Trash/ ~/.config/ ~/Desktop/ ~/bar/ ~/bar/*/ ~/proj/ ~/proj/*/ ~/.config/dotfiles/ ~/.config/nvim/ | fzf --bind ctrl-j:accept" })
+		:cwd(cwd)
+		:stdin(Command.INHERIT)
+		:stdout(Command.PIPED)
+		:stderr(Command.INHERIT)
+		:spawn()
 
 	if not child then
 		return fail("Failed to start `fzf`, error: " .. err)
