@@ -1,0 +1,25 @@
+{
+    "description": "RHS Mappings",
+    "manipulators": [
+            {
+            "from": { "key_code": "home" },
+            "to": [
+                {
+                    "key_code": "v",
+                    "modifiers": ["left_command"]
+                }
+              ],
+            "type": "basic"
+              },
+            {
+                  "from": { "key_code": "delete_forward" },
+            "to": [
+                        {
+                    "key_code": "v",
+                    "modifiers": ["left_command"]
+                          }
+                      ],
+            "type": "basic"
+              }
+          ]
+}
