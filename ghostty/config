@@ -60,4 +60,4 @@ custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_frozen.glsl
 # custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_blaze.glsl
 # custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_blaze_tapered.glsl
 
-keybind = super+o=close_other_tabs
+keybind = super+o=close_tab:other
