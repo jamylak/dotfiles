@@ -211,6 +211,7 @@ alt - n [
 alt - m [
     "brave browser" : skhd -k "cmd - v"
     "Σημειώσεις" : skhd -k "cmd - v"
+    "Μηνύματα" : skhd -k "cmd - v"
 ]
 alt - k [
     "brave browser" : skhd -k "alt + ctrl - f"
