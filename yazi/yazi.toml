@@ -5,9 +5,10 @@ linemode = "mtime"
 [opener]
 edit = [
 	{ run = 'hx "$@"', block = true, for = "unix" },
-	{ run = 'open -a neovide "$@"', block = false, for = "unix", desc = "neovide" },
+	{ run = 'open -a neovide "$@"', block = false, for = "unix", desc = "Neovide" },
 	# TODO: One dir up from file?
-	{ run = 'open -a Finder "$@"', block = false, for = "unix", desc = "finder" },
+	{ run = 'open -a Finder "$@"', block = false, for = "unix", desc = "Finder" },
+	{ run = 'open -a Brave\ Browser "$@"', block = false, for = "unix", desc = "Brave" },
 	{ run = 'nvim "$@"', block = true, for = "unix" },
 	{ run = 'emacsclient -c -a "emacs -nw" "$@"', block = true, for = "unix" },
 ]
