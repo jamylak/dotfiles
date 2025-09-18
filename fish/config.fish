@@ -346,9 +346,9 @@ end
 
 function nvim_new_tab -a path linenum
     if test -n "$linenum"
-        launch_new_tab "nvim $path +$linenum -c ':CD'"
+        launch_new_tab "nvim $path +$linenum"
     else
-        launch_new_tab "nvim $path -c ':CD'"
+        launch_new_tab "nvim $path"
     end
 end
 
