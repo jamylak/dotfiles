@@ -1,7 +1,10 @@
 command = /opt/homebrew/bin/fish
 # theme = 0x96f
-theme = Fairyfloss
-# theme = xcodedarkhc
+# theme = Fairyfloss
+# theme = Vesper
+# theme = Vercel
+# theme = Ultra Dark
+theme = Niji
 confirm-close-surface = false
 macos-option-as-alt = true
 font-family = Fira Code Medium
@@ -13,8 +16,8 @@ font-size = 18
 # macos-icon = xray
 macos-icon = blueprint
 
-# background = #000000
-background-opacity = 0.0
+background = #002450
+background-opacity = 0.3
 background-blur-radius = 65
 # shell-integration-features = no-cursor
 macos-non-native-fullscreen = true
