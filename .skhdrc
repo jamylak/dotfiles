@@ -207,6 +207,7 @@ ctrl - 0x2C [
 alt - n [
     "brave browser" : skhd -k "alt + ctrl - f"
     "Σημειώσεις" : skhd -k "alt + ctrl - f"
+    "finder" : skhd -k "alt + ctrl - f"
 ]
 alt - m [
     "brave browser" : skhd -k "cmd - v"
