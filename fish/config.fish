@@ -21,12 +21,14 @@ set -gx PROJECTS_DIR /Users/$USER/bar
 # set -gx MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
 # Running vulkan things doesn't work without this
 set -gx XDG_DATA_DIRS /usr/local/share
+# set -gx VULKAN_SDK /Users/james/VulkanSDK/1.4.328.1/macOS
 # set -gx XDG_DATA_DIRS /usr/local/share
 # https://github.com/nushell/nushell/issues/10100
 set -gx XDG_CONFIG_HOME $HOME/.config
 # set -gx XDG_STATE_HOME $HOME/.local/state
 # set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
+set -gx UV_PYTHON python3.13
 
 # TODO: Lazygit config
 # promptToReturnFromSubprocess: false
