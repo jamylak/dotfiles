@@ -491,6 +491,8 @@ function fish_user_key_bindings
     bind -M insert \cj forward-or-execute
     bind -M insert \ch delete_or_lazygit
     bind -M insert space space_or_fzf
+    bind -M insert ctrl-enter "__smart_cd_or_insert_path; commandline --function repaint"
+    bind -M insert alt-enter "__smart_cd_or_insert_path; commandline --function repaint"
     if not set -q NVIM
         bind -M insert enter fish_enter_or_fzf
     end
