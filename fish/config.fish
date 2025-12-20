@@ -51,6 +51,16 @@ bind \cy 'commandline -f accept-autosuggestion'
 bind -M insert \ef forward-word
 bind -M insert \eb backward-word
 
+function smart-forward-char
+    set cmd (commandline)
+    set cursor (commandline --cursor)
+    if test $cursor -ge (string length -- "$cmd")
+        commandline -f forward-word
+    else
+        commandline -f forward-char
+    end
+end
+
 function smart-expand-abbr
     # 1. If empty then start neovim terminal
     # 2. Try expand something if it can
@@ -473,7 +483,7 @@ function fish_user_key_bindings
     bind -M insert alt-a beginning-of-line
     bind -M insert \ca beginning-of-line
     bind -M insert \ce end-of-line
-    bind -M insert \cf forward-char
+    bind -M insert \cf smart-forward-char
     bind -M insert \cp history-search-backward
     bind -M insert \cn history-search-forward
     bind -M insert ctrl-space _fzf_search_history
