@@ -177,12 +177,6 @@ alt + ctrl - 0x2F : fish -c toggle_amethyst
 cmd - j [
 	"ghostty" : fish -c "sendRepeatToOtherPane"
 ]
-cmd - g [
-	"ghostty" : skhd -k "alt - q" && skhd -t "xx " && skhd -k "cmd + shift - j" && skhd -k return
-]
-cmd - h [
-	"ghostty" : skhd -t "xx " && skhd -k "cmd + shift - j" && skhd -k return
-]
 ctrl - n [
 	"google chrome" : skhd -k "down"
 	"brave browser" : skhd -k "down"
