@@ -975,6 +975,18 @@ function tmux_session_fzf
     end
 end
 
+function duck --description 'Search DuckDuckGo via awrit'
+    if test (count $argv) -eq 0
+        echo "usage: duck <search terms>" >&2
+        return 1
+    end
+
+    set -l query (string join " " $argv)
+    set -l encoded (string escape --style=url $query)
+
+    awrit "https://duckduckgo.com/?q=$encoded"
+end
+
 starship init fish | source
 set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80% --bind=ctrl-j:accept"
 fzf_configure_bindings --directory=\ct
