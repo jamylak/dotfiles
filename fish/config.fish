@@ -575,7 +575,7 @@ function neogitlog
     if test -n "$argv[1]"
         set delay "$argv[1]"
     end
-    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<c-g>ll\", true, true, true), \"m\", true); vim.defer_fn(function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"ggjdd\", true, true, true), \"m\", true) end, $delay)"
+    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>NGll\", true, true, true), \"m\", true); vim.defer_fn(function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"ggjdd\", true, true, true), \"m\", true) end, $delay)"
 end
 
 function neogitdiffmain
@@ -584,11 +584,11 @@ function neogitdiffmain
     if test -n "$argv[1]"
         set delay "$argv[1]"
     end
-    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<c-g>dr\", true, true, true), \"m\", true); vim.defer_fn(function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<c-n><c-n><enter>\", true, true, true), \"m\", true) end, $delay)"
+    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>NGdr\", true, true, true), \"m\", true); vim.defer_fn(function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<c-n><c-n><enter>\", true, true, true), \"m\", true) end, $delay)"
 end
 
 function neogitdiff
-    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<c-g>dd\", true, true, true), \"m\", true);"
+    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>NGdd\", true, true, true), \"m\", true);"
 end
 
 function nvim_of
