@@ -925,6 +925,9 @@ abbr -a ztt "zig test tests.zig"
 abbr -a zr "./zig-out/bin/*"
 abbr -a zbr "zig build && ./zig-out/bin/*"
 
+# Codex
+# abbr -a co "codex"
+
 # Yazi
 # https://yazi-rs.github.io/docs/quick-start/
 function y
