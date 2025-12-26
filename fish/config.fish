@@ -990,5 +990,16 @@ end
 starship init fish | source
 set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80% --bind=ctrl-j:accept"
 fzf_configure_bindings --directory=\ct
-bind -M insert ctrl-i _fzf_search_directory
+
+function __fzf_all_files
+    set file (fd --hidden --exclude .git . | fzf)
+    if test -n "$file"
+        commandline --insert "$file"
+    end
+    commandline --function repaint
+end
+
+bind -M insert ctrl-i __fzf_all_files
+
+
 source ~/.config/fish/config.local.post.fish
