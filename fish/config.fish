@@ -54,7 +54,10 @@ bind -M insert \eb backward-word
 function smart-forward-char
     set cmd (commandline)
     set cursor (commandline --cursor)
-    if test $cursor -ge (string length -- "$cmd")
+    if test -z "$cmd"
+        commandline -r y
+        commandline -f execute
+    else if test $cursor -ge (string length -- "$cmd")
         commandline -f forward-word
     else
         commandline -f forward-char
