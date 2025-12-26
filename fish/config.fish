@@ -785,6 +785,12 @@ abbr -a v nvim
 abbr -a n nvim
 abbr -a nn nvim_nproj
 
+# Rust
+abbr -a ci cargo init
+abbr -a cgi cargo init
+abbr -a cgb cargo build
+abbr -a cgt cargo test
+
 function nvim_new_session -a name
     tmux new-session -d -s nvim 2>/dev/null
     # unset tmux variable or else when eg. launch_new_tab is called
