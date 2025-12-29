@@ -692,7 +692,7 @@ abbr -a fk tmux new-session -s
 function tmux_attach -a name dir
     set name (string escape --style=var $name)
     if test -n "$dir"
-        tmux new-session -s $name -c $dir "hx ." 2>/dev/null
+        tmux new-session -s $name -c $dir codex 2>/dev/null
     else
         tmux new-session -s $name 2>/dev/null
     end
