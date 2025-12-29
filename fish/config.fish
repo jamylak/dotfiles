@@ -790,6 +790,9 @@ abbr -a ci cargo init
 abbr -a cgi cargo init
 abbr -a cgb cargo build
 abbr -a cgt cargo test
+abbr -a ct cargo test
+abbr -a cgr cargo run
+abbr -a cr cargo run
 
 function nvim_new_session -a name
     tmux new-session -d -s nvim 2>/dev/null
