@@ -1003,14 +1003,21 @@ function wt -a branch
     end
 end
 
-function wtr -a target
-    if test -z "$target"
-        set target (pwd)
+function wtr -a branch
+    if test -z "$branch"
+        echo "usage: wtr <branchname>" >&2
+        return 1
     end
-    git worktree remove --force "$target"
-    if test -d "$target"
-        rm -rf -- "$target"
+    set repo_root (git rev-parse --show-toplevel 2>/dev/null)
+    if test -z "$repo_root"
+        echo "wtr: not in a git repo" >&2
+        return 1
     end
+    set repo_name (basename "$repo_root")
+    set worktree_path (dirname "$repo_root")/"$repo_name-$branch"
+    git -C "$repo_root" worktree remove "$worktree_path"
+    and test -d "$worktree_path"
+    and rm -rf -- "$worktree_path"
 end
 
 function duck --description 'Search DuckDuckGo via awrit'
