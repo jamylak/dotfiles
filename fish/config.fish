@@ -965,7 +965,7 @@ function nvim_join_fzf
 end
 
 function tmux_fzf
-    set dir (ls -d ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
+    set dir (ls -dt ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
     if test -n "$dir"
         tmux_attach "$dir" "$dir"
     end
