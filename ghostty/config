@@ -19,9 +19,13 @@ macos-icon = blueprint
 
 background = #000000
 background-opacity = 0.85
+# background-blur = macos-glass-regular
 # background-blur-radius = 65
 # shell-integration-features = no-cursor
 macos-non-native-fullscreen = true
+
+# command-palette-entry = title:VMode,action:activate_key_table:vim
+# command-palette-entry = title:Open Yanked, description: Open yanked, action:text:nvim +9999 \x19\r
 
 keybind = super+p=toggle_quick_terminal
 keybind = super+enter=new_split:down
