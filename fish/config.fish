@@ -974,6 +974,13 @@ end
 function tmux_session_fzf
     set session (tmux list-sessions | fzf | cut -d ':' -f 1)
     if test -n "$session"
+        set session_path (tmux display-message -p -t "$session" '#{session_path}' 2>/dev/null)
+        if test -z "$session_path"
+            set session_path (tmux list-panes -t "$session" -F '#{pane_current_path}' 2>/dev/null | head -n 1)
+        end
+        if test -n "$session_path"; and test -d "$session_path"
+            builtin cd -- "$session_path"
+        end
         tmux attach-session -t $session
     end
 end
