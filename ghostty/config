@@ -51,11 +51,6 @@ keybind = super+g=write_screen_file:copy
 keybind = super+r=toggle_command_palette
 keybind = super+k=toggle_command_palette
 
-# nvm this
-keybind = super+shift+h=text:nvim +9999 /
-keybind = super+shift+j=write_screen_file:paste
-keybind = super+alt+shift+j=write_screen_file:open
-
 # custom-shader = ~/proj/ghostty-shaders/galaxy.glsl
 # custom-shader = ~/proj/ghostty-shaders/glow-rgbsplit-twitchy.glsl
 # custom-shader = ~/proj/ghostty-shaders/tft.glsl
