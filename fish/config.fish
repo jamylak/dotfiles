@@ -998,6 +998,9 @@ function wt -a branch
     else
         git worktree add -b "$branch" "$worktree_path"
     end
+    if test -d "$worktree_path"
+        builtin cd -- "$worktree_path"
+    end
 end
 
 function duck --description 'Search DuckDuckGo via awrit'
