@@ -1004,12 +1004,16 @@ fzf_configure_bindings --directory=\ct
 function __fzf_all_files
     set file (fd --hidden --exclude .git . | fzf)
     if test -n "$file"
-        commandline --insert "$file"
+        set cmdline (commandline)
+        if test -z "$cmdline" -a -x "$file" -a -f "$file"
+            commandline --insert "./$file"
+        else
+            commandline --insert "$file"
+        end
     end
     commandline --function repaint
 end
 
 bind -M insert ctrl-i __fzf_all_files
-
 
 source ~/.config/fish/config.local.post.fish
