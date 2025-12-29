@@ -1003,6 +1003,16 @@ function wt -a branch
     end
 end
 
+function wtr -a target
+    if test -z "$target"
+        set target (pwd)
+    end
+    git worktree remove --force "$target"
+    if test -d "$target"
+        rm -rf -- "$target"
+    end
+end
+
 function duck --description 'Search DuckDuckGo via awrit'
     if test (count $argv) -eq 0
         echo "usage: duck <search terms>" >&2
