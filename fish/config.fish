@@ -95,6 +95,7 @@ bind -M insert \eo 'commandline -r "nvim -c \":Telescope oldfiles\"" ; commandli
 bind -M insert \eh "hx ."
 bind -M insert \cg "echo n | lazygit && commandline --function repaint"
 bind -M insert \eg "echo n | lazygit && commandline --function repaint"
+bind -M insert \el "echo n | lazygit && commandline --function repaint"
 # bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
 bind -M insert \en 'commandline -r "nvim_nproj"; commandline -f execute'
 bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
