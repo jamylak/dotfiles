@@ -1,4 +1,5 @@
 command = /opt/homebrew/bin/fish
+auto-update-channel = tip
 # theme = 0x96f
 # theme = Fairyfloss
 # theme = Vesper
