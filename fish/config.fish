@@ -654,7 +654,8 @@ abbr -a dm neogitdiffmain
 abbr -a hex hexdump -C
 abbr -a cdls "cd (ls -t | head -n 1)"
 abbr -a war watchandrun
-abbr -a w --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
+# abbr -a w --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
+abbr -a w wt
 abbr -a workon --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
 abbr -a svep --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
 abbr -a setvirtualenvproject --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
