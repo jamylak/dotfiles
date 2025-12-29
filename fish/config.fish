@@ -985,6 +985,20 @@ function tmux_session_fzf
     end
 end
 
+function wt -a branch
+    if test -z "$branch"
+        echo "usage: wt <branchname>" >&2
+        return 1
+    end
+    set repo_name (basename (pwd))
+    set worktree_path "../$repo_name-$branch"
+    if git show-ref --verify --quiet "refs/heads/$branch"
+        git worktree add "$worktree_path" "$branch"
+    else
+        git worktree add -b "$branch" "$worktree_path"
+    end
+end
+
 function duck --description 'Search DuckDuckGo via awrit'
     if test (count $argv) -eq 0
         echo "usage: duck <search terms>" >&2
