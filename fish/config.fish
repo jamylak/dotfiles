@@ -982,6 +982,20 @@ function tmux_dir_session_name -a dir
     end
 end
 
+function mm -a dir
+    if test -z "$dir"
+        echo "usage: mm <dirname>" >&2
+        return 1
+    end
+    builtin cd -- ~/bar
+    mkdir "$dir"; or return $status
+    builtin cd -- "$dir"
+    git init
+    set dir (pwd)
+    set name (tmux_dir_session_name "$dir")
+    tmux_attach "$name" "$dir"
+end
+
 function tmux_fzf
     set dir (ls -dt ~/bar/* ~/proj/* ~/.config/dotfiles* ~/.config/nvim* | fzf)
     if test -n "$dir"
