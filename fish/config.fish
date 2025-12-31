@@ -29,6 +29,7 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 # set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
 set -gx UV_PYTHON python3.13
+set -gx AI_CLI codex
 
 # TODO: Lazygit config
 # promptToReturnFromSubprocess: false
@@ -693,7 +694,7 @@ abbr -a fk tmux new-session -s
 function tmux_attach -a name dir
     set name (string escape --style=var $name)
     if test -n "$dir"
-        tmux new-session -s $name -c $dir codex 2>/dev/null
+        tmux new-session -s $name -c $dir $AI_CLI 2>/dev/null
     else
         tmux new-session -s $name 2>/dev/null
     end
