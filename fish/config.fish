@@ -1021,6 +1021,9 @@ function wtr -a branch
         return 1
     end
     set main_root (dirname "$git_common_dir")
+    if test "$git_common_dir" = ".git"
+        set main_root "$repo_root"
+    end
     set repo_name (basename "$main_root")
     set worktree_path (dirname "$main_root")/"$repo_name-$branch"
     git -C "$main_root" worktree remove "$worktree_path"
