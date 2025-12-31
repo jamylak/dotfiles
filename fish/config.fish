@@ -930,7 +930,7 @@ abbr -a zr "./zig-out/bin/*"
 abbr -a zbr "zig build && ./zig-out/bin/*"
 
 # Codex
-# abbr -a co "codex"
+abbr -a co codex
 
 # Yazi
 # https://yazi-rs.github.io/docs/quick-start/
