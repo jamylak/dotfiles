@@ -979,11 +979,30 @@ function nvim_join_fzf
     end
 end
 
+function tmux_dir_session_name -a dir
+    # Use the dir as session name but get rid of $HOME from it
+    if test -n "$dir"
+        string replace -r "^$HOME/" "" -- "$dir"
+    end
+end
+
 function tmux_fzf
     set dir (ls -dt ~/bar/* ~/proj/* ~/.config/dotfiles* ~/.config/nvim* | fzf)
     if test -n "$dir"
         builtin cd -- "$dir"
-        set name (string replace -r "^$HOME/" "" -- "$dir")
+        set name (tmux_dir_session_name "$dir")
+        tmux_attach "$name" "$dir"
+    end
+end
+
+function coco -a branch
+    worktree_add "$branch"
+    if test $status -ne 0
+        return $status
+    end
+    set dir (pwd)
+    if test -n "$dir"
+        set name (tmux_dir_session_name "$dir")
         tmux_attach "$name" "$dir"
     end
 end
