@@ -1115,12 +1115,17 @@ function worktree_merge --description 'Squash merge current worktree into main a
         return 1
     end
     set branch (git -C "$repo_root" rev-parse --abbrev-ref HEAD); or return 1
+    set message "Squash merge $branch"
+    if test (count $argv) -gt 0
+        set message (string join " " $argv)
+    end
     set main_branch main
     if not git -C "$main_root" show-ref --verify --quiet refs/heads/main
         set main_branch master
     end
     git -C "$main_root" checkout "$main_branch"; or return 1
     git -C "$main_root" merge --squash "$branch"; or return 1
+    git -C "$main_root" commit -m "$message"; or return 1
     worktree_remove
 end
 
