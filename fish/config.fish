@@ -1093,10 +1093,13 @@ function worktree_remove -a branch
     end
     # Remove the worktree and clean up any leftover directory, then return home.
     git -C "$main_root" worktree remove "$worktree_path"
-    and test -d "$worktree_path"
-    and rm -rf -- "$worktree_path"
-    # Only run this if git command worked
-    # Just having and in front doesn't help
+    set -l remove_status $status
+    if test $remove_status -ne 0
+        return $remove_status
+    end
+    if test -d "$worktree_path"
+        rm -rf -- "$worktree_path"
+    end
     builtin cd -- "$main_root"
 end
 
