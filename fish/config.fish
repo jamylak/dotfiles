@@ -659,7 +659,7 @@ abbr -a war watchandrun
 abbr -a w worktree_add
 abbr -a wa worktree_add
 abbr -a wt worktree_add
-abbr -a wtr worktree_add
+abbr -a wtr worktree_remove
 abbr -a wr worktree_remove
 abbr -a workon --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
 abbr -a svep --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
