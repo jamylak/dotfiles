@@ -87,6 +87,7 @@ abbr -a hm --position anywhere ~/
 abbr -a dotfiles --position anywhere ~/.config/dotfiles
 abbr -a dot --position anywhere ~/.config/dotfiles
 abbr -a m --set-cursor=! "cd ~/bar; mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mm make_new_project
 abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
@@ -985,7 +986,7 @@ function tmux_dir_session_name -a dir
     end
 end
 
-function mm -a dir
+function make_new_project -a dir
     if test -z "$dir"
         echo "usage: mm <dirname>" >&2
         return 1
