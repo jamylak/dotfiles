@@ -692,8 +692,8 @@ abbr -a tk tmux new-session -s
 abbr -a fk tmux new-session -s
 
 function tmux_attach -a name dir
-    # Replaces any character not in the allow-list (letters, digits, underscore, dot, hyphen) with "_".
-    set name (string replace -ar '[^[:alnum:]_.-]' '_' -- $name)
+    # Replaces any character not in the allow-list (letters, digits, underscore, hyphen) with "_".
+    set name (string replace -ar '[^[:alnum:]_-]' '_' -- $name)
     # Collapses consecutive underscores into a single "_" so the slug stays tidy.
     set name (string replace -ar '_+' '_' -- $name)
     # Trims leading and trailing underscores so you don’t end up with "_name_".
