@@ -1,4 +1,7 @@
 source ~/.config/fish/config.local.pre.fish
+
+### ENVIRONMENT ###
+
 if test -d /opt/homebrew/bin
     set -xg SHELL /opt/homebrew/bin/fish
 else
@@ -31,11 +34,317 @@ set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
 set -gx UV_PYTHON python3.13
 set -gx AI_CLI codex
 
+set -g fish_key_bindings fish_vi_key_bindings
+
+### ABBREVIATIONS ###
+
+abbr -a bt btop
+abbr -a a awrit
+# Dashboard
+abbr -a db dashboard
+# Neogit
+abbr -a ng neogitlog 300
+abbr -a ngl neogitlog 300
+abbr -a dl neogitlog 300
+abbr -a nl neogitlog 300
+abbr -a ngd neogitdiff
+abbr -a nd neogitdiff
+abbr -a d neogitdiff
+abbr -a ngdm neogitdiffmain
+abbr -a ngm neogitdiffmain
+abbr -a dm neogitdiffmain
+# C++
+# TODO: debug build
+# TODO: lldb
+# Other
+abbr -a hex hexdump -C
+abbr -a cdls "cd (ls -t | head -n 1)"
+abbr -a war watchandrun
+# abbr -a w --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
+abbr -a w worktree_add
+abbr -a wa worktree_add
+abbr -a wt worktree_add
+abbr -a wtr worktree_remove
+abbr -a wr worktree_remove
+abbr -a workon --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
+abbr -a svep --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
+abbr -a setvirtualenvproject --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
+abbr -a ef exec fish
+abbr -a hm --position anywhere ~/
+abbr -a dotfiles --position anywhere ~/.config/dotfiles
+abbr -a dot --position anywhere ~/.config/dotfiles
+abbr -a m --set-cursor=! "cd ~/bar; mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mkd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mkc --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mk --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a p python3
+abbr -a pdb python3 -m pdb
+abbr -a --position anywhere tmp /tmp/
+abbr -a --position anywhere tm /tmp/
+abbr -a --position anywhere bar ~/bar/
+abbr -a --position anywhere b ~/bar/
+abbr -a --position anywhere proj ~/proj/
+abbr -a --position anywhere pr ~/proj/
+abbr -a c 'nvim -c ":CopilotChatOpen" -c ":only" -c "startinsert"'
+abbr -a r --position anywhere --function last_history_item
+abbr -a q exit
+
+# Tmux
+abbr -a t tmux
+abbr -a ta "tmux a"
+abbr -a td "tmux detach"
+abbr -a tc tmux new-session -s
+abbr -a ts tmux new-session -s
+abbr -a tk tmux new-session -s
+abbr -a fk tmux new-session -s
+abbr -a tj tmux_attach
+abbr -a fk tmux_attach
+
+# Directories
+abbr -a k zi
+abbr -a zid "cd ~/.config/dotfiles"
+abbr -a zd "cd ~/.config/dotfiles"
+abbr -a zib "cd ~/bar"
+abbr -a zis "cd ~/scripts"
+abbr -a zp "cd ~/proj"
+abbr -a zit "cd /tmp"
+abbr -a zin "z ~/.config/nvim"
+abbr -a zn "z ~/.config/nvim"
+abbr -a br brew
+abbr -a bi "brew install"
+abbr -a bin "brew info"
+abbr -a bu "brew upgrade"
+
+# Git
+abbr -a g git
+abbr -a gf git fetch
+abbr -a gfk "git_fetch_main; git_checkout_origin"
+abbr -a gfo "git_fetch_main; git_checkout_origin"
+abbr -a gko git_checkout_origin
+abbr -a gkt "git checkout (tv git-branch)"
+abbr -a gt "git checkout (tv git-branch)"
+abbr -a gkb "git checkout (tv git-branch)"
+abbr -a N nvim -c ":Neogit"
+abbr -a ng nvim -c ":Neogit"
+abbr -a gi "git init"
+abbr -a gb "git branch"
+abbr -a gk git checkout
+abbr -a gm --set-cursor=! "git commit -m \"!\""
+# gh extension install gennaro-tedesco/gh-s
+abbr -a ghc --set-cursor=! "git clone (gh s \"!\") && cd (ls -t | head -n 1)"
+abbr -a ghs --set-cursor=! "git clone (gh s \"!\") && cd (ls -t | head -n 1)"
+abbr -a cloneproj --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
+abbr -a clonetoproj --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
+# TODO: if it already exists, just cd into it?
+abbr -a ghp --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
+abbr -a gl "git log"
+abbr -a gpl "git pull"
+abbr -a gc git commit
+abbr -a ga git add
+abbr -a gaa git add -A
+abbr -a gp git pull
+abbr -a gs git status
+abbr -a gst git stash
+abbr -a gstp git stash pop
+abbr -a gd git diff
+abbr -a gu git push
+abbr -a gps git push
+abbr -a gcl --set-cursor=! "git clone ! && cd (ls -t | head -n 1)"
+abbr -a gpsu "git push --set-upstream origin (git branch --show-current)"
+abbr -a gsu "git push --set-upstream origin (git branch --show-current)"
+
+# Neovide
+abbr -a neovide 'open -a neovide --args'
+abbr -a nv 'open -a neovide --args'
+# alias neovide 'open -a Neovide --args'
+# abbr -a nv neovide
+
+# gcloud
+abbr -a gal gcloud auth login
+abbr -a gad gcloud auth application-default login
+abbr -a gaadl gcloud auth application-default login
+abbr -a gadl gcloud auth application-default login
+
+# Lazygit
+abbr -a lg lazygit
+abbr -a G lazygit
+abbr -a lgd "cd ~/.config/dotfiles; lazygit"
+abbr -a lgn "cd ~/.config/nvim/; lazygit"
+
+# Vim
+abbr -a vi nvim
+abbr -a v nvim
+abbr -a n nvim
+abbr -a nn nvim_nproj
+
+# Rust
+abbr -a ci cargo init
+abbr -a cgi cargo init
+abbr -a cgb cargo build
+abbr -a cgt cargo test
+abbr -a ct cargo test
+abbr -a cgr cargo run
+abbr -a cr cargo run
+
+abbr -a ns nvim_new_session
+abbr -a njj --set-cursor=! nvim --server /tmp/nvim!.sock --remote-ui
+abbr -a ne nvim_join_session
+abbr -a nj nvim_join_session
+abbr -a fj nvim_join_session
+#abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
+abbr -a vib "cd ~/bar; nvim ."
+abbr -a o "cd /Users/james/bar/testfoo; nvim foo.frag -c ':M' -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"f<CR>\", true, true, true), \"m\", true)'"
+
+abbr -a vb "cd ~/bar; cd (fzf --walker=dir) && nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"si<CR>\", true, true, true), \"m\", true)'"
+abbr -a vij "nvim ."
+abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
+abbr -a viv 'nvim -c "normal \'0"'
+abbr -a vn 'NVIM_APPNAME=nvim2 nvim'
+abbr -a vj 'NVIM_APPNAME=nvim2 nvim'
+abbr -a vnn 'NVIM_APPNAME=nvim2 nvim ~/.config/nvim2/init.lua'
+abbr -a vi nvim
+abbr -a vii "nvim ."
+abbr -a vij "nvim ."
+abbr -a via 'nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'
+abbr -a viz 'nvim ~/.config/dotfiles/.zshenv -c "normal cd"'
+abbr -a vic 'nvim ~/.config -c "normal cd"'
+abbr -a vin 'nvim ~/.config/nvim/ -c "normal cd"'
+abbr -a vih 'cd ~/.config/helix/; nvim config.toml'
+abbr -a vip 'nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
+abbr -a vp "cd ~/proj; cd (fzf --walker=dir) && nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"si<CR>\", true, true, true), \"m\", true)'"
+abbr -a vid 'nvim ~/.config/dotfiles/ -c "normal cd"'
+abbr -a vif 'nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
+abbr -a vifl 'nvim ~/.config/dotfiles/fish/config.local.post.fish -c "normal cd"'
+abbr -a vfl 'nvim ~/.config/dotfiles/fish/config.local.post.fish -c "normal cd"'
+abbr -a fl 'nvim ~/.config/dotfiles/fish/config.local.post.fish -c "normal cd"'
+abbr -a vizl 'nvim ~/.config/dotfiles/.zshenv.local -c "normal cd"'
+abbr -a vik 'nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
+abbr -a vk 'cd ~/.config/dotfiles && nvim kitty/kitty.conf'
+abbr -a vit 'nvim /tmp -c "normal cd"'
+abbr -a vt 'nvim -c ":term" -c ":startinsert"'
+abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
+
+# Helix
+abbr -a h hx
+abbr -a hr 'hx .'
+abbr -a hz 'cd ~/.config/dotfiles; hx .zshenv'
+abbr -a hzl 'cd ~/.config/dotfiles; hx .zshenv.local'
+abbr -a ha 'cd ~/.config/dotfiles; hx alacritty/alacritty.toml'
+abbr -a hf 'cd ~/.config/dotfiles; hx fish/config.fish'
+abbr -a hy 'cd ~/.config/dotfiles; hx yazi'
+abbr -a hg 'cd ~/.config/dotfiles; hx ghostty/config'
+abbr -a hh 'cd ~/.config/dotfiles; hx helix/config.toml'
+abbr -a hb 'cd ~/bar; cd (fzf --walker=dir) && hx .'
+abbr -a hp 'cd ~/proj; cd (fzf --walker=dir) && hx .'
+abbr -a he 'cd ~/bar; cd (fzf --walker=dir) && hx .'
+abbr -a hfl 'cd ~/.config/dotfiles; hx fish/config.local.post.fish'
+abbr -a hd 'cd ~/.config/dotfiles; hx .'
+abbr -a htm 'cd ~/.config/dotfiles; hx .tmux.conf'
+abbr -a hn 'cd ~/.config/nvim/; hx .'
+abbr -a hk 'cd ~/.config/dotfiles; hx kitty/kitty.conf'
+abbr -a ht 'cd /tmp; hx .'
+
+# Emacs
+abbr -a em emacsclient -c
+abbr -a e emacsclient -c
+
+# Misc
+abbr -a rp realpath
+abbr -a newproj "scripts/newproj.sh"
+abbr -a nproj "scripts/newproj.sh"
+abbr -a killdocker "osascript -e 'quit app \"Docker\"'"
+abbr -a rt "./build/test*"
+abbr -a sb "./scripts/build.sh"
+abbr -a xx hx +999999
+
+# C++
+abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
+abbr -a cb "cmake --build build"
+
+# eza
+abbr -a l "eza --no-permissions --no-user --icons --tree -l -L 2"
+abbr -a x "eza --icons -l"
+abbr -a xj "eza --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
+abbr -a xk "eza --no-permissions --no-user --icons --tree -l -L 1"
+abbr -a ex "eza --icons --tree -l"
+abbr -a exn "eza --icons --tree -l --git --git-ignore --no-permissions --no-user"
+abbr -a exx "eza --icons --tree -l --git --git-ignore"
+abbr -a ll "eza --icons -l"
+
+# Zig
+abbr -a zb "zig build"
+abbr -a zbt "zig build test"
+abbr -a zt "zig test"
+abbr -a ztt "zig test tests.zig"
+abbr -a zr "./zig-out/bin/*"
+abbr -a zbr "zig build && ./zig-out/bin/*"
+
+# Codex
+abbr -a co codex
+
+
+#### KEY BINDINGS ###
+
+# Autocomplete binding
+bind \cy 'commandline -f accept-autosuggestion'
+bind -M insert \ef forward-word
+bind -M insert \eb backward-word
+
+bind -M insert \ck smart-expand-abbr
+bind -M insert \cs "zi; commandline --function repaint"
+bind -M insert \ei "zi; commandline --function repaint"
+# Doing commandline -r because if you bind things directly
+# it messes up nvim cursor
+bind -M insert \ej 'commandline -r "y" ; commandline -f execute'
+bind -M insert \ek 'commandline -r "nvim_find_files" ; commandline -f execute'
+bind -M insert \eo 'commandline -r "nvim -c \":Telescope oldfiles\"" ; commandline -f execute'
+bind -M insert \eh "hx ."
+bind -M insert \cg "echo n | lazygit && commandline --function repaint"
+bind -M insert \eg "echo n | lazygit && commandline --function repaint"
+bind -M insert \el "echo n | lazygit && commandline --function repaint"
+# bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
+bind -M insert \en 'commandline -r "nvim_nproj"; commandline -f execute'
+bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
+# bind -M insert \ev "nvim"
+bind -M insert \eq "commandline --function kill-whole-line"
+bind -M insert \ep 'commandline -r "tmux_fzf"; commandline -f execute'
+bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
+bind -M insert \co "__smart_cd_or_insert_path; commandline --function repaint"
+bind --mode insert \cy 'commandline --insert (pbpaste)'
+# bind -M insert \em fish_clipboard_paste
+bind -M insert ctrl-i __fzf_all_files
+
+#bind -M normal \ce edit_command_buffer
+#bind -M insert \ce edit_command_buffer
+
 # TODO: Lazygit config
 # promptToReturnFromSubprocess: false
 # https://github.com/jesseduffield/lazygit/issues/1915
 
-set -g fish_key_bindings fish_vi_key_bindings
+### FUNCTIONS ###
+
+function fish_user_key_bindings
+    # for mode in insert default visual
+    bind -M insert \cb backward-char
+    bind -M insert alt-a beginning-of-line
+    bind -M insert \ca beginning-of-line
+    bind -M insert \ce end-of-line
+    bind -M insert \cf smart-forward-char
+    bind -M insert \cp history-search-backward
+    bind -M insert \cn history-search-forward
+    bind -M insert ctrl-space _fzf_search_history
+    bind -M insert alt-space _fzf_search_history
+    bind -M insert \cj forward-or-execute
+    bind -M insert \ch delete_or_lazygit
+    bind -M insert space space_or_fzf
+    bind -M insert ctrl-enter "__smart_cd_or_insert_path; commandline --function repaint"
+    bind -M insert alt-enter "__smart_cd_or_insert_path; commandline --function repaint"
+    if not set -q NVIM
+        bind -M insert enter fish_enter_or_fzf
+    end
+end
 
 function nvim_nproj -a projname
     if test -n "$projname"
@@ -46,11 +355,6 @@ function nvim_nproj -a projname
         nvim -c ":F"
     end
 end
-
-# Autocomplete binding
-bind \cy 'commandline -f accept-autosuggestion'
-bind -M insert \ef forward-word
-bind -M insert \eb backward-word
 
 function smart-forward-char
     set cmd (commandline)
@@ -85,28 +389,28 @@ function smart-expand-abbr
     end
 end
 
-bind -M insert \ck smart-expand-abbr
-bind -M insert \cs "zi; commandline --function repaint"
-bind -M insert \ei "zi; commandline --function repaint"
-# Doing commandline -r because if you bind things directly
-# it messes up nvim cursor
-bind -M insert \ej 'commandline -r "y" ; commandline -f execute'
-bind -M insert \ek 'commandline -r "nvim_find_files" ; commandline -f execute'
-bind -M insert \eo 'commandline -r "nvim -c \":Telescope oldfiles\"" ; commandline -f execute'
-bind -M insert \eh "hx ."
-bind -M insert \cg "echo n | lazygit && commandline --function repaint"
-bind -M insert \eg "echo n | lazygit && commandline --function repaint"
-bind -M insert \el "echo n | lazygit && commandline --function repaint"
-# bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
-bind -M insert \en 'commandline -r "nvim_nproj"; commandline -f execute'
-bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
-# bind -M insert \ev "nvim"
-bind -M insert \eq "commandline --function kill-whole-line"
-bind -M insert \ep 'commandline -r "tmux_fzf"; commandline -f execute'
-bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
-bind -M insert \co "__smart_cd_or_insert_path; commandline --function repaint"
-bind --mode insert \cy 'commandline --insert (pbpaste)'
-# bind -M insert \em fish_clipboard_paste
+function fish_enter_or_fzf
+    set cmd (commandline)
+    # If empty then run nvim FFFFind
+    if test -z "$cmd"
+        commandline -r 'nvim -c ":FFFFind"'
+    end
+    # Otherwise normal enter
+    commandline -f execute
+end
+
+function __fzf_all_files
+    set file (fd --hidden --exclude .git . | fzf)
+    if test -n "$file"
+        set cmdline (commandline)
+        if test -z "$cmdline" -a -x "$file" -a -f "$file"
+            commandline --insert "./$file"
+        else
+            commandline --insert "$file"
+        end
+    end
+    commandline --function repaint
+end
 
 function __smart_cd_or_insert_path
     # 1. If I press eg. \co
@@ -145,9 +449,6 @@ function __smart_cd_or_insert_path
         _fzf_search_directory
     end
 end
-
-#bind -M normal \ce edit_command_buffer
-#bind -M insert \ce edit_command_buffer
 
 # eg. fd is in here
 fish_add_path -mp /opt/homebrew/bin
@@ -481,37 +782,6 @@ function space_or_fzf
     end
 end
 
-function fish_user_key_bindings
-    # for mode in insert default visual
-    bind -M insert \cb backward-char
-    bind -M insert alt-a beginning-of-line
-    bind -M insert \ca beginning-of-line
-    bind -M insert \ce end-of-line
-    bind -M insert \cf smart-forward-char
-    bind -M insert \cp history-search-backward
-    bind -M insert \cn history-search-forward
-    bind -M insert ctrl-space _fzf_search_history
-    bind -M insert alt-space _fzf_search_history
-    bind -M insert \cj forward-or-execute
-    bind -M insert \ch delete_or_lazygit
-    bind -M insert space space_or_fzf
-    bind -M insert ctrl-enter "__smart_cd_or_insert_path; commandline --function repaint"
-    bind -M insert alt-enter "__smart_cd_or_insert_path; commandline --function repaint"
-    if not set -q NVIM
-        bind -M insert enter fish_enter_or_fzf
-    end
-end
-
-function fish_enter_or_fzf
-    set cmd (commandline)
-    # If empty then run nvim FFFFind
-    if test -z "$cmd"
-        commandline -r 'nvim -c ":FFFFind"'
-    end
-    # Otherwise normal enter
-    commandline -f execute
-end
-
 function watchandrun
     # Check if the command was provided
     if set -q argv[1]
@@ -632,182 +902,11 @@ function git_checkout_origin
     git switch --track $branch
 end
 
-abbr -a bt btop
-abbr -a a awrit
-
-# Dashboard
-abbr -a db dashboard
-# Neogit
-abbr -a ng neogitlog 300
-abbr -a ngl neogitlog 300
-abbr -a dl neogitlog 300
-abbr -a nl neogitlog 300
-abbr -a ngd neogitdiff
-abbr -a nd neogitdiff
-abbr -a d neogitdiff
-abbr -a ngdm neogitdiffmain
-abbr -a ngm neogitdiffmain
-abbr -a dm neogitdiffmain
-# C++
-# TODO: debug build
-# TODO: lldb
-# Other
-abbr -a hex hexdump -C
-abbr -a cdls "cd (ls -t | head -n 1)"
-abbr -a war watchandrun
-# abbr -a w --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
-abbr -a w worktree_add
-abbr -a wa worktree_add
-abbr -a wt worktree_add
-abbr -a wtr worktree_remove
-abbr -a wr worktree_remove
-abbr -a workon --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
-abbr -a svep --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
-abbr -a setvirtualenvproject --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
-abbr -a ef exec fish
-abbr -a hm --position anywhere ~/
-abbr -a dotfiles --position anywhere ~/.config/dotfiles
-abbr -a dot --position anywhere ~/.config/dotfiles
-abbr -a m --set-cursor=! "cd ~/bar; mkdir \"!\" && cd (ls -tA | head -n 1)"
-abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
-abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
-abbr -a mkd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
-abbr -a mkc --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
-abbr -a mk --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
-abbr -a p python3
-abbr -a pdb python3 -m pdb
-abbr -a --position anywhere tmp /tmp/
-abbr -a --position anywhere tm /tmp/
-abbr -a --position anywhere bar ~/bar/
-abbr -a --position anywhere b ~/bar/
-abbr -a --position anywhere proj ~/proj/
-abbr -a --position anywhere pr ~/proj/
-abbr -a c 'nvim -c ":CopilotChatOpen" -c ":only" -c "startinsert"'
-abbr -a r --position anywhere --function last_history_item
-abbr -a q exit
-
-# Tmux
-abbr -a t tmux
-abbr -a ta "tmux a"
-abbr -a td "tmux detach"
-abbr -a tc tmux new-session -s
-abbr -a ts tmux new-session -s
-abbr -a tk tmux new-session -s
-abbr -a fk tmux new-session -s
-
-function tmux_attach -a name dir
-    # Replaces any character not in the allow-list (letters, digits, underscore, hyphen) with "_".
-    set name (string replace -ar '[^[:alnum:]_-]' '_' -- $name)
-    # Collapses consecutive underscores into a single "_" so the slug stays tidy.
-    set name (string replace -ar '_+' '_' -- $name)
-    # Trims leading and trailing underscores so you don’t end up with "_name_".
-    set name (string trim -c '_' -- $name)
-    if test -z "$name"
-        # Provides a safe fallback session name if it’s empty.
-        set name session
-    end
-    if test -n "$dir"
-        tmux new-session -s $name -c $dir $AI_CLI 2>/dev/null
-    else
-        tmux new-session -s $name 2>/dev/null
-    end
-    tmux attach-session -t $name
-end
-
-abbr -a tj tmux_attach
-abbr -a fk tmux_attach
-
-# Directories
-abbr -a k zi
-abbr -a zid "cd ~/.config/dotfiles"
-abbr -a zd "cd ~/.config/dotfiles"
-abbr -a zib "cd ~/bar"
-abbr -a zis "cd ~/scripts"
-abbr -a zp "cd ~/proj"
-abbr -a zit "cd /tmp"
-abbr -a zin "z ~/.config/nvim"
-abbr -a zn "z ~/.config/nvim"
-abbr -a br brew
-abbr -a bi "brew install"
-abbr -a bin "brew info"
-abbr -a bu "brew upgrade"
-
 function git_fetch_main
     git fetch
     git branch -f main origin/main 2>/dev/null
     git branch -f master origin/master 2>/dev/null
 end
-
-# Git
-abbr -a g git
-abbr -a gf git fetch
-abbr -a gfk "git_fetch_main; git_checkout_origin"
-abbr -a gfo "git_fetch_main; git_checkout_origin"
-abbr -a gko git_checkout_origin
-abbr -a gkt "git checkout (tv git-branch)"
-abbr -a gt "git checkout (tv git-branch)"
-abbr -a gkb "git checkout (tv git-branch)"
-abbr -a N nvim -c ":Neogit"
-abbr -a ng nvim -c ":Neogit"
-abbr -a gi "git init"
-abbr -a gb "git branch"
-abbr -a gk git checkout
-abbr -a gm --set-cursor=! "git commit -m \"!\""
-# gh extension install gennaro-tedesco/gh-s
-abbr -a ghc --set-cursor=! "git clone (gh s \"!\") && cd (ls -t | head -n 1)"
-abbr -a ghs --set-cursor=! "git clone (gh s \"!\") && cd (ls -t | head -n 1)"
-abbr -a cloneproj --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
-abbr -a clonetoproj --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
-# TODO: if it already exists, just cd into it?
-abbr -a ghp --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
-abbr -a gl "git log"
-abbr -a gpl "git pull"
-abbr -a gc git commit
-abbr -a ga git add
-abbr -a gaa git add -A
-abbr -a gp git pull
-abbr -a gs git status
-abbr -a gst git stash
-abbr -a gstp git stash pop
-abbr -a gd git diff
-abbr -a gu git push
-abbr -a gps git push
-abbr -a gcl --set-cursor=! "git clone ! && cd (ls -t | head -n 1)"
-abbr -a gpsu "git push --set-upstream origin (git branch --show-current)"
-abbr -a gsu "git push --set-upstream origin (git branch --show-current)"
-
-# Neovide
-abbr -a neovide 'open -a neovide --args'
-abbr -a nv 'open -a neovide --args'
-# alias neovide 'open -a Neovide --args'
-# abbr -a nv neovide
-
-# gcloud
-abbr -a gal gcloud auth login
-abbr -a gad gcloud auth application-default login
-abbr -a gaadl gcloud auth application-default login
-abbr -a gadl gcloud auth application-default login
-
-# Lazygit
-abbr -a lg lazygit
-abbr -a G lazygit
-abbr -a lgd "cd ~/.config/dotfiles; lazygit"
-abbr -a lgn "cd ~/.config/nvim/; lazygit"
-
-# Vim
-abbr -a vi nvim
-abbr -a v nvim
-abbr -a n nvim
-abbr -a nn nvim_nproj
-
-# Rust
-abbr -a ci cargo init
-abbr -a cgi cargo init
-abbr -a cgb cargo build
-abbr -a cgt cargo test
-abbr -a ct cargo test
-abbr -a cgr cargo run
-abbr -a cr cargo run
 
 function nvim_new_session -a name
     tmux new-session -d -s nvim 2>/dev/null
@@ -842,64 +941,6 @@ function nvim_join_session -a name dir
     nvim --server /tmp/nvim$name.sock --remote-ui
 end
 
-abbr -a ns nvim_new_session
-abbr -a njj --set-cursor=! nvim --server /tmp/nvim!.sock --remote-ui
-abbr -a ne nvim_join_session
-abbr -a nj nvim_join_session
-abbr -a fj nvim_join_session
-#abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
-abbr -a vib "cd ~/bar; nvim ."
-abbr -a o "cd /Users/james/bar/testfoo; nvim foo.frag -c ':M' -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"f<CR>\", true, true, true), \"m\", true)'"
-
-abbr -a vb "cd ~/bar; cd (fzf --walker=dir) && nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"si<CR>\", true, true, true), \"m\", true)'"
-abbr -a vij "nvim ."
-abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
-abbr -a viv 'nvim -c "normal \'0"'
-abbr -a vn 'NVIM_APPNAME=nvim2 nvim'
-abbr -a vj 'NVIM_APPNAME=nvim2 nvim'
-abbr -a vnn 'NVIM_APPNAME=nvim2 nvim ~/.config/nvim2/init.lua'
-abbr -a vi nvim
-abbr -a vii "nvim ."
-abbr -a vij "nvim ."
-abbr -a via 'nvim ~/.config/dotfiles/alacritty/alacritty.toml -c "normal cd"'
-abbr -a viz 'nvim ~/.config/dotfiles/.zshenv -c "normal cd"'
-abbr -a vic 'nvim ~/.config -c "normal cd"'
-abbr -a vin 'nvim ~/.config/nvim/ -c "normal cd"'
-abbr -a vih 'cd ~/.config/helix/; nvim config.toml'
-abbr -a vip 'nvim ~/.config/nvim/lua/plugins/ -c "normal cd"'
-abbr -a vp "cd ~/proj; cd (fzf --walker=dir) && nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"si<CR>\", true, true, true), \"m\", true)'"
-abbr -a vid 'nvim ~/.config/dotfiles/ -c "normal cd"'
-abbr -a vif 'nvim ~/.config/dotfiles/fish/config.fish -c "normal cd"'
-abbr -a vifl 'nvim ~/.config/dotfiles/fish/config.local.post.fish -c "normal cd"'
-abbr -a vfl 'nvim ~/.config/dotfiles/fish/config.local.post.fish -c "normal cd"'
-abbr -a fl 'nvim ~/.config/dotfiles/fish/config.local.post.fish -c "normal cd"'
-abbr -a vizl 'nvim ~/.config/dotfiles/.zshenv.local -c "normal cd"'
-abbr -a vik 'nvim ~/.config/dotfiles/kitty/kitty.conf -c "normal cd"'
-abbr -a vk 'cd ~/.config/dotfiles && nvim kitty/kitty.conf'
-abbr -a vit 'nvim /tmp -c "normal cd"'
-abbr -a vt 'nvim -c ":term" -c ":startinsert"'
-abbr -a vitm 'nvim ~/.config/dotfiles/.tmux.conf -c "normal cd"'
-
-# Helix
-abbr -a h hx
-abbr -a hr 'hx .'
-abbr -a hz 'cd ~/.config/dotfiles; hx .zshenv'
-abbr -a hzl 'cd ~/.config/dotfiles; hx .zshenv.local'
-abbr -a ha 'cd ~/.config/dotfiles; hx alacritty/alacritty.toml'
-abbr -a hf 'cd ~/.config/dotfiles; hx fish/config.fish'
-abbr -a hy 'cd ~/.config/dotfiles; hx yazi'
-abbr -a hg 'cd ~/.config/dotfiles; hx ghostty/config'
-abbr -a hh 'cd ~/.config/dotfiles; hx helix/config.toml'
-abbr -a hb 'cd ~/bar; cd (fzf --walker=dir) && hx .'
-abbr -a hp 'cd ~/proj; cd (fzf --walker=dir) && hx .'
-abbr -a he 'cd ~/bar; cd (fzf --walker=dir) && hx .'
-abbr -a hfl 'cd ~/.config/dotfiles; hx fish/config.local.post.fish'
-abbr -a hd 'cd ~/.config/dotfiles; hx .'
-abbr -a htm 'cd ~/.config/dotfiles; hx .tmux.conf'
-abbr -a hn 'cd ~/.config/nvim/; hx .'
-abbr -a hk 'cd ~/.config/dotfiles; hx kitty/kitty.conf'
-abbr -a ht 'cd /tmp; hx .'
-
 function toggle_amethyst
     if pgrep Amethyst >/dev/null
         killall Amethyst
@@ -907,44 +948,6 @@ function toggle_amethyst
         open -a Amethyst
     end
 end
-
-# Emacs
-abbr -a em emacsclient -c
-abbr -a e emacsclient -c
-
-# Misc
-abbr -a rp realpath
-abbr -a newproj "scripts/newproj.sh"
-abbr -a nproj "scripts/newproj.sh"
-abbr -a killdocker "osascript -e 'quit app \"Docker\"'"
-abbr -a rt "./build/test*"
-abbr -a sb "./scripts/build.sh"
-abbr -a xx hx +999999
-
-# C++
-abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
-abbr -a cb "cmake --build build"
-
-# eza
-abbr -a l "eza --no-permissions --no-user --icons --tree -l -L 2"
-abbr -a x "eza --icons -l"
-abbr -a xj "eza --no-permissions --no-user --icons --tree -l --git --git-ignore -L 2"
-abbr -a xk "eza --no-permissions --no-user --icons --tree -l -L 1"
-abbr -a ex "eza --icons --tree -l"
-abbr -a exn "eza --icons --tree -l --git --git-ignore --no-permissions --no-user"
-abbr -a exx "eza --icons --tree -l --git --git-ignore"
-abbr -a ll "eza --icons -l"
-
-# Zig
-abbr -a zb "zig build"
-abbr -a zbt "zig build test"
-abbr -a zt "zig test"
-abbr -a ztt "zig test tests.zig"
-abbr -a zr "./zig-out/bin/*"
-abbr -a zbr "zig build && ./zig-out/bin/*"
-
-# Codex
-abbr -a co codex
 
 # Yazi
 # https://yazi-rs.github.io/docs/quick-start/
@@ -955,6 +958,25 @@ function y
         builtin cd -- "$cwd"
     end
     rm -f -- "$tmp"
+end
+
+function tmux_attach -a name dir
+    # Replaces any character not in the allow-list (letters, digits, underscore, hyphen) with "_".
+    set name (string replace -ar '[^[:alnum:]_-]' '_' -- $name)
+    # Collapses consecutive underscores into a single "_" so the slug stays tidy.
+    set name (string replace -ar '_+' '_' -- $name)
+    # Trims leading and trailing underscores so you don’t end up with "_name_".
+    set name (string trim -c '_' -- $name)
+    if test -z "$name"
+        # Provides a safe fallback session name if it’s empty.
+        set name session
+    end
+    if test -n "$dir"
+        tmux new-session -s $name -c $dir $AI_CLI 2>/dev/null
+    else
+        tmux new-session -s $name 2>/dev/null
+    end
+    tmux attach-session -t $name
 end
 
 function nvim_join_fzf
@@ -1097,23 +1119,9 @@ function duck --description 'Search DuckDuckGo via awrit'
     awrit "https://duckduckgo.com/?q=$encoded"
 end
 
+### INITIALIZATION ###
 starship init fish | source
 set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80% --bind=ctrl-j:accept"
 fzf_configure_bindings --directory=\ct
-
-function __fzf_all_files
-    set file (fd --hidden --exclude .git . | fzf)
-    if test -n "$file"
-        set cmdline (commandline)
-        if test -z "$cmdline" -a -x "$file" -a -f "$file"
-            commandline --insert "./$file"
-        else
-            commandline --insert "$file"
-        end
-    end
-    commandline --function repaint
-end
-
-bind -M insert ctrl-i __fzf_all_files
 
 source ~/.config/fish/config.local.post.fish
