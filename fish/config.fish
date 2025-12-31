@@ -970,7 +970,8 @@ function tmux_fzf
     set dir (ls -dt ~/bar/* ~/proj/* ~/.config/dotfiles* ~/.config/nvim | fzf)
     if test -n "$dir"
         builtin cd -- "$dir"
-        tmux_attach "$dir" "$dir"
+        set name (string replace -r "^$HOME/" "" -- "$dir")
+        tmux_attach "$name" "$dir"
     end
 end
 
