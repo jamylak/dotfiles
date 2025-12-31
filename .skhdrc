@@ -192,9 +192,15 @@ alt - k [
 	"finder" : ~/.config/dotfiles/scripts/runbrave.sh
 ]
 
-# yabai -m config layout monocle
+# alt + ctrl - space : yabai -m space --layout bsp || yabai -m space --layout monocle
 
-alt + ctrl - space : yabai -m space --layout bsp || yabai -m space --layout monocle
+alt + ctrl - space : \
+  current=$(yabai -m query --spaces --space | jq '.type' -r); \
+  if [ "$current" = "bsp" ]; then \
+    yabai -m space --layout stack; \
+  else \
+    yabai -m space --layout bsp; \
+  fi
 
 alt + ctrl - h : yabai -m window --resize right:-150:0 || yabai -m window --resize left:-150:0
 alt + ctrl - l : yabai -m window --resize right:150:0 || yabai -m window --resize left:150:0
@@ -205,8 +211,12 @@ alt + ctrl - l : yabai -m window --resize right:150:0 || yabai -m window --resiz
 alt + ctrl - n : skhd -k "ctrl - right"
 alt + ctrl - p : skhd -k "ctrl - left"
 
-alt + ctrl - f: yabai -m window --focus next  || yabai -m window --focus first
-alt + ctrl - b: yabai -m window --focus prev  || yabai -m window --focus last
+# https://github.com/asmvik/yabai/issues/665
+alt + ctrl - f: (yabai -m window --focus stack.next || yabai -m window --focus next) || (yabai -m window --focus stack.first || yabai -m window --focus first)
+alt + ctrl - b: (yabai -m window --focus stack.prev || yabai -m window --focus prev) || (yabai -m window --focus stack.last || yabai -m window --focus last)
+alt + ctrl - return: yabai -m window --swap next || yabai -m window --swap first
 
-cmd + alt - n : yabai -m window --space next
-cmd + alt - p : yabai -m window --space prev
+# ctrl + cmd - n : yabai -m window --space next
+# ctrl + cmd - p : yabai -m window --space prev
+# ctrl + cmd - n : yabai -m window --space next; skhd -k "ctrl - right"
+# ctrl + cmd - p : yabai -m window --space prev; skhd -k "ctrl - left"
