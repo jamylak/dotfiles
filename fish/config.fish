@@ -475,37 +475,6 @@ function launch_new_tab -a cmd
     end
 end
 
-function hx_tv -a path
-    # Text search a path
-    # then open result in hx (if we got one)
-    set res (tv text (dirname "$path"))
-    if test -n "$res"
-        hx $res
-    end
-end
-
-function yazi_tv_text -a path
-    # Text search a path
-    # then open result in hx (if we got one)
-    set res (tv text (dirname "$path"))
-    # Strip off everything after final : at the end
-    # including the #
-    set res (echo $res | sed 's/:[^:]*$//')
-    if test -n "$res"
-        yazi $res
-    end
-end
-
-function yazi_tv_git -a path
-    # Text search a path
-    # then open result in hx (if we got one)
-    set res (tv git-repos (dirname "$path"))
-    if test -n "$res"
-        z $res
-        yazi $res
-    end
-end
-
 function launch_overlay -a cmd
     if test -n "$TMUX"
         tmux split-window -v -c "#{pane_current_path}" "fish -c \"$cmd\"" \; resize-pane -Z
