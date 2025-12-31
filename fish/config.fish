@@ -954,7 +954,9 @@ function tmux_attach -a name dir
     else
         tmux new-session -s $name 2>/dev/null
     end
-    tmux attach-session -t $name
+    # Suppress "can't find session" message
+    tmux attach-session -t $name 2>/dev/null
+    # tmux attach-session -t $name
 end
 
 function nvim_join_fzf
