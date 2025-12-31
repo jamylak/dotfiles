@@ -36,6 +36,17 @@ set -gx AI_CLI codex
 
 set -g fish_key_bindings fish_vi_key_bindings
 
+### PATHS ###
+
+# eg. fd is in here
+fish_add_path -mp /opt/homebrew/bin
+fish_add_path -mp /opt/homebrew/opt/llvm/bin
+fish_add_path -mp /usr/local/bin
+fish_add_path -mp /Users/$USER/.local/bin
+fish_add_path -mp $HOME/.cargo/bin
+fish_add_path -mp $HOME/.emacs.d/bin
+fish_add_path -mp $HOME/.config/emacs/bin
+
 ### ABBREVIATIONS ###
 
 abbr -a bt btop
@@ -452,15 +463,6 @@ function __smart_cd_or_insert_path
         _fzf_search_directory
     end
 end
-
-# eg. fd is in here
-fish_add_path -mp /opt/homebrew/bin
-fish_add_path -mp /opt/homebrew/opt/llvm/bin
-fish_add_path -mp /usr/local/bin
-fish_add_path -mp /Users/$USER/.local/bin
-fish_add_path -mp $HOME/.cargo/bin
-fish_add_path -mp $HOME/.emacs.d/bin
-fish_add_path -mp $HOME/.config/emacs/bin
 
 function launch_new_tab -a cmd
     if test -n "$TMUX"
