@@ -119,6 +119,8 @@ abbr -a bu "brew upgrade"
 
 # Git
 abbr -a g git
+abbr -a gw git worktree
+abbr -a gwp git worktree prune
 abbr -a gf git fetch
 abbr -a gfk "git_fetch_main; git_checkout_origin"
 abbr -a gfo "git_fetch_main; git_checkout_origin"
@@ -283,7 +285,8 @@ abbr -a zbr "zig build && ./zig-out/bin/*"
 
 # Codex
 abbr -a co codex
-
+abbr -a cor codex resume
+abbr -a corl codex resume --last
 
 #### KEY BINDINGS ###
 
