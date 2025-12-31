@@ -1,7 +1,7 @@
 [font.normal]
 family = "MesloLGS NF"
 
-[shell]
+[terminal.shell]
 program = "/opt/homebrew/bin/tmux"
 
 [font]
@@ -56,3 +56,5 @@ bindings = [
   { key = "8", mods = "Command",  chars = "\u00007"},
   { key = "9", mods = "Command",  chars = "\u0000e"},
 ]
+
+[terminal]
