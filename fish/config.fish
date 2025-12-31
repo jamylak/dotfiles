@@ -692,7 +692,16 @@ abbr -a tk tmux new-session -s
 abbr -a fk tmux new-session -s
 
 function tmux_attach -a name dir
-    set name (string escape --style=var $name)
+    # Replaces any character not in the allow-list (letters, digits, underscore, dot, hyphen) with "_".
+    set name (string replace -ar '[^[:alnum:]_.-]' '_' -- $name)
+    # Collapses consecutive underscores into a single "_" so the slug stays tidy.
+    set name (string replace -ar '_+' '_' -- $name)
+    # Trims leading and trailing underscores so you don’t end up with "_name_".
+    set name (string trim -c '_' -- $name)
+    if test -z "$name"
+        # Provides a safe fallback session name if it’s empty.
+        set name session
+    end
     if test -n "$dir"
         tmux new-session -s $name -c $dir $AI_CLI 2>/dev/null
     else
