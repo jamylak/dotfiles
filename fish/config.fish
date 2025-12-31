@@ -32,7 +32,7 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 # set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
 set -gx UV_PYTHON python3.13
-set -gx AI_CLI codex -a untrusted
+set -gx AI_CLI codex --full-auto
 
 set -g fish_key_bindings fish_vi_key_bindings
 
@@ -297,7 +297,7 @@ abbr -a zr "./zig-out/bin/*"
 abbr -a zbr "zig build && ./zig-out/bin/*"
 
 # Codex
-abbr -a co codex -a untrusted
+abbr -a co codex --full-auto
 abbr -a cor codex resume
 abbr -a corl codex resume --last
 
