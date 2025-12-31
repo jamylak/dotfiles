@@ -1080,6 +1080,8 @@ function worktree_remove -a branch
     git -C "$main_root" worktree remove "$worktree_path"
     and test -d "$worktree_path"
     and rm -rf -- "$worktree_path"
+    # Only run this if git command worked
+    # Just having and in front doesn't help
     builtin cd -- "$main_root"
 end
 
