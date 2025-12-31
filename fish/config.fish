@@ -656,7 +656,11 @@ abbr -a hex hexdump -C
 abbr -a cdls "cd (ls -t | head -n 1)"
 abbr -a war watchandrun
 # abbr -a w --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
-abbr -a w wt
+abbr -a w worktree_add
+abbr -a wa worktree_add
+abbr -a wt worktree_add
+abbr -a wtr worktree_add
+abbr -a wr worktree_remove
 abbr -a workon --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
 abbr -a svep --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
 abbr -a setvirtualenvproject --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
@@ -998,7 +1002,7 @@ function tmux_session_fzf
     end
 end
 
-function wt -a branch
+function worktree_add -a branch
     if test -z "$branch"
         echo "usage: wt <branchname>" >&2
         return 1
@@ -1015,7 +1019,7 @@ function wt -a branch
     end
 end
 
-function wtr -a branch
+function worktree_remove -a branch
     # Resolve main root and git common dir for both main repo and worktrees.
     set repo_root (git rev-parse --show-toplevel 2>/dev/null)
     if test -z "$repo_root"
