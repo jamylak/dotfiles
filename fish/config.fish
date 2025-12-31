@@ -1015,11 +1015,18 @@ function wtr -a branch
         echo "wtr: not in a git repo" >&2
         return 1
     end
-    set repo_name (basename "$repo_root")
-    set worktree_path (dirname "$repo_root")/"$repo_name-$branch"
-    git -C "$repo_root" worktree remove "$worktree_path"
+    set git_common_dir (git rev-parse --git-common-dir 2>/dev/null)
+    if test -z "$git_common_dir"
+        echo "wtr: unable to locate git common dir" >&2
+        return 1
+    end
+    set main_root (dirname "$git_common_dir")
+    set repo_name (basename "$main_root")
+    set worktree_path (dirname "$main_root")/"$repo_name-$branch"
+    git -C "$main_root" worktree remove "$worktree_path"
     and test -d "$worktree_path"
     and rm -rf -- "$worktree_path"
+    builtin cd -- "$main_root"
 end
 
 function duck --description 'Search DuckDuckGo via awrit'
