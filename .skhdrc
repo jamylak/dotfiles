@@ -144,30 +144,8 @@
 # toggle sticky(+float), picture-in-picture
 # alt - p : yabai -m window --toggle sticky --toggle pip
 
-# TODO:fix chrome overriding this
-# alt + ctrl - j : skhd -k "alt + ctrl - b"
-
-# test remaps
-alt + shift - j : skhd -k "ctrl + alt - p"
-alt + shift - k : skhd -k "ctrl + alt - n"
-# alt + shift - k : skhd -k "ctrl + alt - k"
-# alt + shift - h : skhd -k "ctrl + alt - h"
-# alt + shift - l : skhd -k "ctrl + alt - l"
-# alt + shift - f : skhd -k "ctrl + alt - f"
-# alt + shift - b : skhd -k "ctrl + alt - b"
-# alt + shift - space : skhd -k "ctrl + alt - space"
-# # ; character
-# alt + shift - 0x29 : skhd -k "ctrl + alt - 0x29"
-
-# Shortcuts to move forward and back desktops
-# only run these if amethyst is on
-# otherwise we may wan to turn off amethyst
-# and use app which redefines this stuff
-alt + ctrl - n : pgrep Amethyst && skhd -k "ctrl - right"
-alt + ctrl - p : pgrep Amethyst && skhd -k "ctrl - left"
-
 # toggle amethyst alt ctrl . (dot)
-alt + ctrl - 0x2F : fish -c toggle_amethyst
+# alt + ctrl - 0x2F : fish -c toggle_amethyst
 
 # has some hacks eg.
 # alt-q kills line
@@ -213,3 +191,22 @@ alt - k [
     "Σημειώσεις" : skhd -k "alt + ctrl - f"
 	"finder" : ~/.config/dotfiles/scripts/runbrave.sh
 ]
+
+# yabai -m config layout monocle
+
+alt + ctrl - space : yabai -m space --layout bsp || yabai -m space --layout monocle
+
+alt + ctrl - h : yabai -m window --resize right:-150:0 || yabai -m window --resize left:-150:0
+alt + ctrl - l : yabai -m window --resize right:150:0 || yabai -m window --resize left:150:0
+
+# workspace next and prev. Currently proper way doesn't work
+# alt + ctrl - n : yabai -m space --focus next
+# alt + ctrl - p : yabai -m space --focus prev
+alt + ctrl - n : skhd -k "ctrl - right"
+alt + ctrl - p : skhd -k "ctrl - left"
+
+alt + ctrl - f: yabai -m window --focus next  || yabai -m window --focus first
+alt + ctrl - b: yabai -m window --focus prev  || yabai -m window --focus last
+
+cmd + alt - n : yabai -m window --space next
+cmd + alt - p : yabai -m window --space prev
