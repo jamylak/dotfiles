@@ -32,7 +32,7 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 # set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
 set -gx UV_PYTHON python3.13
-set -gx AI_CLI codex
+set -gx AI_CLI codex -a untrusted
 
 set -g fish_key_bindings fish_vi_key_bindings
 
@@ -295,7 +295,7 @@ abbr -a zr "./zig-out/bin/*"
 abbr -a zbr "zig build && ./zig-out/bin/*"
 
 # Codex
-abbr -a co codex
+abbr -a co codex -a untrusted
 abbr -a cor codex resume
 abbr -a corl codex resume --last
 
@@ -991,6 +991,9 @@ function mm -a dir
     mkdir "$dir"; or return $status
     builtin cd -- "$dir"
     git init
+    # touch README.md
+    # git add README.md
+    # git commit -m README
     set dir (pwd)
     set name (tmux_dir_session_name "$dir")
     tmux_attach "$name" "$dir"
