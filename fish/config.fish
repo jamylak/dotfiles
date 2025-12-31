@@ -1006,6 +1006,7 @@ function wt -a branch
 end
 
 function wtr -a branch
+    # Resolve main root and git common dir for both main repo and worktrees.
     set repo_root (git rev-parse --show-toplevel 2>/dev/null)
     if test -z "$repo_root"
         echo "wtr: not in a git repo" >&2
@@ -1020,21 +1021,29 @@ function wtr -a branch
     if test "$git_common_dir" = ".git"
         set main_root "$repo_root"
     end
+    # Decide which worktree to remove: current worktree (no args) or named one.
     if test -z "$branch"
+        # (no args)
+        # If running from main worktree, you need to provide a branchname to remove
+        # (other worktree)
         if test "$repo_root" = "$main_root"
             echo "usage: wtr <branchname>" >&2
             return 1
         end
+        # Find the current worktree
         set current_branch (git -C "$repo_root" rev-parse --abbrev-ref HEAD 2>/dev/null)
-        if test "$current_branch" = "main" -o "$current_branch" = "master"
+        # Don't allow them to remove main or master
+        if test "$current_branch" = main -o "$current_branch" = master
             echo "wtr: refusing to remove '$current_branch' worktree" >&2
             return 1
         end
         set worktree_path "$repo_root"
     else
+        # (wtr branch_name)
         set repo_name (basename "$main_root")
         set worktree_path (dirname "$main_root")/"$repo_name-$branch"
     end
+    # Remove the worktree and clean up any leftover directory, then return home.
     git -C "$main_root" worktree remove "$worktree_path"
     and test -d "$worktree_path"
     and rm -rf -- "$worktree_path"
