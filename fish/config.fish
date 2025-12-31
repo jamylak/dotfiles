@@ -969,6 +969,7 @@ end
 function tmux_fzf
     set dir (ls -dt ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
     if test -n "$dir"
+        builtin cd -- "$dir"
         tmux_attach "$dir" "$dir"
     end
 end
