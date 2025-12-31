@@ -77,6 +77,8 @@ abbr -a wa worktree_add
 abbr -a wt worktree_add
 abbr -a wtr worktree_remove
 abbr -a wr worktree_remove
+abbr -a wm worktree_merge
+abbr -a wtm worktree_merge
 abbr -a workon --set-cursor=! "cd ~/.virtualenvs/! && source bin/activate.fish && test -f .project && cd (cat .project)"
 abbr -a svep --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
 abbr -a setvirtualenvproject --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
@@ -1096,6 +1098,27 @@ function worktree_remove -a branch
     # Only run this if git command worked
     # Just having and in front doesn't help
     builtin cd -- "$main_root"
+end
+
+function worktree_merge --description 'Squash merge current worktree into main and remove it'
+    set repo_root (git rev-parse --show-toplevel 2>/dev/null); or return 1
+    set git_common_dir (git rev-parse --git-common-dir 2>/dev/null); or return 1
+    set main_root (dirname "$git_common_dir")
+    if test "$git_common_dir" = ".git"
+        set main_root "$repo_root"
+    end
+    if test "$repo_root" = "$main_root"
+        echo "wtm: run from a worktree, not main" >&2
+        return 1
+    end
+    set branch (git -C "$repo_root" rev-parse --abbrev-ref HEAD); or return 1
+    set main_branch main
+    if not git -C "$main_root" show-ref --verify --quiet refs/heads/main
+        set main_branch master
+    end
+    git -C "$main_root" checkout "$main_branch"; or return 1
+    git -C "$main_root" merge --squash "$branch"; or return 1
+    worktree_remove
 end
 
 function duck --description 'Search DuckDuckGo via awrit'
