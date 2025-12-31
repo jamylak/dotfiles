@@ -129,7 +129,7 @@ function __smart_cd_or_insert_path
         return
     end
 
-    set result (ls -dt /Applications /tmp (eval echo ~) ~/.local/share/ ~/.local/share/nvim/lazy/ ~/.Trash ~/.config ~/bar/ ~/Desktop/ ~/bar/* ~/proj/ ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf )
+    set result (ls -dt /Applications /tmp (eval echo ~) ~/.local/share/ ~/.local/share/nvim/lazy/ ~/.Trash ~/.config ~/bar/ ~/Desktop/ ~/bar/* ~/proj/ ~/proj/* ~/.config/dotfiles* ~/.config/nvim | fzf )
     if test -z "$result"
         return
     end
@@ -967,7 +967,7 @@ function nvim_join_fzf
 end
 
 function tmux_fzf
-    set dir (ls -dt ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf)
+    set dir (ls -dt ~/bar/* ~/proj/* ~/.config/dotfiles* ~/.config/nvim | fzf)
     if test -n "$dir"
         builtin cd -- "$dir"
         tmux_attach "$dir" "$dir"
