@@ -360,6 +360,9 @@ function fish_user_key_bindings
     bind -M insert space space_or_fzf
     bind -M insert ctrl-enter "__smart_cd_or_insert_path; commandline --function repaint"
     bind -M insert alt-enter "__smart_cd_or_insert_path; commandline --function repaint"
+    bind -M insert shift-enter smart_shift_enter
+    # For weird terminals
+    # bind -M insert \e\[13\;2u smart_shift_enter
     if not set -q NVIM
         bind -M insert enter fish_enter_or_fzf
     end
@@ -416,6 +419,17 @@ function fish_enter_or_fzf
     end
     # Otherwise normal enter
     commandline -f execute
+end
+
+function smart_shift_enter
+    set cmd (commandline)
+    if test -z "$cmd"
+        commandline -r 'echo "helllo world"'
+        commandline -f execute
+    else
+        commandline -i \n
+        commandline -f expand-abbr
+    end
 end
 
 function __fzf_all_files
