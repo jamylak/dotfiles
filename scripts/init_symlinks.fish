@@ -26,8 +26,8 @@ ln -sfn $repo_root/helix ~/.config/helix
 ln -sfn $repo_root/yazi ~/.config/yazi
 
 # Btop
-# mkdir -p ~/.config/btop
-# ln -sfn $repo_root/btop/presets ~/.config/btop/presets
+mkdir -p ~/.config/btop
+ln -sfn $repo_root/btop/btop.conf ~/.config/btop/btop.conf
 
 # Lazygit
 # mkdir -p ~/.config/lazygit
