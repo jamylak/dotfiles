@@ -301,6 +301,7 @@ abbr -a zbr "zig build && ./zig-out/bin/*"
 abbr -a co codex --full-auto
 abbr -a cor codex resume
 abbr -a corl codex resume --last
+abbr -a coral codex resume --last
 abbr -a coc coco
 
 #### KEY BINDINGS ###
