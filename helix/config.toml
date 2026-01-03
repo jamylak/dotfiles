@@ -136,3 +136,4 @@ j = { k = "normal_mode", i = "normal_mode"}
 q = "extend_to_line_end"
 0 = "extend_to_line_start"
 Y = "yank_main_selection_to_clipboard"
+"C-e" = "extend_to_line_end"
