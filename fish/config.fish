@@ -434,8 +434,9 @@ end
 function smart_shift_enter
     set cmd (commandline)
     if test -z "$cmd"
-        commandline -r 'echo "helllo world"'
-        commandline -f execute
+        # TODO: Do something useful here
+        commandline -i \n
+        commandline -f expand-abbr
     else
         commandline -i \n
         commandline -f expand-abbr
