@@ -8,8 +8,7 @@ mkdir -p ~/.config/fish
 ln -sfn $repo_root/fish/config.fish ~/.config/fish/config.fish
 
 # Alacritty
-mkdir -p ~/.config/alacritty
-ln -sfn $repo_root/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
+ln -sfn $repo_root/alacritty ~/.config/alacritty
 
 # Kitty
 ln -sfn $repo_root/kitty ~/.config/kitty
