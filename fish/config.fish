@@ -1060,8 +1060,9 @@ function worktree_add -a branch
         echo "usage: wt <branchname>" >&2
         return 1
     end
+    set branch_dir (string replace -a "/" "--" -- "$branch")
     set repo_name (basename (pwd))
-    set worktree_path "../$repo_name-$branch"
+    set worktree_path "../$repo_name-$branch_dir"
     if git show-ref --verify --quiet "refs/heads/$branch"
         git worktree add "$worktree_path" "$branch"
     else
@@ -1107,8 +1108,9 @@ function worktree_remove -a branch
         set worktree_path "$repo_root"
     else
         # (wtr branch_name)
+        set branch_dir (string replace -a "/" "--" -- "$branch")
         set repo_name (basename "$main_root")
-        set worktree_path (dirname "$main_root")/"$repo_name-$branch"
+        set worktree_path (dirname "$main_root")/"$repo_name-$branch_dir"
     end
     # Remove the worktree and clean up any leftover directory, then return home.
     git -C "$main_root" worktree remove "$worktree_path"
