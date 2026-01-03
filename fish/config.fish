@@ -1060,7 +1060,7 @@ function worktree_add -a branch
         echo "usage: wt <branchname>" >&2
         return 1
     end
-    set branch_dir (string replace -a "/" "--" -- "$branch")
+    set branch_dir (safe_worktree_branch_dir "$branch")
     set repo_name (basename (pwd))
     set worktree_path "../$repo_name-$branch_dir"
     if git show-ref --verify --quiet "refs/heads/$branch"
@@ -1108,7 +1108,7 @@ function worktree_remove -a branch
         set worktree_path "$repo_root"
     else
         # (wtr branch_name)
-        set branch_dir (string replace -a "/" "--" -- "$branch")
+        set branch_dir (safe_worktree_branch_dir "$branch")
         set repo_name (basename "$main_root")
         set worktree_path (dirname "$main_root")/"$repo_name-$branch_dir"
     end
@@ -1122,6 +1122,11 @@ function worktree_remove -a branch
         rm -rf -- "$worktree_path"
     end
     builtin cd -- "$main_root"
+end
+
+function safe_worktree_branch_dir -a branch
+    # Example: "docs/fix-123" -> "docs--fix-123" for a safe worktree directory.
+    string replace -a / -- -- "$branch"
 end
 
 function worktree_merge --description 'Squash merge current worktree into main and remove it'
