@@ -346,7 +346,7 @@ bind -M insert ctrl-i __fzf_all_files
 
 function fish_user_key_bindings
     # for mode in insert default visual
-    bind -M insert \cb backward-char
+    bind -M insert \cb smart-backward-char
     bind -M insert alt-a beginning-of-line
     bind -M insert \ca beginning-of-line
     bind -M insert \ce end-of-line
@@ -365,6 +365,16 @@ function fish_user_key_bindings
     # bind -M insert \e\[13\;2u smart_shift_enter
     if not set -q NVIM
         bind -M insert enter fish_enter_or_fzf
+    end
+end
+
+function smart-backward-char
+    set cmd (commandline)
+    if test -z "$cmd"
+        commandline -r btop
+        commandline -f execute
+    else
+        commandline -f backward-char
     end
 end
 
