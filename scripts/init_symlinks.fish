@@ -12,19 +12,19 @@ mkdir -p ~/.config/alacritty
 ln -sfn $repo_root/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 
 # Kitty
-# ln -sfn $repo_root/kitty ~/.config/kitty
+ln -sfn $repo_root/kitty ~/.config/kitty
 
 # Ghostty
 ln -sfn $repo_root/ghostty ~/.config/ghostty
 
 # Helix
-# ln -sfn $repo_root/helix ~/.config/helix
+ln -sfn $repo_root/helix ~/.config/helix
 
 # Starship
 # ln -sfn $repo_root/starship.toml ~/.config/starship.toml
 
 # Yazi
-# ln -sfn $repo_root/yazi ~/.config/yazi
+ln -sfn $repo_root/yazi ~/.config/yazi
 
 # Btop
 # mkdir -p ~/.config/btop
