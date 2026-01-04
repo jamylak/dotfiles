@@ -10,6 +10,7 @@ confirm-close-surface = false
 macos-option-as-alt = true
 font-family = Fira Code Medium
 window-title-font-family = MesloLGS NF
+unfocused-split-opacity = 0.8
 font-size = 18
 #  * `blueprint`, `chalkboard`, `microchip`, `glass`, `holographic`,
 #    `paper`, `retro`, `xray` - Official variants of the Ghostty icon
