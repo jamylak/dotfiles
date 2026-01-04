@@ -54,7 +54,8 @@ keybind = super+l=new_split:right
 keybind = super+;=new_split:right
 
 keybind = super+g=write_screen_file:copy
-keybind = super+r=toggle_command_palette
+# keybind = super+r=toggle_command_palette
+keybind = super+r=new_split:right
 keybind = super+k=toggle_command_palette
 
 # custom-shader = ~/proj/ghostty-shaders/galaxy.glsl
