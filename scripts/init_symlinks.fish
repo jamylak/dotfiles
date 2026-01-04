@@ -32,6 +32,9 @@ ln -sfn $repo_root/btop/btop.conf ~/.config/btop/btop.conf
 # Lazygit
 ln -sfn $repo_root/lazygit ~/.config/lazygit
 
+# Yabai
+ln -sfn $repo_root/.yabairc ~/.config/.yabairc
+
 # Nushell
 # mkdir -p ~/.config/nushell
 # ln -sfn $repo_root/nushell/config.nu ~/.config/nushell/config.nu
