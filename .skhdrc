@@ -202,6 +202,14 @@ alt + ctrl - space : \
     yabai -m space --layout bsp; \
   fi
 
+alt + ctrl - t : \
+  current=$(yabai -m query --spaces --space | jq '.type' -r); \
+  if [ "$current" = "float" ]; then \
+    yabai -m space --layout stack; \
+  else \
+    yabai -m space --layout float; \
+  fi
+
 alt + ctrl - h : yabai -m window --resize right:-150:0 || yabai -m window --resize left:-150:0
 alt + ctrl - l : yabai -m window --resize right:150:0 || yabai -m window --resize left:150:0
 
