@@ -30,8 +30,7 @@ mkdir -p ~/.config/btop
 ln -sfn $repo_root/btop/btop.conf ~/.config/btop/btop.conf
 
 # Lazygit
-# mkdir -p ~/.config/lazygit
-# ln -sfn $repo_root/lazygit/config.yaml ~/.config/lazygit/config.yml
+ln -sfn $repo_root/lazygit ~/.config/lazygit
 
 # Nushell
 # mkdir -p ~/.config/nushell
