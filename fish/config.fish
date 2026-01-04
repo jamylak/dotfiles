@@ -444,7 +444,7 @@ function smart_shift_enter
 end
 
 function __fzf_all_files
-    set file (fd --hidden --exclude .git . | fzf)
+    set file (fd --hidden -I --exclude .git --exclude .cache --exclude .zig-cache --exclude node_modules . | fzf)
     if test -n "$file"
         set cmdline (commandline)
         if test -z "$cmdline" -a -x "$file" -a -f "$file"
