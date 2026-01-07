@@ -1187,7 +1187,7 @@ end
 
 ### INITIALIZATION ###
 starship init fish | source
-set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80% --bind=ctrl-j:accept"
+set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80%  --bind=ctrl-h:accept --bind=ctrl-j:accept"
 fzf_configure_bindings --directory=\ct
 
 source ~/.config/fish/config.local.post.fish
