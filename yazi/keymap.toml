@@ -60,7 +60,7 @@ desc = "Print path"
 
 [[mgr.prepend_keymap]]
 on   = ["<c-g>"]
-run  = "shell 'fish -c \"lazygit_new_tab $1\"' --confirm"
+run  = "shell 'fish -c \"lazygit\"' --block"
 desc = "Lazygit in New Tab"
 
 # Since i don't have much use for running non blocking shell from yazi
