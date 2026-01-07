@@ -149,12 +149,13 @@ abbr -a gk git checkout
 abbr -a gkb "git checkout -b"
 abbr -a gm --set-cursor=! "git commit -m \"!\""
 # gh extension install gennaro-tedesco/gh-s
-abbr -a ghc --set-cursor=! "git clone (gh s \"!\") && cd (ls -t | head -n 1)"
 abbr -a ghs --set-cursor=! "git clone (gh s \"!\") && cd (ls -t | head -n 1)"
 abbr -a cloneproj --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
 abbr -a clonetoproj --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
 # TODO: if it already exists, just cd into it?
 abbr -a ghp --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
+abbr -a ghc --set-cursor=! "cd ~/proj && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
+abbr -a ghb --set-cursor=! "cd ~/bar && git clone (gh s \"!\") && cd (ls -t | head -n 1)"
 abbr -a gl "git log"
 abbr -a gpl "git pull"
 abbr -a gc git commit
