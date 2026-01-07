@@ -235,17 +235,17 @@ desc = "Fish Shell"
 
 [[mgr.prepend_keymap]]
 on   = "<C-n>"
-run  = "shell 'fish -c \"neogitlog_new_tab $1\"' --confirm"
+run  = "shell 'fish -c \"neogitlog 500\"' --confirm --block"
 desc = "Open Neogit Log in new tab"
 
 [[mgr.prepend_keymap]]
 on   = "<A-n>"
-run  = "shell 'fish -c \"neogitdiffmain_new_tab $1\"' --confirm"
+run  = "shell 'fish -c \"neogitdiffmain\"' --confirm --block"
 desc = "Open Neogit Log in new tab"
 
 [[mgr.prepend_keymap]]
 on   = "<A-d>"
-run  = "shell 'fish -c \"neogitdiff_new_tab $1\"' --confirm"
+run  = "shell 'fish -c \"neogitdiff\"' --confirm --block"
 desc = "Open Neogit Diff Main in new tab"
 
 [[mgr.prepend_keymap]]
