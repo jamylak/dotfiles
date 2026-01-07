@@ -768,7 +768,9 @@ function delete_or_fuzz
         )
         commandline --function repaint
         if test -n "$file"
-            set escaped (string escape -- $file)
+            set abs (string replace -r '^\./' '' -- $file)
+            set abs (string join "" (pwd) "/" $abs)
+            set escaped (string escape -- $abs)
             commandline -r "nvim $escaped"
             commandline -f execute
         end
