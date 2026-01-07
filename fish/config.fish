@@ -754,7 +754,18 @@ function delete_or_fuzz
     set cmd (commandline)
     if test -z "$cmd"
         # empty commandline
-        set file (fd --hidden -I --exclude .git --exclude .cache --exclude .zig-cache --exclude node_modules . | fzf --bind=ctrl-j:accept)
+        set file (
+            find . \
+                -not -path './.git/*' \
+                -not -path './.cache/*' \
+                -not -path './.zig-cache/*' \
+                -not -path './node_modules/*' \
+                -type f -print0 \
+            | xargs -0 stat -f "%m %N" \
+            | sort -nr \
+            | cut -d' ' -f2- \
+            | fzf --bind=ctrl-j:accept
+        )
         commandline --function repaint
         if test -n "$file"
             set escaped (string escape -- $file)
