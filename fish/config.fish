@@ -435,9 +435,7 @@ end
 function smart_shift_enter
     set cmd (commandline)
     if test -z "$cmd"
-        # TODO: Do something useful here
-        commandline -i \n
-        commandline -f expand-abbr
+        _fzf_search_history
     else
         commandline -i \n
         commandline -f expand-abbr
