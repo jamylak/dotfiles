@@ -55,6 +55,7 @@ q.k = "extend_to_line_end"
 "C-A" = "increment"
 "C-X" = "decrement"
 q.h = "select_all"
+g.h = "goto_next_change"
 g.o = "goto_file_start"
 0 = "extend_to_line_start"
 # Yank to clipboard
