@@ -357,7 +357,7 @@ function fish_user_key_bindings
     bind -M insert ctrl-space _fzf_search_history
     bind -M insert alt-space _fzf_search_history
     bind -M insert \cj forward-or-execute
-    bind -M insert \ch delete_or_lazygit
+    bind -M insert \ch delete_or_fuzz
     bind -M insert space space_or_fzf
     bind -M insert ctrl-enter "__smart_cd_or_insert_path; commandline --function repaint"
     bind -M insert alt-enter "__smart_cd_or_insert_path; commandline --function repaint"
@@ -750,11 +750,17 @@ function forward-or-execute
     end
 end
 
-function delete_or_lazygit
+function delete_or_fuzz
     set cmd (commandline)
     if test -z "$cmd"
         # empty commandline
-        echo n | lazygit && commandline --function repaint
+        set file (fd --hidden -I --exclude .git --exclude .cache --exclude .zig-cache --exclude node_modules . | fzf --bind=ctrl-j:accept)
+        commandline --function repaint
+        if test -n "$file"
+            set escaped (string escape -- $file)
+            commandline -r "nvim $escaped"
+            commandline -f execute
+        end
     else
         commandline -f backward-delete-char
     end
