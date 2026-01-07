@@ -768,9 +768,16 @@ function delete_or_fuzz
         )
         commandline --function repaint
         if test -n "$file"
+            # If we got a file back
+            # Get the absolute path
             set abs (string replace -r '^\./' '' -- $file)
             set abs (string join "" (pwd) "/" $abs)
+            # Escape for safety
             set escaped (string escape -- $abs)
+            # Shorten eg. /Users/james -> ~ for brevity
+            if string match -q "$HOME/*" -- $escaped
+                set escaped (string replace -r "^$HOME" "~" -- $escaped)
+            end
             commandline -r "nvim $escaped"
             commandline -f execute
         end
