@@ -282,6 +282,7 @@ abbr -a xx hx +999999
 # C++
 abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
 abbr -a cb "cmake --build build"
+abbr -a cmb "cmake --build build"
 
 # eza
 abbr -a l "eza --no-permissions --no-user --icons --tree -l -L 2"
