@@ -1208,6 +1208,16 @@ function duck --description 'Search DuckDuckGo via awrit'
     awrit "https://duckduckgo.com/?q=$encoded"
 end
 
+function ge
+    read -P "Gemini: " prompt
+    if test -n "$prompt"
+        # Assuming 'gemini' is the command for the Gemini CLI and uses -p for prompt
+        gemini -p "$prompt"
+    else
+        gemini
+    end
+end
+
 ### INITIALIZATION ###
 starship init fish | source
 set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80%  --bind=ctrl-h:accept --bind=ctrl-j:accept"
