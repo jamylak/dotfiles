@@ -308,6 +308,7 @@ abbr -a cor codex resume --full-auto
 abbr -a corl codex resume --full-auto --last
 abbr -a coral codex resume --full-auto --last
 abbr -a coc coco
+abbr -a cop copilot --allow-all-tools
 
 #### KEY BINDINGS ###
 
