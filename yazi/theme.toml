@@ -64,9 +64,9 @@ prepend_dirs  = [
 	{ name = "Volumes", text = "📀" },
 	{ name = ".Trash", text = "🗑️" },
 ]
-prepend_globs = [
-		{ name = "**/*.app/", text = "󰘳 ", fg_dark = "#eca517", fg_light = "#76520c" },
-]
+# prepend_globs = [
+# 		{ name = "**/*.app/", text = "󰘳 ", fg_dark = "#eca517", fg_light = "#76520c" },
+# ]
 prepend_files = [
 		{ name = ".clang-format", text = "", fg_dark = "#eca517", fg_light = "#76520c" },
 		{ name = ".gitignore", text = "󰊢", fg_dark = "#b9b9b9", fg_light = "#f1f1f1" },
