@@ -1219,6 +1219,34 @@ function ge
     end
 end
 
+function vsdf-toy
+    set shader (vsdf --new-toy $argv)
+    if test -z "$shader"
+        echo "Failed to create shader"
+        return 1
+    end
+
+    # Launch vsdf in background
+    vsdf >/dev/null 2>&1 --no-focus --log-level error --toy $shader & disown
+
+    nvim $shader # Neovim
+    echo "Editing $shader with vsdf running"
+end
+
+function vsdf-toy-debug
+    set shader (./build/vsdf --new-toy $argv)
+    if test -z "$shader"
+        echo "Failed to create shader"
+        return 1
+    end
+
+    # Launch vsdf in background
+    ./build/vsdf >/dev/null 2>&1 --no-focus --log-level error --toy $shader & disown
+
+    nvim $shader # Neovim
+    echo "Editing $shader with vsdf running"
+end
+
 ### INITIALIZATION ###
 starship init fish | source
 set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80%  --bind=ctrl-h:accept --bind=ctrl-j:accept"
