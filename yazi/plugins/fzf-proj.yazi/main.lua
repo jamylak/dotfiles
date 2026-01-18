@@ -7,7 +7,7 @@ local function fail(s, ...)
 end
 
 local function entry()
-	local _permit = ya.hide()
+	local _permit = ui.hide()
 	local cwd = tostring(state())
 
 	local child, err =
