@@ -20,7 +20,7 @@ desc = "Horizontal Split"
 
 [[mgr.prepend_keymap]]
 on   = "<c-o>"
-run  = "plugin fzf_proj"
+run  = "plugin fzf-proj"
 desc = "fzf projects"
 
 # ya pkg install
@@ -30,17 +30,17 @@ run = ["plugin system-clipboard"]
 
 [[mgr.prepend_keymap]]
 on   = "<c-space>"
-run  = "plugin fzf_proj"
+run  = "plugin fzf-proj"
 desc = "fzf projects"
 
 [[mgr.prepend_keymap]]
 on   = "<c-enter>"
-run  = "plugin fzf_proj"
+run  = "plugin fzf-proj"
 desc = "fzf projects"
 
 [[mgr.prepend_keymap]]
 on   = "<a-enter>"
-run  = "plugin fzf_proj"
+run  = "plugin fzf-proj"
 desc = "fzf projects"
 
 [[mgr.prepend_keymap]]
