@@ -1,4 +1,6 @@
-source ~/.config/fish/config.local.pre.fish
+if test -f ~/.config/fish/config.local.pre.fish
+    source ~/.config/fish/config.local.pre.fish
+end
 
 ### ENVIRONMENT ###
 
@@ -1252,4 +1254,6 @@ starship init fish | source
 set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80%  --bind=ctrl-h:accept --bind=ctrl-j:accept"
 fzf_configure_bindings --directory=\ct
 
-source ~/.config/fish/config.local.post.fish
+if test -f ~/.config/fish/config.local.post.fish
+    source ~/.config/fish/config.local.post.fish
+end
