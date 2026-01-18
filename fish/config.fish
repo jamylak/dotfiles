@@ -174,6 +174,7 @@ abbr -a gpsu "git push --set-upstream origin (git branch --show-current)"
 abbr -a gsu "git push --set-upstream origin (git branch --show-current)"
 
 abbr -a ch chmod +x
+abbr -a chx chmod +x
 
 # Neovide
 abbr -a neovide 'open -a neovide --args'
