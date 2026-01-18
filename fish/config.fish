@@ -886,7 +886,7 @@ end
 
 function neogitdiffmain
     # Hacky feedkeys way, so use a delay to wait for it to load
-    set -l delay 400
+    set -l delay 500
     if test -n "$argv[1]"
         set delay "$argv[1]"
     end
