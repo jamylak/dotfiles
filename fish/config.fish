@@ -451,14 +451,28 @@ function smart_shift_enter
 end
 
 function __fzf_all_files
-    set file (fd --hidden -I --exclude .git --exclude .cache --exclude .zig-cache --exclude node_modules . | fzf)
+    set line (commandline)
+    set cursor (commandline --cursor)
+    set token (commandline --current-token)
+    set token_len (string length -- $token)
+    set prefix_len (math $cursor - $token_len)
+    if test $prefix_len -lt 0
+        set prefix_len 0
+    end
+    set left_prefix (string sub -l $prefix_len -- $line)
+    set right (string sub --start=(math $cursor + 1) -- $line)
+
+    set file (fd --hidden -I --exclude .git --exclude .cache --exclude .zig-cache --exclude node_modules . | fzf --query="$token")
     if test -n "$file"
-        set cmdline (commandline)
-        if test -z "$cmdline" -a -x "$file" -a -f "$file"
-            commandline --insert "./$file"
+        if test -z "$left_prefix$right" -a -x "$file" -a -f "$file"
+            set insert "./$file"
         else
-            commandline --insert "$file"
+            set insert "$file"
         end
+        set new_line "$left_prefix$insert$right"
+        commandline -r -- "$new_line"
+        set new_cursor (math $prefix_len + (string length -- "$insert"))
+        commandline -C $new_cursor
     end
     commandline --function repaint
 end
