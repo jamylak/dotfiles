@@ -6,8 +6,6 @@ end
 
 if test -d /opt/homebrew/bin
     set -xg SHELL /opt/homebrew/bin/fish
-else
-    set -xg SHELL /usr/local/bin/fish
 end
 
 # TODO: Empty <c-c> does copilot chat?
