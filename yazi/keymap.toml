@@ -252,3 +252,8 @@ desc = "Open Neogit Diff Main in new tab"
 on   = [ "c", "m" ]
 run  = "plugin chmod"
 desc = "Chmod on selected files"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "o" ]
+run  = "arrow top"
+desc = "Go to top"
