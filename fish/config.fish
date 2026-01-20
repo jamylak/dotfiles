@@ -502,7 +502,7 @@ function __smart_cd_or_insert_path
         return
     end
 
-    set result (fish ~/.config/dotfiles/scripts/fzf_proj_paths.sh | fzf )
+    set result (fish ~/.config/dotfiles/scripts/fzf_proj_paths.fish | fzf )
     if test -z "$result"
         return
     end

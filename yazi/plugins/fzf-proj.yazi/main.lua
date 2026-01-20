@@ -14,7 +14,7 @@ local function entry()
 	-- Command("fzf"):cwd(cwd):stdin(Command.INHERIT):stdout(Command.PIPED):stderr(Command.INHERIT):spawn()
 		Command("sh")
 		:arg({ "-c",
-			"fish ~/.config/dotfiles/scripts/fzf_proj_paths.sh | fzf --bind ctrl-j:accept" })
+			"fish ~/.config/dotfiles/scripts/fzf_proj_paths.fish | fzf --bind ctrl-j:accept" })
 		:cwd(cwd)
 		:stdin(Command.INHERIT)
 		:stdout(Command.PIPED)
