@@ -46,6 +46,7 @@ keybind = super+ctrl+h=resize_split:left,60
 keybind = super+ctrl+k=resize_split:up,60
 keybind = super+ctrl+l=resize_split:right,60
 keybind = super+ctrl+enter=toggle_split_zoom
+keybind = ctrl+enter=ignore
 
 keybind = super+f=goto_split:next
 keybind = super+b=goto_split:previous
