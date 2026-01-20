@@ -3,6 +3,9 @@
 
 set repo_root (pwd)
 
+# ~/.config/dotfiles -> ~/proj/dotfiles
+ln -sfn $repo_root ~/.config/dotfiles
+
 # Fish
 mkdir -p ~/.config/fish
 ln -sfn $repo_root/fish/config.fish ~/.config/fish/config.fish
