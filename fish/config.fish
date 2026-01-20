@@ -506,6 +506,9 @@ function __smart_cd_or_insert_path
     if test (uname) = Darwin
         set search_paths $search_paths /Applications ~/.Trash ~/Desktop/ ~/Downloads/
     end
+    if test -e /etc/NIXOS
+        set search_paths $search_paths ~/nixconf
+    end
     set result (ls -dt $search_paths | fzf )
     if test -z "$result"
         return
