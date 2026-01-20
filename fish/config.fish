@@ -10,42 +10,48 @@ end
 
 # TODO: Empty <c-c> does copilot chat?
 
-# Fix incorrerct yazi emoji rendering on
-# nvim terminal. Also fix tmux issue when returning
-# to a session, on return the layout gets messed up
-if set -q NVIM; or set -q TMUX
-    set -gx YAZI_CONFIG_HOME $HOME/.config/dotfiles/yazi_alt
+if test (uname) = Darwin
+    #### Mac Only Stuff ####
+    # Fix incorrerct yazi emoji rendering on
+    # nvim terminal. Also fix tmux issue when returning
+    # to a session, on return the layout gets messed up
+    if set -q NVIM; or set -q TMUX
+        # TODO: Move this out later?
+        set -gx YAZI_CONFIG_HOME $HOME/.config/dotfiles/yazi_alt
+    end
+    set -gx PROJECTS_DIR /Users/$USER/bar
+    # Running vulkan things doesn't work without this
+    set -gx XDG_DATA_DIRS /usr/local/share
+    # set -gx MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
+    # set -gx VULKAN_SDK /Users/james/VulkanSDK/1.4.328.1/macOS
+    # set -gx XDG_DATA_DIRS /usr/local/share
+    # https://github.com/nushell/nushell/issues/10100
+    set -gx XDG_CONFIG_HOME $HOME/.config
+
+    ### PATHS ###
+
+    # eg. fd is in here
+    fish_add_path -mp /opt/homebrew/bin
+    fish_add_path -mp /opt/homebrew/opt/llvm/bin
+    fish_add_path -mp /usr/local/bin
+    fish_add_path -mp /Users/$USER/.local/bin
+    fish_add_path -mp $HOME/.cargo/bin
+    fish_add_path -mp $HOME/.emacs.d/bin
+    fish_add_path -mp $HOME/.config/emacs/bin
+else if test -e /etc/nixos
+    #### NIX Only Stuff ####
+    # TODO: Update this
+    set -gx PROJECTS_DIR /Users/$USER/
 end
 
 set fish_cursor_insert line
 set -gx EDITOR hx
-# set -gx HELIX_RUNTIME /Users/james/proj/helix/runtime
-set -gx PROJECTS_DIR /Users/$USER/bar
-# set -gx MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
-# Running vulkan things doesn't work without this
-set -gx XDG_DATA_DIRS /usr/local/share
-# set -gx VULKAN_SDK /Users/james/VulkanSDK/1.4.328.1/macOS
-# set -gx XDG_DATA_DIRS /usr/local/share
-# https://github.com/nushell/nushell/issues/10100
-set -gx XDG_CONFIG_HOME $HOME/.config
-# set -gx XDG_STATE_HOME $HOME/.local/state
-# set -gx XDG_DATA_HOME $HOME/.local/share
+# set -gx HELIX_RUNTIME ~/proj/helix/runtime
 set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
 set -gx UV_PYTHON python3.13
 set -gx AI_CLI codex --full-auto
 
 set -g fish_key_bindings fish_vi_key_bindings
-
-### PATHS ###
-
-# eg. fd is in here
-fish_add_path -mp /opt/homebrew/bin
-fish_add_path -mp /opt/homebrew/opt/llvm/bin
-fish_add_path -mp /usr/local/bin
-fish_add_path -mp /Users/$USER/.local/bin
-fish_add_path -mp $HOME/.cargo/bin
-fish_add_path -mp $HOME/.emacs.d/bin
-fish_add_path -mp $HOME/.config/emacs/bin
 
 ### ABBREVIATIONS ###
 
