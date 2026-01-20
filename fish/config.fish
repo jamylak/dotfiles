@@ -339,7 +339,7 @@ bind -M insert \eq "commandline --function kill-whole-line"
 bind -M insert \ep 'commandline -r "tmux_fzf"; commandline -f execute'
 bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
 bind -M insert \co "__smart_cd_or_insert_path; commandline --function repaint"
-bind --mode insert \cy 'commandline --insert (pbpaste)'
+bind --mode insert \cy __clipboard_paste
 # bind -M insert \em fish_clipboard_paste
 bind -M insert ctrl-i __fzf_all_files
 
@@ -373,6 +373,26 @@ function fish_user_key_bindings
     # bind -M insert \e\[13\;2u smart_shift_enter
     if not set -q NVIM
         bind -M insert enter fish_enter_or_fzf
+    end
+end
+
+function __clipboard_paste --description "Paste clipboard contents on macOS or Linux"
+    set -l clip (
+        begin
+            if command -sq pbpaste
+                pbpaste
+            else if command -sq wl-paste
+                wl-paste -n
+            else if command -sq xclip
+                xclip -o -selection clipboard
+            else if command -sq xsel
+                xsel --clipboard --output
+            end
+        end | string collect
+    )
+
+    if test -n "$clip"
+        commandline --insert $clip
     end
 end
 
