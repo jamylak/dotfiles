@@ -17,6 +17,7 @@ prepend_dirs  = [
 	{ name = "kitty", text = "😺" },
 	{ name = "helix", text = "🧬" },
 	{ name = ".helix", text = "🧬" },
+	{ name = "nvimconf", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
 	{ name = "nvim", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
 	{ name = "nvim2", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
 	{ name = ".nvim", text = " ", fg_dark = "#eca517", fg_light = "#76520c"  },
