@@ -4,12 +4,13 @@ end
 
 ### ENVIRONMENT ###
 
+set -gx PROJECTS_DIR $HOME/proj
+
 if test -d /opt/homebrew/bin
     set -xg SHELL /opt/homebrew/bin/fish
 end
 
 # TODO: Empty <c-c> does copilot chat?
-
 if test (uname) = Darwin
     #### Mac Only Stuff ####
     # Fix incorrerct yazi emoji rendering on
@@ -19,7 +20,6 @@ if test (uname) = Darwin
         # TODO: Move this out later?
         set -gx YAZI_CONFIG_HOME $HOME/.config/dotfiles/yazi_alt
     end
-    set -gx PROJECTS_DIR /Users/$USER/bar
     # Running vulkan things doesn't work without this
     set -gx XDG_DATA_DIRS /usr/local/share
     # set -gx MACOSX_DEPLOYMENT_TARGET $(sw_vers -productVersion)
@@ -40,8 +40,6 @@ if test (uname) = Darwin
     fish_add_path -mp $HOME/.config/emacs/bin
 else if test -e /etc/nixos
     #### NIX Only Stuff ####
-    # TODO: Update this
-    set -gx PROJECTS_DIR /Users/$USER/
 end
 
 set fish_cursor_insert line
@@ -93,7 +91,7 @@ abbr -a ef exec fish
 abbr -a hm --position anywhere ~/
 abbr -a dotfiles --position anywhere ~/.config/dotfiles
 abbr -a dot --position anywhere ~/.config/dotfiles
-abbr -a m --set-cursor=! "cd ~/bar; mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a m --set-cursor=! "cd ~/proj; mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mm make_new_project
 abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
@@ -221,10 +219,7 @@ abbr -a ne nvim_join_session
 abbr -a nj nvim_join_session
 abbr -a fj nvim_join_session
 #abbr -a vj "nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>fw\", true, true, true), \"m\", true)'"
-abbr -a vib "cd ~/bar; nvim ."
-abbr -a o "cd /Users/james/bar/testfoo; nvim foo.frag -c ':M' -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"f<CR>\", true, true, true), \"m\", true)'"
 
-abbr -a vb "cd ~/bar; cd (fzf --walker=dir) && nvim . -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"si<CR>\", true, true, true), \"m\", true)'"
 abbr -a vij "nvim ."
 abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
 abbr -a viv 'nvim -c "normal \'0"'
@@ -393,8 +388,8 @@ end
 
 function nvim_nproj -a projname
     if test -n "$projname"
-        mkdir ~/bar/$projname
-        cd ~/bar/$projname
+        mkdir ~/proj/$projname
+        cd ~/proj/$projname
         nvim_find_files
     else
         nvim -c ":F"
@@ -575,9 +570,7 @@ function launchGithubUrl -a url branch
         set path (string split / $url -f8 -m7)
     end
 
-    if test -d "$HOME/bar/$repo"
-        set p "$HOME/bar/$repo"
-    else if test -d "$HOME/proj/$repo"
+    if test -d "$HOME/proj/$repo"
         set p "$HOME/proj/$repo"
     else
         set p "$HOME/proj/$repo"
@@ -1037,19 +1030,19 @@ function tmux_attach -a name dir
 end
 
 function nvim_join_fzf
-    set result (ls -d /tmp ~/bar/* ~/proj/* ~/.config/dotfiles ~/.config/nvim | fzf --print-query)
+    set result (ls -d /tmp ~/proj/* | fzf --print-query)
     set query $result[1]
     set dir $result[2]
 
     if test -n "$query"; and not test -n "$dir"
-        set dir $HOME/bar/$query
+        set dir $HOME/proj/$query
         if string match -q '*.*' $query
-            # new file to create in bar, ensure directories exist
+            # new file to create in proj, ensure directories exist
             mkdir -p (dirname $dir)
             touch $dir
             set dir (dirname $dir)
         else
-            # new folder to create in bar, doesn't already exist
+            # new folder to create in proj, doesn't already exist
             mkdir -p $dir
         end
     end
@@ -1070,7 +1063,7 @@ function make_new_project -a dir
         echo "usage: mm <dirname>" >&2
         return 1
     end
-    builtin cd -- ~/bar
+    builtin cd -- ~/proj
     mkdir "$dir"; or return $status
     builtin cd -- "$dir"
     git init
@@ -1083,7 +1076,7 @@ function make_new_project -a dir
 end
 
 function tmux_fzf
-    set dir (ls -dt ~/bar/* ~/proj/* ~/.config/dotfiles* ~/.config/nvim* | fzf)
+    set dir (ls -dt ~/proj/* | fzf)
     if test -n "$dir"
         builtin cd -- "$dir"
         set name (tmux_dir_session_name "$dir")
