@@ -502,14 +502,7 @@ function __smart_cd_or_insert_path
         return
     end
 
-    set search_paths /tmp (eval echo ~) ~/.local/share/ ~/.local/share/nvim/lazy/ ~/.config ~/bar/ ~/bar/* ~/proj/ ~/proj/* ~/.config/dotfiles* ~/.config/nvim*
-    if test (uname) = Darwin
-        set search_paths $search_paths /Applications ~/.Trash ~/Desktop/ ~/Downloads/
-    end
-    if test -e /etc/NIXOS
-        set search_paths $search_paths ~/nixconf
-    end
-    set result (ls -dt $search_paths | fzf )
+    set result (fish ~/.config/dotfiles/scripts/fzf_proj_paths.sh | fzf )
     if test -z "$result"
         return
     end
