@@ -109,6 +109,7 @@ abbr -a --position anywhere pr ~/proj/
 abbr -a c 'nvim -c ":CopilotChatOpen" -c ":only" -c "startinsert"'
 abbr -a r --position anywhere --function last_history_item
 abbr -a q exit
+abbr -a cl clear
 
 # Tmux
 abbr -a t tmux
