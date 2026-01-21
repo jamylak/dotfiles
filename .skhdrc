@@ -194,24 +194,12 @@ alt - k [
 
 # alt + ctrl - space : yabai -m space --layout bsp || yabai -m space --layout monocle
 
-alt + ctrl - space : \
-  current=$(yabai -m query --spaces --space | jq '.type' -r); \
-  if [ "$current" = "bsp" ]; then \
-    yabai -m space --layout stack; \
-  else \
-    yabai -m space --layout bsp; \
-  fi
+alt + ctrl - space : fish -c 'set current (yabai -m query --spaces --space | jq .type -r); if test "$current" = "bsp"; yabai -m space --layout stack; else; yabai -m space --layout bsp; end'
 
-alt + ctrl - t : \
-  current=$(yabai -m query --spaces --space | jq '.type' -r); \
-  if [ "$current" = "float" ]; then \
-    yabai -m space --layout stack; \
-  else \
-    yabai -m space --layout float; \
-  fi
+alt + ctrl - t : fish -c 'set current (yabai -m query --spaces --space | jq .type -r); if test "$current" = "float"; yabai -m space --layout stack; else; yabai -m space --layout float; end'
 
-alt + ctrl - h : yabai -m window --resize right:-150:0 || yabai -m window --resize left:-150:0
-alt + ctrl - l : yabai -m window --resize right:150:0 || yabai -m window --resize left:150:0
+alt + ctrl - h : yabai -m window --resize right:-150:0; or yabai -m window --resize left:-150:0
+alt + ctrl - l : yabai -m window --resize right:150:0; or yabai -m window --resize left:150:0
 
 # workspace next and prev. Currently proper way doesn't work
 # alt + ctrl - n : yabai -m space --focus next
@@ -220,9 +208,9 @@ alt + ctrl - n : skhd -k "ctrl - right"
 alt + ctrl - p : skhd -k "ctrl - left"
 
 # https://github.com/asmvik/yabai/issues/665
-alt + ctrl - f: (yabai -m window --focus stack.next || yabai -m window --focus next) || (yabai -m window --focus stack.first || yabai -m window --focus first)
-alt + ctrl - b: (yabai -m window --focus stack.prev || yabai -m window --focus prev) || (yabai -m window --focus stack.last || yabai -m window --focus last)
-alt + ctrl - return: yabai -m window --swap next || yabai -m window --swap first
+alt + ctrl - f : yabai -m window --focus stack.next; or yabai -m window --focus next; or yabai -m window --focus stack.first; or yabai -m window --focus first
+alt + ctrl - b : yabai -m window --focus stack.prev; or yabai -m window --focus prev; or yabai -m window --focus stack.last; or yabai -m window --focus last
+alt + ctrl - return : yabai -m window --swap next; or yabai -m window --swap first
 
 # ctrl + cmd - n : yabai -m window --space next
 # ctrl + cmd - p : yabai -m window --space prev
