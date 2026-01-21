@@ -60,6 +60,7 @@ keybind = super+r=new_split:right
 keybind = super+k=toggle_command_palette
 
 # macOS-style tab/window bindings
+keybind = super+a=select_all
 keybind = super+t=new_tab
 keybind = super+n=new_window
 keybind = super+w=close_surface
