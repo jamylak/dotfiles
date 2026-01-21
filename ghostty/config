@@ -1,4 +1,5 @@
 auto-update-channel = tip
+maximize = true
 # theme = 0x96f
 # theme = Fairyfloss
 # theme = Vesper
