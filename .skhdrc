@@ -194,9 +194,9 @@ alt - k [
 
 # alt + ctrl - space : yabai -m space --layout bsp || yabai -m space --layout monocle
 
-alt + ctrl - space : fish -c 'set current (yabai -m query --spaces --space | jq .type -r); if test "$current" = "bsp"; yabai -m space --layout stack; else; yabai -m space --layout bsp; end'
+alt + ctrl - space : set current (yabai -m query --spaces --space | jq .type -r); if test "$current" = "bsp"; yabai -m space --layout stack; else; yabai -m space --layout bsp; end
 
-alt + ctrl - t : fish -c 'set current (yabai -m query --spaces --space | jq .type -r); if test "$current" = "float"; yabai -m space --layout stack; else; yabai -m space --layout float; end'
+alt + ctrl - t : set current (yabai -m query --spaces --space | jq .type -r); if test "$current" = "float"; yabai -m space --layout stack; else; yabai -m space --layout float; end
 
 alt + ctrl - h : yabai -m window --resize right:-150:0; or yabai -m window --resize left:-150:0
 alt + ctrl - l : yabai -m window --resize right:150:0; or yabai -m window --resize left:150:0
