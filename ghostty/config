@@ -88,7 +88,7 @@ keybind = super+0=goto_tab:0
 # custom-shader = ~/proj/ghostty-shaders/tft.glsl
 # custom-shader = ~/proj/ghostty-shaders/gears-and-belts.glsl
 # custom-shader = ~/proj/ghostty-shaders/underwater.glsl
-custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_frozen.glsl
+# custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_frozen.glsl
 # custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_blaze.glsl
 # custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_blaze_tapered.glsl
 
