@@ -155,13 +155,6 @@
 cmd - j [
 	"ghostty" : fish -c "sendRepeatToOtherPane"
 ]
-ctrl - n [
-	"google chrome" : skhd -k "down"
-	"brave browser" : skhd -k "down"
-]
-ctrl - p [
-	"brave browser" : skhd -k "up"
-]
 alt - j [
 	"finder" : ~/.config/dotfiles/scripts/runghostty.sh
 	"google chrome" : ~/.config/dotfiles/scripts/runghostty.sh
