@@ -4,17 +4,7 @@ run  = "shell 'fish -c \"yazi_vsplit $1\"' --confirm"
 desc = "Vertical Split"
 
 [[mgr.prepend_keymap]]
-on   = "<S-k>"
-run  = "shell 'fish -c \"yazi_vsplit $1\"' --confirm"
-desc = "Vertical Split"
-
-[[mgr.prepend_keymap]]
 on   = "\\"
-run  = "shell 'fish -c \"yazi_hsplit $1\"' --confirm"
-desc = "Horizontal Split"
-
-[[mgr.prepend_keymap]]
-on   = "<S-j>"
 run  = "shell 'fish -c \"yazi_hsplit $1\"' --confirm"
 desc = "Horizontal Split"
 
