@@ -111,6 +111,10 @@ abbr -a r --position anywhere --function last_history_item
 abbr -a q exit
 abbr -a cl clear
 
+# Nvim Fast
+abbr -a nf NVIM_APPNAME=nvim-fast nvim
+abbr -a nfe NVIM_APPNAME=nvim-fast nvim -c ":FFFFind"
+
 # Tmux
 abbr -a t tmux
 abbr -a ta "tmux a"
@@ -325,7 +329,7 @@ bind -M insert \cs "zi; commandline --function repaint"
 bind -M insert \ei "zi; commandline --function repaint"
 # Doing commandline -r because if you bind things directly
 # it messes up nvim cursor
-bind -M insert \ej 'commandline -r "y" ; commandline -f execute'
+bind -M insert \ej delete_or_fuzz
 bind -M insert \ek 'commandline -r "nvim_find_files" ; commandline -f execute'
 bind -M insert \eo 'commandline -r "nvim -c \":Telescope oldfiles\"" ; commandline -f execute'
 bind -M insert \eh "hx ."
