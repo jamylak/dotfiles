@@ -317,47 +317,47 @@ abbr -a coral codex resume --full-auto --last
 abbr -a coc coco
 abbr -a cop copilot --allow-all-tools
 
-#### KEY BINDINGS ###
-
-# Autocomplete binding
-bind \cy 'commandline -f accept-autosuggestion'
-bind -M insert \ef forward-word
-bind -M insert \eb backward-word
-
-bind -M insert \ck smart-expand-abbr
-bind -M insert \cs "zi; commandline --function repaint"
-bind -M insert \ei "zi; commandline --function repaint"
-# Doing commandline -r because if you bind things directly
-# it messes up nvim cursor
-bind -M insert \ej delete_or_fuzz
-bind -M insert \ek 'commandline -r "nvim_find_files" ; commandline -f execute'
-bind -M insert \eo 'commandline -r "nvim -c \":Telescope oldfiles\"" ; commandline -f execute'
-bind -M insert \eh "hx ."
-bind -M insert \cg "echo n | lazygit && commandline --function repaint"
-bind -M insert \eg "echo n | lazygit && commandline --function repaint"
-bind -M insert \el "echo n | lazygit && commandline --function repaint"
-# bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
-bind -M insert \en 'commandline -r "nvim_nproj"; commandline -f execute'
-bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
-# bind -M insert \ev "nvim"
-bind -M insert \eq "commandline --function kill-whole-line"
-bind -M insert \ep 'commandline -r "tmux_fzf"; commandline -f execute'
-bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
-bind -M insert \co "__smart_cd_or_insert_path; commandline --function repaint"
-bind --mode insert \cy __clipboard_paste
-# bind -M insert \em fish_clipboard_paste
-bind -M insert ctrl-i __fzf_all_files
-
-#bind -M normal \ce edit_command_buffer
-#bind -M insert \ce edit_command_buffer
-
-# TODO: Lazygit config
-# promptToReturnFromSubprocess: false
-# https://github.com/jesseduffield/lazygit/issues/1915
-
 ### FUNCTIONS ###
 
 function fish_user_key_bindings
+    #### KEY BINDINGS ###
+
+    # Autocomplete binding
+    bind \cy 'commandline -f accept-autosuggestion'
+    bind -M insert \ef forward-word
+    bind -M insert \eb backward-word
+
+    bind -M insert \ck smart-expand-abbr
+    bind -M insert \cs "zi; commandline --function repaint"
+    bind -M insert \ei "zi; commandline --function repaint"
+    # Doing commandline -r because if you bind things directly
+    # it messes up nvim cursor
+    bind -M insert \ej delete_or_fuzz
+    bind -M insert \ek 'commandline -r "nvim_find_files" ; commandline -f execute'
+    bind -M insert \eo 'commandline -r "nvim -c \":Telescope oldfiles\"" ; commandline -f execute'
+    bind -M insert \eh "hx ."
+    bind -M insert \cg "echo n | lazygit && commandline --function repaint"
+    bind -M insert \eg "echo n | lazygit && commandline --function repaint"
+    bind -M insert \el "echo n | lazygit && commandline --function repaint"
+    # bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
+    bind -M insert \en 'commandline -r "nvim_nproj"; commandline -f execute'
+    bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
+    # bind -M insert \ev "nvim"
+    bind -M insert \eq "commandline --function kill-whole-line"
+    bind -M insert \ep 'commandline -r "tmux_fzf"; commandline -f execute'
+    bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
+    bind -M insert \co "__smart_cd_or_insert_path; commandline --function repaint"
+    bind --mode insert \cy __clipboard_paste
+    # bind -M insert \em fish_clipboard_paste
+    bind -M insert ctrl-i __fzf_all_files
+
+    #bind -M normal \ce edit_command_buffer
+    #bind -M insert \ce edit_command_buffer
+
+    # TODO: Lazygit config
+    # promptToReturnFromSubprocess: false
+    # https://github.com/jesseduffield/lazygit/issues/1915
+
     # for mode in insert default visual
     bind -M insert \cb smart-backward-char
     bind -M insert alt-a beginning-of-line
