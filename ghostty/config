@@ -91,6 +91,7 @@ keybind = alt+6=unbind
 keybind = alt+7=unbind
 keybind = alt+8=unbind
 keybind = alt+9=unbind
+keybind = alt+space=unbind
 keybind = ctrl+enter=unbind
 
 # custom-shader = ~/proj/ghostty-shaders/galaxy.glsl
