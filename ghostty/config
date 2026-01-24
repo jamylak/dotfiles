@@ -47,7 +47,6 @@ keybind = super+ctrl+h=resize_split:left,60
 keybind = super+ctrl+k=resize_split:up,60
 keybind = super+ctrl+l=resize_split:right,60
 keybind = super+ctrl+enter=toggle_split_zoom
-keybind = ctrl+enter=unbind
 
 keybind = super+f=goto_split:next
 keybind = super+b=goto_split:previous
@@ -82,6 +81,17 @@ keybind = super+7=goto_tab:7
 keybind = super+8=goto_tab:8
 keybind = super+9=goto_tab:9
 keybind = super+0=goto_tab:0
+keybind = alt+0=unbind
+keybind = alt+1=unbind
+keybind = alt+2=unbind
+keybind = alt+3=unbind
+keybind = alt+4=unbind
+keybind = alt+5=unbind
+keybind = alt+6=unbind
+keybind = alt+7=unbind
+keybind = alt+8=unbind
+keybind = alt+9=unbind
+keybind = ctrl+enter=unbind
 
 # custom-shader = ~/proj/ghostty-shaders/galaxy.glsl
 # custom-shader = ~/proj/ghostty-shaders/glow-rgbsplit-twitchy.glsl
