@@ -22,8 +22,8 @@ ln -sfn $repo_root/ghostty ~/.config/ghostty
 # Helix
 ln -sfn $repo_root/helix ~/.config/helix
 
-# Starship
-# ln -sfn $repo_root/starship.toml ~/.config/starship.toml
+Starship
+ln -sfn $repo_root/starship_alt.toml ~/.config/starship.toml
 
 # Yazi
 ln -sfn $repo_root/yazi ~/.config/yazi
