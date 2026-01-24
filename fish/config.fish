@@ -93,6 +93,7 @@ abbr -a dotfiles --position anywhere ~/.config/dotfiles
 abbr -a dot --position anywhere ~/.config/dotfiles
 abbr -a m --set-cursor=! "cd ~/proj; mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mm make_new_project
+abbr -a mnp make_new_project
 abbr -a mcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
@@ -338,7 +339,7 @@ function fish_user_key_bindings
     bind -M insert \eh "hx ."
     bind -M insert \cg "echo n | lazygit && commandline --function repaint"
     bind -M insert \eg "echo n | lazygit && commandline --function repaint"
-    bind -M insert \el "echo n | lazygit && commandline --function repaint"
+    bind -M insert \el 'commandline -r "tmux_session_fzf"; commandline -f execute'
     # bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
     bind -M insert \en 'commandline -r "nvim_nproj"; commandline -f execute'
     bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
@@ -1287,7 +1288,7 @@ end
 
 ### INITIALIZATION ###
 starship init fish | source
-set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80%  --bind=ctrl-h:accept --bind=ctrl-j:accept"
+set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80%  --bind=ctrl-h:accept --bind=ctrl-j:accept --bind=alt-j:accept --bind=alt-m:accept"
 fzf_configure_bindings --directory=\ct
 
 if test -f ~/.config/fish/config.local.post.fish
