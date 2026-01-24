@@ -797,6 +797,11 @@ function delete_or_fuzz
     set cmd (commandline)
     if test -z "$cmd"
         # empty commandline
+        if test (uname) = "Darwin"
+            set stat_fmt 'stat -f "%m %N"'
+        else
+            set stat_fmt 'stat -c "%Y %n"'
+        end
         set file (
             find . \
                 -not -path './.git/*' \
@@ -807,7 +812,7 @@ function delete_or_fuzz
                 -not -path './external/*' \
                 -not -path './build/*' \
                 -type f -print0 \
-            | xargs -0 stat -f "%m %N" \
+            | xargs -0 $stat_fmt \
             | sort -nr \
             | cut -d' ' -f2- \
             | fzf --bind=ctrl-j:accept
