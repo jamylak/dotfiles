@@ -798,9 +798,9 @@ function delete_or_fuzz
     if test -z "$cmd"
         # empty commandline
         if test (uname) = "Darwin"
-            set stat_fmt 'stat -f "%m %N"'
+            set stat_fmt stat -f "%m %N"
         else
-            set stat_fmt 'stat -c "%Y %n"'
+            set stat_fmt stat -c "%Y %n"
         end
         set file (
             find . \
