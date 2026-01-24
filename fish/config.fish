@@ -803,6 +803,9 @@ function delete_or_fuzz
                 -not -path './.cache/*' \
                 -not -path './.zig-cache/*' \
                 -not -path './node_modules/*' \
+                -not -path './target/*' \
+                -not -path './external/*' \
+                -not -path './build/*' \
                 -type f -print0 \
             | xargs -0 stat -f "%m %N" \
             | sort -nr \
