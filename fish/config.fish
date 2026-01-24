@@ -335,7 +335,8 @@ function fish_user_key_bindings
     # it messes up nvim cursor
     bind -M insert \ej delete_or_fuzz
     bind -M insert \ek 'commandline -r "nvim_find_files" ; commandline -f execute'
-    bind -M insert \eo 'commandline -r "nvim -c \":Telescope oldfiles\"" ; commandline -f execute'
+    bind -M insert \eo 'commandline -r "nvim -c \":OldFiles\"" ; commandline -f execute'
+    bind -M insert \eu 'commandline -r "nvim -c \":FindWord\"" ; commandline -f execute'
     bind -M insert \eh "hx ."
     bind -M insert \cg "echo n | lazygit && commandline --function repaint"
     bind -M insert \eg "echo n | lazygit && commandline --function repaint"
@@ -750,7 +751,7 @@ function neogitdiff_new_tab -a path
 end
 
 function nvim_find_files
-    nvim -c ":Telescope find_files"
+    nvim -c ":FindFiles"
 end
 
 function git_repo_dir -a path
@@ -1017,7 +1018,7 @@ function nvim_join_session -a name dir
     end
     if test -n "$dir"
         nvim --server /tmp/nvim$name.sock --remote-send ":cd $dir <CR>"
-        nvim --server /tmp/nvim$name.sock --remote-send ":Telescope find_files <CR>"
+        nvim --server /tmp/nvim$name.sock --remote-send ":FindFiles <CR>"
     end
 
     nvim --server /tmp/nvim$name.sock --remote-ui
