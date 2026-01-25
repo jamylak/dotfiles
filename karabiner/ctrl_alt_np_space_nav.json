@@ -1,0 +1,67 @@
+{
+  "description": "ctrl+alt+n/p -> ctrl+right/left except VMware Fusion",
+  "manipulators": [
+    {
+      "type": "basic",
+      "conditions": [
+        {
+          "type": "frontmost_application_unless",
+          "bundle_identifiers": [
+            "^com\\.vmware\\.fusion$"
+          ]
+        }
+      ],
+      "from": {
+        "key_code": "n",
+        "modifiers": {
+          "mandatory": [
+            "control",
+            "option"
+          ],
+          "optional": [
+            "any"
+          ]
+        }
+      },
+      "to": [
+        {
+          "key_code": "right_arrow",
+          "modifiers": [
+            "control"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "basic",
+      "conditions": [
+        {
+          "type": "frontmost_application_unless",
+          "bundle_identifiers": [
+            "^com\\.vmware\\.fusion$"
+          ]
+        }
+      ],
+      "from": {
+        "key_code": "p",
+        "modifiers": {
+          "mandatory": [
+            "control",
+            "option"
+          ],
+          "optional": [
+            "any"
+          ]
+        }
+      },
+      "to": [
+        {
+          "key_code": "left_arrow",
+          "modifiers": [
+            "control"
+          ]
+        }
+      ]
+    }
+  ]
+}
