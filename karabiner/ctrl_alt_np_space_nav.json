@@ -1,263 +1,268 @@
 {
-  "description": "ctrl+alt nav + yabai controls except VMware Fusion",
-  "manipulators": [
+  "title": "c-a rules",
+  "rules": [
     {
-      "type": "basic",
-      "conditions": [
+      "description": "ctrl+alt nav + yabai controls except VMware Fusion",
+      "manipulators": [
         {
-          "type": "frontmost_application_unless",
-          "bundle_identifiers": [
-            "^com\\.vmware\\.fusion$"
-          ]
-        }
-      ],
-      "from": {
-        "key_code": "n",
-        "modifiers": {
-          "mandatory": [
-            "control",
-            "option"
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.vmware\\.fusion$"
+              ]
+            }
           ],
-          "optional": [
-            "any"
+          "from": {
+            "key_code": "n",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "option"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow",
+              "modifiers": [
+                "control"
+              ],
+              "repeat": true
+            }
           ]
-        }
-      },
-      "to": [
+        },
         {
-          "key_code": "right_arrow",
-          "modifiers": [
-            "control"
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.vmware\\.fusion$"
+              ]
+            }
           ],
-          "repeat": true
-        }
-      ]
-    },
-    {
-      "type": "basic",
-      "conditions": [
-        {
-          "type": "frontmost_application_unless",
-          "bundle_identifiers": [
-            "^com\\.vmware\\.fusion$"
+          "from": {
+            "key_code": "p",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "option"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow",
+              "modifiers": [
+                "control"
+              ],
+              "repeat": true
+            }
           ]
-        }
-      ],
-      "from": {
-        "key_code": "p",
-        "modifiers": {
-          "mandatory": [
-            "control",
-            "option"
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.vmware\\.fusion$"
+              ]
+            }
           ],
-          "optional": [
-            "any"
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "option"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; current=\"$(yabai -m query --spaces --space | jq -r .type)\"; if [ \"$current\" = \"bsp\" ]; then yabai -m space --layout stack; else yabai -m space --layout bsp; fi"
+            }
           ]
-        }
-      },
-      "to": [
+        },
         {
-          "key_code": "left_arrow",
-          "modifiers": [
-            "control"
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.vmware\\.fusion$"
+              ]
+            }
           ],
-          "repeat": true
-        }
-      ]
-    },
-    {
-      "type": "basic",
-      "conditions": [
-        {
-          "type": "frontmost_application_unless",
-          "bundle_identifiers": [
-            "^com\\.vmware\\.fusion$"
+          "from": {
+            "key_code": "t",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "option"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; current=\"$(yabai -m query --spaces --space | jq -r .type)\"; if [ \"$current\" = \"float\" ]; then yabai -m space --layout stack; else yabai -m space --layout float; fi"
+            }
           ]
-        }
-      ],
-      "from": {
-        "key_code": "spacebar",
-        "modifiers": {
-          "mandatory": [
-            "control",
-            "option"
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.vmware\\.fusion$"
+              ]
+            }
           ],
-          "optional": [
-            "any"
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "option"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; yabai -m window --resize right:-150:0 || yabai -m window --resize left:-150:0"
+            }
           ]
-        }
-      },
-      "to": [
+        },
         {
-          "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; current=\"$(yabai -m query --spaces --space | jq -r .type)\"; if [ \"$current\" = \"bsp\" ]; then yabai -m space --layout stack; else yabai -m space --layout bsp; fi"
-        }
-      ]
-    },
-    {
-      "type": "basic",
-      "conditions": [
-        {
-          "type": "frontmost_application_unless",
-          "bundle_identifiers": [
-            "^com\\.vmware\\.fusion$"
-          ]
-        }
-      ],
-      "from": {
-        "key_code": "t",
-        "modifiers": {
-          "mandatory": [
-            "control",
-            "option"
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.vmware\\.fusion$"
+              ]
+            }
           ],
-          "optional": [
-            "any"
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "option"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; yabai -m window --resize right:150:0 || yabai -m window --resize left:150:0"
+            }
           ]
-        }
-      },
-      "to": [
+        },
         {
-          "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; current=\"$(yabai -m query --spaces --space | jq -r .type)\"; if [ \"$current\" = \"float\" ]; then yabai -m space --layout stack; else yabai -m space --layout float; fi"
-        }
-      ]
-    },
-    {
-      "type": "basic",
-      "conditions": [
-        {
-          "type": "frontmost_application_unless",
-          "bundle_identifiers": [
-            "^com\\.vmware\\.fusion$"
-          ]
-        }
-      ],
-      "from": {
-        "key_code": "h",
-        "modifiers": {
-          "mandatory": [
-            "control",
-            "option"
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.vmware\\.fusion$"
+              ]
+            }
           ],
-          "optional": [
-            "any"
+          "from": {
+            "key_code": "f",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "option"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; yabai -m window --focus stack.next || yabai -m window --focus next || yabai -m window --focus stack.first || yabai -m window --focus first"
+            }
           ]
-        }
-      },
-      "to": [
+        },
         {
-          "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; yabai -m window --resize right:-150:0 || yabai -m window --resize left:-150:0"
-        }
-      ]
-    },
-    {
-      "type": "basic",
-      "conditions": [
-        {
-          "type": "frontmost_application_unless",
-          "bundle_identifiers": [
-            "^com\\.vmware\\.fusion$"
-          ]
-        }
-      ],
-      "from": {
-        "key_code": "l",
-        "modifiers": {
-          "mandatory": [
-            "control",
-            "option"
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.vmware\\.fusion$"
+              ]
+            }
           ],
-          "optional": [
-            "any"
+          "from": {
+            "key_code": "b",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "option"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; yabai -m window --focus stack.prev || yabai -m window --focus prev || yabai -m window --focus stack.last || yabai -m window --focus last"
+            }
           ]
-        }
-      },
-      "to": [
+        },
         {
-          "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; yabai -m window --resize right:150:0 || yabai -m window --resize left:150:0"
-        }
-      ]
-    },
-    {
-      "type": "basic",
-      "conditions": [
-        {
-          "type": "frontmost_application_unless",
-          "bundle_identifiers": [
-            "^com\\.vmware\\.fusion$"
-          ]
-        }
-      ],
-      "from": {
-        "key_code": "f",
-        "modifiers": {
-          "mandatory": [
-            "control",
-            "option"
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.vmware\\.fusion$"
+              ]
+            }
           ],
-          "optional": [
-            "any"
+          "from": {
+            "key_code": "return_or_enter",
+            "modifiers": {
+              "mandatory": [
+                "control",
+                "option"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; yabai -m window --swap next || yabai -m window --swap first"
+            }
           ]
-        }
-      },
-      "to": [
-        {
-          "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; yabai -m window --focus stack.next || yabai -m window --focus next || yabai -m window --focus stack.first || yabai -m window --focus first"
-        }
-      ]
-    },
-    {
-      "type": "basic",
-      "conditions": [
-        {
-          "type": "frontmost_application_unless",
-          "bundle_identifiers": [
-            "^com\\.vmware\\.fusion$"
-          ]
-        }
-      ],
-      "from": {
-        "key_code": "b",
-        "modifiers": {
-          "mandatory": [
-            "control",
-            "option"
-          ],
-          "optional": [
-            "any"
-          ]
-        }
-      },
-      "to": [
-        {
-          "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; yabai -m window --focus stack.prev || yabai -m window --focus prev || yabai -m window --focus stack.last || yabai -m window --focus last"
-        }
-      ]
-    },
-    {
-      "type": "basic",
-      "conditions": [
-        {
-          "type": "frontmost_application_unless",
-          "bundle_identifiers": [
-            "^com\\.vmware\\.fusion$"
-          ]
-        }
-      ],
-      "from": {
-        "key_code": "return_or_enter",
-        "modifiers": {
-          "mandatory": [
-            "control",
-            "option"
-          ],
-          "optional": [
-            "any"
-          ]
-        }
-      },
-      "to": [
-        {
-          "shell_command": "PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin; yabai -m window --swap next || yabai -m window --swap first"
         }
       ]
     }
