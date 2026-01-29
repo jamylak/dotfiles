@@ -801,7 +801,7 @@ function delete_or_fuzz
     set cmd (commandline)
     if test -z "$cmd"
         # empty commandline
-        if test (uname) = "Darwin"
+        if test (uname) = Darwin
             set stat_fmt stat -f "%m %N"
         else
             set stat_fmt stat -c "%Y %n"
