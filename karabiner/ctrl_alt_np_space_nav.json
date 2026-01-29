@@ -28,7 +28,8 @@
           "key_code": "right_arrow",
           "modifiers": [
             "control"
-          ]
+          ],
+          "repeat": true
         }
       ]
     },
@@ -59,7 +60,8 @@
           "key_code": "left_arrow",
           "modifiers": [
             "control"
-          ]
+          ],
+          "repeat": true
         }
       ]
     },
