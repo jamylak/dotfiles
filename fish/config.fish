@@ -353,18 +353,11 @@ function fish_user_key_bindings
     # bind -M insert \em fish_clipboard_paste
     bind -M insert ctrl-i __fzf_all_files
 
-    #bind -M normal \ce edit_command_buffer
-    #bind -M insert \ce edit_command_buffer
-
-    # TODO: Lazygit config
-    # promptToReturnFromSubprocess: false
-    # https://github.com/jesseduffield/lazygit/issues/1915
-
     # for mode in insert default visual
     bind -M insert \cb smart-backward-char
     bind -M insert alt-a beginning-of-line
     bind -M insert \ca beginning-of-line
-    bind -M insert \ce end-of-line
+    bind -M insert \ce smart-end-of-line
     bind -M insert \cf smart-forward-char
     bind -M insert \cp history-search-backward
     bind -M insert \cn history-search-forward
@@ -410,6 +403,16 @@ function smart-backward-char
         commandline -f execute
     else
         commandline -f backward-char
+    end
+end
+
+function smart-end-of-line
+    set cmd (commandline)
+    if test -z "$cmd"
+        # just fuzzes... could move fuzz part out
+        delete_or_fuzz
+    else
+        commandline -f end-of-line
     end
 end
 
