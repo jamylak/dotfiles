@@ -42,8 +42,9 @@ ln -sfn $repo_root/.yabairc ~/.config/.yabairc
 # mkdir -p ~/.config/nushell
 # ln -sfn $repo_root/nushell/config.nu ~/.config/nushell/config.nu
 
-# # Karabiner
-# mkdir -p ~/.config/karabiner/assets/complex_modifications
+# Karabiner
+mkdir -p ~/.config/karabiner/assets/complex_modifications
+ln -sfn $repo_root/karabiner/ctrl_alt_np_space_nav.json ~/.config/karabiner/assets/complex_modifications/ctrl_alt_np_space_nav.json
 # for file in $repo_root/karabiner/*.json
 #   set name (basename $file)
 #   ln -sfn $file ~/.config/karabiner/assets/complex_modifications/$name
