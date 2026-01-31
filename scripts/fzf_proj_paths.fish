@@ -7,7 +7,7 @@ if test (uname) = Darwin
 end
 
 if test -e /etc/NIXOS
-    set search_paths $search_paths ~/
+    set search_paths $search_paths ~/*
 end
 
 set search_paths $search_paths ~/proj/*
