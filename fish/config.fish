@@ -1114,7 +1114,7 @@ function make_new_project -a dir
 end
 
 function tmux_fzf
-    set dir (ls -dt ~/proj/* | fzf)
+    set dir (fish "$HOME/proj/dotfiles/scripts/fzf_proj_paths.fish" | fzf)
     if test -n "$dir"
         builtin cd -- "$dir"
         set name (tmux_dir_session_name "$dir")
