@@ -6,8 +6,8 @@ if test (uname) = Darwin
     set search_paths $search_paths /Applications ~/.Trash ~/Desktop
 end
 
-if test -e /etc/NIXOS; and test -e ~/nixconf
-    set search_paths $search_paths ~/nixconf
+if test -e /etc/NIXOS
+    set search_paths $search_paths ~/
 end
 
 set search_paths $search_paths ~/proj/*
