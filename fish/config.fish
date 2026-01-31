@@ -89,7 +89,7 @@ abbr -a svep --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
 abbr -a setvirtualenvproject --set-cursor=! "echo (pwd) > ~/.virtualenvs/!/.project"
 abbr -a ef exec fish
 abbr -a hm --position anywhere ~/
-abbr -a dotfiles --position anywhere ~/.config/dotfiles
+abbr -a dotf --position anywhere ~/.config/dotfiles
 abbr -a dot --position anywhere ~/.config/dotfiles
 abbr -a m --set-cursor=! "cd ~/proj; mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mm make_new_project
