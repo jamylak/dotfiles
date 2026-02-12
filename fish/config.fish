@@ -1305,7 +1305,7 @@ end
 ### INITIALIZATION ###
 set -gx STARSHIP_LOG error
 starship init fish | source
-set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80%  --bind=ctrl-h:accept --bind=ctrl-j:accept --bind=alt-j:accept --bind=alt-m:accept"
+set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80%  --bind=ctrl-h:accept --bind=ctrl-i:accept --bind=ctrl-j:accept --bind=alt-j:accept --bind=alt-m:accept"
 fzf_configure_bindings --directory=\ct
 
 if test -f ~/.config/fish/config.local.post.fish
