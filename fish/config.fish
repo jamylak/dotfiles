@@ -46,7 +46,6 @@ set fish_cursor_insert line
 set -gx EDITOR hx
 # set -gx HELIX_RUNTIME ~/proj/helix/runtime
 set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
-set -gx UV_PYTHON python3.13
 set -gx AI_CLI codex --full-auto
 
 set -g fish_key_bindings fish_vi_key_bindings
