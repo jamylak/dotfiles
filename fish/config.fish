@@ -54,6 +54,11 @@ set -g fish_key_bindings fish_vi_key_bindings
 
 abbr -a bt btop
 abbr -a a awrit
+abbr -a o open
+abbr -a od open .
+abbr -a vs vsdf
+abbr -a vst vsdf --toy
+abbr -a vn vsdf --new-toy
 # Dashboard
 abbr -a db dashboard
 # Neogit
@@ -228,7 +233,6 @@ abbr -a fj nvim_join_session
 abbr -a vij "nvim ."
 abbr -a vig 'nvim ~/.config/dotfiles/ghostty/config -c "normal cd"'
 abbr -a viv 'nvim -c "normal \'0"'
-abbr -a vn 'NVIM_APPNAME=nvim2 nvim'
 abbr -a vj 'NVIM_APPNAME=nvim2 nvim'
 abbr -a vnn 'NVIM_APPNAME=nvim2 nvim ~/.config/nvim2/init.lua'
 abbr -a vi nvim
