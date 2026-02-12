@@ -371,7 +371,8 @@ function fish_user_key_bindings
     bind -M insert space space_or_fzf
     bind -M insert ctrl-enter "__smart_cd_or_insert_path; commandline --function repaint"
     bind -M insert alt-enter "__smart_cd_or_insert_path; commandline --function repaint"
-    bind -M insert shift-enter smart_shift_enter
+    bind -M insert shift-enter 'commandline -r "tmux_session_fzf"; commandline -f execute'
+
     # For weird terminals
     # bind -M insert \e\[13\;2u smart_shift_enter
     if not set -q NVIM
