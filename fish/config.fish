@@ -59,6 +59,8 @@ abbr -a od open .
 abbr -a vs vsdf
 abbr -a vst vsdf --toy
 abbr -a vn vsdf --new-toy
+abbr -a mr make run
+abbr -a rmd nvim README.md
 # Dashboard
 abbr -a db dashboard
 # Neogit
@@ -103,6 +105,7 @@ abbr -a mkcd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkc --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mk --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mn --set-cursor=! "cd ~/proj; mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a p python3
 abbr -a pdb python3 -m pdb
 abbr -a --position anywhere tmp /tmp/
@@ -293,6 +296,7 @@ abbr -a xx hx +999999
 # C++
 abbr -a cm "cmake . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
 abbr -a cb "cmake --build build"
+abbr -a cbr "cmake --build build && ./*.out"
 abbr -a cmb "cmake --build build"
 
 # eza
