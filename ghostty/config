@@ -21,7 +21,7 @@ macos-icon = blueprint
 background = #000000
 # -- Blur --
 # background-opacity = 0.3
-# background-blur = macos-glass-regular
+background-blur = macos-glass-regular
 # background-blur-radius = 65
 # shell-integration-features = no-cursor
 macos-non-native-fullscreen = true
@@ -101,7 +101,7 @@ keybind = ctrl+enter=unbind
 # custom-shader = ~/proj/ghostty-shaders/underwater.glsl
 # custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_frozen.glsl
 # custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_blaze.glsl
-# custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_blaze_tapered.glsl
+custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_blaze_tapered.glsl
 
 keybind = super+o=close_tab:other
 
