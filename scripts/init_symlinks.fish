@@ -38,6 +38,9 @@ ln -sfn $repo_root/lazygit ~/.config/lazygit
 # Yabai
 ln -sfn $repo_root/.yabairc ~/.config/.yabairc
 
+# Tmux
+ln -sfn $repo_root/.tmux.conf ~/.tmux.conf
+
 # Nushell
 # mkdir -p ~/.config/nushell
 # ln -sfn $repo_root/nushell/config.nu ~/.config/nushell/config.nu
