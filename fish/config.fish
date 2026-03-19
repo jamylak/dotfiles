@@ -343,7 +343,7 @@ function fish_user_key_bindings
     bind -M insert \ej delete_or_fuzz
     bind -M insert \ek 'commandline -r "nvim_find_files" ; commandline -f execute'
     bind -M insert \eo 'commandline -r "nvim -c \":OldFiles\"" ; commandline -f execute'
-    bind -M insert \eu 'commandline -r "nvim -c \":FindWord\"" ; commandline -f execute'
+    bind -M insert \eu 'commandline -r "nvim -c \":FFFGrep\"" ; commandline -f execute'
     bind -M insert \eh "hx ."
     bind -M insert \cg "echo n | lazygit && commandline --function repaint"
     bind -M insert \eg "echo n | lazygit && commandline --function repaint"
