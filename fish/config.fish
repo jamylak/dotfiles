@@ -11,7 +11,7 @@ if test -d /opt/homebrew/bin
 end
 
 # TODO: Empty <c-c> does copilot chat?
-if test (uname) = Darwin
+if test -x /usr/bin/sw_vers
     #### Mac Only Stuff ####
     # Fix incorrerct yazi emoji rendering on
     # nvim terminal. Also fix tmux issue when returning
