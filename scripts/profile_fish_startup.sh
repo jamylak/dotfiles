@@ -92,4 +92,7 @@ profile_fish
 echo
 echo "profile-startup sorted by total time descending"
 printf 'Time\tSum\tCommand\n'
-tail -n +2 "$profile_file" | LC_ALL=C sort -t "$(printf '\t')" -k2,2nr
+tail -n +2 "$profile_file" \
+  | awk -F '\t' 'NF >= 3 { printf "%012d %s\n", $2, $0 }' \
+  | LC_ALL=C sort -nr \
+  | cut -d ' ' -f2-
