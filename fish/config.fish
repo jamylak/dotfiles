@@ -106,6 +106,7 @@ abbr -a mkd --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mkc --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mk --set-cursor=! "mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a mn --set-cursor=! "cd ~/proj; mkdir \"!\" && cd (ls -tA | head -n 1)"
+abbr -a mkp --set-cursor=! "cd ~/proj; mkdir \"!\" && cd (ls -tA | head -n 1)"
 abbr -a p python3
 abbr -a pdb python3 -m pdb
 abbr -a --position anywhere tmp /tmp/
