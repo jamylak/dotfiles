@@ -36,8 +36,6 @@ if test (uname) = Darwin
     fish_add_path -mp /usr/local/bin
     fish_add_path -mp /Users/$USER/.local/bin
     fish_add_path -mp $HOME/.cargo/bin
-    fish_add_path -mp $HOME/.emacs.d/bin
-    fish_add_path -mp $HOME/.config/emacs/bin
 else if test -e /etc/nixos
     #### NIX Only Stuff ####
 end
