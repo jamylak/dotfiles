@@ -91,8 +91,27 @@ profile_fish
 
 echo
 echo "profile-startup sorted by total time descending"
-printf 'Time\tSum\tCommand\n'
-tail -n +2 "$profile_file" \
-  | awk -F '\t' 'NF >= 3 { printf "%012d %s\n", $2, $0 }' \
-  | LC_ALL=C sort -nr \
-  | cut -d ' ' -f2-
+python3 - "$profile_file" <<'PY'
+import sys
+from pathlib import Path
+
+profile_path = Path(sys.argv[1])
+lines = profile_path.read_text().splitlines()
+
+print("Time\tSum\tCommand")
+
+rows = []
+for line in lines[1:]:
+    parts = line.split("\t", 2)
+    if len(parts) != 3:
+        continue
+    try:
+        time = int(parts[0])
+        total = int(parts[1])
+    except ValueError:
+        continue
+    rows.append((total, time, parts[2]))
+
+for total, time, command in sorted(rows, reverse=True):
+    print(f"{time}\t{total}\t{command}")
+PY
