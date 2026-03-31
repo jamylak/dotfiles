@@ -31,11 +31,12 @@ if test -x /usr/bin/sw_vers
     ### PATHS ###
 
     # eg. fd is in here
-    fish_add_path -mp /opt/homebrew/bin
-    fish_add_path -mp /opt/homebrew/opt/llvm/bin
-    fish_add_path -mp /usr/local/bin
-    fish_add_path -mp /Users/$USER/.local/bin
-    fish_add_path -mp $HOME/.cargo/bin
+    fish_add_path -mp \
+        /opt/homebrew/bin \
+        /opt/homebrew/opt/llvm/bin \
+        /usr/local/bin \
+        /Users/$USER/.local/bin \
+        $HOME/.cargo/bin
 else if test -e /etc/nixos
     #### NIX Only Stuff ####
 end
