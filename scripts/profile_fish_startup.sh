@@ -92,6 +92,7 @@ profile_fish
 echo
 echo "profile-startup sorted by total time descending"
 python3 - "$profile_file" <<'PY'
+import re
 import sys
 from pathlib import Path
 
@@ -102,15 +103,12 @@ print("Time\tSum\tCommand")
 
 rows = []
 for line in lines[1:]:
-    parts = line.split("\t", 2)
-    if len(parts) != 3:
+    match = re.match(r"^\s*(\d+)\s+(\d+)\s+(.*)$", line)
+    if match is None:
         continue
-    try:
-        time = int(parts[0])
-        total = int(parts[1])
-    except ValueError:
-        continue
-    rows.append((total, time, parts[2]))
+    time = int(match.group(1))
+    total = int(match.group(2))
+    rows.append((total, time, match.group(3)))
 
 for total, time, command in sorted(rows, reverse=True):
     print(f"{time}\t{total}\t{command}")
