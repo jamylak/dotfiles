@@ -30,13 +30,26 @@ if test -x /usr/bin/sw_vers
 
     ### PATHS ###
 
-    # eg. fd is in here
-    fish_add_path -mp \
-        /opt/homebrew/bin \
-        /opt/homebrew/opt/llvm/bin \
-        /usr/local/bin \
-        /Users/$USER/.local/bin \
-        $HOME/.cargo/bin
+    set -l desired_fish_startup_bootstrap_version 1
+    # Bump this version if the one-time startup path bootstrap needs to run again.
+    if not set -q __fish_startup_bootstrap_version; or test "$__fish_startup_bootstrap_version" != "$desired_fish_startup_bootstrap_version"
+        set -l desired_fish_user_paths \
+            /opt/homebrew/bin \
+            /opt/homebrew/opt/llvm/bin \
+            /usr/local/bin \
+            /Users/$USER/.local/bin \
+            $HOME/.cargo/bin
+        set -l bootstrapped_fish_user_paths
+
+        for path in $desired_fish_user_paths $fish_user_paths
+            if not contains -- $path $bootstrapped_fish_user_paths
+                set -a bootstrapped_fish_user_paths $path
+            end
+        end
+
+        set -U fish_user_paths $bootstrapped_fish_user_paths
+        set -U __fish_startup_bootstrap_version $desired_fish_startup_bootstrap_version
+    end
 else if test -e /etc/nixos
     #### NIX Only Stuff ####
 end
