@@ -1310,7 +1310,12 @@ end
 set -gx STARSHIP_LOG error
 # starship init fish | source
 set -gx FZF_DEFAULT_OPTS "--pointer=🔥 --layout=reverse --info=inline --height=80%  --bind=ctrl-h:accept --bind=ctrl-i:accept --bind=ctrl-j:accept --bind=alt-j:accept --bind=alt-m:accept"
-fzf_configure_bindings --directory=\ct
+# fzf.fish already installs its bindings from conf.d; only override the
+# directory binding locally instead of reinstalling the whole set.
+bind --erase -- \e\cf
+bind --erase --mode insert -- \e\cf
+bind --mode default \ct _fzf_search_directory
+bind --mode insert \ct _fzf_search_directory
 
 if test -f ~/.config/fish/config.local.post.fish
     source ~/.config/fish/config.local.post.fish
