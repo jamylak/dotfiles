@@ -133,10 +133,9 @@ abbr -a q exit
 abbr -a cl clear
 
 # Nvim Fast
-abbr -a nf NVIM_APPNAME=nvim-fast nvim
-abbr -a nfe NVIM_APPNAME=nvim-fast nvim -c ":FFFFind"
 abbr -a n2 NVIM_APPNAME=nvimconf2 nvim
 abbr -a nt NVIM_APPNAME=nvimconf2 nvim
+abbr -a nf NVIM_APPNAME=nvimconf2 nvim -c ":FFFFind"
 
 # Tmux
 abbr -a t tmux
