@@ -82,7 +82,7 @@ run  = "shell 'fish -c \"yazi_tv_git $1\"' --block --confirm"
 desc = "Yazi TV Git"
 
 [[mgr.prepend_keymap]]
-on   = "<c-s>"
+on   = "<c-f>"
 run  = "find --smart"
 desc = "Find next file"
 
@@ -172,7 +172,7 @@ run  = "shell 'fish -c \"cd (git_repo_dir $1); nvim $@\"' --block --confirm"
 desc = "Open with nvim"
 
 [[mgr.prepend_keymap]]
-on   = "<C-f>"
+on   = "<C-s>"
 run  = "plugin fzf"
 desc = "fzf"
 
