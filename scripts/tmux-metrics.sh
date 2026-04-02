@@ -2,8 +2,61 @@
 
 set -euo pipefail
 
-bar_for_percent() {
+clamp_percent() {
     local percent=$1
+
+    if ((percent < 0)); then
+        printf '0'
+    elif ((percent > 100)); then
+        printf '100'
+    else
+        printf '%s' "$percent"
+    fi
+}
+
+interpolate_channel() {
+    local start=$1
+    local end=$2
+    local progress=$3
+
+    printf '%d' $((start + ((end - start) * progress / 100)))
+}
+
+color_for_percent() {
+    local percent
+    percent=$(clamp_percent "$1")
+
+    local start_r start_g start_b
+    local end_r end_g end_b
+    local progress
+
+    if ((percent <= 50)); then
+        start_r=0xb8
+        start_g=0xbb
+        start_b=0x26
+        end_r=0xfa
+        end_g=0xbd
+        end_b=0x2f
+        progress=$((percent * 2))
+    else
+        start_r=0xfa
+        start_g=0xbd
+        start_b=0x2f
+        end_r=0xfb
+        end_g=0x49
+        end_b=0x34
+        progress=$(((percent - 50) * 2))
+    fi
+
+    printf '#%02x%02x%02x' \
+        "$(interpolate_channel "$start_r" "$end_r" "$progress")" \
+        "$(interpolate_channel "$start_g" "$end_g" "$progress")" \
+        "$(interpolate_channel "$start_b" "$end_b" "$progress")"
+}
+
+bar_for_percent() {
+    local percent
+    percent=$(clamp_percent "$1")
     local filled=$((percent / 25))
     local empty=$((4 - filled))
     local bar=""
@@ -44,11 +97,15 @@ ram_percent() {
     '
 }
 
-cpu=$(cpu_percent)
-ram=$(ram_percent)
+cpu=$(clamp_percent "$(cpu_percent)")
+ram=$(clamp_percent "$(ram_percent)")
 cpu_bar=$(bar_for_percent "$cpu")
 ram_bar=$(bar_for_percent "$ram")
+cpu_color=$(color_for_percent "$cpu")
+ram_color=$(color_for_percent "$ram")
 
-printf '#[fg=#fbf1c7,bg=#282828,bold]🧠 #[fg=#fe8019,bg=#282828,bold]%s %s%% #[fg=#fbf1c7,bg=#282828,bold]💾 #[fg=#fe8019,bg=#282828,bold]%s %s%% ' \
+printf '#[fg=#fbf1c7,bg=#282828,bold]🧠 #[fg=%s,bg=#282828,bold]%s %s%% #[fg=#fbf1c7,bg=#282828,bold]💾 #[fg=%s,bg=#282828,bold]%s %s%% ' \
+    "$cpu_color" \
     "$cpu_bar" "$cpu" \
+    "$ram_color" \
     "$ram_bar" "$ram"
