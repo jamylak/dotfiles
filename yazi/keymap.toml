@@ -131,6 +131,11 @@ on   = [ "g", "p" ]
 run  = "cd ~/proj"
 desc = "Cd to ~/proj"
 
+[[mgr.prepend_keymap]]
+on   = [ "g", "i" ]
+run  = "shell 'fish -c \"git init\"' --block --confirm"
+desc = "Git init"
+
 # NOTE: This remaps symlink
 [[mgr.prepend_keymap]]
 on  = "-"
