@@ -58,7 +58,7 @@ set fish_cursor_insert line
 set -gx EDITOR hx
 # set -gx HELIX_RUNTIME ~/proj/helix/runtime
 set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
-set -gx AI_CLI codex --full-auto
+set -gx AI_CLI codex --full-auto --add-dir /tmp --add-dir /private/tmp
 
 set -g fish_key_bindings fish_vi_key_bindings
 
@@ -332,10 +332,10 @@ abbr -a zr "./zig-out/bin/*"
 abbr -a zbr "zig build && ./zig-out/bin/*"
 
 # Codex
-abbr -a co codex --full-auto
-abbr -a cor codex resume --full-auto
-abbr -a corl codex resume --full-auto --last
-abbr -a coral codex resume --full-auto --last
+abbr -a co "codex --full-auto --add-dir /tmp --add-dir /private/tmp"
+abbr -a cor "codex resume --full-auto --add-dir /tmp --add-dir /private/tmp"
+abbr -a corl "codex resume --full-auto --add-dir /tmp --add-dir /private/tmp --last"
+abbr -a coral "codex resume --full-auto --add-dir /tmp --add-dir /private/tmp --last"
 abbr -a coc coco
 abbr -a cop copilot --allow-all-tools
 
@@ -1118,6 +1118,26 @@ function tmux_dir_session_name -a dir
     end
 end
 
+function codex_trust_project -a dir
+    if test -z "$dir"
+        return 1
+    end
+
+    set -l config $HOME/.codex/config.toml
+    set -l escaped_dir (string replace -a '"' '\\"' -- "$dir")
+    set -l header "[projects.\"$escaped_dir\"]"
+
+    mkdir -p $HOME/.codex
+
+    if test -f "$config"
+        if grep -Fq -- "$header" "$config"
+            return 0
+        end
+    end
+
+    printf '\n%s\ntrust_level = "trusted"\n' "$header" >> "$config"
+end
+
 function make_new_project -a dir
     if test -z "$dir"
         echo "usage: mm <dirname>" >&2
@@ -1131,6 +1151,7 @@ function make_new_project -a dir
     # git add README.md
     # git commit -m README
     set dir (pwd)
+    codex_trust_project "$dir"
     set name (tmux_dir_session_name "$dir")
     tmux_attach "$name" "$dir"
 end
