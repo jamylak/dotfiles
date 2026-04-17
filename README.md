@@ -12,3 +12,9 @@ chsh -s "$(command -v fish)"
 ```
 ./scripts/init_symlinks.fish
 ```
+
+## Karabiner Only
+
+```
+./scripts/symlink_karabiner.fish
+```
