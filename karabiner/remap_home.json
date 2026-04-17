@@ -1,0 +1,26 @@
+{
+  "description": "Home to CMD+SHIFT+5",
+  "manipulators": [
+    {
+      "from": {
+        "key_code": "home",
+        "modifiers": {
+          "mandatory": [],
+          "optional": [
+            "any"
+          ]
+        }
+      },
+      "to": [
+        {
+          "key_code": "5",
+          "modifiers": [
+            "left_command",
+            "shift"
+          ]
+        }
+      ],
+      "type": "basic"
+    }
+  ]
+}
