@@ -45,12 +45,8 @@ ln -sfn $repo_root/.tmux.conf ~/.tmux.conf
 # mkdir -p ~/.config/nushell
 # ln -sfn $repo_root/nushell/config.nu ~/.config/nushell/config.nu
 
-# # Karabiner
-# mkdir -p ~/.config/karabiner/assets/complex_modifications
-# for file in $repo_root/karabiner/*.json
-#   set name (basename $file)
-#   ln -sfn $file ~/.config/karabiner/assets/complex_modifications/$name
-# end
+# Karabiner
+# $repo_root/scripts/symlink_karabiner.fish
 
 # macOS keybindings
 # mkdir -p ~/Library/KeyBindings
