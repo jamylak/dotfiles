@@ -58,7 +58,7 @@ set fish_cursor_insert line
 set -gx EDITOR hx
 # set -gx HELIX_RUNTIME ~/proj/helix/runtime
 set -gx LG_CONFIG_FILE $HOME/.config/lazygit/config.yaml
-set -gx AI_CLI codex --full-auto --add-dir /tmp --add-dir /private/tmp
+set -gx AI_CLI codex --sandbox workspace-write --ask-for-approval on-request --add-dir /tmp --add-dir /private/tmp
 
 set -g fish_key_bindings fish_vi_key_bindings
 
@@ -332,10 +332,10 @@ abbr -a zr "./zig-out/bin/*"
 abbr -a zbr "zig build && ./zig-out/bin/*"
 
 # Codex
-abbr -a co "codex --full-auto --add-dir /tmp --add-dir /private/tmp"
-abbr -a cor "codex resume --full-auto --add-dir /tmp --add-dir /private/tmp"
-abbr -a corl "codex resume --full-auto --add-dir /tmp --add-dir /private/tmp --last"
-abbr -a coral "codex resume --full-auto --add-dir /tmp --add-dir /private/tmp --last"
+abbr -a co "codex --sandbox workspace-write --ask-for-approval on-request --add-dir /tmp --add-dir /private/tmp"
+abbr -a cor "codex resume --sandbox workspace-write --ask-for-approval on-request --add-dir /tmp --add-dir /private/tmp"
+abbr -a corl "codex resume --sandbox workspace-write --ask-for-approval on-request --add-dir /tmp --add-dir /private/tmp --last"
+abbr -a coral "codex resume --sandbox workspace-write --ask-for-approval on-request --add-dir /tmp --add-dir /private/tmp --last"
 abbr -a coc coco
 abbr -a cop copilot --allow-all-tools
 
