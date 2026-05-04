@@ -3,7 +3,7 @@
 set -l search_paths /tmp ~ ~/.local/share ~/.local/share/nvim/lazy ~/.config ~/proj ~/Downloads
 
 if test (uname) = Darwin
-    set search_paths $search_paths /Applications ~/.Trash ~/Desktop
+    set search_paths $search_paths /Applications ~/.Trash ~/Desktop ~/Pictures ~/Documents
 end
 
 if test -e /etc/NIXOS
