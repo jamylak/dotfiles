@@ -73,19 +73,17 @@ abbr -a vst vsdf --toy
 abbr -a vn vsdf --new-toy
 abbr -a mr make run
 abbr -a rmd nvim README.md
-# Dashboard
-abbr -a db dashboard
 # Neogit
-abbr -a ng neogitlog 300
-abbr -a ngl neogitlog 300
-abbr -a dl neogitlog 300
-abbr -a nl neogitlog 300
-abbr -a ngd neogitdiff
-abbr -a nd neogitdiff
-abbr -a d neogitdiff
-abbr -a ngdm neogitdiffmain
-abbr -a ngm neogitdiffmain
-abbr -a dm neogitdiffmain
+abbr -a ng nvim -c ":NeogitLog"
+abbr -a ngl nvim -c ":NeogitLog"
+abbr -a dl nvim -c ":NeogitLog"
+abbr -a nl nvim -c ":NeogitLog"
+abbr -a d nvim -c ":NeogitDiff"
+abbr -a ngd nvim -c ":NeogitDiff"
+abbr -a nd nvim -c ":NeogitDiff"
+abbr -a ngdm nvim -c ":NeogitDiffMain"
+abbr -a ngm nvim -c ":NeogitDiffMain"
+abbr -a dm nvim -c ":NeogitDiffMain"
 # C++
 # TODO: debug build
 # TODO: lldb
@@ -133,9 +131,9 @@ abbr -a q exit
 abbr -a cl clear
 
 # Nvim Fast
-abbr -a n2 NVIM_APPNAME=nvimconf2 nvim-0.12.0
-abbr -a nt NVIM_APPNAME=nvimconf2 nvim-0.12.0
-abbr -a nf NVIM_APPNAME=nvimconf2 nvim-0.12.0 -c ":FFFFind"
+abbr -a n2 NVIM_APPNAME=old-nvimconf nvim
+abbr -a nt NVIM_APPNAME=old-nvimconf nvim
+abbr -a nf NVIM_APPNAME=old-nvimconf nvim -c ":FFFFind"
 
 # Tmux
 abbr -a t tmux
@@ -356,7 +354,7 @@ function fish_user_key_bindings
     # it messes up nvim cursor
     bind -M insert \ej delete_or_fuzz
     bind -M insert \ek 'commandline -r "nvim_find_files" ; commandline -f execute'
-    bind -M insert \eo 'commandline -r "nvim -c \":OldFiles\"" ; commandline -f execute'
+    bind -M insert \eo 'commandline -r "nvim -c \":Oldfiles\"" ; commandline -f execute'
     bind -M insert \eu 'commandline -r "nvim -c \":FFFGrep\"" ; commandline -f execute'
     bind -M insert \eh "hx ."
     bind -M insert \cg "echo n | lazygit && commandline --function repaint"
@@ -438,13 +436,17 @@ function smart-end-of-line
     end
 end
 
+function nvim_find_files
+    nvim -c ":FFFFind"
+end
+
 function nvim_nproj -a projname
     if test -n "$projname"
         mkdir ~/proj/$projname
         cd ~/proj/$projname
         nvim_find_files
     else
-        nvim -c ":F"
+        nvim -c ":ProjectPicker"
     end
 end
 
@@ -763,22 +765,6 @@ function yazi_hsplit -a path
     launch_hsplit "y $path"
 end
 
-function neogitlog_new_tab -a path
-    launch_new_tab "cd (git_repo_dir $path); neogitlog 400"
-end
-
-function neogitdiffmain_new_tab -a path
-    launch_new_tab "cd (git_repo_dir $path); neogitdiffmain"
-end
-
-function neogitdiff_new_tab -a path
-    launch_new_tab "cd (git_repo_dir $path); neogitdiff"
-end
-
-function nvim_find_files
-    nvim -c ":FindFiles"
-end
-
 function git_repo_dir -a path
     set dir (realpath $path)
     # Test git rev-parse --show-toplevel
@@ -948,28 +934,6 @@ function zi
     zi $argv
 end
 
-function neogitlog
-    # Hacky feedkeys way, so use a delay to wait for it to load
-    set -l delay 1000
-    if test -n "$argv[1]"
-        set delay "$argv[1]"
-    end
-    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>NGll\", true, true, true), \"m\", true); vim.defer_fn(function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"ggjdd\", true, true, true), \"m\", true) end, $delay)"
-end
-
-function neogitdiffmain
-    # Hacky feedkeys way, so use a delay to wait for it to load
-    set -l delay 500
-    if test -n "$argv[1]"
-        set delay "$argv[1]"
-    end
-    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>NGdr\", true, true, true), \"m\", true); vim.defer_fn(function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<c-n><c-n><enter>\", true, true, true), \"m\", true) end, $delay)"
-end
-
-function neogitdiff
-    nvim . -c ":lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<leader>NGdd\", true, true, true), \"m\", true);"
-end
-
 function nvim_of
     # From within neovim, escape terminal, then open a file
     # and CD into that dir
@@ -989,18 +953,6 @@ end
 function tmux_last_session
     set last_command (history | grep '^tmux_attach' | head -n 1)
     eval $last_command
-end
-
-function dashboard
-    set -l dir (pwd)
-    if test -n "$argv[1]"
-        set dir "$argv[1]"
-    end
-    launch_new_tab "cd $dir && fish -c yazi"
-    launch_new_tab "cd $dir && fish -c neogitlog"
-    launch_new_tab "cd $dir && fish -c 'hx .'"
-    launch_new_tab "cd $dir && fish -c lazygit"
-    exit
 end
 
 function git_checkout_origin
@@ -1135,7 +1087,7 @@ function codex_trust_project -a dir
         end
     end
 
-    printf '\n%s\ntrust_level = "trusted"\n' "$header" >> "$config"
+    printf '\n%s\ntrust_level = "trusted"\n' "$header" >>"$config"
 end
 
 function make_new_project -a dir
