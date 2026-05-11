@@ -171,8 +171,6 @@ abbr -a gfo "git_fetch_main; git_checkout_origin"
 abbr -a gko git_checkout_origin
 abbr -a gkt "git checkout (tv git-branch)"
 abbr -a gt "git checkout (tv git-branch)"
-abbr -a N nvim -c ":Neogit"
-abbr -a ng nvim -c ":Neogit"
 abbr -a gi "git init"
 abbr -a gb "git branch"
 abbr -a gk git checkout
