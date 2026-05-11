@@ -1291,6 +1291,67 @@ function vsdf-toy-debug
     echo "Editing $shader with vsdf running"
 end
 
+function repodump \
+    --description "Print repo tree and selected important text files"
+
+    set -l ignore_dirs \
+        .git \
+        build \
+        'cmake-build-*' \
+        .cache \
+        .venv \
+        venv \
+        node_modules \
+        target \
+        dist \
+        __pycache__
+
+    set -l ignore_files \
+        '*.png' \
+        '*.jpg' \
+        '*.jpeg' \
+        '*.gif' \
+        '*.webp' \
+        '*.pdf' \
+        '*.o' \
+        '*.a' \
+        '*.dylib' \
+        '*.so' \
+        '*.exe' \
+        '*.bin'
+
+    set -l file_pattern \
+        '(^README|^PLAN|^PROMPT|^MILESTONES|CMakeLists\.txt$|Cargo\.toml$|package\.json$|.*\.(c|cc|cpp|h|hpp|m|mm|metal|glsl|cmake|py|rs|zig|md|txt|yml|yaml|json|toml)$)'
+
+    echo "=============================="
+    echo "📁 REPO TREE"
+    echo "=============================="
+
+    tree -a -I (string join '|' $ignore_dirs) .
+
+    echo
+    echo "=============================="
+    echo "📄 IMPORTANT FILES"
+    echo "=============================="
+
+    set -l fd_args -H -t f
+
+    for dir in $ignore_dirs
+        set fd_args $fd_args -E $dir
+    end
+
+    for file in $ignore_files
+        set fd_args $fd_args -E $file
+    end
+
+    fd $fd_args $file_pattern . | sort | while read -l file
+        echo
+        echo
+        echo "===== $file ====="
+        sed -n '1,240p' $file
+    end
+end
+
 ### INITIALIZATION ###
 set -gx STARSHIP_LOG error
 # starship init fish | source
