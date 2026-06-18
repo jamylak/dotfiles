@@ -1297,7 +1297,7 @@ function repodump \
 
     set -l ignore_dirs \
         .git \
-        build \
+        'build*' \
         'cmake-build-*' \
         .cache \
         .venv \
