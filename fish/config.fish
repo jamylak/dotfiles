@@ -1322,7 +1322,7 @@ function repodump \
         '*.bin'
 
     set -l file_pattern \
-        '(^README|^PLAN|^PROMPT|^MILESTONES|CMakeLists\.txt$|Cargo\.toml$|package\.json$|.*\.(c|cc|cpp|h|hpp|m|mm|metal|glsl|cmake|py|rs|zig|md|txt|yml|yaml|json|toml)$)'
+        '(^README|^PLAN|^PROMPT|^MILESTONES|CMakeLists\.txt$|Cargo\.toml$|package\.json$|.*\.(c|cc|cpp|h|hpp|s|S|m|mm|metal|glsl|cmake|py|rs|zig|md|txt|yml|yaml|json|toml)$)'
 
     echo "=============================="
     echo "📁 REPO TREE"
