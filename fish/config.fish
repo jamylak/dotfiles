@@ -1152,6 +1152,15 @@ function worktree_add -a branch
     set worktree_path "../$repo_name-$branch_dir"
     if git show-ref --verify --quiet "refs/heads/$branch"
         git worktree add "$worktree_path" "$branch"
+    else if set remote_branches (git for-each-ref --format='%(refname:short)' "refs/remotes/*/$branch" | string match -rv '.*/HEAD$')
+        if test (count $remote_branches) -eq 1
+            git worktree add --track -b "$branch" "$worktree_path" "$remote_branches[1]"
+        else
+            echo "wt: branch '$branch' exists on multiple remotes:" >&2
+            printf '  %s\n' $remote_branches >&2
+            echo "wt: create the local branch manually or use an explicit remote ref" >&2
+            return 1
+        end
     else
         git worktree add -b "$branch" "$worktree_path"
     end
