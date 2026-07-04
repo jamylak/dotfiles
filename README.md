@@ -18,3 +18,9 @@ chsh -s "$(command -v fish)"
 ```
 ./scripts/symlink_karabiner.fish
 ```
+
+## Tests
+
+```sh
+sh ./tests/worktree_add.sh
+```
