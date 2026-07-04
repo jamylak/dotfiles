@@ -22,5 +22,11 @@ chsh -s "$(command -v fish)"
 ## Tests
 
 ```sh
-sh ./tests/worktree_add.sh
+fish ./tests/run_all.fish
+```
+
+Run one test directly:
+
+```sh
+fish ./tests/worktree_add.fish
 ```
