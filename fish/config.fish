@@ -1147,22 +1147,28 @@ function worktree_add -a branch
         echo "usage: wt <branchname>" >&2
         return 1
     end
-    set branch_dir (safe_worktree_branch_dir "$branch")
-    set repo_name (basename (pwd))
+    set main_root (worktree_main_root)
+    if test -z "$main_root"
+        echo "wt: not in a git repo" >&2
+        return 1
+    end
+    set target_branch (worktree_branch_name "$branch")
+    set branch_dir (safe_worktree_branch_dir "$target_branch")
+    set repo_name (basename "$main_root")
     set worktree_path "../$repo_name-$branch_dir"
-    if git show-ref --verify --quiet "refs/heads/$branch"
-        git worktree add "$worktree_path" "$branch"
-    else if set remote_branches (git for-each-ref --format='%(refname:short)' "refs/remotes/*/$branch" | string match -rv '.*/HEAD$')
+    if git show-ref --verify --quiet "refs/heads/$target_branch"
+        git worktree add "$worktree_path" "$target_branch"
+    else if set remote_branches (git for-each-ref --format='%(refname:short)' "refs/remotes/*/$target_branch" | string match -rv '.*/HEAD$')
         if test (count $remote_branches) -eq 1
-            git worktree add --track -b "$branch" "$worktree_path" "$remote_branches[1]"
+            git worktree add --track -b "$target_branch" "$worktree_path" "$remote_branches[1]"
         else
-            echo "wt: branch '$branch' exists on multiple remotes:" >&2
+            echo "wt: branch '$target_branch' exists on multiple remotes:" >&2
             printf '  %s\n' $remote_branches >&2
             echo "wt: create the local branch manually or use an explicit remote ref" >&2
             return 1
         end
     else
-        git worktree add -b "$branch" "$worktree_path"
+        git worktree add -b "$target_branch" "$worktree_path"
     end
     if test -d "$worktree_path"
         builtin cd -- "$worktree_path"
@@ -1223,6 +1229,43 @@ end
 function safe_worktree_branch_dir -a branch
     # Example: "docs/fix-123" -> "docs--fix-123" for a safe worktree directory.
     string replace -a / -- -- "$branch"
+end
+
+function worktree_branch_name -a branch
+    set repo_root (git rev-parse --show-toplevel 2>/dev/null)
+    set main_root (worktree_main_root)
+    if test -z "$repo_root" -o -z "$main_root"
+        echo "$branch"
+        return
+    end
+
+    if test "$repo_root" = "$main_root"
+        echo "$branch"
+        return
+    end
+
+    set current_branch (git -C "$repo_root" rev-parse --abbrev-ref HEAD 2>/dev/null)
+    if test -z "$current_branch" -o "$current_branch" = HEAD
+        echo "$branch"
+        return
+    end
+
+    echo "$current_branch-$branch"
+end
+
+function worktree_main_root
+    set repo_root (git rev-parse --show-toplevel 2>/dev/null)
+    set git_common_dir (git rev-parse --git-common-dir 2>/dev/null)
+    if test -z "$repo_root" -o -z "$git_common_dir"
+        return 1
+    end
+
+    set main_root (dirname "$git_common_dir")
+    if test "$git_common_dir" = ".git"
+        set main_root "$repo_root"
+    end
+
+    echo "$main_root"
 end
 
 function worktree_merge --description 'Squash merge current worktree into main and remove it'
