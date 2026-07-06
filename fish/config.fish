@@ -366,7 +366,7 @@ function fish_user_key_bindings
     bind -M insert \eq "commandline --function kill-whole-line"
     bind -M insert \ep 'commandline -r "tmux_fzf"; commandline -f execute'
     bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
-    bind -M insert \co "__smart_cd_or_insert_path; commandline --function repaint"
+    bind -M insert \co "nvim_ctrl_o_if_empty; commandline --function repaint"
     bind --mode insert \cy __clipboard_paste
     # bind -M insert \em fish_clipboard_paste
     bind -M insert ctrl-i __fzf_all_files
@@ -528,6 +528,17 @@ function __fzf_all_files
         commandline -C $new_cursor
     end
     commandline --function repaint
+end
+
+function nvim_ctrl_o_if_empty
+    if test -n (commandline)
+        __smart_cd_or_insert_path
+        commandline --function repaint
+        return
+    end
+
+    commandline -r "nvim -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<C-o>\", true, true, true), \"m\", true)'"
+    commandline -f execute
 end
 
 function __smart_cd_or_insert_path
