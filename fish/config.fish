@@ -95,6 +95,7 @@ abbr -a war watchandrun
 abbr -a w worktree_add
 abbr -a wa worktree_add
 abbr -a wt worktree_add
+abbr -a wta worktree_add
 abbr -a wtr worktree_remove
 abbr -a wr worktree_remove
 abbr -a wm worktree_merge
