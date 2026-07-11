@@ -537,7 +537,7 @@ function nvim_ctrl_o_if_empty
         return
     end
 
-    commandline -r "nvim -c ':lua vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(\"<C-o>\", true, true, true), \"m\", true)'"
+    commandline -r "nvim -c 'execute \"normal! \\\\<C-o>\"'"
     commandline -f execute
 end
 
