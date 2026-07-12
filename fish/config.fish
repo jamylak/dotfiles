@@ -352,15 +352,15 @@ function fish_user_key_bindings
     # Doing commandline -r because if you bind things directly
     # it messes up nvim cursor
     bind -M insert \ej delete_or_fuzz
-    bind -M insert \ek 'commandline -r "nvim_find_files" ; commandline -f execute'
-    bind -M insert \eo 'commandline -r "nvim -c \":Oldfiles\"" ; commandline -f execute'
-    bind -M insert \eu 'commandline -r "nvim -c \":FFFGrep\"" ; commandline -f execute'
+    bind -M insert \ek nvim_find_files
+    bind -M insert \eo 'nvim -c ":Oldfiles";'
+    bind -M insert \eu 'nvim -c ":FFFGrep"'
     bind -M insert \eh "hx ."
     bind -M insert \cg "echo n | lazygit && commandline --function repaint"
     bind -M insert \eg "echo n | lazygit && commandline --function repaint"
     bind -M insert \el 'commandline -r "tmux_session_fzf"; commandline -f execute'
     # bind -M insert \eg "z (tv git-repos) && commandline --function repaint"
-    bind -M insert \en 'commandline -r "nvim_nproj"; commandline -f execute'
+    bind -M insert \en nvim_nproj
     bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
     # bind -M insert \ev "nvim"
     bind -M insert \eq "commandline --function kill-whole-line"
@@ -487,10 +487,11 @@ function fish_enter_or_fzf
     set cmd (commandline)
     # If empty then run nvim FFFFind
     if test -z "$cmd"
-        commandline -r 'nvim -c ":FFFFind"'
+        nvim -c ":FFFFind"
+    else
+        # Otherwise normal enter
+        commandline -f execute
     end
-    # Otherwise normal enter
-    commandline -f execute
 end
 
 function smart_shift_enter
