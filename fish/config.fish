@@ -537,8 +537,7 @@ function nvim_ctrl_o_if_empty
         return
     end
 
-    commandline -r "nvim -c 'execute \"normal! \\\\<C-o>\"'"
-    commandline -f execute
+    nvim -c 'execute "normal! \\<C-o>"'
 end
 
 function __smart_cd_or_insert_path
