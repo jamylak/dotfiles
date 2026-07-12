@@ -37,8 +37,9 @@ X = ["extend_line_up", "extend_to_line_bounds"]
 # Move lines up and down
 "C-j" = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 "C-k" = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
-"C-f" = "goto_next_function"
-"C-b" = "goto_prev_function"
+"C-f" = "search"
+"C-b" = "rsearch"
+"C-ret" = "file_picker"
 "C-r" = "redo"
 g.j = ["jump_view_left", "jump_view_up"]
 g.k = ["jump_view_right", "jump_view_down"]
