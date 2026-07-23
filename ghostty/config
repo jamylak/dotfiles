@@ -11,7 +11,7 @@ macos-option-as-alt = true
 font-family = Fira Code Medium
 window-title-font-family = MesloLGS NF
 unfocused-split-opacity = 0.8
-font-size = 18
+font-size = 17
 #  * `blueprint`, `chalkboard`, `microchip`, `glass`, `holographic`,
 #    `paper`, `retro`, `xray` - Official variants of the Ghostty icon
 # macos-icon = holographic
@@ -20,7 +20,7 @@ macos-icon = blueprint
 
 background = #002450
 # -- Blur --
-background-opacity = 0.5
+background-opacity = 0.84
 background-blur = macos-glass-regular
 background-blur-radius = 65
 # shell-integration-features = no-cursor
