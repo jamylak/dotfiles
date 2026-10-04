@@ -30,14 +30,14 @@ if test -x /usr/bin/sw_vers
 
     ### PATHS ###
 
-    set -l desired_fish_startup_bootstrap_version 1
+    set -l desired_fish_startup_bootstrap_version 2
     # Bump this version if the one-time startup path bootstrap needs to run again.
     if not set -q __fish_startup_bootstrap_version; or test "$__fish_startup_bootstrap_version" != "$desired_fish_startup_bootstrap_version"
         set -l desired_fish_user_paths \
+            /Users/$USER/.local/bin \
             /opt/homebrew/bin \
             /opt/homebrew/opt/llvm/bin \
             /usr/local/bin \
-            /Users/$USER/.local/bin \
             $HOME/.cargo/bin
         set -l bootstrapped_fish_user_paths
 
