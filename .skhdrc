@@ -159,6 +159,7 @@ alt - j [
 	"finder" : ~/.config/dotfiles/scripts/runghostty.sh
 	"google chrome" : ~/.config/dotfiles/scripts/runghostty.sh
     "brave browser" : skhd -k "cmd + shift + ctrl - 4"
+    "Safari" : skhd -k "cmd + shift + ctrl - 4"
     "Notes" : skhd -k "cmd + shift + ctrl - 4"
     "Σημειώσεις" : skhd -k "cmd + shift + ctrl - 4"
 ]
