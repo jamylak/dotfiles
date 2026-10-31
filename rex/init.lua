@@ -9,7 +9,7 @@ end
 rex.bind("cmd+f", "pane.focus_next")
 rex.bind("cmd+b", "pane.focus_previous")
 rex.bind("cmd+ctrl+enter", "pane.zoom")
-rex.bind("cmd+k", "client.palette.toggle")
+-- rex.bind("cmd+k", "client.palette.toggle")
 
 -- Ghostty resizes in pixels; Rex uses percentages of the enclosing split.
 for _, direction in ipairs({ "down", "left", "up", "right" }) do
@@ -23,17 +23,28 @@ for key, direction in pairs({ j = "down", h = "left", k = "up", l = "right" }) d
   })
 end
 
-rex.bind("cmd+t", "client.tab.new")
-rex.bind("cmd+n", "client.window.new")
-rex.bind("cmd+w", "client.close")
+-- rex.bind("cmd+t", "client.tab.new")
+-- rex.bind("cmd+n", "client.window.new")
+-- rex.bind("cmd+w", "client.close")
 -- Match Ghostty: Cmd+Q closes the window, rather than quitting Rex.
-rex.bind("cmd+q", "client.window.close")
+-- rex.bind("cmd+q", "client.window.close")
 rex.bind("cmd+shift+w", "client.tab.close")
 rex.bind("cmd+shift+[", "client.tab.previous")
 rex.bind("cmd+shift+]", "client.tab.next")
 rex.bind("cmd+=", "client.font.increase")
 rex.bind("cmd+-", "client.font.decrease")
 -- rex.bind("cmd+0", "client.tab.goto", { index = 1 })
+
+-- Bypass macOS accent/dead-key input (e.g. Option+N producing a tilde),
+-- even when Rex's Option-as-Alt setting is enabled. Send an explicit Alt
+-- chord instead of forwarding the native event's composed text.
+for byte = string.byte("a"), string.byte("z") do
+  local letter = string.char(byte)
+  for _, modifiers in ipairs({ "alt+", "alt+shift+" }) do
+    local key = modifiers .. letter
+    rex.bind(key, "pane.send_key", { key = key })
+  end
+end
 
 -- Forward these chords to the terminal without warning about missing defaults.
 -- Cmd+O is implemented below; the other unsupported Ghostty actions remain
