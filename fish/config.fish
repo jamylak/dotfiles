@@ -6,6 +6,42 @@ end
 
 set -gx PROJECTS_DIR $HOME/proj
 
+# Resolve the bundled CLI too: Rex isn't always on the shell's PATH.
+function __rex_cli
+    set -l cli (command -s rex)
+    if test -z "$cli"
+        set cli '/Applications/Rex Beta.app/Contents/Helpers/Rex Server.rex/Contents/MacOS/rex'
+    end
+    test -x "$cli"; or return 1
+    printf '%s\n' "$cli"
+end
+
+# Only the first terminal pane owns automatic session naming.
+function __rex_project_session_name --on-event fish_prompt --on-variable PWD
+    set -q REX_SESSION; or return
+    set -q __rex_project_session_suspended; and return
+    if test "$__rex_project_session_pwd" = "$PWD"
+        return
+    end
+
+    set -l rex_cli (__rex_cli); or return
+    set -q REX_BLOCK; or return
+    set -l view (command "$rex_cli" --autostart=false --timeout 1s session inspect "$REX_SESSION" --json 2>/dev/null); or return
+    set -l owner (printf '%s\n' $view | jq -er '[.windows[].layers[].blocks[] | select(.creator_name == "com.superlogical.terminal")][0].block_id'); or return
+    test "$owner" = "$REX_BLOCK"; or return
+
+    set -l project_dir (command git rev-parse --show-toplevel 2>/dev/null)
+    if test -z "$project_dir"
+        set project_dir "$PWD"
+    end
+    set -l project_name (path basename -- "$project_dir")
+    set -l current_label (printf '%s\n' $view | jq -r '.label')
+    if test "$current_label" != "$project_name"
+        command "$rex_cli" --autostart=false --timeout 1s session rename "$REX_SESSION" "$project_name" >/dev/null 2>&1; or return
+    end
+    set -g __rex_project_session_pwd "$PWD"
+end
+
 if test -d /opt/homebrew/bin
     set -xg SHELL /opt/homebrew/bin/fish
 end
@@ -1129,12 +1165,44 @@ function tmux_fzf
 end
 
 function coco -a branch
-    worktree_add "$branch"
-    if test $status -ne 0
-        return $status
+    # Check Rex before creating a worktree so a missing CLI leaves no partial work.
+    set -l rex_cli
+    if set -q REX_SESSION
+        set rex_cli (__rex_cli); or begin
+            echo 'coco: Rex CLI not found' >&2
+            return 1
+        end
     end
-    set dir (pwd)
+    set -l original_dir "$PWD"
+    if set -q REX_SESSION
+        # worktree_add changes directory. Keep that temporary change from renaming
+        # the originating session, and restore its directory before launching Rex.
+        set -g __rex_project_session_suspended 1
+    end
+    worktree_add "$branch"
+    set -l worktree_status $status
+    set -l dir "$PWD"
+    if set -q REX_SESSION
+        builtin cd -- "$original_dir"
+        set -l restore_status $status
+        set -e __rex_project_session_suspended
+        test $restore_status -eq 0; or return $restore_status
+    end
+    test $worktree_status -eq 0; or return $worktree_status
     if test -n "$dir"
+        if set -q REX_SESSION
+            set -l created (command "$rex_cli" new (path basename -- "$dir") -c "$dir" --keep-open --json -- $AI_CLI)
+            if test $status -ne 0
+                echo "coco: worktree is ready at $dir, but Rex session creation failed" >&2
+                return 1
+            end
+            set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return 1
+            command "$rex_cli" do session.select "session_id=$session_id"; or begin
+                echo "coco: Rex session $session_id was created for $dir; select it in Rex to continue" >&2
+                return 1
+            end
+            return 0
+        end
         set name (tmux_dir_session_name "$dir")
         tmux_attach "$name" "$dir"
     end
@@ -1169,10 +1237,10 @@ function worktree_add -a branch
     set repo_name (basename "$main_root")
     set worktree_path "../$repo_name-$branch_dir"
     if git show-ref --verify --quiet "refs/heads/$target_branch"
-        git worktree add "$worktree_path" "$target_branch"
+        git worktree add "$worktree_path" "$target_branch"; or return $status
     else if set remote_branches (git for-each-ref --format='%(refname:short)' "refs/remotes/*/$target_branch" | string match -rv '.*/HEAD$')
         if test (count $remote_branches) -eq 1
-            git worktree add --track -b "$target_branch" "$worktree_path" "$remote_branches[1]"
+            git worktree add --track -b "$target_branch" "$worktree_path" "$remote_branches[1]"; or return $status
         else
             echo "wt: branch '$target_branch' exists on multiple remotes:" >&2
             printf '  %s\n' $remote_branches >&2
@@ -1180,7 +1248,7 @@ function worktree_add -a branch
             return 1
         end
     else
-        git worktree add -b "$target_branch" "$worktree_path"
+        git worktree add -b "$target_branch" "$worktree_path"; or return $status
     end
     if test -d "$worktree_path"
         builtin cd -- "$worktree_path"
