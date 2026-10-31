@@ -16,6 +16,38 @@ function __rex_cli
     printf '%s\n' "$cli"
 end
 
+# Keep Rex worktree/session lifecycle out of the shared coco command.
+function __rex_worktree_session -a branch
+    # Resolve Rex before creating a worktree so a missing CLI leaves no partial work.
+    set -l rex_cli (__rex_cli); or begin
+        echo 'coco: Rex CLI not found' >&2
+        return 1
+    end
+
+    # worktree_add changes directory; don't rename the originating session.
+    set -l original_dir "$PWD"
+    set -g __rex_project_session_suspended 1
+    worktree_add "$branch"
+    set -l worktree_status $status
+    set -l dir "$PWD"
+    builtin cd -- "$original_dir"
+    set -l restore_status $status
+    set -e __rex_project_session_suspended
+    test $restore_status -eq 0; or return $restore_status
+    test $worktree_status -eq 0; or return $worktree_status
+
+    set -l created (command "$rex_cli" new (path basename -- "$dir") -c "$dir" --keep-open --json -- $AI_CLI)
+    if test $status -ne 0
+        echo "coco: worktree is ready at $dir, but Rex session creation failed" >&2
+        return 1
+    end
+    set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return 1
+    command "$rex_cli" do session.select "session_id=$session_id"; or begin
+        echo "coco: Rex session $session_id was created for $dir; select it in Rex to continue" >&2
+        return 1
+    end
+end
+
 # Only the first terminal pane owns automatic session naming.
 function __rex_project_session_name --on-event fish_prompt --on-variable PWD
     set -q REX_SESSION; or return
@@ -1165,45 +1197,15 @@ function tmux_fzf
 end
 
 function coco -a branch
-    # Check Rex before creating a worktree so a missing CLI leaves no partial work.
-    set -l rex_cli
     if set -q REX_SESSION
-        set rex_cli (__rex_cli); or begin
-            echo 'coco: Rex CLI not found' >&2
-            return 1
-        end
+        __rex_worktree_session "$branch"
+        return $status
     end
-    set -l original_dir "$PWD"
-    if set -q REX_SESSION
-        # worktree_add changes directory. Keep that temporary change from renaming
-        # the originating session, and restore its directory before launching Rex.
-        set -g __rex_project_session_suspended 1
-    end
-    worktree_add "$branch"
-    set -l worktree_status $status
+
+    worktree_add "$branch"; or return $status
     set -l dir "$PWD"
-    if set -q REX_SESSION
-        builtin cd -- "$original_dir"
-        set -l restore_status $status
-        set -e __rex_project_session_suspended
-        test $restore_status -eq 0; or return $restore_status
-    end
-    test $worktree_status -eq 0; or return $worktree_status
     if test -n "$dir"
-        if set -q REX_SESSION
-            set -l created (command "$rex_cli" new (path basename -- "$dir") -c "$dir" --keep-open --json -- $AI_CLI)
-            if test $status -ne 0
-                echo "coco: worktree is ready at $dir, but Rex session creation failed" >&2
-                return 1
-            end
-            set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return 1
-            command "$rex_cli" do session.select "session_id=$session_id"; or begin
-                echo "coco: Rex session $session_id was created for $dir; select it in Rex to continue" >&2
-                return 1
-            end
-            return 0
-        end
-        set name (tmux_dir_session_name "$dir")
+        set -l name (tmux_dir_session_name "$dir")
         tmux_attach "$name" "$dir"
     end
 end
