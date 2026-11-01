@@ -21,7 +21,8 @@ mkdir -p "$scratch/bin" "$scratch/project with spaces"
 printf '%s\n' '#!/usr/bin/env fish' \
     'string join " " -- (string escape -- $argv) >> "$REX_TEST_DIR/calls"' \
     'test "$REX_TEST_FAIL" = yes; and exit 7' \
-    'echo \'{"block_ids":["block:new","block:original"]}\'' > "$scratch/bin/rex"
+    'if contains -- do $argv; and test "$REX_TEST_FAIL" = select; exit 8; end' \
+    'echo \'{"window_id":"window:new","block_ids":["block:new","block:original"]}\'' > "$scratch/bin/rex"
 chmod +x "$scratch/bin/rex"
 set -gx PATH "$scratch/bin" $PATH
 set -e REX_SESSION REX_BLOCK TMUX
@@ -53,7 +54,7 @@ for layout in tab right below overlay
     set -l calls (cat "$scratch/calls")
     if test "$layout" = tab
         check 'tab command preserves cwd and shell syntax' \
-            (expected_call run -s "$REX_SESSION" -c "$PWD" --shell=none -- "$fish_cli" -c "$cmd") "$calls[1]"
+            (expected_call run -s "$REX_SESSION" -c "$PWD" --shell=none --json -- "$fish_cli" -c "$cmd") "$calls[1]"
     else
         set -l direction "$layout"
         set -l extra
@@ -64,7 +65,11 @@ for layout in tab right below overlay
         check "$layout uses explicit source pane and preserves command" \
             (expected_call split -s "$REX_SESSION" -b "$REX_BLOCK" --split="$direction" -c "$PWD" --shell=none $extra -- "$fish_cli" -c "$cmd") "$calls[1]"
     end
-    if test "$layout" = overlay
+    if test "$layout" = tab
+        check 'new tab is explicitly displayed in the app' \
+            (expected_call do session.select "session_id=$REX_SESSION" window_id=window:new) "$calls[2]"
+        check 'tab calls create and select' 2 (count $calls)
+    else if test "$layout" = overlay
         check 'overlay zooms the newly created pane' \
             (expected_call zoom -s "$REX_SESSION" block:new --on) "$calls[2]"
         check 'overlay calls split and zoom' 2 (count $calls)
@@ -78,6 +83,13 @@ printf '' > "$scratch/calls"
 launch_overlay "$cmd" >/dev/null 2>/dev/null
 check 'creation failure propagates' 7 $status
 check 'failed overlay does not zoom' 1 (count (cat "$scratch/calls"))
+printf '' > "$scratch/calls"
+launch_new_tab "$cmd" >/dev/null 2>/dev/null
+check 'tab creation failure propagates' 7 $status
+check 'failed tab creation does not select a tab' 1 (count (cat "$scratch/calls"))
+set -gx REX_TEST_FAIL select
+launch_new_tab "$cmd" >/dev/null 2>/dev/null
+check 'tab selection failure propagates' 8 $status
 set -e REX_TEST_FAIL REX_BLOCK
 printf '' > "$scratch/calls"
 launch_vsplit "$cmd" >/dev/null 2>/dev/null

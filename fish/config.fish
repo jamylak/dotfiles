@@ -666,7 +666,12 @@ function __rex_launch -a layout cmd
         set options split -s "$REX_SESSION" -b "$REX_BLOCK" --split="$direction" -c "$PWD" --shell=none
     end
 
-    if test "$layout" = overlay
+    if test "$layout" = tab
+        set -l created (command "$rex_cli" $options --json -- "$fish_cli" -c "$cmd"); or return $status
+        set -l window_id (printf '%s\n' $created | jq -er '.window_id'); or return 1
+        # Server focus alone doesn't switch the tab displayed by the Rex app.
+        command "$rex_cli" do session.select "session_id=$REX_SESSION" "window_id=$window_id"
+    else if test "$layout" = overlay
         set -l created (command "$rex_cli" $options --json -- "$fish_cli" -c "$cmd"); or return $status
         set -l block_id (printf '%s\n' $created | jq -er '.block_ids[0]'); or return 1
         command "$rex_cli" zoom -s "$REX_SESSION" "$block_id" --on
