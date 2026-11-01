@@ -647,10 +647,38 @@ function __smart_cd_or_insert_path
     end
 end
 
+# Use an explicit pane anchor: Rex's focused pane may belong to another tab.
+function __rex_launch -a layout cmd
+    set -l rex_cli (__rex_cli); or begin
+        echo 'launch: Rex CLI not found' >&2
+        return 1
+    end
+    set -l options run -s "$REX_SESSION" -c "$PWD" --shell=none
+    if test "$layout" != tab
+        if not set -q REX_BLOCK; or test -z "$REX_BLOCK"
+            echo 'launch: REX_BLOCK is required for a Rex split' >&2
+            return 1
+        end
+        set -l direction "$layout"
+        test "$layout" = overlay; and set direction below
+        set options split -s "$REX_SESSION" -b "$REX_BLOCK" --split="$direction" -c "$PWD" --shell=none
+    end
+
+    if test "$layout" = overlay
+        set -l created (command "$rex_cli" $options --json -- fish -c "$cmd"); or return $status
+        set -l block_id (printf '%s\n' $created | jq -er '.block_ids[0]'); or return 1
+        command "$rex_cli" zoom -s "$REX_SESSION" "$block_id" --on
+    else
+        command "$rex_cli" $options -- fish -c "$cmd"
+    end
+end
+
 function launch_new_tab -a cmd
     if test -n "$TMUX"
         tmux new-window "fish -c \"$cmd\""
-    else if test $TERM = xterm-kitty
+    else if set -q REX_SESSION
+        __rex_launch tab "$cmd"
+    else if test "$TERM" = xterm-kitty
         kitty @ launch --type=tab fish -c "$cmd"
     else
         # For ghostty (or others?)
@@ -663,7 +691,9 @@ function launch_overlay -a cmd
         tmux split-window -v -c "#{pane_current_path}" "fish -c \"$cmd\"" \; resize-pane -Z
         #tmux new-window "fish -c \"$cmd\""
         #tmux popup -E "fish -c \"$cmd\""
-    else if test $TERM = xterm-kitty
+    else if set -q REX_SESSION
+        __rex_launch overlay "$cmd"
+    else if test "$TERM" = xterm-kitty
         kitty @ launch --type=overlay fish -c "$cmd"
     else
         # For ghostty
@@ -674,7 +704,9 @@ end
 function launch_vsplit -a cmd
     if test -n "$TMUX"
         tmux split-window -v "fish -c \"$cmd\""
-    else if test $TERM = xterm-kitty
+    else if set -q REX_SESSION
+        __rex_launch right "$cmd"
+    else if test "$TERM" = xterm-kitty
         kitty @ launch --location=vsplit fish -c "$cmd"
     else
         # For ghostty - Replicate Cmd - \
@@ -685,7 +717,9 @@ end
 function launch_hsplit -a cmd
     if test -n "$TMUX"
         tmux split-window -h "fish -c \"$cmd\""
-    else if test $TERM = xterm-kitty
+    else if set -q REX_SESSION
+        __rex_launch below "$cmd"
+    else if test "$TERM" = xterm-kitty
         kitty @ launch --location=hsplit fish -c "$cmd"
     else
         # For ghostty - Replicate Cmd - Enter
