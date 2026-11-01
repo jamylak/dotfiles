@@ -653,6 +653,8 @@ function __rex_launch -a layout cmd
         echo 'launch: Rex CLI not found' >&2
         return 1
     end
+    # Rex's server PATH may omit Homebrew, especially when launched by the app.
+    set -l fish_cli (status fish-path)
     set -l options run -s "$REX_SESSION" -c "$PWD" --shell=none
     if test "$layout" != tab
         if not set -q REX_BLOCK; or test -z "$REX_BLOCK"
@@ -665,11 +667,11 @@ function __rex_launch -a layout cmd
     end
 
     if test "$layout" = overlay
-        set -l created (command "$rex_cli" $options --json -- fish -c "$cmd"); or return $status
+        set -l created (command "$rex_cli" $options --json -- "$fish_cli" -c "$cmd"); or return $status
         set -l block_id (printf '%s\n' $created | jq -er '.block_ids[0]'); or return 1
         command "$rex_cli" zoom -s "$REX_SESSION" "$block_id" --on
     else
-        command "$rex_cli" $options -- fish -c "$cmd"
+        command "$rex_cli" $options -- "$fish_cli" -c "$cmd"
     end
 end
 

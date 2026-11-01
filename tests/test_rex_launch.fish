@@ -31,6 +31,8 @@ set -gx REX_BLOCK block:original
 # Rex can inherit a Kitty-compatible TERM; Rex must still take precedence.
 set -gx TERM xterm-kitty
 set -l cmd 'printf "%s\\n" "a b"; echo $PWD | cat'
+set -l fish_cli (status fish-path)
+check 'Rex receives an absolute executable path' / (string sub -l 1 -- "$fish_cli")
 
 function expected_call
     string join ' ' -- (string escape -- $argv)
@@ -51,7 +53,7 @@ for layout in tab right below overlay
     set -l calls (cat "$scratch/calls")
     if test "$layout" = tab
         check 'tab command preserves cwd and shell syntax' \
-            (expected_call run -s "$REX_SESSION" -c "$PWD" --shell=none -- fish -c "$cmd") "$calls[1]"
+            (expected_call run -s "$REX_SESSION" -c "$PWD" --shell=none -- "$fish_cli" -c "$cmd") "$calls[1]"
     else
         set -l direction "$layout"
         set -l extra
@@ -60,7 +62,7 @@ for layout in tab right below overlay
             set extra --json
         end
         check "$layout uses explicit source pane and preserves command" \
-            (expected_call split -s "$REX_SESSION" -b "$REX_BLOCK" --split="$direction" -c "$PWD" --shell=none $extra -- fish -c "$cmd") "$calls[1]"
+            (expected_call split -s "$REX_SESSION" -b "$REX_BLOCK" --split="$direction" -c "$PWD" --shell=none $extra -- "$fish_cli" -c "$cmd") "$calls[1]"
     end
     if test "$layout" = overlay
         check 'overlay zooms the newly created pane' \
