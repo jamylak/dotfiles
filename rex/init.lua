@@ -47,11 +47,11 @@ for byte = string.byte("a"), string.byte("z") do
 end
 
 -- Forward these chords to the terminal without warning about missing defaults.
--- Cmd+O is implemented below; the other unsupported Ghostty actions remain
--- unavailable (quick terminal, page scrolling, and screen-file export/editor).
+-- Cmd+O and Cmd+H are implemented below; the other unsupported Ghostty
+-- actions remain unavailable (quick terminal, page scrolling, and file export).
 for index = 0, 9 do rex.bind("alt+" .. index, "client.key.forward") end
 for _, key in ipairs({ "alt+space", "ctrl+enter", "cmd+p", "cmd+d",
-                        "cmd+u", "cmd+g", "cmd+h" }) do
+                        "cmd+u", "cmd+g" }) do
   rex.bind(key, "client.key.forward")
 end
 -- Native macOS Select All / Copy / Paste retain Rex's standard handling.
@@ -91,3 +91,88 @@ rex.action{
   end,
 }
 rex.bind("cmd+o", "ghostty_close_other_tabs")
+
+-- Capture through Rex's API and start a separate terminal above the source.
+-- No input is sent to the source pane, even while it is running a program.
+rex.action{
+  name = "scrollback_nvim",
+  title = "Open Scrollback in Neovim",
+  description = "Search, select, and edit a snapshot of this pane in a floating Neovim viewer.",
+  category = "Pane",
+  run = function(ctx, args)
+    if not ctx.session_id or not ctx.block_id then
+      error("Open Scrollback needs a focused terminal pane in a session.", 0)
+    end
+    local pane, err = rex.session.describe_block{
+      session_id = ctx.session_id, block_id = ctx.block_id,
+    }
+    if err then error(err, 0) end
+    if pane.block.creator_name ~= "com.superlogical.terminal" or not pane.block.window_id then
+      error("Open Scrollback needs a terminal pane in a tab.", 0)
+    end
+
+    local function terminal(method, method_args)
+      local result, call_err = rex.call("com.superlogical.terminal." .. method, {
+        session_id = ctx.session_id, block_id = ctx.block_id, args = method_args,
+      })
+      if call_err then error(call_err, 0) end
+      return result
+    end
+    local snapshot = terminal("format", {
+      format = "text", trim = true, unwrap = true, max_bytes = 256 * 1024,
+    })
+    -- mktemp creates a private file; never reuse a shared /tmp/kitty.log.
+    local temp, temp_err = rex.exec({ "mktemp", "-t", "rex-scrollback" })
+    if not temp or not temp.ok then
+      error(temp_err or temp.stderr or "Could not create scrollback file.", 0)
+    end
+    local path = temp.stdout:gsub("[\r\n]+$", "")
+    local file
+    local ok, result = pcall(function()
+      file = assert(io.open(path, "wb"))
+      assert(file:write(snapshot.content))
+      local offset = #snapshot.content
+      if snapshot.id then
+        while true do
+          local part = terminal("blob_read", {
+            id = snapshot.id, offset = offset, max_bytes = 256 * 1024,
+          })
+          assert(file:write(part.data))
+          offset = offset + #part.data
+          if part.eof then break end
+          if #part.data == 0 then error("Scrollback capture stopped making progress.", 0) end
+        end
+      end
+      assert(file:close())
+      file = nil
+      local layer, layer_err = rex.session.new_layer{
+        session_id = ctx.session_id, window_id = pane.block.window_id,
+        bounds = { 0.025, 0.025, 0.95, 0.95 }, focus = true,
+        layout = rex.layout.block{
+          flavor = "com.superlogical.terminal.shell",
+          label = "Scrollback (Neovim)",
+          options = {
+            -- A fixed wrapper cleans up on exit, including editor startup failure.
+            -- The filename is an argument, never interpolated into shell code.
+            command = { "/bin/sh", "-c", [[
+trap 'rm -f -- "$1"' EXIT
+nvim -n -i NONE --cmd 'set nomodeline' \
+  -c 'setlocal buftype=nofile bufhidden=wipe noswapfile noundofile' \
+  -c 'normal! G' -- "$1"
+]], "rex-scrollback", path },
+            exit = { on_completion = true },
+          },
+        },
+      }
+      if layer_err then error(layer_err, 0) end
+      return layer
+    end)
+    if file then file:close() end
+    if not ok then
+      os.remove(path)
+      error(result, 0)
+    end
+    return result
+  end,
+}
+rex.bind("cmd+h", "scrollback_nvim")
