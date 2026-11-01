@@ -2,6 +2,28 @@
 -- Apply changes with: rex config check && rex config reload
 -- App-assigned shortcuts have priority over this file.
 
+-- Translate the key itself in Codex, including slash/file completion and menus.
+-- Preserve Ctrl-I for Fish's file picker and every other foreground program.
+rex.action{
+  name = "codex_ctrl_i",
+  title = "Ctrl-I as Tab in Codex",
+  category = "Pane",
+  run = function(ctx)
+    local key = "ctrl+i"
+    if ctx.session_id and ctx.block_id then
+      local process, err = rex.call("com.superlogical.terminal.process", {
+        session_id = ctx.session_id, block_id = ctx.block_id, args = {},
+      })
+      if not err and process and process.foreground
+          and process.foreground.name == "codex" then
+        key = "tab"
+      end
+    end
+    rex.client.queue("pane.send_key", { key = key })
+  end,
+}
+rex.bind("ctrl+i", "codex_ctrl_i")
+
 rex.bind("cmd+enter", "pane.split", { direction = "down" })
 for _, key in ipairs({ "cmd+\\", "cmd+l", "cmd+;", "cmd+r" }) do
   rex.bind(key, "pane.split", { direction = "right" })
