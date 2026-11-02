@@ -13,6 +13,8 @@ function check -a message expected actual
     end
 end
 
+source (sed -n '/^function __rex_close_origin_tab /,/^end$/p' "$root/fish/config.fish" | psub)
+
 # Isolate project creation from startup hooks, personal trust files, and real Rex.
 source (sed -n '/^function make_new_project /,/^end$/p' "$root/fish/config.fish" | psub)
 source (sed -n '/^function __rex_make_new_project /,/^end$/p' "$root/fish/config.fish" | psub)
@@ -35,6 +37,8 @@ printf '%s\n' '#!/usr/bin/env fish' \
     'else if test "$argv[1]" = block' \
     '    test "$REX_PROJECT_FAIL" = inspect; and exit 9' \
     '    echo \'{"block":{"window_id":"window:original"}}\'' \
+    'else if test "$argv[1]" = session' \
+    '    echo \'{"windows":[{"window_id":"window:original"}]}\'' \
     'else if test "$argv[1]" = do' \
     '    test "$REX_PROJECT_FAIL" = select; and exit 8' \
     'end' 'exit 0' > "$REX_PROJECT_TEST_DIR/rex"
@@ -49,12 +53,13 @@ test -d "$project/.git"; or exit 1
 check 'project is trusted' "$project" (cat "$REX_PROJECT_TEST_DIR/trusted")
 check 'original Rex shell stays in place' "$original_dir" "$PWD"
 set -l calls (cat "$REX_PROJECT_TEST_DIR/calls")
-check 'inspect, create, switch, and close exactly once' 4 (count $calls)
+check 'inspect, create, switch, inspect session, and close' 5 (count $calls)
 check 'originating pane is inspected before creation' 'block|inspect|-s|session:original|block:original|--json' "$calls[1]"
 check 'AI_CLI arguments and project path are preserved' \
     "new|project with spaces|-c|$project|--keep-open|--json|--|codex|--sandbox|workspace-write" "$calls[2]"
 check 'new session is displayed before closing the old tab' 'do|session.select|session_id=session:new' "$calls[3]"
-check 'only the originating tab is closed' 'window|close|-s|session:original|window:original' "$calls[4]"
+check 'originating session is inspected before cleanup' 'session|inspect|session:original|--json' "$calls[4]"
+check 'last originating tab closes its session' 'kill|session:original' "$calls[5]"
 test ! -e "$REX_PROJECT_TEST_DIR/tmux"; or exit 1
 
 printf '' > "$REX_PROJECT_TEST_DIR/calls"
@@ -90,11 +95,11 @@ end
 printf '' > "$REX_PROJECT_TEST_DIR/calls"
 rex_project_fzf; or exit 1
 set calls (cat "$REX_PROJECT_TEST_DIR/calls")
-check 'project picker inspects, launches, selects, and closes' 4 (count $calls)
+check 'project picker inspects, launches, selects, inspects session, and closes' 5 (count $calls)
 check 'project picker preserves AI_CLI arguments and directory' \
     "new|project with spaces|-c|$project|--keep-open|--json|--|codex|--sandbox|workspace-write" "$calls[2]"
 check 'project picker switches before closing' 'do|session.select|session_id=session:new' "$calls[3]"
-check 'project picker closes only its originating tab' 'window|close|-s|session:original|window:original' "$calls[4]"
+check 'project picker closes its empty originating session' 'kill|session:original' "$calls[5]"
 check 'project picker leaves original shell directory intact' "$original_dir" "$PWD"
 printf '' > "$REX_PROJECT_TEST_DIR/calls"
 set -gx REX_PROJECT_CANCEL yes

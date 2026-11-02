@@ -16,6 +16,17 @@ function __rex_cli
     printf '%s\n' "$cli"
 end
 
+# Closing the last tab can terminate this shell before any follow-up cleanup.
+function __rex_close_origin_tab -a rex_cli session_id window_id
+    set -l view (command "$rex_cli" session inspect "$session_id" --json); or return $status
+    if printf '%s\n' $view | jq -e --arg window "$window_id" '.windows | length == 1 and .[0].window_id == $window' >/dev/null
+        # 🧹 Remove the session too when closing this tab would leave zero tabs.
+        command "$rex_cli" kill "$session_id"
+    else
+        command "$rex_cli" window close -s "$session_id" "$window_id"
+    end
+end
+
 # Keep Rex worktree/session lifecycle out of the shared coco command.
 function __rex_worktree_session -a branch
     # Resolve Rex before creating a worktree so a missing CLI leaves no partial work.
@@ -53,7 +64,7 @@ function __rex_worktree_session -a branch
         return 1
     end
     # 🧹 Close the originating tab only after the worktree session is visible.
-    command "$rex_cli" window close -s "$origin_session" "$origin_window"
+    __rex_close_origin_tab "$rex_cli" "$origin_session" "$origin_window"
 end
 
 # Only the first terminal pane owns automatic session naming.
@@ -1246,7 +1257,7 @@ function __rex_make_new_project -a dir
     set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return $status
     command "$rex_cli" do session.select "session_id=$session_id"; or return $status
     # 🧹 Close the old tab only after the new project session is visible.
-    command "$rex_cli" window close -s "$origin_session" "$origin_window"
+    __rex_close_origin_tab "$rex_cli" "$origin_session" "$origin_window"
 end
 
 function make_new_project -a dir
@@ -1289,7 +1300,7 @@ function rex_project_fzf --description 'Pick a directory and open AI_CLI in a Re
     set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return $status
     command "$rex_cli" do session.select "session_id=$session_id"; or return $status
     # 🧹 Close the originating tab only after switching succeeds.
-    command "$rex_cli" window close -s "$origin_session" "$origin_window"
+    __rex_close_origin_tab "$rex_cli" "$origin_session" "$origin_window"
 end
 
 function tmux_fzf
@@ -1334,7 +1345,7 @@ function rex_session_fzf --description 'Pick and switch to a Rex session'
     # 🔀 Switch successfully before closing the tab that launched the picker.
     command "$rex_cli" do session.select "session_id=$session_id"; or return $status
     # 🧹 Close that specific tab, even though a different session is now visible.
-    command "$rex_cli" window close -s "$origin_session" "$origin_window"
+    __rex_close_origin_tab "$rex_cli" "$origin_session" "$origin_window"
 end
 
 function tmux_session_fzf

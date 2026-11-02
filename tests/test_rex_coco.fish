@@ -34,7 +34,7 @@ printf '%s\n' '#!/usr/bin/env fish' \
     'end' 'exit 0' > "$scratch/bin/rex"
 chmod +x "$scratch/bin/rex"
 set -gx PATH "$scratch/bin" $PATH
-printf '%s\n' '{"label":"project","windows":[{"layers":[{"blocks":[{"creator_name":"com.superlogical.terminal","block_id":"block:owner"},{"creator_name":"com.superlogical.terminal","block_id":"block:other"}]}]}]}' > "$scratch/view.json"
+printf '%s\n' '{"label":"project","windows":[{"window_id":"window:original","layers":[{"blocks":[{"creator_name":"com.superlogical.terminal","block_id":"block:owner"},{"creator_name":"com.superlogical.terminal","block_id":"block:other"}]}]}]}' > "$scratch/view.json"
 set -gx REX_SESSION session:original
 set -gx REX_BLOCK block:owner
 set -gx AI_CLI codex --sandbox workspace-write
@@ -48,12 +48,13 @@ check 'worktree branch' feature (git -C "$scratch/project-feature" branch --show
 check 'original shell stays in its project' "$scratch/project" "$PWD"
 emit fish_prompt
 set -l calls (cat "$scratch/calls")
-check 'coco inspects, creates, selects, and closes without renaming' 4 (count $calls)
+check 'coco inspects, creates, selects, inspects session, and closes without renaming' 5 (count $calls)
 check 'coco captures the originating tab' 'block inspect -s session:original block:owner --json' "$calls[1]"
 check 'Rex starts Codex in the named worktree' \
     "new project-feature -c $scratch/project-feature --keep-open --json -- codex --sandbox workspace-write" "$calls[2]"
 check 'Rex displays the created session before closing' 'do session.select session_id=session:test' "$calls[3]"
-check 'Rex closes only the originating tab' 'window close -s session:original window:original' "$calls[4]"
+check 'Rex inspects the originating session before cleanup' 'session inspect session:original --json' "$calls[4]"
+check 'Rex closes the session with its last tab' 'kill session:original' "$calls[5]"
 
 # A failed app switch keeps the created session and worktree, and reports failure.
 cd "$scratch/project"

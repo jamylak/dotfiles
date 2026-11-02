@@ -6,6 +6,8 @@ function cleanup --on-event fish_exit
     rm -rf -- "$REX_PICKER_TEST_DIR"
 end
 
+source (sed -n '/^function __rex_close_origin_tab /,/^end$/p' "$root/fish/config.fish" | psub)
+
 # Load only the picker; don't run personal startup hooks or contact Rex.
 source (sed -n '/^function rex_session_fzf /,/^end$/p' "$root/fish/config.fish" | psub)
 set -gx REX_SESSION session:one
@@ -16,6 +18,8 @@ printf '%s\n' '#!/bin/sh' \
     '  printf \'%s\n\' \'{"sessions":[{"session_id":"session:one","label":"same name"},{"session_id":"session:two","label":"same name"}]}\'' \
     'elif [ "$1" = block ]; then' \
     '  printf \'%s\n\' \'{"block":{"window_id":"window:origin"}}\'' \
+    'elif [ "$1" = session ]; then' \
+    '  printf \'%s\n\' \'{"windows":[{"window_id":"window:origin"},{"window_id":"window:other"}]}\'' \
     'else' \
     '  [ "$1" = do ] && [ "$REX_PICKER_FAIL_SWITCH" = yes ] && exit 8' \
     '  printf "%s " "$@" >> "$REX_PICKER_TEST_DIR/selected"' \
