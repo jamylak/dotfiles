@@ -1214,14 +1214,34 @@ function codex_trust_project -a dir
     printf '\n%s\ntrust_level = "trusted"\n' "$header" >>"$config"
 end
 
+function __rex_make_new_project -a dir
+    set -l rex_cli (__rex_cli); or return 1
+    if not string match -q '/*' -- "$dir"
+        set dir "$HOME/proj/$dir"
+    end
+    # 📌 Create the project without moving or renaming the original Rex shell.
+    mkdir -- "$dir"; or return $status
+    set dir (path resolve -- "$dir")
+    git -C "$dir" init; or return $status
+    codex_trust_project "$dir"; or return $status
+    # 🚀 Start AI_CLI in its own project session, then show it in Rex.
+    set -l created (command "$rex_cli" new (path basename -- "$dir") -c "$dir" --keep-open --json -- $AI_CLI); or return $status
+    set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return $status
+    command "$rex_cli" do session.select "session_id=$session_id"
+end
+
 function make_new_project -a dir
     if test -z "$dir"
         echo "usage: mm <dirname>" >&2
         return 1
     end
-    builtin cd -- ~/proj
-    mkdir "$dir"; or return $status
-    builtin cd -- "$dir"
+    if set -q REX_SESSION
+        __rex_make_new_project "$dir"
+        return $status
+    end
+    builtin cd -- ~/proj; or return $status
+    mkdir -- "$dir"; or return $status
+    builtin cd -- "$dir"; or return $status
     git init
     # touch README.md
     # git add README.md
