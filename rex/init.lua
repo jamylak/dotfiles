@@ -25,7 +25,7 @@ rex.action{
 rex.bind("ctrl+i", "codex_ctrl_i")
 
 rex.bind("cmd+enter", "pane.split", { direction = "down" })
-for _, key in ipairs({ "cmd+\\", "cmd+l", "cmd+;", "cmd+r" }) do
+for _, key in ipairs({ "cmd+\\", "cmd+;", "cmd+r" }) do
   rex.bind(key, "pane.split", { direction = "right" })
 end
 rex.bind("cmd+f", "pane.focus_next")
@@ -47,6 +47,9 @@ end
 
 -- rex.bind("cmd+t", "client.tab.new")
 -- rex.bind("cmd+n", "client.window.new")
+-- Match Cmd+Shift+N: create a new session.
+rex.bind("cmd+j", "session.new")
+rex.bind("cmd+l", "session.new")
 -- rex.bind("cmd+w", "client.close")
 -- Match Ghostty: Cmd+Q closes the window, rather than quitting Rex.
 -- rex.bind("cmd+q", "client.window.close")
