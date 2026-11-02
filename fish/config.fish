@@ -1257,13 +1257,24 @@ end
 
 function rex_session_fzf --description 'Pick and switch to a Rex session'
     set -l rex_cli (__rex_cli); or return 1
+    # 🔎 Show session names in fzf, keeping IDs to distinguish duplicate names.
     set -l sessions (command "$rex_cli" ls --json); or return $status
     set -l rows (printf '%s\n' $sessions | jq -r '.sessions[] | [.session_id, .label] | @tsv'); or return $status
     test (count $rows) -gt 0; or return
     set -l selected (printf '%s\n' $rows | fzf --delimiter=\t --with-nth=2.. --no-multi); or return
     test -n "$selected"; or return
     set -l session_id (string split -f 1 -- \t "$selected")
-    command "$rex_cli" do session.select "session_id=$session_id"
+    # 🏠 Picking this session keeps the current tab open.
+    test "$session_id" != "$REX_SESSION"; or return
+    set -q REX_SESSION REX_BLOCK; or return 1
+    # 📌 Save the original tab's ID before changing sessions.
+    set -l origin_session "$REX_SESSION"
+    set -l pane (command "$rex_cli" block inspect -s "$origin_session" "$REX_BLOCK" --json); or return $status
+    set -l origin_window (printf '%s\n' $pane | jq -er '.block.window_id'); or return $status
+    # 🔀 Switch successfully before closing the tab that launched the picker.
+    command "$rex_cli" do session.select "session_id=$session_id"; or return $status
+    # 🧹 Close that specific tab, even though a different session is now visible.
+    command "$rex_cli" window close -s "$origin_session" "$origin_window"
 end
 
 function tmux_session_fzf
