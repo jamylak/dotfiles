@@ -455,7 +455,11 @@ function fish_user_key_bindings
     # bind -M insert ctrl-enter "__smart_cd_or_insert_path; commandline --function repaint"
     bind -M insert alt-enter "__smart_cd_or_insert_path; commandline --function repaint"
     bind -M insert shift-enter 'commandline -r "tmux_session_fzf"; commandline -f execute'
-    bind -M insert ctrl-enter 'commandline -r "tmux_session_fzf"; commandline -f execute'
+    if set -q REX_SESSION
+        bind -M insert ctrl-enter 'commandline -r "rex_session_fzf"; commandline -f execute'
+    else
+        bind -M insert ctrl-enter 'commandline -r "tmux_session_fzf"; commandline -f execute'
+    end
 
     # For weird terminals
     # bind -M insert \e\[13\;2u smart_shift_enter
@@ -1249,6 +1253,17 @@ function coco -a branch
         set -l name (tmux_dir_session_name "$dir")
         tmux_attach "$name" "$dir"
     end
+end
+
+function rex_session_fzf --description 'Pick and switch to a Rex session'
+    set -l rex_cli (__rex_cli); or return 1
+    set -l sessions (command "$rex_cli" ls --json); or return $status
+    set -l rows (printf '%s\n' $sessions | jq -r '.sessions[] | [.session_id, .label] | @tsv'); or return $status
+    test (count $rows) -gt 0; or return
+    set -l selected (printf '%s\n' $rows | fzf --delimiter=\t --with-nth=2.. --no-multi); or return
+    test -n "$selected"; or return
+    set -l session_id (string split -f 1 -- \t "$selected")
+    command "$rex_cli" do session.select "session_id=$session_id"
 end
 
 function tmux_session_fzf
