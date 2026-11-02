@@ -114,6 +114,36 @@ rex.action{
 }
 rex.bind("cmd+o", "ghostty_close_other_tabs")
 
+rex.action{
+  name = "close_other_sessions",
+  title = "Close Other Sessions",
+  description = "Keep this session; close all other sessions and their tabs and panes on this server.",
+  category = "Session",
+  run = function(ctx)
+    if not ctx.session_id then
+      error("Close Other Sessions needs a current session.", 0)
+    end
+    local result, err = rex.call("session.list", {})
+    if err then error(err, 0) end
+    local found = false
+    for _, session in ipairs(result.sessions or {}) do
+      if session.session_id == ctx.session_id then found = true end
+    end
+    if not found then error("Current session was not found; no sessions closed.", 0) end
+    local closed = 0
+    for _, session in ipairs(result.sessions or {}) do
+      if session.session_id ~= ctx.session_id then
+        local _, attach_err = rex.call("session.attach", { session_id = session.session_id })
+        if attach_err then error(attach_err, 0) end
+        local _, close_err = rex.call("session.destroy", { session_id = session.session_id })
+        if close_err then error(close_err, 0) end
+        closed = closed + 1
+      end
+    end
+    return { kept_session_id = ctx.session_id, closed_sessions = closed }
+  end,
+}
+
 -- Capture through Rex's API and start a separate terminal above the source.
 -- No input is sent to the source pane, even while it is running a program.
 rex.action{
