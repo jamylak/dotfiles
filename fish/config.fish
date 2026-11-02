@@ -432,7 +432,11 @@ function fish_user_key_bindings
     bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
     # bind -M insert \ev "nvim"
     bind -M insert \eq "commandline --function kill-whole-line"
-    bind -M insert \ep 'commandline -r "tmux_fzf"; commandline -f execute'
+    if set -q REX_SESSION
+        bind -M insert \ep 'commandline -r "rex_project_fzf"; commandline -f execute'
+    else
+        bind -M insert \ep 'commandline -r "tmux_fzf"; commandline -f execute'
+    end
     bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
     bind -M insert \co "nvim_ctrl_o_if_empty; commandline --function repaint"
     bind --mode insert \cy __clipboard_paste
@@ -1257,6 +1261,27 @@ function make_new_project -a dir
     codex_trust_project "$dir"
     set name (tmux_dir_session_name "$dir")
     tmux_attach "$name" "$dir"
+end
+
+function rex_project_fzf --description 'Pick a directory and open AI_CLI in a Rex session' -a dir
+    # 🔎 Keep Alt+P's directory picker, with Rex handling the selected project.
+    if not set -q argv[1]
+        set dir (fish ~/.config/dotfiles/scripts/fzf_proj_paths.fish | fzf --no-multi); or return
+    end
+    test -n "$dir"; or return
+    test -d "$dir"; or return 1
+    set -l rex_cli (__rex_cli); or return 1
+    # 📌 Save the original tab without changing its working directory.
+    set -q REX_SESSION REX_BLOCK; or return 1
+    set -l origin_session "$REX_SESSION"
+    set -l pane (command "$rex_cli" block inspect -s "$origin_session" "$REX_BLOCK" --json); or return $status
+    set -l origin_window (printf '%s\n' $pane | jq -er '.block.window_id'); or return $status
+    # 🚀 Launch the selected project and switch to its new Rex session.
+    set -l created (command "$rex_cli" new (path basename -- "$dir") -c "$dir" --keep-open --json -- $AI_CLI); or return $status
+    set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return $status
+    command "$rex_cli" do session.select "session_id=$session_id"; or return $status
+    # 🧹 Close the originating tab only after switching succeeds.
+    command "$rex_cli" window close -s "$origin_session" "$origin_window"
 end
 
 function tmux_fzf
