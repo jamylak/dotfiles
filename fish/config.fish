@@ -24,6 +24,12 @@ function __rex_worktree_session -a branch
         return 1
     end
 
+    # 📌 Remember the originating tab before creating or switching sessions.
+    set -q REX_SESSION REX_BLOCK; or return 1
+    set -l origin_session "$REX_SESSION"
+    set -l pane (command "$rex_cli" block inspect -s "$origin_session" "$REX_BLOCK" --json); or return $status
+    set -l origin_window (printf '%s\n' $pane | jq -er '.block.window_id'); or return $status
+
     # worktree_add changes directory; don't rename the originating session.
     set -l original_dir "$PWD"
     set -g __rex_project_session_suspended 1
@@ -46,6 +52,8 @@ function __rex_worktree_session -a branch
         echo "coco: Rex session $session_id was created for $dir; select it in Rex to continue" >&2
         return 1
     end
+    # 🧹 Close the originating tab only after the worktree session is visible.
+    command "$rex_cli" window close -s "$origin_session" "$origin_window"
 end
 
 # Only the first terminal pane owns automatic session naming.

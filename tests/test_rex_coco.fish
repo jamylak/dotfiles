@@ -24,6 +24,9 @@ printf '%s\n' '#!/usr/bin/env fish' \
     'if contains -- new $argv' \
     '    test "$REX_TEST_FAIL" = create; and exit 1' \
     '    echo \'{"session_id":"session:test"}\'' \
+    'else if test "$argv[1]" = block' \
+    '    test "$REX_TEST_FAIL" = inspect; and exit 9' \
+    '    echo \'{"block":{"window_id":"window:original"}}\'' \
     'else if contains -- inspect $argv' \
     '    cat "$REX_TEST_DIR/view.json"' \
     'else if contains -- do $argv' \
@@ -45,16 +48,20 @@ check 'worktree branch' feature (git -C "$scratch/project-feature" branch --show
 check 'original shell stays in its project' "$scratch/project" "$PWD"
 emit fish_prompt
 set -l calls (cat "$scratch/calls")
-check 'coco and subsequent prompt never rename the original session' 2 (count $calls)
+check 'coco inspects, creates, selects, and closes without renaming' 4 (count $calls)
+check 'coco captures the originating tab' 'block inspect -s session:original block:owner --json' "$calls[1]"
 check 'Rex starts Codex in the named worktree' \
-    "new project-feature -c $scratch/project-feature --keep-open --json -- codex --sandbox workspace-write" "$calls[1]"
-check 'Rex displays the created session' 'do session.select session_id=session:test' "$calls[2]"
+    "new project-feature -c $scratch/project-feature --keep-open --json -- codex --sandbox workspace-write" "$calls[2]"
+check 'Rex displays the created session before closing' 'do session.select session_id=session:test' "$calls[3]"
+check 'Rex closes only the originating tab' 'window close -s session:original window:original' "$calls[4]"
 
 # A failed app switch keeps the created session and worktree, and reports failure.
 cd "$scratch/project"
 set -gx REX_TEST_FAIL select
+printf '' > "$scratch/calls"
 coco other >/dev/null 2>/dev/null
 check 'failed app switch is reported' 1 $status
+check 'failed switch keeps the originating tab' 3 (count (cat "$scratch/calls"))
 check 'worktree survives app switch failure' other (git -C "$scratch/project-other" branch --show-current)
 check 'failed switch leaves the original directory intact' "$scratch/project" "$PWD"
 set -e REX_TEST_FAIL
@@ -65,7 +72,7 @@ set -gx REX_TEST_FAIL create
 printf '' > "$scratch/calls"
 coco failed >/dev/null 2>/dev/null
 check 'failed creation is reported' 1 $status
-check 'failed creation does not select a session' 1 (count (cat "$scratch/calls"))
+check 'failed creation neither switches nor closes' 2 (count (cat "$scratch/calls"))
 check 'worktree survives creation failure' failed (git -C "$scratch/project-failed" branch --show-current)
 set -e REX_TEST_FAIL
 
@@ -75,9 +82,17 @@ coco feature >/dev/null 2>/dev/null
 set -l worktree_status $status
 test $worktree_status -ne 0
 check 'existing worktree fails' 0 $status
-check 'failed worktree creation does not call Rex' 0 (count (cat "$scratch/calls"))
+check 'failed worktree creation only inspects the originating pane' 1 (count (cat "$scratch/calls"))
 set -q __rex_project_session_suspended
 check 'failed worktree creation restores automatic naming' 1 $status
+
+set -gx REX_TEST_FAIL inspect
+printf '' > "$scratch/calls"
+coco inspect-fails >/dev/null 2>/dev/null
+check 'inspection failure propagates' 9 $status
+check 'failed inspection never creates or closes a session' 1 (count (cat "$scratch/calls"))
+test ! -d "$scratch/project-inspect-fails"; or exit 1
+set -e REX_TEST_FAIL
 
 # Only the primary terminal may rename a session, using the Git root even in src/.
 printf '%s\n' '{"label":"old","windows":[{"layers":[{"blocks":[{"creator_name":"com.superlogical.terminal","block_id":"block:owner"},{"creator_name":"com.superlogical.terminal","block_id":"block:other"}]}]}]}' > "$scratch/view.json"
