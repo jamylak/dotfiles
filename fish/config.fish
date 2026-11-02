@@ -1216,6 +1216,11 @@ end
 
 function __rex_make_new_project -a dir
     set -l rex_cli (__rex_cli); or return 1
+    # 📌 Save the originating tab so cleanup still targets it after switching.
+    set -q REX_SESSION REX_BLOCK; or return 1
+    set -l origin_session "$REX_SESSION"
+    set -l pane (command "$rex_cli" block inspect -s "$origin_session" "$REX_BLOCK" --json); or return $status
+    set -l origin_window (printf '%s\n' $pane | jq -er '.block.window_id'); or return $status
     if not string match -q '/*' -- "$dir"
         set dir "$HOME/proj/$dir"
     end
@@ -1227,7 +1232,9 @@ function __rex_make_new_project -a dir
     # 🚀 Start AI_CLI in its own project session, then show it in Rex.
     set -l created (command "$rex_cli" new (path basename -- "$dir") -c "$dir" --keep-open --json -- $AI_CLI); or return $status
     set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return $status
-    command "$rex_cli" do session.select "session_id=$session_id"
+    command "$rex_cli" do session.select "session_id=$session_id"; or return $status
+    # 🧹 Close the old tab only after the new project session is visible.
+    command "$rex_cli" window close -s "$origin_session" "$origin_window"
 end
 
 function make_new_project -a dir
