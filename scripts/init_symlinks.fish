@@ -19,6 +19,9 @@ ln -sfn $repo_root/kitty ~/.config/kitty
 # Ghostty
 ln -sfn $repo_root/ghostty ~/.config/ghostty
 
+# Rex
+ln -sfn $repo_root/rex ~/.config/rex
+
 # Helix
 ln -sfn $repo_root/helix ~/.config/helix
 

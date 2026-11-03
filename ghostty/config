@@ -101,7 +101,9 @@ keybind = ctrl+enter=unbind
 # custom-shader = ~/proj/ghostty-shaders/underwater.glsl
 # custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_frozen.glsl
 # custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_blaze.glsl
-custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_blaze_tapered.glsl
+# custom-shader = ~/proj/ghostty-shader-playground/shaders/cursor_blaze_tapered.glsl
+custom-shader = shaders/rex-rainbow.glsl
+custom-shader-animation = true
 
 keybind = super+o=close_tab:other
 

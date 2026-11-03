@@ -6,6 +6,93 @@ end
 
 set -gx PROJECTS_DIR $HOME/proj
 
+# Resolve the bundled CLI too: Rex isn't always on the shell's PATH.
+function __rex_cli
+    set -l cli (command -s rex)
+    if test -z "$cli"
+        set cli '/Applications/Rex Beta.app/Contents/Helpers/Rex Server.rex/Contents/MacOS/rex'
+    end
+    test -x "$cli"; or return 1
+    printf '%s\n' "$cli"
+end
+
+# Closing the last tab can terminate this shell before any follow-up cleanup.
+function __rex_close_origin_tab -a rex_cli session_id window_id
+    set -l view (command "$rex_cli" session inspect "$session_id" --json); or return $status
+    if printf '%s\n' $view | jq -e --arg window "$window_id" '.windows | length == 1 and .[0].window_id == $window' >/dev/null
+        # 🧹 Remove the session too when closing this tab would leave zero tabs.
+        command "$rex_cli" kill "$session_id"
+    else
+        command "$rex_cli" window close -s "$session_id" "$window_id"
+    end
+end
+
+# Keep Rex worktree/session lifecycle out of the shared coco command.
+function __rex_worktree_session -a branch
+    # Resolve Rex before creating a worktree so a missing CLI leaves no partial work.
+    set -l rex_cli (__rex_cli); or begin
+        echo 'coco: Rex CLI not found' >&2
+        return 1
+    end
+
+    # 📌 Remember the originating tab before creating or switching sessions.
+    set -q REX_SESSION REX_BLOCK; or return 1
+    set -l origin_session "$REX_SESSION"
+    set -l pane (command "$rex_cli" block inspect -s "$origin_session" "$REX_BLOCK" --json); or return $status
+    set -l origin_window (printf '%s\n' $pane | jq -er '.block.window_id'); or return $status
+
+    # worktree_add changes directory; don't rename the originating session.
+    set -l original_dir "$PWD"
+    set -g __rex_project_session_suspended 1
+    worktree_add "$branch"
+    set -l worktree_status $status
+    set -l dir "$PWD"
+    builtin cd -- "$original_dir"
+    set -l restore_status $status
+    set -e __rex_project_session_suspended
+    test $restore_status -eq 0; or return $restore_status
+    test $worktree_status -eq 0; or return $worktree_status
+
+    set -l created (command "$rex_cli" new (path basename -- "$dir") -c "$dir" --keep-open --json -- $AI_CLI)
+    if test $status -ne 0
+        echo "coco: worktree is ready at $dir, but Rex session creation failed" >&2
+        return 1
+    end
+    set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return 1
+    command "$rex_cli" do session.select "session_id=$session_id"; or begin
+        echo "coco: Rex session $session_id was created for $dir; select it in Rex to continue" >&2
+        return 1
+    end
+    # 🧹 Close the originating tab only after the worktree session is visible.
+    __rex_close_origin_tab "$rex_cli" "$origin_session" "$origin_window"
+end
+
+# Only the first terminal pane owns automatic session naming.
+function __rex_project_session_name --on-event fish_prompt --on-variable PWD
+    set -q REX_SESSION; or return
+    set -q __rex_project_session_suspended; and return
+    if test "$__rex_project_session_pwd" = "$PWD"
+        return
+    end
+
+    set -l rex_cli (__rex_cli); or return
+    set -q REX_BLOCK; or return
+    set -l view (command "$rex_cli" --autostart=false --timeout 1s session inspect "$REX_SESSION" --json 2>/dev/null); or return
+    set -l owner (printf '%s\n' $view | jq -er '[.windows[].layers[].blocks[] | select(.creator_name == "com.superlogical.terminal")][0].block_id'); or return
+    test "$owner" = "$REX_BLOCK"; or return
+
+    set -l project_dir (command git rev-parse --show-toplevel 2>/dev/null)
+    if test -z "$project_dir"
+        set project_dir "$PWD"
+    end
+    set -l project_name (path basename -- "$project_dir")
+    set -l current_label (printf '%s\n' $view | jq -r '.label')
+    if test "$current_label" != "$project_name"
+        command "$rex_cli" --autostart=false --timeout 1s session rename "$REX_SESSION" "$project_name" >/dev/null 2>&1; or return
+    end
+    set -g __rex_project_session_pwd "$PWD"
+end
+
 if test -d /opt/homebrew/bin
     set -xg SHELL /opt/homebrew/bin/fish
 end
@@ -364,7 +451,11 @@ function fish_user_key_bindings
     bind -M insert \ev 'commandline -r "nvim ." ; commandline -f execute'
     # bind -M insert \ev "nvim"
     bind -M insert \eq "commandline --function kill-whole-line"
-    bind -M insert \ep 'commandline -r "tmux_fzf"; commandline -f execute'
+    if set -q REX_SESSION
+        bind -M insert \ep 'commandline -r "rex_project_fzf"; commandline -f execute'
+    else
+        bind -M insert \ep 'commandline -r "tmux_fzf"; commandline -f execute'
+    end
     bind -M insert \em 'commandline -r "tmux_session_fzf"; commandline -f execute'
     bind -M insert \co "nvim_ctrl_o_if_empty; commandline --function repaint"
     bind --mode insert \cy __clipboard_paste
@@ -387,7 +478,11 @@ function fish_user_key_bindings
     # bind -M insert ctrl-enter "__smart_cd_or_insert_path; commandline --function repaint"
     bind -M insert alt-enter "__smart_cd_or_insert_path; commandline --function repaint"
     bind -M insert shift-enter 'commandline -r "tmux_session_fzf"; commandline -f execute'
-    bind -M insert ctrl-enter 'commandline -r "tmux_session_fzf"; commandline -f execute'
+    if set -q REX_SESSION
+        bind -M insert ctrl-enter 'commandline -r "rex_session_fzf"; commandline -f execute'
+    else
+        bind -M insert ctrl-enter 'commandline -r "tmux_session_fzf"; commandline -f execute'
+    end
 
     # For weird terminals
     # bind -M insert \e\[13\;2u smart_shift_enter
@@ -579,10 +674,45 @@ function __smart_cd_or_insert_path
     end
 end
 
+# Use an explicit pane anchor: Rex's focused pane may belong to another tab.
+function __rex_launch -a layout cmd
+    set -l rex_cli (__rex_cli); or begin
+        echo 'launch: Rex CLI not found' >&2
+        return 1
+    end
+    # Rex's server PATH may omit Homebrew, especially when launched by the app.
+    set -l fish_cli (status fish-path)
+    set -l options run -s "$REX_SESSION" -c "$PWD" --shell=none
+    if test "$layout" != tab
+        if not set -q REX_BLOCK; or test -z "$REX_BLOCK"
+            echo 'launch: REX_BLOCK is required for a Rex split' >&2
+            return 1
+        end
+        set -l direction "$layout"
+        test "$layout" = overlay; and set direction below
+        set options split -s "$REX_SESSION" -b "$REX_BLOCK" --split="$direction" -c "$PWD" --shell=none
+    end
+
+    if test "$layout" = tab
+        set -l created (command "$rex_cli" $options --json -- "$fish_cli" -c "$cmd"); or return $status
+        set -l window_id (printf '%s\n' $created | jq -er '.window_id'); or return 1
+        # Server focus alone doesn't switch the tab displayed by the Rex app.
+        command "$rex_cli" do session.select "session_id=$REX_SESSION" "window_id=$window_id"
+    else if test "$layout" = overlay
+        set -l created (command "$rex_cli" $options --json -- "$fish_cli" -c "$cmd"); or return $status
+        set -l block_id (printf '%s\n' $created | jq -er '.block_ids[0]'); or return 1
+        command "$rex_cli" zoom -s "$REX_SESSION" "$block_id" --on
+    else
+        command "$rex_cli" $options -- "$fish_cli" -c "$cmd"
+    end
+end
+
 function launch_new_tab -a cmd
     if test -n "$TMUX"
         tmux new-window "fish -c \"$cmd\""
-    else if test $TERM = xterm-kitty
+    else if set -q REX_SESSION
+        __rex_launch tab "$cmd"
+    else if test "$TERM" = xterm-kitty
         kitty @ launch --type=tab fish -c "$cmd"
     else
         # For ghostty (or others?)
@@ -595,7 +725,9 @@ function launch_overlay -a cmd
         tmux split-window -v -c "#{pane_current_path}" "fish -c \"$cmd\"" \; resize-pane -Z
         #tmux new-window "fish -c \"$cmd\""
         #tmux popup -E "fish -c \"$cmd\""
-    else if test $TERM = xterm-kitty
+    else if set -q REX_SESSION
+        __rex_launch overlay "$cmd"
+    else if test "$TERM" = xterm-kitty
         kitty @ launch --type=overlay fish -c "$cmd"
     else
         # For ghostty
@@ -606,7 +738,9 @@ end
 function launch_vsplit -a cmd
     if test -n "$TMUX"
         tmux split-window -v "fish -c \"$cmd\""
-    else if test $TERM = xterm-kitty
+    else if set -q REX_SESSION
+        __rex_launch right "$cmd"
+    else if test "$TERM" = xterm-kitty
         kitty @ launch --location=vsplit fish -c "$cmd"
     else
         # For ghostty - Replicate Cmd - \
@@ -617,7 +751,9 @@ end
 function launch_hsplit -a cmd
     if test -n "$TMUX"
         tmux split-window -h "fish -c \"$cmd\""
-    else if test $TERM = xterm-kitty
+    else if set -q REX_SESSION
+        __rex_launch below "$cmd"
+    else if test "$TERM" = xterm-kitty
         kitty @ launch --location=hsplit fish -c "$cmd"
     else
         # For ghostty - Replicate Cmd - Enter
@@ -1101,14 +1237,41 @@ function codex_trust_project -a dir
     printf '\n%s\ntrust_level = "trusted"\n' "$header" >>"$config"
 end
 
+function __rex_make_new_project -a dir
+    set -l rex_cli (__rex_cli); or return 1
+    # 📌 Save the originating tab so cleanup still targets it after switching.
+    set -q REX_SESSION REX_BLOCK; or return 1
+    set -l origin_session "$REX_SESSION"
+    set -l pane (command "$rex_cli" block inspect -s "$origin_session" "$REX_BLOCK" --json); or return $status
+    set -l origin_window (printf '%s\n' $pane | jq -er '.block.window_id'); or return $status
+    if not string match -q '/*' -- "$dir"
+        set dir "$HOME/proj/$dir"
+    end
+    # 📌 Create the project without moving or renaming the original Rex shell.
+    mkdir -- "$dir"; or return $status
+    set dir (path resolve -- "$dir")
+    git -C "$dir" init; or return $status
+    codex_trust_project "$dir"; or return $status
+    # 🚀 Start AI_CLI in its own project session, then show it in Rex.
+    set -l created (command "$rex_cli" new (path basename -- "$dir") -c "$dir" --keep-open --json -- $AI_CLI); or return $status
+    set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return $status
+    command "$rex_cli" do session.select "session_id=$session_id"; or return $status
+    # 🧹 Close the old tab only after the new project session is visible.
+    __rex_close_origin_tab "$rex_cli" "$origin_session" "$origin_window"
+end
+
 function make_new_project -a dir
     if test -z "$dir"
         echo "usage: mm <dirname>" >&2
         return 1
     end
-    builtin cd -- ~/proj
-    mkdir "$dir"; or return $status
-    builtin cd -- "$dir"
+    if set -q REX_SESSION
+        __rex_make_new_project "$dir"
+        return $status
+    end
+    builtin cd -- ~/proj; or return $status
+    mkdir -- "$dir"; or return $status
+    builtin cd -- "$dir"; or return $status
     git init
     # touch README.md
     # git add README.md
@@ -1117,6 +1280,27 @@ function make_new_project -a dir
     codex_trust_project "$dir"
     set name (tmux_dir_session_name "$dir")
     tmux_attach "$name" "$dir"
+end
+
+function rex_project_fzf --description 'Pick a directory and open AI_CLI in a Rex session' -a dir
+    # 🔎 Keep Alt+P's directory picker, with Rex handling the selected project.
+    if not set -q argv[1]
+        set dir (fish ~/.config/dotfiles/scripts/fzf_proj_paths.fish | fzf --no-multi); or return
+    end
+    test -n "$dir"; or return
+    test -d "$dir"; or return 1
+    set -l rex_cli (__rex_cli); or return 1
+    # 📌 Save the original tab without changing its working directory.
+    set -q REX_SESSION REX_BLOCK; or return 1
+    set -l origin_session "$REX_SESSION"
+    set -l pane (command "$rex_cli" block inspect -s "$origin_session" "$REX_BLOCK" --json); or return $status
+    set -l origin_window (printf '%s\n' $pane | jq -er '.block.window_id'); or return $status
+    # 🚀 Launch the selected project and switch to its new Rex session.
+    set -l created (command "$rex_cli" new (path basename -- "$dir") -c "$dir" --keep-open --json -- $AI_CLI); or return $status
+    set -l session_id (printf '%s\n' $created | jq -er '.session_id'); or return $status
+    command "$rex_cli" do session.select "session_id=$session_id"; or return $status
+    # 🧹 Close the originating tab only after switching succeeds.
+    __rex_close_origin_tab "$rex_cli" "$origin_session" "$origin_window"
 end
 
 function tmux_fzf
@@ -1129,15 +1313,39 @@ function tmux_fzf
 end
 
 function coco -a branch
-    worktree_add "$branch"
-    if test $status -ne 0
+    if set -q REX_SESSION
+        __rex_worktree_session "$branch"
         return $status
     end
-    set dir (pwd)
+
+    worktree_add "$branch"; or return $status
+    set -l dir "$PWD"
     if test -n "$dir"
-        set name (tmux_dir_session_name "$dir")
+        set -l name (tmux_dir_session_name "$dir")
         tmux_attach "$name" "$dir"
     end
+end
+
+function rex_session_fzf --description 'Pick and switch to a Rex session'
+    set -l rex_cli (__rex_cli); or return 1
+    # 🔎 Show session names in fzf, keeping IDs to distinguish duplicate names.
+    set -l sessions (command "$rex_cli" ls --json); or return $status
+    set -l rows (printf '%s\n' $sessions | jq -r '.sessions[] | [.session_id, .label] | @tsv'); or return $status
+    test (count $rows) -gt 0; or return
+    set -l selected (printf '%s\n' $rows | fzf --delimiter=\t --with-nth=2.. --no-multi); or return
+    test -n "$selected"; or return
+    set -l session_id (string split -f 1 -- \t "$selected")
+    # 🏠 Picking this session keeps the current tab open.
+    test "$session_id" != "$REX_SESSION"; or return
+    set -q REX_SESSION REX_BLOCK; or return 1
+    # 📌 Save the original tab's ID before changing sessions.
+    set -l origin_session "$REX_SESSION"
+    set -l pane (command "$rex_cli" block inspect -s "$origin_session" "$REX_BLOCK" --json); or return $status
+    set -l origin_window (printf '%s\n' $pane | jq -er '.block.window_id'); or return $status
+    # 🔀 Switch successfully before closing the tab that launched the picker.
+    command "$rex_cli" do session.select "session_id=$session_id"; or return $status
+    # 🧹 Close that specific tab, even though a different session is now visible.
+    __rex_close_origin_tab "$rex_cli" "$origin_session" "$origin_window"
 end
 
 function tmux_session_fzf
@@ -1169,10 +1377,10 @@ function worktree_add -a branch
     set repo_name (basename "$main_root")
     set worktree_path "../$repo_name-$branch_dir"
     if git show-ref --verify --quiet "refs/heads/$target_branch"
-        git worktree add "$worktree_path" "$target_branch"
+        git worktree add "$worktree_path" "$target_branch"; or return $status
     else if set remote_branches (git for-each-ref --format='%(refname:short)' "refs/remotes/*/$target_branch" | string match -rv '.*/HEAD$')
         if test (count $remote_branches) -eq 1
-            git worktree add --track -b "$target_branch" "$worktree_path" "$remote_branches[1]"
+            git worktree add --track -b "$target_branch" "$worktree_path" "$remote_branches[1]"; or return $status
         else
             echo "wt: branch '$target_branch' exists on multiple remotes:" >&2
             printf '  %s\n' $remote_branches >&2
@@ -1180,7 +1388,7 @@ function worktree_add -a branch
             return 1
         end
     else
-        git worktree add -b "$target_branch" "$worktree_path"
+        git worktree add -b "$target_branch" "$worktree_path"; or return $status
     end
     if test -d "$worktree_path"
         builtin cd -- "$worktree_path"
