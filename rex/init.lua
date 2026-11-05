@@ -49,7 +49,7 @@ end
 -- rex.bind("cmd+n", "client.window.new")
 -- Match Cmd+Shift+N: create a new session.
 rex.bind("cmd+j", "session.new")
-rex.bind("cmd+l", "session.new")
+rex.bind("cmd+l", "session.switch")
 -- rex.bind("cmd+w", "client.close")
 -- Match Ghostty: Cmd+Q closes the window, rather than quitting Rex.
 -- rex.bind("cmd+q", "client.window.close")
