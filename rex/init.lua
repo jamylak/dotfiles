@@ -207,14 +207,17 @@ rex.action{
           flavor = "com.superlogical.terminal.shell",
           label = "Scrollback (Neovim)",
           options = {
-            -- A fixed wrapper cleans up on exit, including editor startup failure.
-            -- The filename is an argument, never interpolated into shell code.
-            command = { "/bin/sh", "-c", [[
-trap 'rm -f -- "$1"' EXIT
-nvim -n -i NONE --cmd 'set nomodeline' \
-  -c 'setlocal buftype=nofile bufhidden=wipe noswapfile noundofile' \
-  -c 'normal! G' -- "$1"
-]], "rex-scrollback", path },
+            shell = "none",
+            -- Prefer the current Neovim build; Homebrew's older nightly
+            -- does not support the UI options used by the Neovim config.
+            path_prepend = { "/usr/local/bin", "/opt/homebrew/bin" },
+            command = {
+              "nvim", "-n", "-i", "NONE", "--cmd", "set nomodeline",
+              -- The snapshot is in memory once startup commands run.
+              "-c", "call delete(expand('%:p'))",
+              "-c", "setlocal buftype=nofile bufhidden=wipe noswapfile noundofile",
+              "-c", "normal! G", "--", path,
+            },
             exit = { on_completion = true },
           },
         },
